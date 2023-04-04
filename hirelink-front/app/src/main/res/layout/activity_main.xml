@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/hire_link_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/hirelink"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/hirelink" />
+
+    <ImageView
+        android:id="@+id/imageWelcomeImage"
+        android:layout_width="248dp"
+        android:layout_height="259dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="50dp"
+        android:layout_marginTop="35dp"
+        android:layout_marginEnd="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/welcome_img"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/welcome_img" />
+
+    <TextView
+        android:id="@+id/txtWelcometoHire"
+        style="@style/AppWelcomeStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_50pxh"
+        android:layout_marginTop="@dimen/_22pxv"
+        android:layout_marginEnd="@dimen/_50pxh"
+        android:ellipsize="end"
+        android:gravity="center_horizontal"
+        android:singleLine="true"
+        android:text="@string/welcome_to_hirelink" />
+
+    <TextView
+        android:id="@+id/txtDescription"
+        style="@style/AppTextRegular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_50pxh"
+        android:layout_marginTop="@dimen/_18pxv"
+        android:layout_marginEnd="@dimen/_50pxh"
+        android:gravity="center_horizontal"
+        android:letterSpacing="0.04"
+        android:lineSpacingExtra="@dimen/_7pxh"
+        android:text="@string/welcome_summary_msg" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnRegister"
+        style="@style/AppButtonIndigoRounded"
+        android:layout_width="@dimen/_206pxh"
+        android:layout_height="@dimen/_60pxv"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/_50pxh"
+        android:layout_marginTop="110dp"
+        android:layout_marginEnd="@dimen/_50pxh"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:lineSpacingExtra="@dimen/_9pxh"
+        android:paddingStart="@dimen/_30pxh"
+        android:paddingTop="@dimen/_16pxv"
+        android:paddingEnd="@dimen/_30pxh"
+        android:paddingBottom="@dimen/_16pxv"
+        android:singleLine="true"
+        android:text="Register"
+        android:textAllCaps="false" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnLogin"
+        style="@style/AppButtonIndigoRounded"
+        android:layout_width="@dimen/_206pxh"
+        android:layout_height="@dimen/_60pxv"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/_50pxh"
+        android:layout_marginTop="@dimen/_17pxv"
+        android:layout_marginEnd="@dimen/_50pxh"
+        android:ellipsize="end"
+        android:gravity="center"
+        android:letterSpacing="0.05"
+        android:lineSpacingExtra="@dimen/_9pxh"
+        android:paddingStart="@dimen/_30pxh"
+        android:paddingTop="@dimen/_16pxv"
+        android:paddingEnd="@dimen/_30pxh"
+        android:paddingBottom="@dimen/_16pxv"
+        android:singleLine="true"
+        android:text="Login"
+        android:textAllCaps="false" />
+
+    <TextView
+        android:id="@+id/txtSEEOFFERS"
+        style="@style/AppTextSemiBold"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="@dimen/_50pxh"
+        android:layout_marginTop="38dp"
+        android:layout_marginEnd="@dimen/_50pxh"
+        android:layout_marginBottom="@dimen/_20pxv"
+        android:ellipsize="end"
+        android:letterSpacing="0.05"
+        android:lineSpacingExtra="@dimen/_9pxh"
+        android:singleLine="true"
+        android:text="@string/view_offers" />
+
+
+</LinearLayout>

@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">hirelink-front</string>
+    <string name="welcome_to_hirelink">Welcome to HireLink</string>
+    <string name="welcome_summary_msg">This mobile application allows users to find job opportunities in different fields, apply online, and connect with potential employers.</string>
+    <string name="view_offers">View offers</string>
+</resources>
