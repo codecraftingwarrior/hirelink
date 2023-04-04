@@ -16,5 +16,5 @@ Hirelink est une application mobile conçue pour faciliter la mise en relation e
 
 ## Technologies utilisées
 
-**Frontend** : `Symfony`  
-**Backend** : `Kotlin (Android Studio)`
+**Frontend** : `Android SDK`  
+**Backend** : `Symfony API Platform`
