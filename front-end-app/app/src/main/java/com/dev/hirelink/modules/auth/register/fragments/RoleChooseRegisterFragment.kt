@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentRoleChooseRegisterBinding
@@ -15,8 +16,13 @@ class RoleChooseRegisterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
-        binding = FragmentRoleChooseRegisterBinding.inflate(inflater, container, false)
+        binding = DataBindingUtil.inflate(
+            inflater,
+            R.layout.fragment_role_choose_register,
+            container,
+            false
+        )
+        
         return binding.root;
     }
 
