@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".UserIdentificationRegiterFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/image_view_back_arrow"
+            android:layout_width="@dimen/_25pxh"
+            android:layout_height="@dimen/_25pxh"
+            android:layout_marginStart="18dp"
+            android:layout_marginTop="16dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/img_logoarrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/img_logoarrow" />
+
+        <ImageView
+            android:id="@+id/image_view_hire_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="40dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/hirelink"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/hirelink" />
+
+        <ImageView
+            android:id="@+id/image_view_select_illustration"
+            android:layout_width="146dp"
+            android:layout_height="155dp"
+            android:layout_marginStart="136dp"
+            android:layout_marginTop="81dp"
+            android:src="@drawable/user_identification_illustratio_"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_hire_link" />
+
+        <TextView
+            android:id="@+id/text_view_user_identification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="76dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins"
+            android:letterSpacing="0.09"
+            android:singleLine="true"
+            android:text="Who are you ?"
+            android:textFontWeight="600"
+            android:textColor="@color/gray_900"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_select_illustration" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_candidate"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="@dimen/_300pxh"
+            android:layout_height="@dimen/_100pxh"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="60dp"
+            android:elevation="6dp"
+            android:gravity="fill"
+            android:paddingLeft="@dimen/_16pxh"
+            android:text="Looking for a job"
+            android:textFontWeight="600"
+            android:textSize="@dimen/_16pxh"
+            app:backgroundTint="#F4F4F4"
+            app:cornerRadius="@dimen/_15pxh"
+            app:icon="@drawable/next_arrow"
+            app:iconGravity="end"
+            app:iconSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_user_identification"
+            app:rippleColor="@color/black_900"
+            app:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_employer"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="@dimen/_300pxh"
+            android:layout_height="@dimen/_100pxh"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="30dp"
+            android:elevation="6dp"
+            android:gravity="fill"
+            android:paddingLeft="@dimen/_16pxh"
+            android:text="Employer"
+            android:textFontWeight="600"
+            android:textSize="@dimen/_16pxh"
+            app:backgroundTint="#F4F4F4"
+            app:cornerRadius="@dimen/_15pxh"
+            app:icon="@drawable/next_arrow"
+            app:iconGravity="end"
+            app:iconSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_candidate"
+            app:rippleColor="@color/black_900"
+            app:textAllCaps="false" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/button_interim"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="@dimen/_300pxh"
+            android:layout_height="@dimen/_100pxh"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="30dp"
+            android:elevation="6dp"
+            android:gravity="fill"
+            android:paddingLeft="@dimen/_16pxh"
+            android:text="Interim agency"
+            android:textFontWeight="600"
+            android:textSize="@dimen/_16pxh"
+            app:backgroundTint="#F4F4F4"
+            app:cornerRadius="@dimen/_15pxh"
+            app:icon="@drawable/next_arrow"
+            app:iconGravity="end"
+            app:iconSize="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/button_employer"
+            app:rippleColor="@color/black_900"
+            app:textAllCaps="false" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
