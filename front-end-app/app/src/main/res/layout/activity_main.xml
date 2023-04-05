@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,7 +9,7 @@
     tools:context=".MainActivity">
 
     <ImageView
-        android:id="@+id/hire_link_logo"
+        android:id="@+id/image_view_hire_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -30,8 +31,7 @@
         android:layout_marginEnd="50dp"
         android:scaleType="fitXY"
         android:src="@drawable/welcome_img"
-        tools:ignore="ContentDescription"
-        tools:src="@drawable/welcome_img" />
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/txtWelcometoHire"
