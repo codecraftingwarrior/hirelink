@@ -94,3 +94,5 @@
 /backend-app/var/
 /backend-app/vendor/
 ###< symfony/framework-bundle ###
+.DS_Store
+/front-end-app/.DS_STORE
