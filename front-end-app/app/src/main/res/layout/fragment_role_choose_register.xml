@@ -5,6 +5,10 @@
 
     <data>
 
+        <variable
+            name="roleChooseViewModel"
+            type="com.dev.hirelink.modules.auth.register.fragments.RoleChooseRegisterViewModel" />
+        
     </data>
 
     <FrameLayout
@@ -66,8 +70,8 @@
                 android:letterSpacing="0.09"
                 android:singleLine="true"
                 android:text="Who are you ?"
-                android:textFontWeight="600"
                 android:textColor="@color/gray_900"
+                android:textFontWeight="600"
                 android:textSize="18dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_view_select_illustration" />
