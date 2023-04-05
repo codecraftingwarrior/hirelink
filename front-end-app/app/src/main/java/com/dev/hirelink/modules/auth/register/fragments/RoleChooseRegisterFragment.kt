@@ -6,11 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentRoleChooseRegisterBinding
 
 class RoleChooseRegisterFragment : Fragment() {
     private lateinit var binding: FragmentRoleChooseRegisterBinding
+    private val viewModel: RoleChooseRegisterViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +24,8 @@ class RoleChooseRegisterFragment : Fragment() {
             container,
             false
         )
+
+        binding.roleChooseViewModel = viewModel
 
         return binding.root;
     }

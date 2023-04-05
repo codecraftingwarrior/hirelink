@@ -60,7 +60,7 @@
         android:text="@string/welcome_summary_msg" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnRegister"
+        android:id="@+id/register_btn"
         style="@style/AppButtonIndigoRounded"
         android:layout_width="@dimen/_206pxh"
         android:layout_height="@dimen/_60pxv"
@@ -81,7 +81,7 @@
         android:textAllCaps="false" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btnLogin"
+        android:id="@+id/login_btn"
         style="@style/AppButtonIndigoRounded"
         android:layout_width="@dimen/_206pxh"
         android:layout_height="@dimen/_60pxv"
@@ -102,7 +102,7 @@
         android:textAllCaps="false" />
 
     <TextView
-        android:id="@+id/txtSEEOFFERS"
+        android:id="@+id/view_offer_link"
         style="@style/AppTextSemiBold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
