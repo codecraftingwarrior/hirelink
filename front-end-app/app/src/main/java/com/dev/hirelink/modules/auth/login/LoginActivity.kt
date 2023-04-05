@@ -1,11 +1,12 @@
-package com.dev.hirelink
+package com.dev.hirelink.modules.auth.login
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.dev.hirelink.R
 
-class RegisterActivity : AppCompatActivity() {
+class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register)
+        setContentView(R.layout.activity_login)
     }
 }
