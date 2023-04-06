@@ -1,4 +1,4 @@
-package com.dev.hirelink.modules.auth.register.fragments
+package com.dev.hirelink.modules.auth.register.fragments.rolechoose
 
 import android.util.Log
 import androidx.lifecycle.LiveData
@@ -12,7 +12,7 @@ class RoleChooseRegisterViewModel : ViewModel() {
 
 
     fun onRoleSelected(role: String) {
-        Log.d(javaClass.simpleName, role)
+        _selectedRole.value = role;
         //TODO: update the selected role color background & display the next button
     }
 }

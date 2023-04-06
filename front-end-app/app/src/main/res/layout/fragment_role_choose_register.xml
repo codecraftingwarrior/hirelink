@@ -7,24 +7,23 @@
 
         <variable
             name="roleChooseViewModel"
-            type="com.dev.hirelink.modules.auth.register.fragments.RoleChooseRegisterViewModel" />
-        
+            type="com.dev.hirelink.modules.auth.register.fragments.rolechoose.RoleChooseRegisterViewModel" />
+
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modules.auth.register.fragments.RoleChooseRegisterFragment">
+        tools:context=".modules.auth.register.fragments.rolechoose.RoleChooseRegisterFragment">
 
         <ImageView
             android:id="@+id/image_view_select_illustration"
             android:layout_width="146dp"
             android:layout_height="155dp"
             android:layout_marginStart="136dp"
-            android:layout_marginTop="81dp"
             android:src="@drawable/user_identification_illustratio_"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_view_hire_link" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/text_view_register"
@@ -53,9 +52,12 @@
             android:elevation="6dp"
             android:gravity="fill"
             android:paddingStart="@dimen/_16pxh"
-            android:text="Looking for a job"
+            android:text="@string/candidate_role_title"
             android:textSize="16sp"
-            app:backgroundTint="#F4F4F4"
+            app:backgroundTint="@color/register_role_choose_button_color"
+            app:selectableButton="@{roleChooseViewModel.selectedRole == `applicant` ? `#3E4F88` : `#F4F4F4`}"
+            app:selectedTextColor="@{roleChooseViewModel.selectedRole == `applicant` ? `#FFFFFF` : `#3E4F88`}"
+            app:selectedIconColor="@{roleChooseViewModel.selectedRole == `applicant` ? `#FFFFFF` : `#3E4F88`}"
             app:cornerRadius="@dimen/_15pxh"
             app:icon="@drawable/next_arrow"
             app:iconGravity="end"
@@ -77,7 +79,10 @@
             android:paddingLeft="@dimen/_16pxh"
             android:text="Employer"
             android:textSize="16sp"
-            app:backgroundTint="#F4F4F4"
+            app:backgroundTint="@color/register_role_choose_button_color"
+            app:selectableButton="@{roleChooseViewModel.selectedRole == `employer` ? `#3E4F88` : `#F4F4F4`}"
+            app:selectedTextColor="@{roleChooseViewModel.selectedRole == `employer` ? `#FFFFFF` : `#3E4F88`}"
+            app:selectedIconColor="@{roleChooseViewModel.selectedRole == `employer` ? `#FFFFFF` : `#3E4F88`}"
             app:cornerRadius="@dimen/_15pxh"
             app:icon="@drawable/next_arrow"
             app:iconGravity="end"
@@ -99,7 +104,10 @@
             android:paddingLeft="@dimen/_16pxh"
             android:text="Interim agency"
             android:textSize="16sp"
-            app:backgroundTint="#F4F4F4"
+            app:backgroundTint="@color/register_role_choose_button_color"
+            app:selectableButton="@{roleChooseViewModel.selectedRole == `interim_agency` ? `#3E4F88` : `#F4F4F4`}"
+            app:selectedTextColor="@{roleChooseViewModel.selectedRole == `interim_agency` ? `#FFFFFF` : `#3E4F88`}"
+            app:selectedIconColor="@{roleChooseViewModel.selectedRole == `interim_agency` ? `#FFFFFF` : `#3E4F88`}"
             app:cornerRadius="@dimen/_15pxh"
             app:icon="@drawable/next_arrow"
             app:iconGravity="end"
