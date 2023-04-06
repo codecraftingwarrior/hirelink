@@ -12,7 +12,7 @@
         android:theme="@style/Theme.Hirelinkfront"
         tools:targetApi="31">
         <activity
-            android:name=".PageNotFoundActivity"
+            android:name=".modules.common.PageNotFoundActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
