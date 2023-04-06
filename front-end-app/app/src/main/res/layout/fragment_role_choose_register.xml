@@ -27,7 +27,7 @@
             app:layout_constraintTop_toBottomOf="@+id/image_view_hire_link" />
 
         <TextView
-            android:id="@+id/text_view_user_identification"
+            android:id="@+id/text_view_register"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="128dp"
@@ -61,7 +61,7 @@
             app:iconGravity="end"
             app:iconSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_user_identification"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_register"
             android:onClick="@{() -> roleChooseViewModel.onRoleSelected(`applicant`)}"
             app:textAllCaps="false" />
 
