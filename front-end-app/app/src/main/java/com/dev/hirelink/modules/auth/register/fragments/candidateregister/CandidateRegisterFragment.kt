@@ -1,5 +1,6 @@
 package com.dev.hirelink.modules.auth.register.fragments.candidateregister
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,12 @@ import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentCandidateRegisterBinding
 
 class CandidateRegisterFragment : Fragment() {
+    private lateinit var listener: ApplicantRegistrationTerminationListener
+
+    interface ApplicantRegistrationTerminationListener {
+        fun onApplicantRegistrationTerminated()
+    }
+
     private lateinit var binding: FragmentCandidateRegisterBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,6 +29,21 @@ class CandidateRegisterFragment : Fragment() {
             false
         )
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonRegister.setOnClickListener { listener.onApplicantRegistrationTerminated() }
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        try {
+            listener = context as ApplicantRegistrationTerminationListener
+        } catch (e: java.lang.Exception) {
+            throw Exception("$context must implement ApplicantRegistrationTerminationListener")
+        }
     }
 
 }

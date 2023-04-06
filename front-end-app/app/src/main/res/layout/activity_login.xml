@@ -65,7 +65,7 @@
             android:gravity="center_horizontal"
             android:letterSpacing="0.09"
             android:singleLine="true"
-            android:text="Welcome"
+            android:text="@string/welcome_text"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/image_view_login_illustration" />
@@ -149,7 +149,7 @@
             android:gravity="center_horizontal"
             android:letterSpacing="0.04"
             android:lineSpacingExtra="@dimen/_7pxh"
-            android:text="Don’t have an account yet?"
+            android:text="@string/dont_have_acc"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_home" />
 
@@ -159,7 +159,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="160dp"
-            android:text="Register"
+            android:text="@string/register"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_description" />
 

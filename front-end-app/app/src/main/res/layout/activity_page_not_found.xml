@@ -41,7 +41,7 @@
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:singleLine="true"
-        android:text="Page not found"
+        android:text="@string/page_not_found"
         android:letterSpacing="0.09"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +58,7 @@
         android:lineSpacingExtra="@dimen/_7pxh"
         android:paddingLeft="@dimen/_32pxh"
         android:paddingRight="@dimen/_32pxh"
-        android:text="Something went wrong, please try again."
+        android:text="@string/issue_msg"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_not_found_title" />

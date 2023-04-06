@@ -25,7 +25,7 @@
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:singleLine="true"
-        android:text="Register confirmation"
+        android:text="@string/register_confirmation"
         android:letterSpacing="0.05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -42,7 +42,7 @@
         android:lineSpacingExtra="@dimen/_7pxh"
         android:paddingLeft="@dimen/_32pxh"
         android:paddingRight="@dimen/_32pxh"
-        android:text="Your subscription was succefuly cofirmed, you can now start candidate to job offers."
+        android:text="@string/registration_confirmation_msg"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_not_found_title" />
 

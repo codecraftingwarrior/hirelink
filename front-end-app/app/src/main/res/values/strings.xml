@@ -9,4 +9,13 @@
     <string name="next">next</string>
     <string name="interim_agency_button_text">Interim agency</string>
     <string name="employer_button_text">Employer</string>
+    <string name="welcome_text">Welcome</string>
+    <string name="dont_have_acc">Don’t have an account yet?</string>
+    <string name="register">Register</string>
+    <string name="login">Login</string>
+    <string name="page_not_found">Page not found</string>
+    <string name="issue_msg">Something went wrong, please try again.</string>
+    <string name="basic_msg">Let’s start with the basics</string>
+    <string name="register_confirmation">Register confirmation</string>
+    <string name="registration_confirmation_msg">Your subscription was succefuly cofirmed, you can now start candidate to job offers.</string>
 </resources>

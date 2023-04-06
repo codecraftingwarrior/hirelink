@@ -1,59 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".modules.auth.register.RegisterActivity" >
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/custom_action_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="50dp"
-        android:layout_marginTop="15dp"
-        >
+    <data>
 
-        <ImageButton
-            android:id="@+id/image_view_back_arrow"
-            android:layout_width="@dimen/_25pxh"
-            android:layout_height="@dimen/_25pxh"
-            android:layout_marginTop="12dp"
-            android:scaleType="fitXY"
-            android:layout_marginStart="12dp"
-            android:background="@android:color/transparent"
-            android:src="@drawable/img_logoarrow"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/img_logoarrow" />
+    </data>
 
-        <ImageView
-            android:id="@+id/image_view_hire_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/hirelink"
-            app:layout_constraintBottom_toBottomOf="@id/image_view_back_arrow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.460"
-            app:layout_constraintStart_toEndOf="@id/image_view_back_arrow"
-            app:layout_constraintTop_toTopOf="@id/image_view_back_arrow"
-            app:layout_constraintVertical_bias="1.0"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/hirelink" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <FrameLayout
-        android:id="@+id/register_activity_fragment_container"
+    <ScrollView
+        android:id="@+id/root_scroll_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/custom_action_bar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        />
+        android:fillViewport="true"
+        tools:context=".modules.auth.register.RegisterActivity">
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/root_linear_layout"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/custom_action_bar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"
+                android:layout_marginTop="15dp">
+
+                <ImageButton
+                    android:id="@+id/image_view_back_arrow"
+                    android:layout_width="@dimen/_25pxh"
+                    android:layout_height="@dimen/_25pxh"
+                    android:layout_marginTop="12dp"
+                    android:scaleType="fitXY"
+                    android:layout_marginStart="12dp"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/img_logoarrow"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/img_logoarrow" />
+
+                <ImageView
+                    android:id="@+id/image_view_hire_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/hirelink"
+                    app:layout_constraintBottom_toBottomOf="@id/image_view_back_arrow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.460"
+                    app:layout_constraintStart_toEndOf="@id/image_view_back_arrow"
+                    app:layout_constraintTop_toTopOf="@id/image_view_back_arrow"
+                    app:layout_constraintVertical_bias="1.0"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/hirelink" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <FrameLayout
+                android:id="@+id/register_activity_fragment_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/custom_action_bar"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+    </ScrollView>
+</layout>

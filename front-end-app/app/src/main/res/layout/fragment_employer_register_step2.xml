@@ -1,241 +1,256 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".modules.auth.register.fragments.employerregister.EmployerRegisterStep2Fragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <TextView
-        android:id="@+id/text_view_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="160dp"
-        android:ellipsize="end"
-        android:fontFamily="@font/poppins"
-        android:letterSpacing="0.09"
-        android:singleLine="true"
-        android:text="Register"
-        android:textColor="@color/gray_900"
-        android:textFontWeight="600"
-        android:textSize="18dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/text_view_description"
-        style="@style/AppTextRegular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="116dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center_horizontal"
-        android:letterSpacing="0.04"
-        android:lineSpacingExtra="@dimen/_7pxh"
-        android:text="Let’s start with the basics"
-        android:textColor="@color/black_900_99"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_register" />
+    </data>
 
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/card_step1"
-        android:layout_width="320dp"
-        android:layout_height="@dimen/_540pxh"
-        android:layout_margin="8dp"
-        app:cardCornerRadius="8dp"
-        app:cardElevation="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_description"
-        app:layout_constraintVertical_bias="0.13999999">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".modules.auth.register.fragments.employerregister.EmployerRegisterStep2Fragment">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/text_view_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins"
+            android:letterSpacing="0.09"
+            android:singleLine="true"
+            android:text="Register"
+            android:textColor="@color/gray_900"
+            android:textFontWeight="600"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingTop="@dimen/_16pxh"
-                android:paddingRight="@dimen/_30pxh"
-                android:src="@drawable/register_step2_card_header"
-                />
+        <TextView
+            android:id="@+id/text_view_description"
+            style="@style/AppTextRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:letterSpacing="0.04"
+            android:lineSpacingExtra="@dimen/_7pxh"
+            android:text="Let’s start with the basics"
+            android:textColor="@color/black_900_99"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_register" />
 
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:padding="@dimen/_37pxh"
-                android:src="@drawable/mail_box_illustration"
-                />
-
-            <TextView
-                android:id="@+id/text_view_verification_title"
-                style="@style/AppWelcomeStyle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="Verification"
-                android:letterSpacing="0.09"
-                />
-
-            <TextView
-                android:id="@+id/text_view_description_verification"
-                style="@style/AppTextRegular"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
-                android:letterSpacing="0.11"
-                android:lineSpacingExtra="@dimen/_7pxh"
-                android:paddingLeft="@dimen/_20pxh"
-                android:paddingRight="@dimen/_20pxh"
-                android:textSize="@dimen/_11pxh"
-                android:text="Please enter the 4-digit verification code that was sent to your email address"
-                />
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_step1"
+            android:layout_width="320dp"
+            android:layout_height="@dimen/_540pxh"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_description"
+            app:layout_constraintVertical_bias="0.13999999">
 
             <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:paddingTop="@dimen/_26pxh">
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_code_first_degit"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_60pxh"
-                    android:layout_height="@dimen/_60pxh"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="16dp"
-                    android:hint="1"
-                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
-                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-                    >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_36pxh"
-                        android:gravity="center"
-                        style="@style/AppTextRegular"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_code_second_degit"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_60pxh"
-                    android:layout_height="@dimen/_60pxh"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="8dp"
-                    android:hint="2"
-                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
-                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-                    >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_36pxh"
-                        android:gravity="center"
-                        style="@style/AppTextRegular"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_code_third_degit"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_60pxh"
-                    android:layout_height="@dimen/_60pxh"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="8dp"
-                    android:hint="3"
-                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
-                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-                    >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_36pxh"
-                        android:gravity="center"
-                        style="@style/AppTextRegular"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_code_fourth_degit"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_60pxh"
-                    android:layout_height="@dimen/_60pxh"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginLeft="8dp"
-                    android:hint="4"
-                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
-                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-                    >
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textSize="@dimen/_36pxh"
-                        android:gravity="center"
-                        style="@style/AppTextRegular"/>
-                </com.google.android.material.textfield.TextInputLayout>
-
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/button_resend_code"
-                style="@style/Widget.MaterialComponents.Button.TextButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:text="resend verification code "
-                app:textAllCaps="false"
-                android:textSize="@dimen/_13pxh" />
-
-            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom">
+                android:layout_height="match_parent"
+                android:orientation="vertical">
 
-                <ImageButton
-                    android:id="@+id/image_view_back_arrow"
-                    android:layout_width="@dimen/_25pxh"
-                    android:layout_height="@dimen/_25pxh"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginBottom="8dp"
-                    android:background="@android:color/transparent"
-                    android:scaleType="fitXY"
-                    android:src="@drawable/img_logoarrow"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    tools:ignore="ContentDescription"
-                    tools:src="@drawable/img_logoarrow" />
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/_16pxh"
+                    android:paddingRight="@dimen/_30pxh"
+                    android:src="@drawable/register_step2_card_header" />
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="@dimen/_37pxh"
+                    android:src="@drawable/mail_box_illustration" />
+
+                <TextView
+                    android:id="@+id/text_view_verification_title"
+                    style="@style/AppWelcomeStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:text="Verification"
+                    android:letterSpacing="0.09" />
+
+                <TextView
+                    android:id="@+id/text_view_description_verification"
+                    style="@style/AppTextRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0.11"
+                    android:lineSpacingExtra="@dimen/_7pxh"
+                    android:paddingLeft="@dimen/_20pxh"
+                    android:paddingRight="@dimen/_20pxh"
+                    android:textSize="@dimen/_11pxh"
+                    android:text="Please enter the 4-digit verification code that was sent to your email address" />
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="@dimen/_26pxh">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_code_first_degit"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_60pxh"
+                        android:layout_height="@dimen/_60pxh"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="16dp"
+                        android:hint="-"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_first_digit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="1"
+                            android:textSize="15sp"
+                            android:inputType="number"
+                            android:gravity="center"
+                            style="@style/AppTextRegular" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_code_second_degit"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_60pxh"
+                        android:layout_height="@dimen/_60pxh"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="8dp"
+                        android:hint="-"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_second_digit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="1"
+                            android:textSize="15sp"
+                            android:inputType="number"
+                            android:gravity="center"
+                            style="@style/AppTextRegular" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_code_third_degit"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_60pxh"
+                        android:layout_height="@dimen/_60pxh"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="8dp"
+                        android:hint="-"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_third_digit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="1"
+                            android:textSize="15sp"
+                            android:inputType="number"
+                            android:gravity="center"
+                            style="@style/AppTextRegular" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_code_fourth_degit"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_60pxh"
+                        android:layout_height="@dimen/_60pxh"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginLeft="8dp"
+                        android:hint="-"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_fourth_digit"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:maxLength="1"
+                            android:textSize="15sp"
+                            android:inputType="number"
+                            android:gravity="center"
+                            style="@style/AppTextRegular" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                </LinearLayout>
 
                 <Button
-                    android:id="@+id/button_next"
+                    android:id="@+id/button_resend_code"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:paddingRight="@dimen/_24pxh"
-                    android:text="next"
-                    android:textSize="@dimen/_18pxh"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.0" />
+                    android:layout_gravity="center_horizontal"
+                    android:text="resend verification code "
+                    app:textAllCaps="false"
+                    android:textSize="@dimen/_13pxh" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom">
 
-        </LinearLayout>
+                    <!--<ImageButton
+                        android:id="@+id/image_view_back_arrow"
+                        android:layout_width="@dimen/_25pxh"
+                        android:layout_height="@dimen/_25pxh"
+                        android:layout_marginStart="24dp"
+                        android:layout_marginBottom="8dp"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/img_logoarrow"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        tools:ignore="ContentDescription"
+                        tools:src="@drawable/img_logoarrow" /> -->
 
-    </com.google.android.material.card.MaterialCardView>
+                    <Button
+                        android:id="@+id/button_next"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginEnd="16dp"
+                        android:text="@string/next"
+                        android:textSize="@dimen/_18pxh"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintVertical_bias="0.0" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

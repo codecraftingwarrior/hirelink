@@ -97,7 +97,7 @@
         android:paddingEnd="@dimen/_30pxh"
         android:paddingBottom="@dimen/_16pxv"
         android:singleLine="true"
-        android:text="Login"
+        android:text="@string/login"
         android:textAllCaps="false" />
 
     <TextView
