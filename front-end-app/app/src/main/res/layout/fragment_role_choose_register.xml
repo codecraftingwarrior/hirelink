@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="roleChooseViewModel"
             type="com.dev.hirelink.modules.auth.register.fragments.rolechoose.RoleChooseRegisterViewModel" />
@@ -30,7 +32,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="128dp"
-            android:layout_marginTop="76dp"
+            android:layout_marginTop="55dp"
             android:ellipsize="end"
             android:fontFamily="@font/poppins"
             android:letterSpacing="0.09"
@@ -51,20 +53,20 @@
             android:layout_marginTop="60dp"
             android:elevation="6dp"
             android:gravity="fill"
+            android:onClick="@{() -> roleChooseViewModel.onRoleSelected(`applicant`)}"
             android:paddingStart="@dimen/_16pxh"
             android:text="@string/candidate_role_title"
             android:textSize="16sp"
             app:backgroundTint="@color/register_role_choose_button_color"
-            app:selectableButton="@{roleChooseViewModel.selectedRole == `applicant` ? `#3E4F88` : `#F4F4F4`}"
-            app:selectedTextColor="@{roleChooseViewModel.selectedRole == `applicant` ? `#FFFFFF` : `#3E4F88`}"
-            app:selectedIconColor="@{roleChooseViewModel.selectedRole == `applicant` ? `#FFFFFF` : `#3E4F88`}"
             app:cornerRadius="@dimen/_15pxh"
             app:icon="@drawable/next_arrow"
             app:iconGravity="end"
             app:iconSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_register"
-            android:onClick="@{() -> roleChooseViewModel.onRoleSelected(`applicant`)}"
+            app:selectableButton="@{roleChooseViewModel.selectedRole == `applicant` ? `#3E4F88` : `#F4F4F4`}"
+            app:selectedIconColor="@{roleChooseViewModel.selectedRole == `applicant` ? `#FFFFFF` : `#3E4F88`}"
+            app:selectedTextColor="@{roleChooseViewModel.selectedRole == `applicant` ? `#FFFFFF` : `#3E4F88`}"
             app:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
@@ -76,20 +78,20 @@
             android:layout_marginTop="30dp"
             android:elevation="6dp"
             android:gravity="fill"
+            android:onClick="@{() -> roleChooseViewModel.onRoleSelected(`employer`)}"
             android:paddingLeft="@dimen/_16pxh"
-            android:text="Employer"
+            android:text="@string/employer_button_text"
             android:textSize="16sp"
             app:backgroundTint="@color/register_role_choose_button_color"
-            app:selectableButton="@{roleChooseViewModel.selectedRole == `employer` ? `#3E4F88` : `#F4F4F4`}"
-            app:selectedTextColor="@{roleChooseViewModel.selectedRole == `employer` ? `#FFFFFF` : `#3E4F88`}"
-            app:selectedIconColor="@{roleChooseViewModel.selectedRole == `employer` ? `#FFFFFF` : `#3E4F88`}"
             app:cornerRadius="@dimen/_15pxh"
             app:icon="@drawable/next_arrow"
             app:iconGravity="end"
             app:iconSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_candidate"
-            android:onClick="@{() -> roleChooseViewModel.onRoleSelected(`employer`)}"
+            app:selectableButton="@{roleChooseViewModel.selectedRole == `employer` ? `#3E4F88` : `#F4F4F4`}"
+            app:selectedIconColor="@{roleChooseViewModel.selectedRole == `employer` ? `#FFFFFF` : `#3E4F88`}"
+            app:selectedTextColor="@{roleChooseViewModel.selectedRole == `employer` ? `#FFFFFF` : `#3E4F88`}"
             app:textAllCaps="false" />
 
         <com.google.android.material.button.MaterialButton
@@ -101,21 +103,36 @@
             android:layout_marginTop="30dp"
             android:elevation="6dp"
             android:gravity="fill"
+            android:onClick="@{() -> roleChooseViewModel.onRoleSelected(`interim_agency`)}"
             android:paddingLeft="@dimen/_16pxh"
-            android:text="Interim agency"
+            android:text="@string/interim_agency_button_text"
             android:textSize="16sp"
             app:backgroundTint="@color/register_role_choose_button_color"
-            app:selectableButton="@{roleChooseViewModel.selectedRole == `interim_agency` ? `#3E4F88` : `#F4F4F4`}"
-            app:selectedTextColor="@{roleChooseViewModel.selectedRole == `interim_agency` ? `#FFFFFF` : `#3E4F88`}"
-            app:selectedIconColor="@{roleChooseViewModel.selectedRole == `interim_agency` ? `#FFFFFF` : `#3E4F88`}"
             app:cornerRadius="@dimen/_15pxh"
             app:icon="@drawable/next_arrow"
             app:iconGravity="end"
             app:iconSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/button_employer"
-            android:onClick="@{() -> roleChooseViewModel.onRoleSelected(`interim_agency`)}"
+            app:selectableButton="@{roleChooseViewModel.selectedRole == `interim_agency` ? `#3E4F88` : `#F4F4F4`}"
+            app:selectedIconColor="@{roleChooseViewModel.selectedRole == `interim_agency` ? `#FFFFFF` : `#3E4F88`}"
+            app:selectedTextColor="@{roleChooseViewModel.selectedRole == `interim_agency` ? `#FFFFFF` : `#3E4F88`}"
             app:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/button_next"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginEnd="@dimen/_9pxh"
+            android:layout_marginBottom="8dp"
+            android:text="@string/next"
+            android:textSize="18sp"
+            android:visibility="@{roleChooseViewModel.selectedRole != `` ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

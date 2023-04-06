@@ -2,6 +2,7 @@ package com.dev.hirelink.modules.auth.register.fragments.rolechoose
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +36,7 @@ class RoleChooseRegisterFragment : Fragment() {
         )
 
         binding.roleChooseViewModel = viewModel
-        binding.lifecycleOwner = this
+        binding.lifecycleOwner = viewLifecycleOwner
 
         return binding.root;
     }
@@ -43,18 +44,15 @@ class RoleChooseRegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonCandidate.setOnClickListener {
-            selectedRoleType = RoleType.APPLICANT
-            //listener.onRoleChosen(RoleType.APPLICANT)
+        viewModel.selectedRole.observe(viewLifecycleOwner) { role ->
+            selectedRoleType = when (role) {
+                EMPLOYER_ROLE -> RoleType.EMPLOYER
+                INTERIM_AGENCY_ROLE -> RoleType.INTERIM_AGENCY
+                else -> RoleType.APPLICANT
+            }
         }
-        binding.buttonEmployer.setOnClickListener {
-            selectedRoleType = RoleType.EMPLOYER
-            //listener.onRoleChosen(RoleType.EMPLOYER)
-        }
-        binding.buttonInterim.setOnClickListener {
-            selectedRoleType = RoleType.INTERIM_AGENCY
-            // listener.onRoleChosen(RoleType.INTERIM_AGENCY)
-        }
+
+        binding.buttonNext.setOnClickListener { listener.onRoleChosen(selectedRoleType) }
     }
 
     override fun onAttach(context: Context) {
@@ -64,5 +62,11 @@ class RoleChooseRegisterFragment : Fragment() {
         } catch (e: java.lang.Exception) {
             throw java.lang.ClassCastException("$context must implement the RoleSelectionListener interface")
         }
+    }
+
+    companion object {
+        private val APPLICANT_ROLE = "applicant"
+        private val EMPLOYER_ROLE = "employer"
+        private val INTERIM_AGENCY_ROLE = "interim_agency"
     }
 }

@@ -6,4 +6,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="candidate_role_title">Looking for a job</string>
+    <string name="next">next</string>
+    <string name="interim_agency_button_text">Interim agency</string>
+    <string name="employer_button_text">Employer</string>
 </resources>
