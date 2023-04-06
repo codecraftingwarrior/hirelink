@@ -4,17 +4,33 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".modules.auth.register.fragments.ConfirmationCandidateRegisterFragment">
+    tools:context=".PageNotFoundActivity">
+
+    <ImageView
+        android:id="@+id/image_view_hire_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="40dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/hirelink"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/hirelink" />
 
     <ImageView
         android:id="@+id/image_view_not_found"
         android:layout_width="@dimen/_250pxh"
         android:layout_height="@dimen/_250pxh"
         android:layout_marginStart="80dp"
-        android:layout_marginTop="90dp"
-        android:src="@drawable/register_confirmation_illustration"
+        android:layout_marginTop="156dp"
+        android:src="@drawable/page_not_found_illustration"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/image_view_hire_link" />
 
     <TextView
         android:id="@+id/text_view_not_found_title"
@@ -25,8 +41,8 @@
         android:ellipsize="end"
         android:gravity="center_horizontal"
         android:singleLine="true"
-        android:text="Register confirmation"
-        android:letterSpacing="0.05"
+        android:text="Page not found"
+        android:letterSpacing="0.09"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/image_view_not_found" />
@@ -38,11 +54,12 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_32pxh"
         android:gravity="center_horizontal"
-        android:letterSpacing="0.04"
+        android:letterSpacing="0.11"
         android:lineSpacingExtra="@dimen/_7pxh"
         android:paddingLeft="@dimen/_32pxh"
         android:paddingRight="@dimen/_32pxh"
-        android:text="Your subscription was succefuly cofirmed, you can now start candidate to job offers."
+        android:text="Something went wrong, please try again."
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_not_found_title" />
 
@@ -53,7 +70,7 @@
         android:layout_height="@dimen/_60pxv"
         android:layout_gravity="center_horizontal"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="212dp"
         android:ellipsize="end"
         android:gravity="center"
         android:letterSpacing="0.05"
@@ -63,9 +80,10 @@
         android:paddingEnd="@dimen/_30pxh"
         android:paddingBottom="@dimen/_16pxv"
         android:singleLine="true"
-        android:text="START"
+        android:text="Home"
         android:textAllCaps="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_description_not_found" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
