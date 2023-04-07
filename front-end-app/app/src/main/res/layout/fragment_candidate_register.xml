@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text_view_register" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_field_firstname"
+            android:id="@+id/text_field_account_owner"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_283pxh"
             android:layout_height="@dimen/_60pxh"
@@ -66,7 +66,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_field_lastname"
+            android:id="@+id/text_field_iban"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_283pxh"
             android:layout_height="@dimen/_60pxh"
@@ -79,7 +79,7 @@
             app:boxCornerRadiusTopEnd="@dimen/_15pxh"
             app:endIconMinSize="@dimen/_20pxh"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_field_firstname"
+            app:layout_constraintTop_toBottomOf="@+id/text_field_account_owner"
             app:startIconMinSize="@dimen/_20pxh">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -88,7 +88,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_field_email"
+            android:id="@+id/text_field_bic"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_283pxh"
             android:layout_height="@dimen/_60pxh"
@@ -101,7 +101,7 @@
             app:boxCornerRadiusTopEnd="@dimen/_15pxh"
             app:endIconMinSize="@dimen/_20pxh"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_field_lastname"
+            app:layout_constraintTop_toBottomOf="@+id/text_field_iban"
             app:startIconMinSize="@dimen/_20pxh">
 
             <com.google.android.material.textfield.TextInputEditText
@@ -116,14 +116,14 @@
             android:layout_height="@dimen/_60pxh"
             android:layout_marginStart="64dp"
             android:layout_marginTop="16dp"
-            android:hint="password"
+            android:hint="@string/password"
             app:boxCornerRadiusTopStart="@dimen/_15pxh"
             app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
             app:boxCornerRadiusBottomStart="@dimen/_15pxh"
             app:boxCornerRadiusTopEnd="@dimen/_15pxh"
             app:endIconMode="password_toggle"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_field_email">
+            app:layout_constraintTop_toBottomOf="@+id/text_field_bic">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -138,7 +138,7 @@
             android:layout_height="@dimen/_60pxh"
             android:layout_marginStart="64dp"
             android:layout_marginTop="16dp"
-            android:hint="confirm password"
+            android:hint="@string/confirm_password"
             app:boxCornerRadiusTopStart="@dimen/_15pxh"
             app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
             app:boxCornerRadiusBottomStart="@dimen/_15pxh"

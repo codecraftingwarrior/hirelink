@@ -84,6 +84,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:text="Verification"
+                    android:textSize="@dimen/_13pxh"
+                    android:paddingBottom="@dimen/_16pxh"
                     android:letterSpacing="0.09" />
 
                 <TextView

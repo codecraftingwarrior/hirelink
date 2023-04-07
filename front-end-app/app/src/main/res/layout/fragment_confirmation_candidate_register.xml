@@ -63,8 +63,7 @@
         android:paddingEnd="@dimen/_30pxh"
         android:paddingBottom="@dimen/_16pxv"
         android:singleLine="true"
-        android:text="START"
-        android:textAllCaps="false"
+        android:text="@string/start"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/text_view_description_not_found" />
 

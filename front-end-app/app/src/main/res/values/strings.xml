@@ -18,4 +18,15 @@
     <string name="basic_msg">Let’s start with the basics</string>
     <string name="register_confirmation">Register confirmation</string>
     <string name="registration_confirmation_msg">Your subscription was succefuly cofirmed, you can now start candidate to job offers.</string>
+    <string name="choose_password">choose a password</string>
+    <string name="password">password</string>
+    <string name="confirm_password">confirm password</string>
+    <string name="payment_approved">Payment approved</string>
+    <string name="payment_approved_description">now you can benefit from all the services of the application offered to employers</string>
+    <string name="start">Start</string>
+    <string name="account_owner">Account owner</string>
+    <string name="iban">IBAN</string>
+    <string name="bic">BIC</string>
+
+
 </resources>

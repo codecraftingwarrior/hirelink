@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".modules.auth.register.fragments.employerregister.EmployerRegisterStep7Fragment">
+
+        <TextView
+            android:id="@+id/text_view_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="160dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins"
+            android:letterSpacing="0.09"
+            android:singleLine="true"
+            android:text="Register"
+            android:textColor="@color/gray_900"
+            android:textFontWeight="600"
+            android:textSize="18dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_description"
+            style="@style/AppTextRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center_horizontal"
+            android:letterSpacing="0.04"
+            android:lineSpacingExtra="@dimen/_7pxh"
+            android:text="Let’s start with the basics"
+            android:textColor="@color/black_900_99"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_register" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_step1"
+            android:layout_width="320dp"
+            android:layout_height="@dimen/_540pxh"
+            android:layout_margin="8dp"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.494"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_description"
+            app:layout_constraintVertical_bias="0.13999999">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/image_view_step6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="8dp"
+                    android:paddingTop="@dimen/_16pxh"
+                    android:paddingRight="@dimen/_30pxh"
+                    android:src="@drawable/register_step7_card_header"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/image_view_direct_debit_illustration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:padding="@dimen/_24pxh"
+                    android:src="@drawable/payment_approved_illustration"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_step6" />
+
+                <TextView
+                    android:id="@+id/text_view_verification_title"
+                    style="@style/AppWelcomeStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:letterSpacing="0.09"
+                    android:text="@string/payment_approved"
+                    android:textColor="@color/black_900_cc"
+                    android:textSize="@dimen/_18pxh"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_direct_debit_illustration" />
+
+                <TextView
+                    android:id="@+id/text_view_description_verification"
+                    style="@style/AppTextRegular"
+                    android:layout_width="@dimen/_240pxh"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="24dp"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0.1"
+                    android:lineSpacingExtra="@dimen/_7pxh"
+                    android:text="@string/payment_approved_description"
+                    android:textSize="@dimen/_11pxh"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_verification_title" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_home"
+                    style="@style/AppButtonIndigoRounded"
+                    android:layout_width="@dimen/_140pxh"
+                    android:layout_height="@dimen/_60pxv"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginStart="58dp"
+                    android:layout_marginEnd="58dp"
+                    android:layout_marginBottom="24dp"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:paddingStart="@dimen/_30pxh"
+                    android:paddingTop="@dimen/_16pxv"
+                    android:paddingEnd="@dimen/_30pxh"
+                    android:paddingBottom="@dimen/_16pxv"
+                    android:singleLine="true"
+                    android:text="@string/start"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
