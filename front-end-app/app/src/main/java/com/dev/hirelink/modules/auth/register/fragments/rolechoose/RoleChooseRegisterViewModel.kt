@@ -13,6 +13,9 @@ class RoleChooseRegisterViewModel : ViewModel() {
 
     fun onRoleSelected(role: String) {
         _selectedRole.value = role;
-        //TODO: update the selected role color background & display the next button
+    }
+
+    fun eraseRole() {
+        _selectedRole.value = ""
     }
 }

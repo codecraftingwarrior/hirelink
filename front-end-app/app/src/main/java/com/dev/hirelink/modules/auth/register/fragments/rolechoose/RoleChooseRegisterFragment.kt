@@ -52,7 +52,10 @@ class RoleChooseRegisterFragment : Fragment() {
             }
         }
 
-        binding.buttonNext.setOnClickListener { listener.onRoleChosen(selectedRoleType) }
+        binding.buttonNext.setOnClickListener {
+            listener.onRoleChosen(selectedRoleType)
+            viewModel.eraseRole()
+        }
     }
 
     override fun onAttach(context: Context) {

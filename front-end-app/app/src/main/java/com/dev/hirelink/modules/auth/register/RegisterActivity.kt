@@ -17,14 +17,16 @@ import com.dev.hirelink.R
 import com.dev.hirelink.databinding.ActivityRegisterBinding
 import com.dev.hirelink.enums.RegistrationStep
 import com.dev.hirelink.enums.RoleType
+import com.dev.hirelink.modules.auth.register.fragments.StepFragment
 import com.dev.hirelink.modules.auth.register.fragments.candidateregister.CandidateRegisterFragment
 import com.dev.hirelink.modules.auth.register.fragments.candidateregister.ConfirmationCandidateRegisterFragment
 import com.dev.hirelink.modules.auth.register.fragments.employerregister.EmployerRegisterStep1Fragment
 import com.dev.hirelink.modules.auth.register.fragments.employerregister.EmployerRegisterStep2Fragment
+import com.dev.hirelink.modules.auth.register.fragments.employerregister.EmployerRegisterStep3Fragment
 import com.dev.hirelink.modules.auth.register.fragments.rolechoose.RoleChooseRegisterFragment
 
 class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSelectionListener,
-    EmployerRegisterStep1Fragment.NextButtonClickListener,
+    StepFragment.NextButtonClickListener,
     CandidateRegisterFragment.ApplicantRegistrationTerminationListener {
     private lateinit var binding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -74,6 +76,7 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
     override fun onNextButtonTouched(step: RegistrationStep) {
         when (step) {
             RegistrationStep.STEP_1 -> createAccount()
+            RegistrationStep.STEP_2 -> verifyOTPCode()
             else -> Log.e(TAG, "feature not implemented yet")
         }
     }
@@ -87,6 +90,10 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
 
     private fun createAccount() {
         replaceFragment("otp_code_fill", EmployerRegisterStep2Fragment())
+    }
+
+    private fun verifyOTPCode() {
+        replaceFragment("password_creation", EmployerRegisterStep3Fragment())
     }
 
     private fun hideKeyboard(view: View) {

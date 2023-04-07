@@ -10,16 +10,12 @@ import androidx.fragment.app.Fragment
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentEmployerRegisterStep1Binding
 import com.dev.hirelink.enums.RegistrationStep
+import com.dev.hirelink.modules.auth.register.fragments.StepFragment
 
 
-class EmployerRegisterStep1Fragment : Fragment() {
+class EmployerRegisterStep1Fragment : StepFragment() {
     private lateinit var binding: FragmentEmployerRegisterStep1Binding
-    private lateinit var listener: NextButtonClickListener
     private val currentStep = RegistrationStep.STEP_1
-
-    interface NextButtonClickListener {
-        fun onNextButtonTouched(step: RegistrationStep);
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,15 +32,6 @@ class EmployerRegisterStep1Fragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.buttonNext.setOnClickListener { listener.onNextButtonTouched(currentStep) }
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        try {
-            listener = context as NextButtonClickListener
-        } catch (e: java.lang.Exception) {
-            throw java.lang.Exception("$context must implements NextButtonClickListener")
-        }
     }
 
 }
