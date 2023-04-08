@@ -4,12 +4,13 @@ namespace App\Entity\RootEntity;
 
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 
 #[ORM\MappedSuperclass]
-class BaseUser extends Auditable implements UserInterface
+class BaseUser extends Auditable implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Column]
     protected array $roles = [];
