@@ -2,26 +2,32 @@
 
 namespace App\Entity\RootEntity;
 
+use App\Entity\ApplicationUser;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 #[ORM\MappedSuperclass]
-class BaseUser extends Auditable implements UserInterface, PasswordAuthenticatedUserInterface
+class BaseUser extends Auditable implements UserInterface, PasswordAuthenticatedUserInterface, JWTUserInterface
 {
     #[ORM\Column]
+    #[Groups('user:read')]
     protected array $roles = [];
 
     #[ORM\Column(length: 80)]
+    #[Groups(['user:read', 'user:writable'])]
     protected ?string $email = null;
 
     #[ORM\Column(length: 255)]
     protected ?string $password = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups('user:writable')]
     protected ?string $plainPassword = null;
 
     #[ORM\Column(length: 80)]
@@ -144,5 +150,14 @@ class BaseUser extends Auditable implements UserInterface, PasswordAuthenticated
         $this->enabled = $enabled;
 
         return $this;
+    }
+
+    public static function createFromPayload($identity, array $payload): ApplicationUser|JWTUserInterface
+    {
+        return (new ApplicationUser())
+            ->setId($identity)
+            ->setEmail($payload['username'])
+            ->setRoles($payload['roles']);
+
     }
 }

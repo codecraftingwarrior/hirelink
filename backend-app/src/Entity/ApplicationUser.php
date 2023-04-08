@@ -2,42 +2,75 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Delete;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use App\Controller\CurrentUserController;
 use App\Entity\RootEntity\BaseUser;
 use App\Repository\ApplicationUserRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 
 #[ORM\Entity(repositoryClass: ApplicationUserRepository::class)]
+#[ApiResource(
+    operations: [
+        new GetCollection(uriTemplate: '/users'),
+        new Get(uriTemplate: '/users/{id}'),
+        new Post(uriTemplate: '/users'),
+        new Get(
+            uriTemplate: '/users/current-user',
+            controller: CurrentUserController::class,
+            openapiContext: [
+                'summary' => 'Retrieves the current logged in user.',
+                'parameters' => []
+            ]
+        )
+    ],
+    normalizationContext: ['groups' => ['user:read']],
+    denormalizationContext: ['groups' => ['user:writable']]
+)]
 class ApplicationUser extends BaseUser
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['user:read', 'user:writable'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $nationality = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?\DateTimeInterface $birthDate = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $phoneNumber = null;
 
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $picUrl = null;
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Document::class)]
@@ -45,6 +78,7 @@ class ApplicationUser extends BaseUser
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['user:writable'])]
     private ?Role $role = null;
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
@@ -86,6 +120,13 @@ class ApplicationUser extends BaseUser
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getFirstName(): ?string
@@ -170,11 +211,6 @@ class ApplicationUser extends BaseUser
         $this->picUrl = $picUrl;
 
         return $this;
-    }
-
-    public function getRoles(): array
-    {
-        return $this->roles;
     }
 
     public function setRoles(array $roles): self
