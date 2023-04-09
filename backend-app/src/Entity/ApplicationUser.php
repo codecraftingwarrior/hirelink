@@ -3,39 +3,57 @@
 namespace App\Entity;
 
 use ApiPlatform\Metadata\ApiResource;
-use ApiPlatform\Metadata\Delete;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
-use ApiPlatform\Metadata\Put;
-use App\Controller\CurrentUserController;
 use App\Entity\RootEntity\BaseUser;
 use App\Repository\ApplicationUserRepository;
+use App\State\CurrentUserProvider;
+use App\State\RegistrationStateProcessor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 
 #[ORM\Entity(repositoryClass: ApplicationUserRepository::class)]
 #[ApiResource(
     operations: [
         new GetCollection(uriTemplate: '/users'),
-        new Get(uriTemplate: '/users/{id}'),
-        new Post(uriTemplate: '/users'),
+        new Get(
+            uriTemplate: '/users/{id}',
+            requirements: ['id' => '\d+'],
+            normalizationContext: ['groups' => ['user:read', 'role:read']]
+        ),
+        new Post(
+            uriTemplate: '/auth/register',
+            openapiContext: [
+                'summary' => 'Register a user to the system.',
+                'description' => 'Use this endpoint to register all type of users to the system. The role field should not be empty.',
+                'tags' => ['Registration']
+            ],
+            normalizationContext: ['groups' => ['user:read', 'role:read']],
+            processor: RegistrationStateProcessor::class
+        ),
         new Get(
             uriTemplate: '/users/current-user',
-            controller: CurrentUserController::class,
             openapiContext: [
                 'summary' => 'Retrieves the current logged in user.',
                 'parameters' => []
-            ]
+            ],
+            normalizationContext: ['groups' => ['user:read', 'role:read']],
+            provider: CurrentUserProvider::class
         )
     ],
     normalizationContext: ['groups' => ['user:read']],
-    denormalizationContext: ['groups' => ['user:writable']]
+    denormalizationContext: ['groups' => ['user:writable']],
 )]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email.')]
+#[UniqueEntity(fields: ['phoneNumber'], message: 'There is already an account with this phone number.')]
 class ApplicationUser extends BaseUser
 {
     #[ORM\Id]
@@ -56,7 +74,7 @@ class ApplicationUser extends BaseUser
     #[Groups(['user:read', 'user:writable'])]
     private ?string $nationality = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
     #[Groups(['user:read', 'user:writable'])]
     private ?\DateTimeInterface $birthDate = null;
 
@@ -78,7 +96,9 @@ class ApplicationUser extends BaseUser
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['user:writable'])]
+    #[Groups(['user:read', 'user:writable'])]
+    #[SerializedName(serializedName: 'appRole')]
+    #[NotBlank]
     private ?Role $role = null;
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]

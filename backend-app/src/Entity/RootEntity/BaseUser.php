@@ -10,17 +10,21 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 
 #[ORM\MappedSuperclass]
 class BaseUser extends Auditable implements UserInterface, PasswordAuthenticatedUserInterface, JWTUserInterface
 {
     #[ORM\Column]
-    #[Groups('user:read')]
+    //#[Groups('user:read')]
     protected array $roles = [];
 
     #[ORM\Column(length: 80)]
     #[Groups(['user:read', 'user:writable'])]
+    #[NotBlank]
+    #[Email]
     protected ?string $email = null;
 
     #[ORM\Column(length: 255)]
@@ -160,4 +164,6 @@ class BaseUser extends Auditable implements UserInterface, PasswordAuthenticated
             ->setRoles($payload['roles']);
 
     }
+
+
 }
