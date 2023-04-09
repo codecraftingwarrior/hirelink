@@ -2,13 +2,27 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Entity\RootEntity\Auditable;
 use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new Post(),
+        new GetCollection(),
+    ],
+    normalizationContext: ['groups' => ['company:read']],
+    denormalizationContext: ['groups' => ['company:writable']]
+)]
 class Company extends Auditable
 {
     #[ORM\Id]
@@ -17,42 +31,50 @@ class Company extends Auditable
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['company:read', 'company:writable', 'company:first-write'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['company:read', 'company:writable'])]
     private ?string $departmentName = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['company:read', 'company:writable'])]
     private ?string $subDepartmentName = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['company:read', 'company:writable', 'company:first-write'])]
     private ?string $nationalUniqueNumber = null;
 
-    #[ORM\Column(length: 80)]
+    #[ORM\Column(length: 80, nullable: true)]
     private ?string $contactFullname = null;
 
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $contactFullname2 = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['company:first-write'])]
     private ?string $mailAddress = null;
 
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $mailAddress2 = null;
 
-    #[ORM\Column(length: 80)]
+    #[ORM\Column(length: 80, nullable: true)]
     private ?string $phoneNumber = null;
 
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $phoneNumber2 = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['company:first-write'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['company:first-write'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['company:first-write'])]
     private ?string $country = null;
 
     #[ORM\Column(length: 80, nullable: true)]

@@ -38,6 +38,7 @@ class BaseUser extends Auditable implements UserInterface, PasswordAuthenticated
     protected ?string $registrationState = null;
 
     #[ORM\Column(length: 5, nullable: true)]
+    #[Groups('user:read:otp')]
     protected ?string $otpCode = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]

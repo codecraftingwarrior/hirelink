@@ -6,9 +6,12 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use App\Dto\DigitVerificationInput;
+use App\Dto\DigitVerificationOutput;
 use App\Entity\RootEntity\BaseUser;
 use App\Repository\ApplicationUserRepository;
 use App\State\CurrentUserProvider;
+use App\State\OtpVerificationProcessor;
 use App\State\RegistrationStateProcessor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -30,14 +33,30 @@ use Symfony\Component\Validator\Constraints\NotBlank;
             normalizationContext: ['groups' => ['user:read', 'role:read']]
         ),
         new Post(
+            uriTemplate: '/auth/verify-digit',
+            openapiContext: [
+                'security' => [],
+                'summary' => 'Verify the generated 4-Digits code.',
+                'description' => 'Use this endpoint to verify the authenticity of the generated 4-Digits code.',
+                'tags' => ['Registration']
+            ],
+            normalizationContext: ['groups' => ['user:read', 'digit:read']],
+            denormalizationContext: ['groups' => ['user:writable', 'digit:write']],
+            input: DigitVerificationInput::class,
+            output: DigitVerificationOutput::class,
+            processor: OtpVerificationProcessor::class
+        ),
+        new Post(
             uriTemplate: '/auth/register',
             openapiContext: [
+                'security' => [],
                 'summary' => 'Register a user to the system.',
                 'description' => 'Use this endpoint to register all type of users to the system. The role field should not be empty.',
                 'tags' => ['Registration']
             ],
-            normalizationContext: ['groups' => ['user:read', 'role:read']],
-            processor: RegistrationStateProcessor::class
+            normalizationContext: ['groups' => ['user:read', 'role:read', 'user:read:otp']],
+            denormalizationContext: ['groups' => ['user:writable', 'company:first-write']],
+            processor: RegistrationStateProcessor::class,
         ),
         new Get(
             uriTemplate: '/users/current-user',
@@ -80,6 +99,7 @@ class ApplicationUser extends BaseUser
 
     #[ORM\Column(length: 80)]
     #[Groups(['user:read', 'user:writable'])]
+    #[NotBlank]
     private ?string $phoneNumber = null;
 
 
@@ -104,7 +124,8 @@ class ApplicationUser extends BaseUser
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
     private ?Plan $plan = null;
 
-    #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
+    #[ORM\ManyToOne(cascade: ["persist"], inversedBy: 'applicationUsers')]
+    #[Groups(['user:writable'])]
     private ?Company $company = null;
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'applicationUsers')]
