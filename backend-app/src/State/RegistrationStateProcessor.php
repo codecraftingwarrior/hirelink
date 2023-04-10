@@ -44,8 +44,7 @@ class RegistrationStateProcessor implements ProcessorInterface
 
         return match ($appRole) {
             RoleType::APPLICANT => $this->handleApplicantRegistration($data),
-            RoleType::EMPLOYER => $this->handleEmployerRegistration($data),
-            RoleType::INTERIM_AGENCY => $this->handleInterimAgencyRegistration($data),
+            RoleType::EMPLOYER, RoleType::INTERIM_AGENCY => $this->handleEmployerRegistration($data),
             RoleType::MANAGER => $this->handleManagerRegistration($data)
         };
 
@@ -90,13 +89,6 @@ class RegistrationStateProcessor implements ProcessorInterface
             throw new UnprocessableEntityHttpException('An error occurred while sending the verification code by email.');
         }*/
 
-        $this->applicationUserRepository->save($user, true);
-
-        return $user;
-    }
-
-    public function handleInterimAgencyRegistration(ApplicationUser $user): ApplicationUser
-    {
         $this->applicationUserRepository->save($user, true);
 
         return $user;
