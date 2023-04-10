@@ -43,7 +43,7 @@ class Company extends Auditable
     private ?string $subDepartmentName = null;
 
     #[ORM\Column(length: 80)]
-    #[Groups(['company:read', 'company:writable', 'company:first-write'])]
+    #[Groups(['company:read', 'company:writable', 'company:first-write', 'company:writable:emp'])]
     private ?string $nationalUniqueNumber = null;
 
     #[ORM\Column(length: 80, nullable: true)]

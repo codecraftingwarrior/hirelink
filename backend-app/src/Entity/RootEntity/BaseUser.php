@@ -22,7 +22,7 @@ class BaseUser extends Auditable implements UserInterface, PasswordAuthenticated
     protected array $roles = [];
 
     #[ORM\Column(length: 80)]
-    #[Groups(['user:read', 'user:writable'])]
+    #[Groups(['user:read', 'user:writable', 'user:writable:emp'])]
     #[NotBlank]
     #[Email]
     protected ?string $email = null;
@@ -31,7 +31,7 @@ class BaseUser extends Auditable implements UserInterface, PasswordAuthenticated
     protected ?string $password = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups('user:writable')]
+    #[Groups(['user:writable', 'user:writable:emp'])]
     protected ?string $plainPassword = null;
 
     #[ORM\Column(length: 80)]
@@ -43,6 +43,9 @@ class BaseUser extends Auditable implements UserInterface, PasswordAuthenticated
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     protected ?DateTimeInterface $otpCodeRequestedAt = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    protected ?DateTimeInterface $otpCodeVerifiedAt = null;
 
     #[ORM\Column]
     protected ?bool $enabled = null;
@@ -141,6 +144,21 @@ class BaseUser extends Auditable implements UserInterface, PasswordAuthenticated
     public function setOtpCodeRequestedAt(?DateTimeInterface $otpCodeRequestedAt): self
     {
         $this->otpCodeRequestedAt = $otpCodeRequestedAt;
+
+        return $this;
+    }
+
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getOtpCodeVerifiedAt(): ?DateTimeInterface
+    {
+        return $this->otpCodeVerifiedAt;
+    }
+
+    public function setOtpCodeVerifiedAt(?DateTimeInterface $otpCodeVerifiedAt): self
+    {
+        $this->otpCodeVerifiedAt = $otpCodeVerifiedAt;
 
         return $this;
     }

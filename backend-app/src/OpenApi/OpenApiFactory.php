@@ -23,35 +23,6 @@ class OpenApiFactory implements OpenApiFactoryInterface
                 $openApi->getPaths()->addPath($key, $path->withGet(null));
         }
 
-        $schemas = $openApi->getComponents()->getSchemas();
-
-        $schemas['DigitVerificationInput'] = new \ArrayObject([
-            'type' => 'object',
-            'properties' => [
-                'otpDigit' => [
-                    'type' => 'string',
-                    'example' => '1234'
-                ],
-                'userID' => [
-                    'type' => 'int',
-                    'example' => 34
-                ],
-                'userEmail' => [
-                    'type' => 'string',
-                    'example' => 'example@hirelink.fr'
-                ]
-            ]
-        ]);
-
-        $schemas['DigitVerificationOutput'] = new \ArrayObject([
-            'type' => 'object',
-            'properties' => [
-                'status' => [
-                    'type' => 'boolean',
-                    'example' => true
-                ]
-            ]
-        ]);
 
         /** @var PathItem $otpVerificationPathItem */
         $otpVerificationPathItem = $openApi->getPaths()->getPath('/api/auth/verify-digit');
@@ -63,7 +34,7 @@ class OpenApiFactory implements OpenApiFactoryInterface
                     'content' => [
                         'application/json' => [
                             'schema' => [
-                                '$ref' => '#/components/schemas/DigitVerificationOutput'
+                                '$ref' => '#/components/schemas/ApplicationUser.DigitVerificationOutput.jsonld-user.read_digit.read'
                             ]
                         ]
                     ]
@@ -72,16 +43,7 @@ class OpenApiFactory implements OpenApiFactoryInterface
                     'description' => '4-Digits verification failed.',
                     'content' => []
                 ]
-            ])
-            ->withRequestBody(new RequestBody(
-                content: new \ArrayObject([
-                    'application/json' => [
-                        'schema' => [
-                            '$ref' => '#/components/schemas/DigitVerificationInput'
-                        ]
-                    ]
-                ])
-            ));
+            ]);
 
         $otpVerificationPathItem = $otpVerificationPathItem->withPost($operation);
 

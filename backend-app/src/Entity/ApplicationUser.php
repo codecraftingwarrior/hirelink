@@ -2,14 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Action\NotFoundAction;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\RequestBody;
+use App\Dto\CreatePasswordInput;
 use App\Dto\DigitVerificationInput;
 use App\Dto\DigitVerificationOutput;
 use App\Entity\RootEntity\BaseUser;
 use App\Repository\ApplicationUserRepository;
+use App\State\CreatePasswordStateProcessor;
 use App\State\CurrentUserProvider;
 use App\State\OtpVerificationProcessor;
 use App\State\RegistrationStateProcessor;
@@ -31,6 +37,39 @@ use Symfony\Component\Validator\Constraints\NotBlank;
             uriTemplate: '/users/{id}',
             requirements: ['id' => '\d+'],
             normalizationContext: ['groups' => ['user:read', 'role:read']]
+        ),
+        new Put(
+            uriTemplate: '/auth/{id}/create-password',
+            openapi: new Operation(
+                tags: ['Registration'],
+                summary: 'Creates a password after the OTP code verification.',
+                description: 'Use this endpoint to create password for a employer / agency after verified the generated OTP.',
+                requestBody: new RequestBody(
+                    description: 'Data for identify the user and the company.',
+                    content: new \ArrayObject([
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'nationalUniqueNumber' => ['type' => 'string'],
+                                    'email' => ['type' => 'string'],
+                                    'plainPassword' => ['type' => 'string']
+                                ]
+                            ],
+                            'example' => [
+                                'nationalUniqueNumber' => 'DFE1293',
+                                'email' => 'example@hirelink.fr',
+                                'plainPassword' => 'thereisapwd'
+                            ]
+                        ]
+                    ]),
+                    required: true
+                ),
+                security: []
+            ),
+            denormalizationContext: ['groups' => ['create-pwd:writable']],
+            input: CreatePasswordInput::class,
+            processor: CreatePasswordStateProcessor::class
         ),
         new Post(
             uriTemplate: '/auth/verify-digit',
@@ -78,7 +117,7 @@ class ApplicationUser extends BaseUser
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['user:read', 'user:writable'])]
+    #[Groups(['user:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 80, nullable: true)]
@@ -125,7 +164,7 @@ class ApplicationUser extends BaseUser
     private ?Plan $plan = null;
 
     #[ORM\ManyToOne(cascade: ["persist"], inversedBy: 'applicationUsers')]
-    #[Groups(['user:writable'])]
+    #[Groups(['user:writable', 'company:writable:emp'])]
     private ?Company $company = null;
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'applicationUsers')]
