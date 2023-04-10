@@ -2,7 +2,7 @@
 
 namespace App\Entity;
 
-use App\Entity\RootEntity\Auditable;
+use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\PlanRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PlanRepository::class)]
-class Plan extends Auditable
+class Plan extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

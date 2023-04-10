@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
 
 
 #[ORM\MappedSuperclass]
-class BaseUser extends Auditable implements UserInterface, PasswordAuthenticatedUserInterface, JWTUserInterface
+class BaseUser extends TrackableEntity implements UserInterface, PasswordAuthenticatedUserInterface, JWTUserInterface
 {
     #[ORM\Column]
     //#[Groups('user:read')]

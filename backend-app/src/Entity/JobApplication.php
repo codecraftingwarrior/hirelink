@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Entity\RootEntity\Auditable;
+use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobApplicationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: JobApplicationRepository::class)]
-class JobApplication extends Auditable
+class JobApplication extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

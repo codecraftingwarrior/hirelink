@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Entity\RootEntity\Auditable;
+use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\ProfessionRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ProfessionRepository::class)]
-class Profession extends Auditable
+class Profession extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

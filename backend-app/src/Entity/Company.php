@@ -6,11 +6,12 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
-use App\Entity\RootEntity\Auditable;
+use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
@@ -23,7 +24,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
     normalizationContext: ['groups' => ['company:read']],
     denormalizationContext: ['groups' => ['company:writable']]
 )]
-class Company extends Auditable
+#[UniqueEntity(fields: ['nationalUniqueNumber'], message: 'There is already a company with this national number.')]
+#[UniqueEntity(fields: ['mailAddress'], message: 'There is already a company with this mail address.')]
+#[UniqueEntity(fields: ['phoneNumber'], message: 'There is already a company with this phone number.')]
+class Company extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Entity\RootEntity\Auditable;
+use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\ShareGroupeRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ShareGroupeRepository::class)]
-class ShareGroup extends Auditable
+class ShareGroup extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
