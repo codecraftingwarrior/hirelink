@@ -7,7 +7,7 @@
     tools:context=".modules.auth.register.fragments.candidateregister.ConfirmationCandidateRegisterFragment">
 
     <ImageView
-        android:id="@+id/image_view_not_found"
+        android:id="@+id/image_view_register_confirmation_illustration"
         android:layout_width="@dimen/_250pxh"
         android:layout_height="@dimen/_250pxh"
         android:layout_marginStart="80dp"
@@ -17,7 +17,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/text_view_not_found_title"
+        android:id="@+id/text_view_register_confirmation_title"
         style="@style/AppWelcomeStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -29,10 +29,10 @@
         android:letterSpacing="0.05"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_view_not_found" />
+        app:layout_constraintTop_toBottomOf="@+id/image_view_register_confirmation_illustration" />
 
     <TextView
-        android:id="@+id/text_view_description_not_found"
+        android:id="@+id/text_view_register_confirmation_description"
         style="@style/AppTextRegular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,10 +44,10 @@
         android:paddingRight="@dimen/_32pxh"
         android:text="@string/registration_confirmation_msg"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_not_found_title" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_register_confirmation_title" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_home"
+        android:id="@+id/button_start"
         style="@style/AppButtonIndigoRounded"
         android:layout_width="@dimen/_206pxh"
         android:layout_height="@dimen/_60pxv"
@@ -65,6 +65,6 @@
         android:singleLine="true"
         android:text="@string/start"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_description_not_found" />
+        app:layout_constraintTop_toBottomOf="@+id/text_view_register_confirmation_description" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

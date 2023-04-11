@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modules.auth.register.fragments.employerregister.EmployerRegisterStep6DirectDebitFragment">
+        tools:context=".modules.auth.register.fragments.employerregister.EmployerRegisterStep4Fragment">
 
         <TextView
             android:id="@+id/text_view_register"
@@ -44,9 +44,9 @@
             app:layout_constraintTop_toBottomOf="@+id/text_view_register" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_step6"
+            android:id="@+id/card_step4"
             android:layout_width="320dp"
-            android:layout_height="@dimen/_540pxh"
+            android:layout_height="@dimen/_560pxh"
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
@@ -63,99 +63,42 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image_view_step6_card_header"
+                    android:id="@+id/image_view_step4_card_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginStart="8dp"
                     android:paddingTop="@dimen/_16pxh"
                     android:paddingRight="@dimen/_30pxh"
-                    android:src="@drawable/register_step6_card_header"
+                    android:src="@drawable/register_step4_card_header"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
-                <ImageView
-                    android:id="@+id/image_view_direct_debit_illustration"
+                <TextView
+                    android:id="@+id/text_view_choose_password_title"
+                    style="@style/AppWelcomeStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:padding="@dimen/_24pxh"
-                    android:src="@drawable/direct_debit_illustration"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="92dp"
+                    android:letterSpacing="0.09"
+                    android:text="@string/choose_your_plan"
+                    android:textColor="@color/black_900_cc"
+                    android:textSize="@dimen/_13pxh"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_step4_card_header" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_view_offers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="140dp"
+                    android:layout_marginTop="44dp"
+                    android:scrollbars="vertical"
+                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_step6_card_header" />
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_account_owner"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_283pxh"
-                    android:layout_height="@dimen/_60pxh"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginEnd="21dp"
-                    android:hint="@string/account_owner"
-                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
-                    app:endIconMinSize="@dimen/_20pxh"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_direct_debit_illustration"
-                    app:startIconMinSize="@dimen/_20pxh">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_iban"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_283pxh"
-                    android:layout_height="@dimen/_60pxh"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="21dp"
-                    android:hint="@string/iban"
-                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
-                    app:endIconMinSize="@dimen/_20pxh"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_field_account_owner"
-                    app:startIconMinSize="@dimen/_20pxh">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </com.google.android.material.textfield.TextInputLayout>
-
-                <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_bic"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_283pxh"
-                    android:layout_height="@dimen/_60pxh"
-                    android:layout_marginStart="21dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="21dp"
-                    android:hint="@string/bic"
-                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
-                    app:endIconMinSize="@dimen/_20pxh"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_field_iban"
-                    app:startIconMinSize="@dimen/_20pxh">
-
-                    <com.google.android.material.textfield.TextInputEditText
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </com.google.android.material.textfield.TextInputLayout>
-
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_choose_password_title" />
 
                 <Button
                     android:id="@+id/button_next"

@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".MainActivity">
@@ -21,7 +22,7 @@
         tools:src="@drawable/hirelink" />
 
     <ImageView
-        android:id="@+id/imageWelcomeImage"
+        android:id="@+id/image_view_welcome_illustration"
         android:layout_width="248dp"
         android:layout_height="259dp"
         android:layout_gravity="center_horizontal"
@@ -33,7 +34,7 @@
         tools:ignore="ContentDescription" />
 
     <TextView
-        android:id="@+id/text_view_not_found_title"
+        android:id="@+id/text_view_welcome_title"
         style="@style/AppWelcomeStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -46,7 +47,7 @@
         android:text="@string/welcome_to_hirelink" />
 
     <TextView
-        android:id="@+id/text_view_description"
+        android:id="@+id/text_view_welcome_description"
         style="@style/AppTextRegular"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -59,7 +60,7 @@
         android:text="@string/welcome_summary_msg" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/register_btn"
+        android:id="@+id/button_register"
         style="@style/AppButtonIndigoRounded"
         android:layout_width="@dimen/_206pxh"
         android:layout_height="@dimen/_60pxv"
@@ -80,7 +81,7 @@
         android:textAllCaps="false" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/login_btn"
+        android:id="@+id/button_login"
         style="@style/AppButtonIndigoRounded"
         android:layout_width="@dimen/_206pxh"
         android:layout_height="@dimen/_60pxv"
@@ -100,9 +101,9 @@
         android:text="@string/login"
         android:textAllCaps="false" />
 
-    <TextView
-        android:id="@+id/view_offer_link"
-        style="@style/AppTextSemiBold"
+    <Button
+        android:id="@+id/button_view_offers"
+        style="@style/Widget.MaterialComponents.Button.TextButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -114,7 +115,10 @@
         android:letterSpacing="0.05"
         android:lineSpacingExtra="@dimen/_9pxh"
         android:singleLine="true"
+        android:textFontWeight="700"
+        android:fontFamily="@font/poppins"
+        android:textSize="@dimen/_18pxh"
+        app:textAllCaps="false"
         android:text="@string/view_offers" />
-
 
 </LinearLayout>

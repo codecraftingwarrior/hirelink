@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card_start_plan"
+        android:layout_width="@dimen/_130pxh"
+        android:layout_height="@dimen/_100pxh"
+        android:layout_margin="8dp"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="1dp"
+        app:cardElevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.08"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_view_choose_password_title"
+        app:layout_constraintVertical_bias="0.07999998"
+        app:strokeColor="@color/stroke_color"
+        app:strokeWidth="1dp"
+        >
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/text_view_start_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins"
+                android:letterSpacing="0.12"
+                android:singleLine="true"
+                android:text="@string/start_plan"
+                android:textColor="@color/plan_color"
+                android:textFontWeight="500"
+                android:textSize="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_start_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="44dp"
+                android:layout_marginTop="4dp"
+                android:ellipsize="end"
+                android:letterSpacing="0.12"
+                android:singleLine="true"
+                android:text="€10"
+                android:textColor="@color/black_900"
+                android:textFontWeight="300"
+                android:textSize="18dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_start_title" />
+
+            <ImageView
+                android:id="@+id/button_start_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:layout_marginBottom="3dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/info" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
+

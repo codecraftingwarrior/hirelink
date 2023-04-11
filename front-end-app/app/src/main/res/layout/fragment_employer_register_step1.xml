@@ -46,7 +46,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_step1"
             android:layout_width="320dp"
-            android:layout_height="@dimen/_540pxh"
+            android:layout_height="@dimen/_560pxh"
             android:layout_margin="8dp"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="306dp"
@@ -91,7 +91,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_bic"
+                    android:id="@+id/text_field_email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="@dimen/_283pxh"
                     android:layout_height="@dimen/_60pxh"
@@ -109,7 +109,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_postal_adress"
+                    android:id="@+id/text_field_postal_adress"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="@dimen/_283pxh"
                     android:layout_height="@dimen/_60pxh"

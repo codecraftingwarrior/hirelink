@@ -19,7 +19,7 @@
         tools:context=".modules.auth.register.fragments.rolechoose.RoleChooseRegisterFragment">
 
         <ImageView
-            android:id="@+id/image_view_select_illustration"
+            android:id="@+id/image_view_select_role_illustration"
             android:layout_width="146dp"
             android:layout_height="155dp"
             android:layout_marginStart="136dp"
@@ -28,7 +28,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/text_view_register"
+            android:id="@+id/text_view_select_role_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="128dp"
@@ -42,7 +42,7 @@
             android:textFontWeight="600"
             android:textSize="18dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_view_select_illustration" />
+            app:layout_constraintTop_toBottomOf="@+id/image_view_select_role_illustration" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/button_candidate"
@@ -63,7 +63,7 @@
             app:iconGravity="end"
             app:iconSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_register"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_select_role_title"
             app:selectableButton="@{roleChooseViewModel.selectedRole == `applicant` ? `#3E4F88` : `#F4F4F4`}"
             app:selectedIconColor="@{roleChooseViewModel.selectedRole == `applicant` ? `#FFFFFF` : `#3E4F88`}"
             app:selectedTextColor="@{roleChooseViewModel.selectedRole == `applicant` ? `#FFFFFF` : `#3E4F88`}"

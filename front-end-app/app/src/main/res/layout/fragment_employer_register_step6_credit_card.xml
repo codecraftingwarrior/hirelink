@@ -10,7 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modules.auth.register.fragments.employerregister.EmployerRegisterStep6DirectDebitFragment">
+        tools:context=".modules.auth.register.fragments.employerregister.EmployerRegisterStep6CreditCardFragment">
 
         <TextView
             android:id="@+id/text_view_register"
@@ -75,12 +75,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/image_view_direct_debit_illustration"
+                    android:id="@+id/image_view_credit_card_illustration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:padding="@dimen/_24pxh"
-                    android:src="@drawable/direct_debit_illustration"
+                    android:src="@drawable/credit_card_illustration"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/image_view_step6_card_header" />
@@ -100,7 +100,7 @@
                     app:endIconMinSize="@dimen/_20pxh"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_direct_debit_illustration"
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_credit_card_illustration"
                     app:startIconMinSize="@dimen/_20pxh">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -109,14 +109,14 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_iban"
+                    android:id="@+id/text_field_card_number"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="@dimen/_283pxh"
                     android:layout_height="@dimen/_60pxh"
                     android:layout_marginStart="21dp"
                     android:layout_marginTop="16dp"
                     android:layout_marginEnd="21dp"
-                    android:hint="@string/iban"
+                    android:hint="@string/card_number"
                     app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
                     app:boxCornerRadiusBottomStart="@dimen/_15pxh"
                     app:boxCornerRadiusTopEnd="@dimen/_15pxh"
@@ -133,22 +133,42 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/text_field_bic"
+                    android:id="@+id/text_field_expiration_date"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="@dimen/_283pxh"
+                    android:layout_width="@dimen/_150pxh"
                     android:layout_height="@dimen/_60pxh"
                     android:layout_marginStart="21dp"
                     android:layout_marginTop="16dp"
+                    android:hint="@string/expiration_date"
+                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                    app:endIconMinSize="@dimen/_20pxh"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_field_card_number"
+                    app:startIconMinSize="@dimen/_20pxh">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_field_cvc"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="@dimen/_110pxh"
+                    android:layout_height="@dimen/_60pxh"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="21dp"
-                    android:hint="@string/bic"
+                    android:hint="@string/cvc"
                     app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
                     app:boxCornerRadiusBottomStart="@dimen/_15pxh"
                     app:boxCornerRadiusTopEnd="@dimen/_15pxh"
                     app:boxCornerRadiusTopStart="@dimen/_15pxh"
                     app:endIconMinSize="@dimen/_20pxh"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_field_iban"
+                    app:layout_constraintTop_toBottomOf="@+id/text_field_card_number"
                     app:startIconMinSize="@dimen/_20pxh">
 
                     <com.google.android.material.textfield.TextInputEditText

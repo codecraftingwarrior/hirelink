@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text_view_register" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_step1"
+            android:id="@+id/card_step2"
             android:layout_width="320dp"
             android:layout_height="@dimen/_540pxh"
             android:layout_margin="8dp"
@@ -78,7 +78,7 @@
                     android:src="@drawable/mail_box_illustration" />
 
                 <TextView
-                    android:id="@+id/text_view_verification_title"
+                    android:id="@+id/text_view_password_verification_title"
                     style="@style/AppWelcomeStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                     android:letterSpacing="0.09" />
 
                 <TextView
-                    android:id="@+id/text_view_description_verification"
+                    android:id="@+id/text_view_password_verification_description"
                     style="@style/AppTextRegular"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

@@ -10,8 +10,10 @@
 
     <color name="indigo_main">#3E4F88</color>
     <color name="register_role_choose_button_color">#F4F4F4</color>
+    <color name="stroke_color">#919191</color>
 
-    <color name="pink_900">#883d3d</color>
+
+    <color name="plan_color">#883d3d</color>
     <color name="green_800">#1da507</color>
     <color name="black_900_3f">#3f000000</color>
     <color name="indigo_700_99">#993e4f88</color>
@@ -29,7 +31,7 @@
     <color name="gray_200">#eeeeee</color>
     <color name="gray_300">#dbdbdb</color>
     <color name="amber_600_bf">#bfe8b603</color>
-    <color name="gray_100">#f4f4f4</color>
+    <color name="gray_100">#F4F4F4</color>
     <color name="black_900_cc">#cc000000</color>
     <color name="black_900_99">#99000000</color>
     <color name="black_900_33">#33000000</color>

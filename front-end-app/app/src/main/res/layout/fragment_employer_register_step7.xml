@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text_view_register" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_step1"
+            android:id="@+id/card_step7"
             android:layout_width="320dp"
             android:layout_height="@dimen/_540pxh"
             android:layout_margin="8dp"
@@ -63,7 +63,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image_view_step6"
+                    android:id="@+id/image_view_step7_card_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -75,7 +75,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/image_view_password_illustration"
+                    android:id="@+id/image_view_payment_approved_illustration"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -84,10 +84,10 @@
                     android:src="@drawable/payment_approved_illustration"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_step6" />
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_step7_card_header" />
 
                 <TextView
-                    android:id="@+id/text_view_verification_title"
+                    android:id="@+id/text_view_payment_approved_title"
                     style="@style/AppWelcomeStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -98,10 +98,10 @@
                     android:textSize="@dimen/_18pxh"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_password_illustration" />
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_payment_approved_illustration" />
 
                 <TextView
-                    android:id="@+id/text_view_description_verification"
+                    android:id="@+id/text_view_payment_approved_description"
                     style="@style/AppTextRegular"
                     android:layout_width="@dimen/_240pxh"
                     android:layout_height="wrap_content"
@@ -113,10 +113,10 @@
                     android:textSize="@dimen/_11pxh"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_verification_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_payment_approved_title" />
 
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/button_home"
+                    android:id="@+id/button_start"
                     style="@style/AppButtonIndigoRounded"
                     android:layout_width="@dimen/_140pxh"
                     android:layout_height="@dimen/_60pxv"

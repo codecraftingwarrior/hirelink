@@ -27,6 +27,23 @@
     <string name="account_owner">Account owner</string>
     <string name="iban">IBAN</string>
     <string name="bic">BIC</string>
-
+    <string name="card_number">Card number</string>
+    <string name="expiration_date">Expiration date</string>
+    <string name="cvc">CVC</string>
+    <string name="choose_your_plan">Choose your plan</string>
+    <string name="start_plan">Start</string>
+    <string name="basic_plan">Basic</string>
+    <string name="standart_plan">Standart</string>
+    <string name="advanced_plan">Advanced</string>
+    <string name="premium_plan">Premium</string>
+    <string name="ultimate_plan">Ultimate</string>
+    <string name="order_summary">Order Summary</string>
+    <string name="chosen_plan">Chosen plan</string>
+    <string name="total_price">Total price</string>
+    <string name="saving_summary">You are saving</string>
+    <string name="select_payment_method">Select a payment method</string>
+    <string name="credit_card">Credit card</string>
+    <string name="direct_debit">Direct debit</string>
+    <string name="info">Info</string>
 
 </resources>

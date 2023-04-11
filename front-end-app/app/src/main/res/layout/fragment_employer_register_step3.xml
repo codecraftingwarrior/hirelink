@@ -44,9 +44,9 @@
             app:layout_constraintTop_toBottomOf="@+id/text_view_register" />
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_step1"
+            android:id="@+id/card_step3"
             android:layout_width="320dp"
-            android:layout_height="wrap_content"
+            android:layout_height="@dimen/_560pxh"
             android:layout_margin="8dp"
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp"
@@ -63,7 +63,7 @@
                 android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/image_view_step6"
+                    android:id="@+id/image_view_step3_card_header"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
@@ -75,29 +75,30 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <ImageView
-                    android:id="@+id/image_view_direct_debit_illustration"
-                    android:layout_width="260dp"
-                    android:layout_height="260dp"
+                    android:id="@+id/image_view_password_illustration"
+                    android:layout_width="@dimen/_200pxh"
+                    android:layout_height="@dimen/_200pxh"
                     android:layout_gravity="center_horizontal"
-                    android:padding="@dimen/_24pxh"
+                    android:layout_marginTop="16dp"
                     android:src="@drawable/password_illustration"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/image_view_step6" />
+                    app:layout_constraintTop_toBottomOf="@id/image_view_step3_card_header" />
 
                 <TextView
-                    android:id="@+id/text_view_verification_title"
+                    android:id="@+id/text_view_choose_password_title"
                     style="@style/AppWelcomeStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="84dp"
                     android:letterSpacing="0.09"
                     android:text="@string/choose_password"
                     android:textColor="@color/black_900_cc"
                     android:textSize="@dimen/_13pxh"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/image_view_direct_debit_illustration" />
+                    app:layout_constraintTop_toBottomOf="@+id/image_view_password_illustration" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_field_password"
@@ -105,7 +106,7 @@
                     android:layout_width="@dimen/_283pxh"
                     android:layout_height="@dimen/_60pxh"
                     android:layout_marginStart="21dp"
-                    android:layout_marginTop="42dp"
+                    android:layout_marginTop="58dp"
                     android:layout_marginEnd="21dp"
                     android:foregroundGravity="center_horizontal"
                     android:hint="@string/password"
@@ -116,7 +117,7 @@
                     app:endIconMode="password_toggle"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_verification_title">
+                    app:layout_constraintTop_toBottomOf="@+id/text_view_choose_password_title">
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:layout_width="match_parent"
@@ -130,8 +131,8 @@
                     android:layout_width="@dimen/_283pxh"
                     android:layout_height="@dimen/_60pxh"
                     android:layout_marginStart="21dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="21dp"
                     android:hint="@string/confirm_password"
                     app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
                     app:boxCornerRadiusBottomStart="@dimen/_15pxh"
@@ -156,10 +157,8 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="3dp"
-                    android:layout_marginTop="7dp"
                     android:text="@string/next"
                     android:textSize="@dimen/_18pxh"
-                    app:layout_constraintTop_toBottomOf="@id/text_field_confirm_password"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent" />
 
