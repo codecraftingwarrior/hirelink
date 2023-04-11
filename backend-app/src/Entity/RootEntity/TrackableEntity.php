@@ -8,25 +8,25 @@ use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\MappedSuperclass]
 #[ORM\HasLifecycleCallbacks]
-class Auditable
+class TrackableEntity
 {
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     private ?\DateTimeInterface $createdAt;
 
-    #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?\DateTimeInterface $updatedAt;
 
 
-    #[ORM\PostPersist]
+    #[ORM\PrePersist]
     public function onCreated(LifecycleEventArgs $args)
     {
-        $this->createdAt = new \DateTime();
+        $this->setCreatedAt(new \DateTime());
     }
 
-    #[ORM\PostUpdate]
+    #[ORM\PreUpdate]
     public function onUpdate(LifecycleEventArgs $args)
     {
-        $this->updatedAt = new \DateTime();
+       $this->setUpdatedAt(new \DateTime());
     }
 
     /**

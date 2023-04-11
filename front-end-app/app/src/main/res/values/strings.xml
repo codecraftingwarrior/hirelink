@@ -10,7 +10,7 @@
     <string name="interim_agency_button_text">Interim agency</string>
     <string name="employer_button_text">Employer</string>
     <string name="welcome_text">Welcome</string>
-    <string name="dont_have_acc">Don’t have an account yet?</string>
+    <string name="dont_have_acc">Don’t have an account yet ?</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
     <string name="page_not_found">Page not found</string>
@@ -19,14 +19,15 @@
     <string name="register_confirmation">Register confirmation</string>
     <string name="registration_confirmation_msg">Your subscription was succefuly cofirmed, you can now start candidate to job offers.</string>
     <string name="choose_password">choose a password</string>
-    <string name="password">password</string>
-    <string name="confirm_password">confirm password</string>
+    <string name="password">Password</string>
+    <string name="confirm_password">Confirm password</string>
     <string name="payment_approved">Payment approved</string>
     <string name="payment_approved_description">now you can benefit from all the services of the application offered to employers</string>
     <string name="start">Start</string>
     <string name="account_owner">Account owner</string>
     <string name="iban">IBAN</string>
     <string name="bic">BIC</string>
+<<<<<<< HEAD
     <string name="card_number">Card number</string>
     <string name="expiration_date">Expiration date</string>
     <string name="cvc">CVC</string>
@@ -45,5 +46,19 @@
     <string name="credit_card">Credit card</string>
     <string name="direct_debit">Direct debit</string>
     <string name="info">Info</string>
+=======
+    <string name="schedule">Schedule</string>
+    <string name="candidacy_label">Candidacy</string>
+    <string name="offers_label">Offers</string>
+    <string name="notifications_label">Notifications</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="company_name">Company name</string>
+    <string name="postal_adress">Postal adress</string>
+    <string name="country">Country</string>
+
+>>>>>>> e37cdaac9c47d62b07bf9a1816da75730685405a
 
 </resources>

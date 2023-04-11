@@ -2,35 +2,50 @@
 
 namespace App\Entity\RootEntity;
 
+use App\Entity\ApplicationUser;
 use DateTimeInterface;
 use Doctrine\DBAL\Types\Types;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\User\JWTUserInterface;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints\Email;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 
 #[ORM\MappedSuperclass]
-class BaseUser extends Auditable implements UserInterface
+class BaseUser extends TrackableEntity implements UserInterface, PasswordAuthenticatedUserInterface, JWTUserInterface
 {
     #[ORM\Column]
+    //#[Groups('user:read')]
     protected array $roles = [];
 
     #[ORM\Column(length: 80)]
+    #[Groups(['user:read', 'user:writable', 'user:writable:emp'])]
+    #[NotBlank]
+    #[Email]
     protected ?string $email = null;
 
     #[ORM\Column(length: 255)]
     protected ?string $password = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['user:writable', 'user:writable:emp'])]
     protected ?string $plainPassword = null;
 
     #[ORM\Column(length: 80)]
     protected ?string $registrationState = null;
 
     #[ORM\Column(length: 5, nullable: true)]
+    #[Groups('user:read:otp')]
     protected ?string $otpCode = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     protected ?DateTimeInterface $otpCodeRequestedAt = null;
+
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    protected ?DateTimeInterface $otpCodeVerifiedAt = null;
 
     #[ORM\Column]
     protected ?bool $enabled = null;
@@ -133,6 +148,21 @@ class BaseUser extends Auditable implements UserInterface
         return $this;
     }
 
+    /**
+     * @return DateTimeInterface|null
+     */
+    public function getOtpCodeVerifiedAt(): ?DateTimeInterface
+    {
+        return $this->otpCodeVerifiedAt;
+    }
+
+    public function setOtpCodeVerifiedAt(?DateTimeInterface $otpCodeVerifiedAt): self
+    {
+        $this->otpCodeVerifiedAt = $otpCodeVerifiedAt;
+
+        return $this;
+    }
+
     public function isEnabled(): ?bool
     {
         return $this->enabled;
@@ -144,4 +174,15 @@ class BaseUser extends Auditable implements UserInterface
 
         return $this;
     }
+
+    public static function createFromPayload($identity, array $payload): ApplicationUser|JWTUserInterface
+    {
+        return (new ApplicationUser())
+            ->setId($identity)
+            ->setEmail($payload['username'])
+            ->setRoles($payload['roles']);
+
+    }
+
+
 }

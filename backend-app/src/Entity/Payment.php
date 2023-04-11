@@ -2,12 +2,12 @@
 
 namespace App\Entity;
 
-use App\Entity\RootEntity\Auditable;
+use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\PaymentRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: PaymentRepository::class)]
-class Payment extends Auditable
+class Payment extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

@@ -2,14 +2,30 @@
 
 namespace App\Entity;
 
-use App\Entity\RootEntity\Auditable;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\CompanyRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: CompanyRepository::class)]
-class Company extends Auditable
+#[ApiResource(
+    operations: [
+        new Get(),
+    ],
+    normalizationContext: ['groups' => ['company:read']],
+    denormalizationContext: ['groups' => ['company:writable']]
+)]
+#[UniqueEntity(fields: ['nationalUniqueNumber'], message: 'There is already a company with this national number.')]
+#[UniqueEntity(fields: ['mailAddress'], message: 'There is already a company with this mail address.')]
+#[UniqueEntity(fields: ['phoneNumber'], message: 'There is already a company with this phone number.')]
+class Company extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -17,42 +33,50 @@ class Company extends Auditable
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['company:read', 'company:writable', 'company:first-write'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['company:read', 'company:writable'])]
     private ?string $departmentName = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['company:read', 'company:writable'])]
     private ?string $subDepartmentName = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['company:read', 'company:writable', 'company:first-write', 'company:writable:emp'])]
     private ?string $nationalUniqueNumber = null;
 
-    #[ORM\Column(length: 80)]
+    #[ORM\Column(length: 80, nullable: true)]
     private ?string $contactFullname = null;
 
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $contactFullname2 = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['company:first-write'])]
     private ?string $mailAddress = null;
 
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $mailAddress2 = null;
 
-    #[ORM\Column(length: 80)]
+    #[ORM\Column(length: 80, nullable: true)]
     private ?string $phoneNumber = null;
 
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $phoneNumber2 = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['company:first-write'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['company:first-write'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['company:first-write'])]
     private ?string $country = null;
 
     #[ORM\Column(length: 80, nullable: true)]

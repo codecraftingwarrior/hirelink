@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
         tools:context=".modules.auth.register.fragments.candidateregister.CandidateRegisterFragment">
 
         <TextView
@@ -50,7 +51,7 @@
             android:layout_height="@dimen/_60pxh"
             android:layout_marginStart="64dp"
             android:layout_marginTop="34dp"
-            android:hint="first name"
+            android:hint="@string/first_name"
             app:boxCornerRadiusTopStart="@dimen/_15pxh"
             app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
             app:boxCornerRadiusBottomStart="@dimen/_15pxh"
@@ -72,7 +73,7 @@
             android:layout_height="@dimen/_60pxh"
             android:layout_marginStart="64dp"
             android:layout_marginTop="16dp"
-            android:hint="last name"
+            android:hint="@string/last_name"
             app:boxCornerRadiusTopStart="@dimen/_15pxh"
             app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
             app:boxCornerRadiusBottomStart="@dimen/_15pxh"
@@ -88,13 +89,13 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_field_email"
+            android:id="@+id/text_field_phone_number"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="@dimen/_283pxh"
             android:layout_height="@dimen/_60pxh"
             android:layout_marginStart="64dp"
             android:layout_marginTop="16dp"
-            android:hint="email"
+            android:hint="Phone number"
             app:boxCornerRadiusTopStart="@dimen/_15pxh"
             app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
             app:boxCornerRadiusBottomStart="@dimen/_15pxh"
@@ -102,6 +103,29 @@
             app:endIconMinSize="@dimen/_20pxh"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_field_last_name"
+            app:startIconMinSize="@dimen/_20pxh">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/text_field_email"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="@dimen/_283pxh"
+            android:layout_height="@dimen/_60pxh"
+            android:layout_marginStart="64dp"
+            android:layout_marginTop="16dp"
+            android:hint="@string/email"
+            app:boxCornerRadiusTopStart="@dimen/_15pxh"
+            app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+            app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+            app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+            app:endIconMinSize="@dimen/_20pxh"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_field_phone_number"
             app:startIconMinSize="@dimen/_20pxh">
 
             <com.google.android.material.textfield.TextInputEditText

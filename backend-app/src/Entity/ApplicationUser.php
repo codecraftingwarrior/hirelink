@@ -2,42 +2,154 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Action\NotFoundAction;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+use ApiPlatform\OpenApi\Model\Operation;
+use ApiPlatform\OpenApi\Model\RequestBody;
+use App\Dto\CreatePasswordInput;
+use App\Dto\DigitVerificationInput;
+use App\Dto\DigitVerificationOutput;
 use App\Entity\RootEntity\BaseUser;
 use App\Repository\ApplicationUserRepository;
+use App\State\CreatePasswordStateProcessor;
+use App\State\CurrentUserProvider;
+use App\State\OtpVerificationProcessor;
+use App\State\RegistrationStateProcessor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Serializer\Annotation\SerializedName;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 
 #[ORM\Entity(repositoryClass: ApplicationUserRepository::class)]
+#[ApiResource(
+    operations: [
+        new GetCollection(uriTemplate: '/users'),
+        new Get(
+            uriTemplate: '/users/{id}',
+            requirements: ['id' => '\d+'],
+            normalizationContext: ['groups' => ['user:read', 'role:read']]
+        ),
+        new Put(
+            uriTemplate: '/auth/{id}/create-password',
+            openapi: new Operation(
+                tags: ['Registration'],
+                summary: 'Creates a password after the OTP code verification.',
+                description: 'Use this endpoint to create password for a employer / agency after verified the generated OTP.',
+                requestBody: new RequestBody(
+                    description: 'Data for identify the user and the company.',
+                    content: new \ArrayObject([
+                        'application/json' => [
+                            'schema' => [
+                                'type' => 'object',
+                                'properties' => [
+                                    'nationalUniqueNumber' => ['type' => 'string'],
+                                    'email' => ['type' => 'string'],
+                                    'plainPassword' => ['type' => 'string']
+                                ]
+                            ],
+                            'example' => [
+                                'nationalUniqueNumber' => 'DFE1293',
+                                'email' => 'example@hirelink.fr',
+                                'plainPassword' => 'thereisapwd'
+                            ]
+                        ]
+                    ]),
+                    required: true
+                ),
+                security: []
+            ),
+            denormalizationContext: ['groups' => ['create-pwd:writable']],
+            input: CreatePasswordInput::class,
+            processor: CreatePasswordStateProcessor::class
+        ),
+        new Post(
+            uriTemplate: '/auth/verify-digit',
+            openapiContext: [
+                'security' => [],
+                'summary' => 'Verify the generated 4-Digits code.',
+                'description' => 'Use this endpoint to verify the authenticity of the generated 4-Digits code.',
+                'tags' => ['Registration']
+            ],
+            normalizationContext: ['groups' => ['user:read', 'digit:read']],
+            denormalizationContext: ['groups' => ['user:writable', 'digit:write']],
+            input: DigitVerificationInput::class,
+            output: DigitVerificationOutput::class,
+            processor: OtpVerificationProcessor::class
+        ),
+        new Post(
+            uriTemplate: '/auth/register',
+            openapiContext: [
+                'security' => [],
+                'summary' => 'Register a user to the system.',
+                'description' => 'Use this endpoint to register all type of users to the system. The role field should not be empty.',
+                'tags' => ['Registration']
+            ],
+            normalizationContext: ['groups' => ['user:read', 'role:read', 'user:read:otp', 'company:first-write']],
+            denormalizationContext: ['groups' => ['user:writable', 'company:first-write']],
+            processor: RegistrationStateProcessor::class,
+        ),
+        new Put(
+            uriTemplate: 'users/{id}'
+        ),
+        new Get(
+            uriTemplate: '/users/current-user',
+            openapiContext: [
+                'summary' => 'Retrieves the current logged in user.',
+                'parameters' => []
+            ],
+            normalizationContext: ['groups' => ['user:read', 'role:read']],
+            provider: CurrentUserProvider::class
+        )
+    ],
+    normalizationContext: ['groups' => ['user:read']]
+)]
+#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email.')]
+#[UniqueEntity(fields: ['phoneNumber'], message: 'There is already an account with this phone number.')]
 class ApplicationUser extends BaseUser
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['user:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $nationality = null;
 
-    #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[ORM\Column(type: Types::DATE_MUTABLE, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?\DateTimeInterface $birthDate = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['user:read', 'user:writable'])]
+    #[NotBlank]
     private ?string $phoneNumber = null;
 
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $address = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['user:read', 'user:writable'])]
     private ?string $picUrl = null;
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Document::class)]
@@ -45,12 +157,17 @@ class ApplicationUser extends BaseUser
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['user:read', 'user:writable'])]
+    #[SerializedName(serializedName: 'appRole')]
+    #[NotBlank]
     private ?Role $role = null;
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
+    #[Groups(['user:writable'])]
     private ?Plan $plan = null;
 
-    #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
+    #[ORM\ManyToOne(cascade: ["persist"], inversedBy: 'applicationUsers')]
+    #[Groups(['user:writable', 'company:writable:emp', 'company:first-write'])]
     private ?Company $company = null;
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'applicationUsers')]
@@ -71,6 +188,15 @@ class ApplicationUser extends BaseUser
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Tag::class)]
     private Collection $tags;
 
+    #[Groups(['user:read'])]
+    private ?string $token = null;
+
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: PaymentInformation::class)]
+    private Collection $paymentInformations;
+
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: BankInformation::class)]
+    private Collection $bankInformations;
+
     public function __construct()
     {
         $this->documents = new ArrayCollection();
@@ -80,12 +206,21 @@ class ApplicationUser extends BaseUser
         $this->jobApplications = new ArrayCollection();
         $this->jobOffers = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->paymentInformations = new ArrayCollection();
+        $this->bankInformations = new ArrayCollection();
     }
 
 
     public function getId(): ?int
     {
         return $this->id;
+    }
+
+    public function setId(?int $id): self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getFirstName(): ?string
@@ -170,11 +305,6 @@ class ApplicationUser extends BaseUser
         $this->picUrl = $picUrl;
 
         return $this;
-    }
-
-    public function getRoles(): array
-    {
-        return $this->roles;
     }
 
     public function setRoles(array $roles): self
@@ -415,6 +545,81 @@ class ApplicationUser extends BaseUser
             // set the owning side to null (unless already changed)
             if ($tag->getOwner() === $this) {
                 $tag->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PaymentInformation>
+     */
+    public function getPaymentInformations(): Collection
+    {
+        return $this->paymentInformations;
+    }
+
+    public function addPaymentInformation(PaymentInformation $paymentInformation): self
+    {
+        if (!$this->paymentInformations->contains($paymentInformation)) {
+            $this->paymentInformations->add($paymentInformation);
+            $paymentInformation->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removePaymentInformation(PaymentInformation $paymentInformation): self
+    {
+        if ($this->paymentInformations->removeElement($paymentInformation)) {
+            // set the owning side to null (unless already changed)
+            if ($paymentInformation->getOwner() === $this) {
+                $paymentInformation->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BankInformation>
+     */
+    public function getBankInformations(): Collection
+    {
+        return $this->bankInformations;
+    }
+
+    public function addBankInformation(BankInformation $bankInformation): self
+    {
+        if (!$this->bankInformations->contains($bankInformation)) {
+            $this->bankInformations->add($bankInformation);
+            $bankInformation->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBankInformation(BankInformation $bankInformation): self
+    {
+        if ($this->bankInformations->removeElement($bankInformation)) {
+            // set the owning side to null (unless already changed)
+            if ($bankInformation->getOwner() === $this) {
+                $bankInformation->setOwner(null);
             }
         }
 

@@ -2,14 +2,14 @@
 
 namespace App\Entity;
 
-use App\Entity\RootEntity\Auditable;
+use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
-class Tag extends Auditable
+class Tag extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]

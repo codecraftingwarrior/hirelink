@@ -9,7 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="667dp"
+        android:layout_gravity="center"
         tools:context=".modules.auth.register.fragments.employerregister.EmployerRegisterStep1Fragment">
 
         <TextView
@@ -79,7 +80,7 @@
                     android:layout_height="@dimen/_60pxh"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_40pxh"
-                    android:hint="company name"
+                    android:hint="@string/company_name"
                     app:boxCornerRadiusTopStart="@dimen/_15pxh"
                     app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
                     app:boxCornerRadiusBottomStart="@dimen/_15pxh"
@@ -97,7 +98,7 @@
                     android:layout_height="@dimen/_60pxh"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
-                    android:hint="email"
+                    android:hint="@string/email"
                     app:boxCornerRadiusTopStart="@dimen/_15pxh"
                     app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
                     app:boxCornerRadiusBottomStart="@dimen/_15pxh"
@@ -115,7 +116,7 @@
                     android:layout_height="@dimen/_60pxh"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
-                    android:hint="postal adress"
+                    android:hint="@string/postal_adress"
                     app:boxCornerRadiusTopStart="@dimen/_15pxh"
                     app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
                     app:boxCornerRadiusBottomStart="@dimen/_15pxh"
@@ -133,7 +134,7 @@
                     android:layout_height="@dimen/_60pxh"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
-                    android:hint="city"
+                    android:hint="City"
                     app:boxCornerRadiusTopStart="@dimen/_15pxh"
                     app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
                     app:boxCornerRadiusBottomStart="@dimen/_15pxh"
@@ -152,7 +153,7 @@
                     android:layout_height="@dimen/_60pxh"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="16dp"
-                    android:hint="country"
+                    android:hint="@string/country"
                     app:boxCornerRadiusTopStart="@dimen/_15pxh"
                     app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
                     app:boxCornerRadiusBottomStart="@dimen/_15pxh"
