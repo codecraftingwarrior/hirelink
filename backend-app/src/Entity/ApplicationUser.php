@@ -97,6 +97,9 @@ use Symfony\Component\Validator\Constraints\NotBlank;
             denormalizationContext: ['groups' => ['user:writable', 'company:first-write']],
             processor: RegistrationStateProcessor::class,
         ),
+        new Put(
+            uriTemplate: 'users/{id}'
+        ),
         new Get(
             uriTemplate: '/users/current-user',
             openapiContext: [
@@ -161,6 +164,7 @@ class ApplicationUser extends BaseUser
     private ?Role $role = null;
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
+    #[Groups(['user:writable'])]
     private ?Plan $plan = null;
 
     #[ORM\ManyToOne(cascade: ["persist"], inversedBy: 'applicationUsers')]
