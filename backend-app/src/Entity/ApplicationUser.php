@@ -195,6 +195,9 @@ class ApplicationUser extends BaseUser
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: PaymentInformation::class)]
     private Collection $paymentInformations;
 
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: BankInformation::class)]
+    private Collection $bankInformations;
+
     public function __construct()
     {
         $this->documents = new ArrayCollection();
@@ -205,6 +208,7 @@ class ApplicationUser extends BaseUser
         $this->jobOffers = new ArrayCollection();
         $this->tags = new ArrayCollection();
         $this->paymentInformations = new ArrayCollection();
+        $this->bankInformations = new ArrayCollection();
     }
 
 
@@ -587,6 +591,36 @@ class ApplicationUser extends BaseUser
             // set the owning side to null (unless already changed)
             if ($paymentInformation->getOwner() === $this) {
                 $paymentInformation->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, BankInformation>
+     */
+    public function getBankInformations(): Collection
+    {
+        return $this->bankInformations;
+    }
+
+    public function addBankInformation(BankInformation $bankInformation): self
+    {
+        if (!$this->bankInformations->contains($bankInformation)) {
+            $this->bankInformations->add($bankInformation);
+            $bankInformation->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removeBankInformation(BankInformation $bankInformation): self
+    {
+        if ($this->bankInformations->removeElement($bankInformation)) {
+            // set the owning side to null (unless already changed)
+            if ($bankInformation->getOwner() === $this) {
+                $bankInformation->setOwner(null);
             }
         }
 
