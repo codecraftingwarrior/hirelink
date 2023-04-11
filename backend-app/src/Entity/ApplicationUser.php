@@ -192,6 +192,9 @@ class ApplicationUser extends BaseUser
     #[Groups(['user:read'])]
     private ?string $token = null;
 
+    #[ORM\OneToMany(mappedBy: 'owner', targetEntity: PaymentInformation::class)]
+    private Collection $paymentInformations;
+
     public function __construct()
     {
         $this->documents = new ArrayCollection();
@@ -201,6 +204,7 @@ class ApplicationUser extends BaseUser
         $this->jobApplications = new ArrayCollection();
         $this->jobOffers = new ArrayCollection();
         $this->tags = new ArrayCollection();
+        $this->paymentInformations = new ArrayCollection();
     }
 
 
@@ -555,6 +559,36 @@ class ApplicationUser extends BaseUser
     public function setToken(?string $token): self
     {
         $this->token = $token;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, PaymentInformation>
+     */
+    public function getPaymentInformations(): Collection
+    {
+        return $this->paymentInformations;
+    }
+
+    public function addPaymentInformation(PaymentInformation $paymentInformation): self
+    {
+        if (!$this->paymentInformations->contains($paymentInformation)) {
+            $this->paymentInformations->add($paymentInformation);
+            $paymentInformation->setOwner($this);
+        }
+
+        return $this;
+    }
+
+    public function removePaymentInformation(PaymentInformation $paymentInformation): self
+    {
+        if ($this->paymentInformations->removeElement($paymentInformation)) {
+            // set the owning side to null (unless already changed)
+            if ($paymentInformation->getOwner() === $this) {
+                $paymentInformation->setOwner(null);
+            }
+        }
 
         return $this;
     }
