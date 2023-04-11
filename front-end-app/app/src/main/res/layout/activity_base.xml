@@ -53,6 +53,9 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="330dp"
                 android:layout_height="wrap_content"
+                app:startIconDrawable="@drawable/search_icon"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/mic_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image_view_hire_link"
                 android:layout_marginTop="24dp"
@@ -61,7 +64,7 @@
                 app:boxCornerRadiusBottomEnd="@dimen/_25pxh"
                 app:boxCornerRadiusBottomStart="@dimen/_25pxh"
                 app:boxCornerRadiusTopEnd="@dimen/_25pxh"
-                app:endIconDrawable="@drawable/mic_icon">
+               >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
