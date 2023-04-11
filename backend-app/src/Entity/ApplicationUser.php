@@ -110,8 +110,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
             provider: CurrentUserProvider::class
         )
     ],
-    normalizationContext: ['groups' => ['user:read']],
-    denormalizationContext: ['groups' => ['user:writable']],
+    normalizationContext: ['groups' => ['user:read']]
 )]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email.')]
 #[UniqueEntity(fields: ['phoneNumber'], message: 'There is already an account with this phone number.')]
