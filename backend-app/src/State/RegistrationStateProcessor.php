@@ -8,6 +8,8 @@ use App\Entity\ApplicationUser;
 use App\Enum\RegistrationState;
 use App\Enum\RoleType;
 use App\Repository\ApplicationUserRepository;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\Http\Authentication\AuthenticationSuccessHandler;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\Mailer\Exception\TransportExceptionInterface;
@@ -22,6 +24,8 @@ class RegistrationStateProcessor implements ProcessorInterface
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly ApplicationUserRepository   $applicationUserRepository,
         private readonly MailerInterface             $mailer,
+        private readonly JWTTokenManagerInterface $JWTTokenManager,
+        private readonly AuthenticationSuccessHandler $authenticationSuccessHandler,
     )
     {
     }
@@ -58,6 +62,13 @@ class RegistrationStateProcessor implements ProcessorInterface
         $user->eraseCredentials();
 
         $this->applicationUserRepository->save($user, true);
+
+        //generates jwt token and authenticates the user
+        $jwtToken = $this->JWTTokenManager->create($user);
+
+        $user->setToken($jwtToken);
+
+        $this->authenticationSuccessHandler->handleAuthenticationSuccess($user, $jwtToken);
 
         return $user;
     }
