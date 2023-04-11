@@ -93,7 +93,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
                 'description' => 'Use this endpoint to register all type of users to the system. The role field should not be empty.',
                 'tags' => ['Registration']
             ],
-            normalizationContext: ['groups' => ['user:read', 'role:read', 'user:read:otp']],
+            normalizationContext: ['groups' => ['user:read', 'role:read', 'user:read:otp', 'company:first-write']],
             denormalizationContext: ['groups' => ['user:writable', 'company:first-write']],
             processor: RegistrationStateProcessor::class,
         ),
@@ -164,7 +164,7 @@ class ApplicationUser extends BaseUser
     private ?Plan $plan = null;
 
     #[ORM\ManyToOne(cascade: ["persist"], inversedBy: 'applicationUsers')]
-    #[Groups(['user:writable', 'company:writable:emp'])]
+    #[Groups(['user:writable', 'company:writable:emp', 'company:first-write'])]
     private ?Company $company = null;
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'applicationUsers')]
@@ -184,6 +184,9 @@ class ApplicationUser extends BaseUser
 
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: Tag::class)]
     private Collection $tags;
+
+    #[Groups(['user:read'])]
+    private ?string $token = null;
 
     public function __construct()
     {
@@ -533,6 +536,21 @@ class ApplicationUser extends BaseUser
                 $tag->setOwner(null);
             }
         }
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getToken(): ?string
+    {
+        return $this->token;
+    }
+
+    public function setToken(?string $token): self
+    {
+        $this->token = $token;
 
         return $this;
     }

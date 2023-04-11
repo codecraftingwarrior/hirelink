@@ -18,8 +18,6 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new Get(),
-        new Post(),
-        new GetCollection(),
     ],
     normalizationContext: ['groups' => ['company:read']],
     denormalizationContext: ['groups' => ['company:writable']]

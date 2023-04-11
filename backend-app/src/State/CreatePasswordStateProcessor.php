@@ -8,6 +8,9 @@ use App\Dto\CreatePasswordInput;
 use App\Entity\ApplicationUser;
 use App\Enum\RoleType;
 use App\Repository\ApplicationUserRepository;
+use Lexik\Bundle\JWTAuthenticationBundle\Security\Http\Authentication\AuthenticationSuccessHandler;
+use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
+use Psr\Container\ContainerInterface;
 use Symfony\Component\Finder\Exception\AccessDeniedException;
 use Symfony\Component\HttpKernel\Exception\UnprocessableEntityHttpException;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -18,6 +21,8 @@ class CreatePasswordStateProcessor implements ProcessorInterface
     public function __construct(
         private readonly UserPasswordHasherInterface $passwordHasher,
         private readonly ApplicationUserRepository   $userRepository,
+        private readonly JWTTokenManagerInterface $JWTTokenManager,
+        private readonly AuthenticationSuccessHandler $authenticationSuccessHandler,
     )
     {
     }
@@ -31,7 +36,7 @@ class CreatePasswordStateProcessor implements ProcessorInterface
             throw new AccessDeniedException("You are not allowed to create a new password.");
 
         if ($user->getCompany()->getNationalUniqueNumber() !== $data->nationalUniqueNumber)
-            throw new UnprocessableEntityHttpException("You provided the wrond national unique number.");
+            throw new UnprocessableEntityHttpException("You provided the wrong national unique number.");
 
         if ($user->getEmail() !== $data->email)
             throw new UnprocessableEntityHttpException("You provided the wrong email address.");
@@ -50,6 +55,13 @@ class CreatePasswordStateProcessor implements ProcessorInterface
         $user->setPassword($hashedPassword);
 
         $this->userRepository->save($user, true);
+
+        //Generating JWT token and authenticating the user
+        $jwtToken = $this->JWTTokenManager->create($user);
+
+        $user->setToken($jwtToken);
+
+        $this->authenticationSuccessHandler->handleAuthenticationSuccess($user, $jwtToken);
 
         return $user;
     }
