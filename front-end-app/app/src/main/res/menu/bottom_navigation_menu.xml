@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_item_schedule"
+        android:enabled="true"
+        android:icon="@drawable/schedule_icon"
+        android:title="@string/schedule"/>
+    <item
+        android:id="@+id/menu_item_candidacy"
+        android:enabled="true"
+        android:icon="@drawable/candidacy_icon"
+        android:title="@string/candidacy_label"/>
+    <item
+        android:id="@+id/menu_item_offers"
+        android:enabled="true"
+        android:icon="@drawable/suitcase_icon"
+        android:title="@string/offers_label"/>
+
+    <item
+        android:id="@+id/menu_item_notifications"
+        android:enabled="true"
+        android:icon="@drawable/bell_icon"
+        android:title="@string/notifications_label"/>
+</menu>

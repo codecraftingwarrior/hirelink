@@ -1,70 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".modules.auth.register.fragments.candidateregister.ConfirmationCandidateRegisterFragment">
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <ImageView
-        android:id="@+id/image_view_not_found"
-        android:layout_width="@dimen/_250pxh"
-        android:layout_height="@dimen/_250pxh"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="90dp"
-        android:src="@drawable/register_confirmation_illustration"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <data>
 
-    <TextView
-        android:id="@+id/text_view_not_found_title"
-        style="@style/AppWelcomeStyle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:ellipsize="end"
-        android:gravity="center_horizontal"
-        android:singleLine="true"
-        android:text="@string/register_confirmation"
-        android:letterSpacing="0.05"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image_view_not_found" />
+    </data>
 
-    <TextView
-        android:id="@+id/text_view_description_not_found"
-        style="@style/AppTextRegular"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_32pxh"
-        android:gravity="center_horizontal"
-        android:letterSpacing="0.04"
-        android:lineSpacingExtra="@dimen/_7pxh"
-        android:paddingLeft="@dimen/_32pxh"
-        android:paddingRight="@dimen/_32pxh"
-        android:text="@string/registration_confirmation_msg"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_not_found_title" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".modules.auth.register.fragments.candidateregister.ConfirmationCandidateRegisterFragment">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_home"
-        style="@style/AppButtonIndigoRounded"
-        android:layout_width="@dimen/_206pxh"
-        android:layout_height="@dimen/_60pxv"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="100dp"
-        android:layout_marginTop="100dp"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:letterSpacing="0.05"
-        android:lineSpacingExtra="@dimen/_9pxh"
-        android:paddingStart="@dimen/_30pxh"
-        android:paddingTop="@dimen/_16pxv"
-        android:paddingEnd="@dimen/_30pxh"
-        android:paddingBottom="@dimen/_16pxv"
-        android:singleLine="true"
-        android:text="@string/start"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_description_not_found" />
+        <ImageView
+            android:id="@+id/image_view_confirmation"
+            android:layout_width="@dimen/_250pxh"
+            android:layout_height="@dimen/_250pxh"
+            android:layout_marginStart="80dp"
+            android:layout_marginTop="90dp"
+            android:src="@drawable/register_confirmation_illustration"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/text_view_not_found_title"
+            style="@style/AppWelcomeStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:text="@string/register_confirmation"
+            android:letterSpacing="0.05"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/image_view_not_found" />
+
+        <TextView
+            android:id="@+id/text_view_description_not_found"
+            style="@style/AppTextRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_32pxh"
+            android:gravity="center_horizontal"
+            android:letterSpacing="0.04"
+            android:lineSpacingExtra="@dimen/_7pxh"
+            android:paddingLeft="@dimen/_32pxh"
+            android:paddingRight="@dimen/_32pxh"
+            android:text="@string/registration_confirmation_msg"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_not_found_title" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_start"
+            style="@style/AppButtonIndigoRounded"
+            android:layout_width="@dimen/_206pxh"
+            android:layout_height="@dimen/_60pxv"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="100dp"
+            android:layout_marginTop="100dp"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:letterSpacing="0.05"
+            android:lineSpacingExtra="@dimen/_9pxh"
+            android:paddingStart="@dimen/_30pxh"
+            android:paddingTop="@dimen/_16pxv"
+            android:paddingEnd="@dimen/_30pxh"
+            android:paddingBottom="@dimen/_16pxv"
+            android:singleLine="true"
+            android:text="@string/start"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/image_view_confirmation" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

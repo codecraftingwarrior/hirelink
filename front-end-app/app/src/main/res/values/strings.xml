@@ -27,6 +27,10 @@
     <string name="account_owner">Account owner</string>
     <string name="iban">IBAN</string>
     <string name="bic">BIC</string>
+    <string name="schedule">Schedule</string>
+    <string name="candidacy_label">Candidacy</string>
+    <string name="offers_label">Offers</string>
+    <string name="notifications_label">Notifications</string>
 
 
 </resources>
