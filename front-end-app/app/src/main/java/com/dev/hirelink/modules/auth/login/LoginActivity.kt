@@ -23,7 +23,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun bindListeners() {
-        val buttonRegisterText = findViewById<Button>(R.id.button_register_text)
+        val buttonRegisterText = findViewById<Button>(R.id.button_register)
         buttonRegisterText.setOnClickListener {
             startActivity(Intent(applicationContext, RegisterActivity::class.java))
         }

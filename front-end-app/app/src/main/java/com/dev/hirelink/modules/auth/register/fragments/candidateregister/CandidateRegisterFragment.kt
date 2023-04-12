@@ -9,12 +9,13 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentCandidateRegisterBinding
+import com.dev.hirelink.enums.RoleType
 
 class CandidateRegisterFragment : Fragment() {
-    private lateinit var listener: ApplicantRegistrationTerminationListener
+    private lateinit var listener: RegistrationTerminationListener
 
-    interface ApplicantRegistrationTerminationListener {
-        fun onApplicantRegistrationTerminated()
+    interface RegistrationTerminationListener {
+        fun onRegistrationTerminated(role: RoleType = RoleType.APPLICANT)
     }
 
     private lateinit var binding: FragmentCandidateRegisterBinding
@@ -34,13 +35,13 @@ class CandidateRegisterFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.buttonRegister.setOnClickListener { listener.onApplicantRegistrationTerminated() }
+        binding.buttonRegister.setOnClickListener { listener.onRegistrationTerminated() }
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         try {
-            listener = context as ApplicantRegistrationTerminationListener
+            listener = context as RegistrationTerminationListener
         } catch (e: java.lang.Exception) {
             throw Exception("$context must implement ApplicantRegistrationTerminationListener")
         }

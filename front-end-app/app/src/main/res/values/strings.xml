@@ -22,12 +22,11 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="payment_approved">Payment approved</string>
-    <string name="payment_approved_description">now you can benefit from all the services of the application offered to employers</string>
+    <string name="payment_approved_description">Now you can benefit from all the services of the application offered to employers.</string>
     <string name="start">Start</string>
     <string name="account_owner">Account owner</string>
     <string name="iban">IBAN</string>
     <string name="bic">BIC</string>
-<<<<<<< HEAD
     <string name="card_number">Card number</string>
     <string name="expiration_date">Expiration date</string>
     <string name="cvc">CVC</string>
@@ -46,7 +45,6 @@
     <string name="credit_card">Credit card</string>
     <string name="direct_debit">Direct debit</string>
     <string name="info">Info</string>
-=======
     <string name="schedule">Schedule</string>
     <string name="candidacy_label">Candidacy</string>
     <string name="offers_label">Offers</string>
@@ -58,7 +56,5 @@
     <string name="company_name">Company name</string>
     <string name="postal_adress">Postal adress</string>
     <string name="country">Country</string>
-
->>>>>>> e37cdaac9c47d62b07bf9a1816da75730685405a
-
+    <string name="cash_str">€ %.2f</string>
 </resources>

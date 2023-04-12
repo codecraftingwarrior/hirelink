@@ -269,34 +269,38 @@
                     app:layout_constraintTop_toBottomOf="@+id/materialDivider2" />
 
                 <RadioButton
-                    android:id="@+id/radio_button_credit_card"
+                    android:id="@+id/radio_btn_credit_card"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="36dp"
                     android:text="@string/credit_card"
-                    android:textFontWeight="400"
+                    android:layout_marginStart="36dp"
+                    app:useMaterialThemeColors="false"
+                    app:buttonTint="@color/indigo_main"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="0.10"
                     android:textColor="#666666"
-                    android:textSize="@dimen/_13pxh"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toTopOf="@+id/materialDivider2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/materialDivider" />
 
+
                 <RadioButton
-                    android:id="@+id/radio_button_direct_debit"
+                    android:id="@+id/radio_btn_direct_debit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="36dp"
                     android:text="@string/direct_debit"
-                    android:textFontWeight="400"
+                    app:useMaterialThemeColors="false"
+                    app:buttonTint="@color/indigo_main"
                     android:fontFamily="@font/poppins"
                     android:letterSpacing="0.10"
                     android:textColor="#666666"
-                    android:textSize="@dimen/_13pxh"
+                    android:textSize="13sp"
                     app:layout_constraintBottom_toTopOf="@+id/materialDivider3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/materialDivider2" />
+
 
                 <Button
                     android:id="@+id/button_next"
@@ -316,17 +320,20 @@
                     android:layout_width="75dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="48dp"
-                    app:layout_constraintStart_toEndOf="@+id/radio_button_credit_card"
-                    app:layout_constraintTop_toBottomOf="@+id/materialDivider"
+                    app:layout_constraintEnd_toEndOf="@id/materialDivider"
+                    app:layout_constraintTop_toTopOf="@+id/radio_btn_credit_card"
+                    app:layout_constraintBottom_toBottomOf="@id/radio_btn_credit_card"
                     app:srcCompat="@drawable/credit_card_illustration" />
+
 
                 <ImageView
                     android:id="@+id/image_view_direct_debit"
                     android:layout_width="75dp"
                     android:layout_height="60dp"
                     android:layout_marginStart="48dp"
-                    app:layout_constraintStart_toEndOf="@+id/radio_button_direct_debit"
-                    app:layout_constraintTop_toBottomOf="@+id/imageView"
+                    app:layout_constraintEnd_toEndOf="@id/materialDivider2"
+                    app:layout_constraintTop_toTopOf="@+id/radio_btn_direct_debit"
+                    app:layout_constraintBottom_toBottomOf="@id/radio_btn_direct_debit"
                     app:srcCompat="@drawable/direct_debit_illustration" />
 
                 <!-- <ImageButton

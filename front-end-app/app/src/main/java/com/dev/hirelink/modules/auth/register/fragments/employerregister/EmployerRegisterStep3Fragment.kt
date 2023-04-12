@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentEmployerRegisterStep3Binding
+import com.dev.hirelink.enums.RegistrationStep
 import com.dev.hirelink.modules.auth.register.fragments.StepFragment
 
 class EmployerRegisterStep3Fragment : StepFragment() {
@@ -24,5 +25,15 @@ class EmployerRegisterStep3Fragment : StepFragment() {
         )
 
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        bindListeners();
+    }
+
+    private fun bindListeners() {
+        binding.buttonNext.setOnClickListener { listener.onNextButtonTouched(RegistrationStep.STEP_3) }
     }
 }
