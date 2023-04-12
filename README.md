@@ -1,6 +1,6 @@
 # Hirelink
 
-Ce projet est réalisé par **GUEYE El Hadji Ahmadou**, **BRAHAM Ahmed** et **HENRY Nathan** dans le cadre de l'enseignement de Développement et Programmation pour Support Mobiles en Master 1 de Génie Logiciel à l'université de Montpellier dans l'année scolaire 2022-2023. 
+Cette application a été conçu par une equipe de developpement composée de **GUEYE El Hadji Ahmadou**, **BRAHAM Ahmed** et **HENRY Nathan** avec pour objectif de créer une application mobile innovante et fonctionnelle. 
 
 ## Introduction
 
