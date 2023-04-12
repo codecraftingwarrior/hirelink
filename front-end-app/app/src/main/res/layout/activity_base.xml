@@ -90,12 +90,13 @@
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:fillViewport="true"
             app:layout_constraintTop_toBottomOf="@id/search_header"
             app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
 
             <FrameLayout
                 android:id="@+id/register_activity_fragment_container"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_behavior="@string/appbar_scrolling_view_behavior"
                 app:layout_constraintStart_toStartOf="parent"

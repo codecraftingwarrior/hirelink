@@ -60,7 +60,7 @@ class MockDataSource {
                 salary = 45000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
-                address = "6648 Shantae Brooks, West Hoseafort, KS 68936",
+                address = "6648 Shantae Brooks",
                 lat = 3003.0f,
                 lng = 300493.0f,
                 companyName = "McDonald's"
@@ -72,7 +72,7 @@ class MockDataSource {
                 salary = 85000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
-                address = "6648 Shantae Brooks, West Hoseafort, KS 68936",
+                address = "6648 Shantae Brooks",
                 lat = 3003.0f,
                 lng = 300493.0f,
                 companyName = "Apple"
@@ -84,7 +84,7 @@ class MockDataSource {
                 salary = 65000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
-                address = "6648 Shantae Brooks, West Hoseafort, KS 68936",
+                address = "6648 Shantae Brooks",
                 lat = 3003.0f,
                 lng = 300493.0f,
                 companyName = "Amazon"
@@ -96,7 +96,7 @@ class MockDataSource {
                 salary = 45000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
-                address = "6648 Shantae Brooks, West Hoseafort, KS 68936",
+                address = "6648 Shantae Brooks",
                 lat = 3003.0f,
                 lng = 300493.0f,
                 companyName = "Ali BaBa"
@@ -108,7 +108,7 @@ class MockDataSource {
                 salary = 105000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
-                address = "6648 Shantae Brooks, West Hoseafort, KS 68936",
+                address = "6648 Shantae Brooks",
                 lat = 3003.0f,
                 lng = 300493.0f,
                 companyName = "Jira"

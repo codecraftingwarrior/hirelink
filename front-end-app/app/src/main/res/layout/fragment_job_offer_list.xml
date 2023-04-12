@@ -8,16 +8,14 @@
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:orientation="vertical"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:context=".modules.core.offers.fragment.JobOfferListFragment">
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_view_offer_list"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
             android:scrollbars="none" />
 
     </androidx.appcompat.widget.LinearLayoutCompat>
