@@ -42,7 +42,11 @@ class EmployerRegisterStep4Fragment : StepFragment() {
 
         initRecyclerView()
 
-        binding.buttonNext.setOnClickListener { listener.onNextButtonTouched(RegistrationStep.STEP_4) }
+        binding.buttonNext.setOnClickListener { updatePlanForUser() }
+    }
+
+    private fun updatePlanForUser() {
+        listener.onNextButtonTouched(RegistrationStep.STEP_4)
     }
 
     private fun initRecyclerView() {

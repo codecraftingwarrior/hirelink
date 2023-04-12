@@ -34,6 +34,10 @@ class EmployerRegisterStep3Fragment : StepFragment() {
     }
 
     private fun bindListeners() {
-        binding.buttonNext.setOnClickListener { listener.onNextButtonTouched(RegistrationStep.STEP_3) }
+        binding.buttonNext.setOnClickListener { createPassword() }
+    }
+
+    private fun createPassword() {
+        listener.onNextButtonTouched(RegistrationStep.STEP_3)
     }
 }

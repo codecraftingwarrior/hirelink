@@ -33,12 +33,10 @@ class EmployerRegisterStep6DirectDebitFragment : StepFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bundle = bundleOf("paymentType" to PaymentType.DIRECT_DEBIT.name)
-        binding.buttonNext.setOnClickListener {
-            listener.onNextButtonTouched(
-                RegistrationStep.STEP_6_DIRECT_DEBIT,
-                bundle
-            )
-        }
+        binding.buttonNext.setOnClickListener { storePaymentInformations() }
+    }
+
+    private fun storePaymentInformations() {
+        listener.onNextButtonTouched(RegistrationStep.STEP_6_DIRECT_DEBIT)
     }
 }

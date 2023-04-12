@@ -31,7 +31,11 @@ class EmployerRegisterStep1Fragment : StepFragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding.buttonNext.setOnClickListener { listener.onNextButtonTouched(currentStep) }
+        binding.buttonNext.setOnClickListener { createAccount() }
+    }
+
+    private fun createAccount() {
+        listener.onNextButtonTouched(currentStep)
     }
 
 }

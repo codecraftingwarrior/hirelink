@@ -37,14 +37,11 @@ class EmployerRegisterStep6CreditCardFragment : StepFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val bundle = bundleOf("paymentType" to PaymentType.CREDIT_CARD.name)
-        binding.buttonNext.setOnClickListener {
-            Log.d(TAG, "Passing this bundle : $bundle")
-            listener.onNextButtonTouched(
-                RegistrationStep.STEP_6_CREDIT_CARD,
-                bundle
-            )
-        }
+        binding.buttonNext.setOnClickListener { storePaymentInformations() }
+    }
+
+    private fun storePaymentInformations() {
+        listener.onNextButtonTouched(RegistrationStep.STEP_6_CREDIT_CARD)
     }
 
     companion object {

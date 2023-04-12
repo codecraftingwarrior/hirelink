@@ -72,13 +72,26 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
 
     override fun onNextButtonTouched(step: RegistrationStep, data: Bundle?) {
         when (step) {
-            RegistrationStep.STEP_1 -> createAccount()
-            RegistrationStep.STEP_2 -> verifyOTPCode()
-            RegistrationStep.STEP_3 -> createPassword()
-            RegistrationStep.STEP_4 -> updatePlan()
+            RegistrationStep.STEP_1 -> replaceFragment(
+                "otp_code_fill",
+                EmployerRegisterStep2Fragment()
+            )
+            RegistrationStep.STEP_2 -> replaceFragment(
+                "password_creation",
+                EmployerRegisterStep3Fragment()
+            )
+            RegistrationStep.STEP_3 -> replaceFragment(
+                "choose_plan",
+                EmployerRegisterStep4Fragment()
+            )
+            RegistrationStep.STEP_4 -> replaceFragment(
+                "choose_payment",
+                EmployerRegisterStep5Fragment()
+            )
             RegistrationStep.STEP_5 -> showPaymentTypeView(data?.getString("paymentType")!!)
-            RegistrationStep.STEP_6_CREDIT_CARD, RegistrationStep.STEP_6_DIRECT_DEBIT -> storePaymentInformation(
-                data?.getString("paymentType")!!
+            RegistrationStep.STEP_6_CREDIT_CARD, RegistrationStep.STEP_6_DIRECT_DEBIT -> replaceFragment(
+                "start_using_service",
+                EmployerRegisterStep7Fragment()
             )
             else -> Log.e(TAG, "feature not implemented yet")
         }
@@ -97,26 +110,6 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
                 )
             )
         }
-    }
-
-    private fun storePaymentInformation(paymentType: String) {
-        replaceFragment("start_using_service", EmployerRegisterStep7Fragment())
-    }
-
-    private fun createAccount() {
-        replaceFragment("otp_code_fill", EmployerRegisterStep2Fragment())
-    }
-
-    private fun verifyOTPCode() {
-        replaceFragment("password_creation", EmployerRegisterStep3Fragment())
-    }
-
-    private fun createPassword() {
-        replaceFragment("choose_plan", EmployerRegisterStep4Fragment())
-    }
-
-    private fun updatePlan() {
-        replaceFragment("choose_payment", EmployerRegisterStep5Fragment())
     }
 
     private fun showPaymentTypeView(paymentType: String) {

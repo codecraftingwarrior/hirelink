@@ -91,6 +91,10 @@ class EmployerRegisterStep2Fragment : StepFragment() {
     }
 
     private fun bindListeners() {
-        binding.buttonNext.setOnClickListener { listener.onNextButtonTouched(currentStep) }
+        binding.buttonNext.setOnClickListener { validateOTPDigit() }
+    }
+
+    private fun validateOTPDigit() {
+        listener.onNextButtonTouched(currentStep)
     }
 }
