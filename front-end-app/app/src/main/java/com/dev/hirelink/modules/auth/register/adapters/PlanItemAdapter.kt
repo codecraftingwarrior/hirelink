@@ -34,7 +34,7 @@ class PlanItemAdapter(
     ): ItemViewHolder {
         val adapterLayout = LayoutInflater
             .from(parent.context)
-            .inflate(R.layout.plan_grid_item, parent, false)
+            .inflate(R.layout.row_plan_grid_item, parent, false)
 
         return ItemViewHolder(adapterLayout)
     }

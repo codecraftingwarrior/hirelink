@@ -47,5 +47,16 @@
         <item name="cornerSize">24dp</item>
     </style>
 
+    <style name="OfferListItemStyle">
+        <item name="android:background">@drawable/offer_item_rectangle_bg</item>
+    </style>
+
+    <style name="OfferListItemStyleHeader">
+        <item name="android:textSize">@dimen/_18pxh</item>
+        <item name="android:textColor">@color/indigo_main</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textFontWeight" tools:targetApi="p">600</item>
+    </style>
+
 
 </resources>

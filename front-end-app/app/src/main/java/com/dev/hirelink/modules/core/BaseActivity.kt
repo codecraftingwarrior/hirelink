@@ -11,8 +11,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.constraintlayout.widget.ConstraintSet.Constraint
 import androidx.core.view.get
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.ActivityBaseBinding
+import com.dev.hirelink.modules.core.offers.fragment.JobOfferListFragment
 import com.dev.hirelink.modules.core.sheets.FilterBottomSheetFragment
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.button.MaterialButton
@@ -52,8 +55,6 @@ class BaseActivity : AppCompatActivity() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.menu_item_schedule -> {
-                    // Respond to navigation item 1 click
-                    Log.d(javaClass.simpleName, "schedule item is clicked")
                     true
                 }
                 R.id.menu_item_candidacy -> {
@@ -62,6 +63,7 @@ class BaseActivity : AppCompatActivity() {
                     true
                 }
                 R.id.menu_item_offers -> {
+                    replaceFragment(JobOfferListFragment())
                     Log.d(javaClass.simpleName, "offers item is clicked")
                     true
                 }
@@ -72,8 +74,15 @@ class BaseActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
         binding.bottomNavigation.menu.getItem(2).isChecked = true
+        replaceFragment(JobOfferListFragment())
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace(R.id.register_activity_fragment_container, fragment)
+        }
     }
 
     private fun hideKeyboard(view: View) {
