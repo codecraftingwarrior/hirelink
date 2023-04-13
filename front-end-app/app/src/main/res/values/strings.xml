@@ -57,4 +57,6 @@
     <string name="postal_adress">Postal adress</string>
     <string name="country">Country</string>
     <string name="cash_str">€ %.2f</string>
+    <string name="salary_range_str">%.2f - %.2f</string>
+    <string name="apply">APPLY</string>
 </resources>

@@ -7,143 +7,186 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_constraint_layout"
-        android:padding="13dp"
+    <com.google.android.material.card.MaterialCardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:cardElevation="5dp"
+        style="?attr/materialCardViewElevatedStyle"
+        app:cardCornerRadius="10dp"
+        app:rippleColor="@color/gray_app"
         android:layout_marginTop="25dp"
         android:layout_marginBottom="10dp"
-        android:layout_marginStart="11dp"
-        android:layout_marginEnd="11dp"
-        android:elevation="8dp"
-        style="@style/OfferListItemStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true">
 
-        <ImageView
-            android:id="@+id/offer_img_view_company_logo"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/register_confirmation_illustration"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/register_confirmation_illustration"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_constraint_layout"
+            android:padding="13dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <TextView
-            android:id="@+id/company_name"
-            tools:text="Apple"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:lineSpacingExtra="@dimen/_9pxh"
-            android:letterSpacing="0.05"
-            style="@style/OfferListItemStyleHeader"
-            app:layout_constraintStart_toEndOf="@id/offer_img_view_company_logo"
-            app:layout_constraintTop_toTopOf="@id/offer_img_view_company_logo"
-            app:layout_constraintBottom_toBottomOf="@id/offer_img_view_company_logo"
-            />
+            <ImageView
+                android:id="@+id/offer_img_view_company_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/logo_apple"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/logo_apple"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
 
-        <ImageView
-            android:id="@+id/icon_job_title"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:scaleType="fitXY"
-            android:layout_marginTop="14dp"
-            android:src="@drawable/suitcase_icon"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/suitcase_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/offer_img_view_company_logo"
-            />
+            <TextView
+                android:id="@+id/company_name"
+                tools:text="Apple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:lineSpacingExtra="@dimen/_9pxh"
+                android:letterSpacing="0.05"
+                android:layout_marginTop="4dp"
+                style="@style/OfferListItemStyleHeader"
+                app:layout_constraintStart_toEndOf="@id/offer_img_view_company_logo"
+                app:layout_constraintTop_toTopOf="@id/offer_img_view_company_logo"
+                app:layout_constraintBottom_toBottomOf="@id/offer_img_view_company_logo"
+                />
 
-        <TextView
-            android:id="@+id/text_view_job_title"
-            tools:text="Data Analyst"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:letterSpacing="0.08"
-            android:lineSpacingExtra="@dimen/_7pxh"
-            android:singleLine="true"
-            style="@style/AppOfferTextRegular"
-            app:layout_constraintStart_toEndOf="@id/icon_job_title"
-            app:layout_constraintTop_toTopOf="@id/icon_job_title"
-            app:layout_constraintBottom_toBottomOf="@id/icon_job_title"
-            />
+            <ImageView
+                android:id="@+id/icon_job_title"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="14dp"
+                android:src="@drawable/outline_work_outline_24"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/outline_work_outline_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/offer_img_view_company_logo"
+                />
 
-        <ImageView
-            android:id="@+id/icon_salary"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:scaleType="fitXY"
-            android:layout_marginTop="14dp"
-            android:src="@drawable/mic_icon"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/mic_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/icon_job_title"
-            />
+            <TextView
+                android:id="@+id/text_view_job_title"
+                tools:text="Data Analyst"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                style="@style/AppOfferTextRegular"
+                app:layout_constraintStart_toEndOf="@id/icon_job_title"
+                app:layout_constraintTop_toTopOf="@id/icon_job_title"
+                app:layout_constraintBottom_toBottomOf="@id/icon_job_title"
+                />
 
-        <TextView
-            android:id="@+id/text_view_salary_range"
-            tools:text="4.500 - 2.000"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:letterSpacing="0.08"
-            android:lineSpacingExtra="@dimen/_7pxh"
-            android:singleLine="true"
-            style="@style/AppOfferTextRegular"
-            app:layout_constraintStart_toEndOf="@id/icon_salary"
-            app:layout_constraintTop_toTopOf="@id/icon_salary"
-            app:layout_constraintBottom_toBottomOf="@id/icon_salary"
-            />
+            <ImageView
+                android:id="@+id/icon_salary"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="14dp"
+                android:src="@drawable/icon_attach_money"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/icon_attach_money"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_job_title"
+                />
 
-        <ImageView
-            android:id="@+id/icon_location"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:scaleType="fitXY"
-            android:layout_marginTop="14dp"
-            android:src="@drawable/mic_icon"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/mic_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/icon_salary"
-            />
+            <TextView
+                android:id="@+id/text_view_salary_range"
+                tools:text="4.500 - 2.000"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                style="@style/AppOfferTextRegular"
+                app:layout_constraintStart_toEndOf="@id/icon_salary"
+                app:layout_constraintTop_toTopOf="@id/icon_salary"
+                app:layout_constraintBottom_toBottomOf="@id/icon_salary"
+                />
 
-        <TextView
-            android:id="@+id/text_view_location"
-            tools:text="Tulum, Mexico"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:letterSpacing="0.08"
-            android:lineSpacingExtra="@dimen/_7pxh"
-            android:singleLine="true"
-            style="@style/AppOfferTextRegular"
-            app:layout_constraintStart_toEndOf="@id/icon_location"
-            app:layout_constraintTop_toTopOf="@id/icon_location"
-            app:layout_constraintBottom_toBottomOf="@id/icon_location"
-            />
+            <ImageView
+                android:id="@+id/icon_location"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:scaleType="fitXY"
+                android:layout_marginTop="14dp"
+                android:src="@drawable/outline_location_on_24"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/outline_location_on_24"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_salary"
+                />
 
-        <TextView
-            android:id="@+id/text_view_timeago"
-            tools:text="4 Days ago"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
-            android:letterSpacing="0.08"
-            android:lineSpacingExtra="@dimen/_7pxh"
-            android:layout_marginTop="9dp"
-            android:singleLine="true"
-            style="@style/AppOfferTextRegular"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/icon_location"
-            app:layout_constraintBottom_toBottomOf="parent"
-            />
+            <TextView
+                android:id="@+id/text_view_location"
+                tools:text="Tulum, Mexico"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                style="@style/AppOfferTextRegular"
+                app:layout_constraintStart_toEndOf="@id/icon_location"
+                app:layout_constraintTop_toTopOf="@id/icon_location"
+                app:layout_constraintBottom_toBottomOf="@id/icon_location"
+                />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/text_view_timeago"
+                tools:text="4 Days ago"
+                android:text="4 Days ago"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="7dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:layout_marginTop="9dp"
+                android:singleLine="true"
+                style="@style/AppOfferTextRegular"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/icon_location"
+                app:layout_constraintBottom_toBottomOf="parent"
+                />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_login"
+                style="@style/AppButtonIndigoApplyRounded"
+                android:layout_width="80dp"
+                android:layout_height="45dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:letterSpacing="0.05"
+                android:lineSpacingExtra="@dimen/_9pxh"
+                android:singleLine="true"
+                android:text="@string/apply"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_timeago" />
+
+            <ImageButton
+                android:id="@+id/image_view_back_arrow"
+                android:layout_width="@dimen/_35pxh"
+                android:layout_height="@dimen/_45pxh"
+                android:scaleType="fitXY"
+                android:layout_marginStart="12dp"
+                android:background="@android:color/transparent"
+                android:src="@drawable/outline_bookmark_border_24"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/outline_bookmark_border_24" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
 </layout>

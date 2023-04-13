@@ -28,7 +28,11 @@ class JobOfferItemAdapter(
         fun bind(jobOffer: JobOffer) {
             companyName.text = jobOffer.companyName
             jobTitle.text = jobOffer.title
-            salaryRange.text = jobOffer.salary.toString()
+            salaryRange.text = view.context.getString(
+                R.string.salary_range_str,
+                jobOffer.salary - 10000.0f,
+                jobOffer.salary
+            )
             location.text = jobOffer.address
         }
     }
