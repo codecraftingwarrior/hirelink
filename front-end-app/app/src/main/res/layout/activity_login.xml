@@ -11,7 +11,6 @@
         android:id="@+id/root_constraint_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="15dp"
         tools:context=".modules.auth.login.LoginActivity">
 
         <ImageButton
@@ -92,6 +91,7 @@
             app:startIconMinSize="@dimen/_20pxh">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -113,6 +113,7 @@
             app:layout_constraintTop_toBottomOf="@+id/text_field_username">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_text_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />

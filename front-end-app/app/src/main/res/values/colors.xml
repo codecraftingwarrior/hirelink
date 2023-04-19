@@ -13,6 +13,9 @@
     <color name="indigo_main">#3E4F88</color>
     <color name="register_role_choose_button_color">#F4F4F4</color>
     <color name="stroke_color">#919191</color>
+    <color name="transparent_grey">#80000000</color>
+
+    <color name="button_disabled">#80CCCCCC</color>
 
 
     <color name="plan_color">#883d3d</color>
