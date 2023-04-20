@@ -66,4 +66,6 @@
     <string name="profile_candidacy">Spontaneous Candidacy</string>
     <string name="profile_documents">Documents</string>
     <string name="profile_blocked_users">Blocked Users</string>
+    <string name="profile_date_birth">15/07/2001</string>
+    <string name="profile_nationality">French</string>
 </resources>
