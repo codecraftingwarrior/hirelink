@@ -48,11 +48,13 @@ class EmployerRegisterStep5Fragment : StepFragment() {
         binding.radioBtnCreditCard.setOnClickListener {
             binding.radioBtnDirectDebit.isChecked = false
             selectedPaymentType = PaymentType.CREDIT_CARD
+            binding.buttonNext.isEnabled = true
         }
 
         binding.radioBtnDirectDebit.setOnClickListener {
             binding.radioBtnCreditCard.isChecked = false
             selectedPaymentType = PaymentType.DIRECT_DEBIT
+            binding.buttonNext.isEnabled = true
         }
     }
 }
