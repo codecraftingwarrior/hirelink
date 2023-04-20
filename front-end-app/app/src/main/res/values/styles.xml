@@ -35,7 +35,7 @@
         <item name="android:textColor">@color/white</item>
         <item name="android:fontFamily">@font/poppins</item>
         <item name="android:textFontWeight" tools:targetApi="p">600</item>
-        <item name="android:background">@drawable/apply_button_background</item>
+        <item name="android:background">@drawable/blue_rectangle_icon</item>
     </style>
 
     <style name="AppTextSemiBold">
@@ -63,7 +63,7 @@
     </style>
 
     <style name="OfferListItemStyle">
-        <item name="android:background">@drawable/offer_item_rectangle_bg</item>
+        <item name="android:background">@drawable/offer_item_rectangle</item>
     </style>
 
     <style name="OfferListItemStyleHeader">

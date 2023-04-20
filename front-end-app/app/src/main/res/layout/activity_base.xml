@@ -28,12 +28,12 @@
                 android:id="@+id/image_view_hire_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/hirelink"
+                android:src="@drawable/hirelink_logo"
                 android:layout_marginStart="10dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription"
-                tools:src="@drawable/hirelink" />
+                tools:src="@drawable/hirelink_logo" />
 
             <ImageButton
                 android:id="@+id/img_btn_profile"
@@ -42,11 +42,11 @@
                 android:scaleType="fitXY"
                 android:background="@android:color/transparent"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/profile_icon"
+                android:src="@drawable/profil_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:ignore="ContentDescription"
-                tools:src="@drawable/profile_icon" />
+                tools:src="@drawable/profil_icon" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/text_field_search"
@@ -55,7 +55,7 @@
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/search_icon"
                 app:endIconMode="custom"
-                app:endIconDrawable="@drawable/mic_icon"
+                app:endIconDrawable="@drawable/microphone_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/image_view_hire_link"
                 android:layout_marginTop="24dp"
@@ -82,7 +82,7 @@
                 app:layout_constraintTop_toTopOf="@id/text_field_search"
                 app:layout_constraintBottom_toBottomOf="@id/text_field_search"
                 app:layout_constraintStart_toEndOf="@id/text_field_search"
-                app:icon="@drawable/filter_icon_search" />
+                app:icon="@drawable/filter_search_icon" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

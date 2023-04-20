@@ -59,4 +59,11 @@
     <string name="cash_str">€ %.2f</string>
     <string name="salary_range_str">%.2f - %.2f</string>
     <string name="apply">APPLY</string>
+    <string name="setting_button_description">Setting Button</string>
+    <string name="next_arrow_left_description">Return Arrow</string>
+    <string name="profile_name">HENRY Nathan</string>
+    <string name="profile_groups">Groups</string>
+    <string name="profile_candidacy">Spontaneous Candidacy</string>
+    <string name="profile_documents">Documents</string>
+    <string name="profile_blocked_users">Blocked Users</string>
 </resources>
