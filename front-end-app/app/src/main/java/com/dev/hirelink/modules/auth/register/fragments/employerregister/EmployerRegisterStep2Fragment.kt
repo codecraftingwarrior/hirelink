@@ -108,7 +108,7 @@ class EmployerRegisterStep2Fragment : StepFragment() {
             val digit = "$firstDigit$secondDigit$thirdDigit$fourthDigit".toInt()
 
             binding.buttonNext.isEnabled = digit in 1000..9999
-            
+
         } catch (e: NumberFormatException) {
             binding.buttonNext.isEnabled = false
         } catch (e: Exception) {
