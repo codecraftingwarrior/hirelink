@@ -23,7 +23,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:paddingHorizontal="14dp"
                 android:paddingTop="14dp"
-                android:paddingBottom="20dp"
+                android:paddingBottom="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
@@ -36,6 +36,7 @@
                     android:scaleType="fitXY"
                     android:src="@drawable/next_arrow_left_icon"
                     android:contentDescription="@string/next_arrow_left_description"
+                    android:layout_marginTop="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
@@ -47,6 +48,7 @@
                     android:layout_height="wrap_content"
                     android:src="@drawable/hirelink_logo"
                     android:layout_marginStart="55dp"
+                    android:paddingTop="3dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
@@ -54,11 +56,12 @@
 
                 <ImageButton
                     android:id="@+id/img_btn_setting"
-                    android:layout_width="@dimen/_35pxh"
-                    android:layout_height="@dimen/_35pxh"
+                    android:layout_width="@dimen/_27pxh"
+                    android:layout_height="@dimen/_27pxh"
                     android:scaleType="fitXY"
                     android:background="@android:color/transparent"
                     android:layout_marginEnd="4dp"
+                    android:layout_marginTop="2dp"
                     android:src="@drawable/setting_icon"
                     android:contentDescription="@string/setting_button_description"
                     app:layout_constraintEnd_toEndOf="parent"
