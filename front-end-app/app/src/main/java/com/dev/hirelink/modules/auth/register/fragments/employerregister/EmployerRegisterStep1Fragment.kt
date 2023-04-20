@@ -2,6 +2,8 @@ package com.dev.hirelink.modules.auth.register.fragments.employerregister
 
 import android.content.Context
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -32,10 +34,37 @@ class EmployerRegisterStep1Fragment : StepFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.buttonNext.setOnClickListener { createAccount() }
+        attachTextWatchers()
     }
 
     private fun createAccount() {
         listener.onNextButtonTouched(currentStep)
+    }
+
+    private fun attachTextWatchers() {
+        with(binding) {
+
+            val watcher = object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun afterTextChanged(p0: Editable?) {}
+
+                override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    buttonNext.isEnabled =
+                        editTextCompanyName.text!!.isNotEmpty()
+                                && editTextEmail.text!!.isNotEmpty()
+                                && editTextPostalAddress.text!!.isNotEmpty()
+                                && editTextCity.text!!.isNotEmpty()
+                                && editTextCountry.text!!.isNotEmpty()
+                }
+            }
+
+            editTextCompanyName.addTextChangedListener(watcher)
+            editTextEmail.addTextChangedListener(watcher)
+            editTextPostalAddress.addTextChangedListener(watcher)
+            editTextCity.addTextChangedListener(watcher)
+            editTextCountry.addTextChangedListener(watcher)
+        }
     }
 
 }
