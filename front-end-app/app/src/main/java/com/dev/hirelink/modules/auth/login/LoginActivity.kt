@@ -28,6 +28,7 @@ import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.BaseActivity
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
+import com.google.gson.JsonSyntaxException
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -156,14 +157,18 @@ class LoginActivity : AppCompatActivity() {
     private fun handleError(error: Throwable) {
         when (error) {
             is HttpException -> {
-                val loginErrorResponse =
-                    HttpExceptionParser.parse(error, LoginErrorResponse::class.java)
-                Log.e(javaClass.simpleName, loginErrorResponse.toString())
-                Snackbar.make(
-                    binding.buttonLogin,
-                    loginErrorResponse.message,
-                    Snackbar.LENGTH_SHORT
-                ).show()
+                try {
+                    val loginErrorResponse = HttpExceptionParser.parse(error, LoginErrorResponse::class.java)
+                    Snackbar.make(binding.buttonLogin, loginErrorResponse.message, Snackbar.LENGTH_SHORT).show()
+                } catch(e: Exception) {
+                    e.printStackTrace()
+                    Snackbar.make(
+                        binding.buttonLogin,
+                        getString(R.string.error_msg),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                }
+
             }
             else -> {
                 error.printStackTrace()
