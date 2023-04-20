@@ -28,8 +28,8 @@
     <string name="iban">IBAN</string>
     <string name="bic">BIC</string>
     <string name="card_number">Card number</string>
-    <string name="expiration_date">Expiration date</string>
-    <string name="cvc">CVC</string>
+    <string name="expiration_date">JJ/AA</string>
+    <string name="cvc">CVV</string>
     <string name="choose_your_plan">Choose your plan</string>
     <string name="start_plan">Start</string>
     <string name="basic_plan">Basic</string>

@@ -29,8 +29,8 @@
 
                 <ImageButton
                     android:id="@+id/img_btn_arrow_left"
-                    android:layout_width="@dimen/_35pxh"
-                    android:layout_height="@dimen/_35pxh"
+                    android:layout_width="@dimen/_25pxh"
+                    android:layout_height="@dimen/_25pxh"
                     android:layout_marginEnd="346dp"
                     android:background="@android:color/transparent"
                     android:scaleType="fitXY"

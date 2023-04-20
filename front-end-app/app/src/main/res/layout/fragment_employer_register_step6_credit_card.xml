@@ -104,6 +104,7 @@
                     app:startIconMinSize="@dimen/_20pxh">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_account_owner"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -127,7 +128,10 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_field_account_owner"
                     app:startIconMinSize="@dimen/_20pxh">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.vicmikhailau.maskededittext.MaskedEditText
+                        android:id="@+id/edit_text_credit_card_number"
+                        android:inputType="number"
+                        app:mask="#### #### #### ####"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -149,7 +153,10 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_field_card_number"
                     app:startIconMinSize="@dimen/_20pxh">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.vicmikhailau.maskededittext.MaskedEditText
+                        android:id="@+id/edit_text_exp_date"
+                        android:inputType="number"
+                        app:mask="##/##"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -171,7 +178,10 @@
                     app:layout_constraintTop_toBottomOf="@+id/text_field_card_number"
                     app:startIconMinSize="@dimen/_20pxh">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.vicmikhailau.maskededittext.MaskedEditText
+                        android:id="@+id/edit_text_cvc"
+                        android:inputType="number"
+                        app:mask="###"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -185,6 +195,7 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginEnd="3dp"
                     android:layout_marginBottom="3dp"
+                    android:enabled="false"
                     android:text="@string/next"
                     android:textSize="@dimen/_18pxh"
                     app:layout_constraintBottom_toBottomOf="parent"
