@@ -7,164 +7,172 @@
 
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_constraint_layout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".modules.auth.login.LoginActivity">
+        android:fillViewport="true">
 
-        <ImageButton
-            android:id="@+id/image_view_back_arrow"
-            android:layout_width="@dimen/_25pxh"
-            android:layout_height="@dimen/_25pxh"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="18dp"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/next_arrow_left_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/next_arrow_left_icon" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".modules.auth.login.LoginActivity">
 
-        <ImageView
-            android:id="@+id/image_view_hire_link"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_gravity="center_horizontal"
-            android:scaleType="fitXY"
-            android:src="@drawable/hirelink_logo"
-            app:layout_constraintBottom_toBottomOf="@id/image_view_back_arrow"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.481"
-            app:layout_constraintStart_toEndOf="@id/image_view_back_arrow"
-            app:layout_constraintTop_toTopOf="@id/image_view_back_arrow"
-            app:layout_constraintVertical_bias="1.0"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/hirelink_logo" />
+            <ImageButton
+                android:id="@+id/image_view_back_arrow"
+                android:layout_width="@dimen/_25pxh"
+                android:layout_height="@dimen/_25pxh"
+                android:layout_marginStart="12dp"
+                android:layout_marginTop="18dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/next_arrow_left_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/next_arrow_left_icon" />
 
-        <ImageView
-            android:id="@+id/image_view_login_illustration"
-            android:layout_width="@dimen/_218pxh"
-            android:layout_height="@dimen/_233pxh"
-            android:layout_marginStart="96dp"
-            android:layout_marginTop="70dp"
-            android:src="@drawable/login_logo"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_view_hire_link" />
-
-        <TextView
-            android:id="@+id/text_view_welcome"
-            style="@style/AppWelcomeStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:gravity="center_horizontal"
-            android:letterSpacing="0.09"
-            android:singleLine="true"
-            android:text="@string/welcome_text"
-            android:textColor="@color/black_900_cc"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image_view_login_illustration" />
-
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_field_username"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/_283pxh"
-            android:layout_height="@dimen/_60pxh"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="50dp"
-            android:layout_marginEnd="64dp"
-            android:hint="@string/username"
-            app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-            app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-            app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-            app:boxCornerRadiusTopStart="@dimen/_15pxh"
-            app:endIconMinSize="@dimen/_20pxh"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_welcome"
-            app:startIconMinSize="@dimen/_20pxh">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_text_username"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_field_password"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="@dimen/_283pxh"
-            android:layout_height="@dimen/_60pxh"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="16dp"
-            android:hint="@string/password"
-            app:boxCornerRadiusTopStart="@dimen/_15pxh"
-            app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-            app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-            app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-            app:endIconMode="password_toggle"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_field_username">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_text_password"
-                android:layout_width="match_parent"
+            <ImageView
+                android:id="@+id/image_view_hire_link"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-        </com.google.android.material.textfield.TextInputLayout>
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_gravity="center_horizontal"
+                android:scaleType="fitXY"
+                android:src="@drawable/hirelink_logo"
+                app:layout_constraintBottom_toBottomOf="@id/image_view_back_arrow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.481"
+                app:layout_constraintStart_toEndOf="@id/image_view_back_arrow"
+                app:layout_constraintTop_toTopOf="@id/image_view_back_arrow"
+                app:layout_constraintVertical_bias="1.0"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/hirelink_logo" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/button_login"
-            style="@style/AppButtonIndigoRounded"
-            android:layout_width="@dimen/_206pxh"
-            android:layout_height="@dimen/_60pxv"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="100dp"
-            android:layout_marginTop="76dp"
-            android:ellipsize="end"
-            android:gravity="center"
-            android:letterSpacing="0.05"
-            android:lineSpacingExtra="@dimen/_9pxh"
-            android:paddingStart="@dimen/_30pxh"
-            android:paddingTop="@dimen/_16pxv"
-            android:paddingEnd="@dimen/_30pxh"
-            android:paddingBottom="@dimen/_16pxv"
-            android:singleLine="true"
-            android:text="Login"
-            android:textAllCaps="false"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_field_password" />
+            <ImageView
+                android:id="@+id/image_view_login_illustration"
+                android:layout_width="@dimen/_218pxh"
+                android:layout_height="@dimen/_233pxh"
+                android:layout_marginStart="96dp"
+                android:layout_marginTop="70dp"
+                android:src="@drawable/login_logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_view_hire_link" />
 
-        <TextView
-            android:id="@+id/text_view_no_account_discription"
-            style="@style/AppTextRegular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="112dp"
-            android:layout_marginTop="70dp"
-            android:gravity="center_horizontal"
-            android:letterSpacing="0.04"
-            android:lineSpacingExtra="@dimen/_7pxh"
-            android:text="@string/dont_have_acc"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/button_login" />
+            <TextView
+                android:id="@+id/text_view_welcome"
+                style="@style/AppWelcomeStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center_horizontal"
+                android:letterSpacing="0.09"
+                android:singleLine="true"
+                android:text="@string/welcome_text"
+                android:textColor="@color/black_900_cc"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/image_view_login_illustration" />
 
-        <Button
-            android:id="@+id/button_register"
-            style="@style/Widget.MaterialComponents.Button.TextButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="160dp"
-            android:text="@string/register"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_no_account_discription" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_field_username"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="@dimen/_283pxh"
+                android:layout_height="@dimen/_60pxh"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="50dp"
+                android:layout_marginEnd="64dp"
+                android:hint="@string/username"
+                app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                app:endIconMinSize="@dimen/_20pxh"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_welcome"
+                app:startIconMinSize="@dimen/_20pxh">
 
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_username"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/text_field_password"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="@dimen/_283pxh"
+                android:layout_height="@dimen/_60pxh"
+                android:layout_marginStart="64dp"
+                android:layout_marginTop="16dp"
+                android:hint="@string/password"
+                app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                app:endIconMode="password_toggle"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_field_username">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_login"
+                style="@style/AppButtonIndigoRounded"
+                android:layout_width="@dimen/_206pxh"
+                android:layout_height="@dimen/_60pxv"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="100dp"
+                android:layout_marginTop="76dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:letterSpacing="0.05"
+                android:lineSpacingExtra="@dimen/_9pxh"
+                android:paddingStart="@dimen/_30pxh"
+                android:paddingTop="@dimen/_16pxv"
+                android:paddingEnd="@dimen/_30pxh"
+                android:paddingBottom="@dimen/_16pxv"
+                android:singleLine="true"
+                android:text="Login"
+                android:textAllCaps="false"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_field_password" />
+
+            <TextView
+                android:id="@+id/text_view_no_account_discription"
+                style="@style/AppTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="112dp"
+                android:layout_marginTop="70dp"
+                android:gravity="center_horizontal"
+                android:letterSpacing="0.04"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:text="@string/dont_have_acc"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/button_login" />
+
+            <Button
+                android:id="@+id/button_register"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="160dp"
+                android:text="@string/register"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_no_account_discription" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 </layout>
