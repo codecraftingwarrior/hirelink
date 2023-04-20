@@ -33,9 +33,9 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:scaleType="fitXY"
-                android:src="@drawable/logo_apple"
+                android:src="@drawable/apple_logo_icon"
                 tools:ignore="ContentDescription"
-                tools:src="@drawable/logo_apple"
+                tools:src="@drawable/apple_logo_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
@@ -61,9 +61,9 @@
                 android:layout_height="25dp"
                 android:scaleType="fitXY"
                 android:layout_marginTop="14dp"
-                android:src="@drawable/outline_work_outline_24"
+                android:src="@drawable/gray_suitcase_icon"
                 tools:ignore="ContentDescription"
-                tools:src="@drawable/outline_work_outline_24"
+                tools:src="@drawable/gray_suitcase_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/offer_img_view_company_logo"
                 />
@@ -89,9 +89,9 @@
                 android:layout_height="25dp"
                 android:scaleType="fitXY"
                 android:layout_marginTop="14dp"
-                android:src="@drawable/icon_attach_money"
+                android:src="@drawable/dollar_icon"
                 tools:ignore="ContentDescription"
-                tools:src="@drawable/icon_attach_money"
+                tools:src="@drawable/dollar_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/icon_job_title"
                 />
@@ -117,9 +117,9 @@
                 android:layout_height="25dp"
                 android:scaleType="fitXY"
                 android:layout_marginTop="14dp"
-                android:src="@drawable/outline_location_on_24"
+                android:src="@drawable/gray_location_icon"
                 tools:ignore="ContentDescription"
-                tools:src="@drawable/outline_location_on_24"
+                tools:src="@drawable/gray_location_icon"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/icon_salary"
                 />
@@ -178,11 +178,11 @@
                 android:scaleType="fitXY"
                 android:layout_marginStart="12dp"
                 android:background="@android:color/transparent"
-                android:src="@drawable/outline_bookmark_border_24"
+                android:src="@drawable/bookmark_icon"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="ContentDescription"
-                tools:src="@drawable/outline_bookmark_border_24" />
+                tools:src="@drawable/bookmark_icon" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
