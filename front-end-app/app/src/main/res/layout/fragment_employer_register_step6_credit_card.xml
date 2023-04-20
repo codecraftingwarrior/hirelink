@@ -80,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:padding="@dimen/_24pxh"
-                    android:src="@drawable/credit_card_icon"
+                    android:src="@drawable/credit_card_illustration"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/image_view_step6_card_header" />

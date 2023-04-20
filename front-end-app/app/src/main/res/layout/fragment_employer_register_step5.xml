@@ -323,7 +323,7 @@
                     app:layout_constraintEnd_toEndOf="@id/materialDivider"
                     app:layout_constraintTop_toTopOf="@+id/radio_btn_credit_card"
                     app:layout_constraintBottom_toBottomOf="@id/radio_btn_credit_card"
-                    app:srcCompat="@drawable/credit_card_icon" />
+                    app:srcCompat="@drawable/credit_card_illustration" />
 
 
                 <ImageView

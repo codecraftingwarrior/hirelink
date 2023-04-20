@@ -116,7 +116,7 @@
                 app:endIconMode="password_toggle"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/text_field_username">
-    
+
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/edit_text_password"
                     android:layout_width="match_parent"
