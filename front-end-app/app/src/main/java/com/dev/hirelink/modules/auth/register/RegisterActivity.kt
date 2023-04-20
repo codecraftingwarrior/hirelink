@@ -109,6 +109,7 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
                     BaseActivity::class.java
                 )
             )
+            else -> Log.d(TAG, "Feature not implemented yet.")
         }
     }
 
