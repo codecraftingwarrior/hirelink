@@ -1,26 +1,21 @@
 package com.dev.hirelink.modules.core
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageButton
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet.Constraint
-import androidx.core.view.get
-import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.ActivityBaseBinding
 import com.dev.hirelink.modules.core.offers.fragment.JobOfferListFragment
+import com.dev.hirelink.modules.core.profil.ProfilActivity
 import com.dev.hirelink.modules.core.sheets.FilterBottomSheetFragment
 import com.dev.hirelink.network.auth.AuthRepository
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.button.MaterialButton
 import io.reactivex.disposables.CompositeDisposable
 
 class BaseActivity : AppCompatActivity() {
@@ -63,6 +58,10 @@ class BaseActivity : AppCompatActivity() {
                 supportFragmentManager,
                 FilterBottomSheetFragment.TAG
             )
+        }
+
+        binding.imgBtnProfile.setOnClickListener {
+            startActivity(Intent(this, ProfilActivity::class.java))
         }
 
     }

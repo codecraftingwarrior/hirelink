@@ -16,6 +16,10 @@
         android:theme="@style/Theme.Hirelinkfront"
         tools:targetApi="31">
         <activity
+            android:name=".modules.core.profil.ProfilActivity"
+            android:exported="false" />
+
+        <activity
             android:name=".modules.core.BaseActivity"
             android:exported="false" />
         <activity
