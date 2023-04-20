@@ -87,6 +87,7 @@
                     app:boxCornerRadiusTopEnd="@dimen/_15pxh">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_company_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -105,6 +106,7 @@
                     app:boxCornerRadiusTopEnd="@dimen/_15pxh">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_email"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -123,6 +125,7 @@
                     app:boxCornerRadiusTopEnd="@dimen/_15pxh">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_postal_address"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -141,6 +144,7 @@
                     app:boxCornerRadiusTopEnd="@dimen/_15pxh">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_city"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         tools:ignore="TouchTargetSizeCheck" />
@@ -160,6 +164,7 @@
                     app:boxCornerRadiusTopEnd="@dimen/_15pxh">
 
                     <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_country"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -172,6 +177,7 @@
                     android:layout_gravity="end|bottom"
                     android:layout_marginTop="48dp"
                     android:text="@string/next"
+                    android:enabled="false"
                     android:textSize="18sp" />
 
             </LinearLayout>

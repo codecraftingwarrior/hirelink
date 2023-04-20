@@ -67,6 +67,7 @@ class CandidateRegisterFragment : Fragment() {
                                 && editTextEmail.text!!.isNotEmpty()
                                 && editTextPassword.text!!.isNotEmpty()
                                 && editTextPasswordConfirm.text!!.isNotEmpty()
+                                && editTextPassword.text.toString() == editTextPasswordConfirm.text.toString()
                 }
             }
 

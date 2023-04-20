@@ -48,6 +48,8 @@ class EmployerRegisterStep2Fragment : StepFragment() {
                 override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     if (s?.length == 1)
                         editTextSecondDigit.requestFocus()
+
+                    handleTextChange()
                 }
             })
 
@@ -61,6 +63,8 @@ class EmployerRegisterStep2Fragment : StepFragment() {
                         editTextThirdDigit.requestFocus()
                     else if (s?.length == 0)
                         editTextFirstDigit.requestFocus()
+
+                    handleTextChange()
                 }
             })
 
@@ -74,6 +78,8 @@ class EmployerRegisterStep2Fragment : StepFragment() {
                         editTextFourthDigit.requestFocus()
                     else if (s?.length == 0)
                         editTextSecondDigit.requestFocus()
+
+                    handleTextChange()
                 }
             })
 
@@ -85,8 +91,28 @@ class EmployerRegisterStep2Fragment : StepFragment() {
                 override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
                     if (s?.length == 0)
                         editTextThirdDigit.requestFocus()
+
+                    handleTextChange()
                 }
             })
+        }
+    }
+
+    private fun handleTextChange() {
+        val firstDigit = binding.editTextFirstDigit.text.toString()
+        val secondDigit = binding.editTextSecondDigit.text.toString()
+        val thirdDigit = binding.editTextThirdDigit.text.toString()
+        val fourthDigit = binding.editTextFourthDigit.text.toString()
+
+        try {
+            val digit = "$firstDigit$secondDigit$thirdDigit$fourthDigit".toInt()
+
+            binding.buttonNext.isEnabled = digit in 1000..9999
+
+        } catch (e: NumberFormatException) {
+            binding.buttonNext.isEnabled = false
+        } catch (e: Exception) {
+            e.printStackTrace()
         }
     }
 
