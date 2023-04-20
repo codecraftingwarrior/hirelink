@@ -165,7 +165,14 @@ class LoginActivity : AppCompatActivity() {
                     Snackbar.LENGTH_SHORT
                 ).show()
             }
-            else -> throw error
+            else -> {
+                error.printStackTrace()
+                Snackbar.make(
+                    binding.buttonLogin,
+                    getString(R.string.error_msg),
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
         }
     }
 }
