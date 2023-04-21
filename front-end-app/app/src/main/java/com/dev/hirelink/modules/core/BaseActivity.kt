@@ -7,11 +7,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.ActivityBaseBinding
+import com.dev.hirelink.modules.core.offers.fragment.JobApplicationListFragment
 import com.dev.hirelink.modules.core.offers.fragment.JobOfferListFragment
 import com.dev.hirelink.modules.core.profil.ProfilActivity
 import com.dev.hirelink.modules.core.sheets.FilterBottomSheetFragment
@@ -68,18 +70,19 @@ class BaseActivity : AppCompatActivity() {
 
     private fun setupNavigationBar() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
+            binding.searchHeader.background = ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray)
             when (item.itemId) {
                 R.id.menu_item_schedule -> {
                     true
                 }
                 R.id.menu_item_candidacy -> {
                     // Respond to navigation item 2 click
-                    Log.d(javaClass.simpleName, "candidacy item is clicked")
+                    binding.searchHeader.background = ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray_reg)
+                    replaceFragment(JobApplicationListFragment())
                     true
                 }
                 R.id.menu_item_offers -> {
                     replaceFragment(JobOfferListFragment())
-                    Log.d(javaClass.simpleName, "offers item is clicked")
                     true
                 }
                 R.id.menu_item_notifications -> {

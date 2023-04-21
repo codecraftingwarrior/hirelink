@@ -44,4 +44,6 @@
     <color name="black_900_19">#19000000</color>
     <color name="white_A700">#ffffff</color>
     <color name="green_800_b7">#b71ca406</color>
+
+    <color name="state_green" >#4CAF50</color>
 </resources>
