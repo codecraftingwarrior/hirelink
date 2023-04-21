@@ -70,6 +70,7 @@ class BaseActivity : AppCompatActivity() {
 
     private fun setupNavigationBar() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
+            binding.searchHeader.background = ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray)
             when (item.itemId) {
                 R.id.menu_item_schedule -> {
                     true

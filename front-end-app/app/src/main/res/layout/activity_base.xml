@@ -86,25 +86,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <ScrollView
-            android:id="@+id/scroll_view"
+        <FrameLayout
+            android:id="@+id/register_activity_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:fillViewport="true"
+            android:orientation="vertical"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/search_header"
-            app:layout_constraintBottom_toTopOf="@id/bottom_navigation">
-
-            <FrameLayout
-                android:id="@+id/register_activity_fragment_container"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/search_header"
-                app:layout_constraintBottom_toTopOf="@id/bottom_navigation" />
-
-        </ScrollView>
+            app:layout_constraintBottom_toTopOf="@id/bottom_navigation" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
