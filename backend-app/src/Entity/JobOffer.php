@@ -2,6 +2,13 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Doctrine\Orm\Filter\RangeFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobOfferRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -10,56 +17,90 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: JobOfferRepository::class)]
+#[ApiResource(
+    operations:[
+        new GetCollection(),
+        new Get(
+            normalizationContext: ['groups' => ['jobOffer:read']]
+        )
+    ]
+),
+ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'id' => 'exact',
+        'address' => 'partial',
+        'profession' => 'partial',
+        'owner' => 'partial',
+    ]
+),
+ApiFilter(RangeFilter::class, properties: ['salary']),
+ApiFilter(DateFilter::class, properties: ['fromDate', 'toDate'])
+]
 class JobOffer extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['job-offer:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['job-offer:read'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['job-offer:read'])]
     private ?string $description = null;
 
     #[ORM\Column]
+    #[Groups(['job-offer:read'])]
     private ?float $salary = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['job-offer:read'])]
     private ?\DateTimeInterface $fromDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
+    #[Groups(['job-offer:read'])]
     private ?\DateTimeInterface $toDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['job-offer:read'])]
     private ?string $address = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['job-offer:read'])]
     private ?float $lat = null;
 
     #[ORM\Column(nullable: true)]
+    #[Groups(['job-offer:read'])]
     private ?float $lng = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
+    #[Groups(['job-offer:read'])]
     private ?JobOfferCategory $category = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-offer:read'])]
     private ?Profession $profession = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-offer:read'])]
     private ?ContractType $contractType = null;
 
-    #[ORM\OneToMany(mappedBy: 'jobOffer', targetEntity: JobApplication::class)]
+    #[ORM\OneToMany(mappedBy: 'job-offer', targetEntity: JobApplication::class)]
     private Collection $jobApplications;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'jobOffers')]
+    #[Groups(['job-offer:read'])]
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-offer:read'])]
     private ?ApplicationUser $owner = null;
 
     public function __construct()
