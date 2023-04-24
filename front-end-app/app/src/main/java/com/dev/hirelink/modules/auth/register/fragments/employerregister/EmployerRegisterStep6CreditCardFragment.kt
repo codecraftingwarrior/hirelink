@@ -1,64 +1,82 @@
 package com.dev.hirelink.modules.auth.register.fragments.employerregister
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
+import androidx.databinding.DataBindingUtil
 import com.dev.hirelink.R
+import com.dev.hirelink.databinding.FragmentEmployerRegisterStep6CreditCardBinding
+import com.dev.hirelink.enums.PaymentType
+import com.dev.hirelink.enums.RegistrationStep
+import com.dev.hirelink.modules.auth.register.fragments.StepFragment
+import com.vicmikhailau.maskededittext.MaskedFormatter
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EmployerRegisterStep6CreditCardFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class EmployerRegisterStep6CreditCardFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class EmployerRegisterStep6CreditCardFragment : StepFragment() {
+    private lateinit var binding: FragmentEmployerRegisterStep6CreditCardBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(
+    ): View {
+        binding = DataBindingUtil.inflate(
+            inflater,
             R.layout.fragment_employer_register_step6_credit_card,
             container,
             false
         )
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        binding.buttonNext.setOnClickListener { storePaymentInformations() }
+        attachTextWatchers()
+    }
+
+    private fun storePaymentInformations() {
+        listener.onNextButtonTouched(RegistrationStep.STEP_6_CREDIT_CARD)
+    }
+
+    private fun attachTextWatchers() {
+        with(binding) {
+
+            val watcher = object : TextWatcher {
+                override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+                override fun afterTextChanged(p0: Editable?) {}
+
+                override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                    buttonNext.isEnabled =
+                        editTextAccountOwner.text!!.isNotEmpty()
+                                && editTextCreditCardNumber.text!!.isNotEmpty()
+                                && editTextExpDate.text!!.isNotEmpty()
+                                && editTextCvc.text!!.isNotEmpty()
+                                && Regex("\\d{4} \\d{4} \\d{4} \\d{4}").matches(editTextCreditCardNumber.text.toString())
+                                && Regex("\\d{2}/\\d{2}").matches(editTextExpDate.text.toString())
+                                && Regex("\\d{3}").matches(editTextCvc.text.toString())
+
+                }
+            }
+
+            editTextAccountOwner.addTextChangedListener(watcher)
+            editTextCreditCardNumber.addTextChangedListener(watcher)
+            editTextExpDate.addTextChangedListener(watcher)
+            editTextCvc.addTextChangedListener(watcher)
+        }
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EmployerRegisterStep6CreditCardFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EmployerRegisterStep6CreditCardFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+        val TAG = EmployerRegisterStep6CreditCardFragment::class.java.simpleName
     }
 }

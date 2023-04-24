@@ -22,15 +22,14 @@
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="payment_approved">Payment approved</string>
-    <string name="payment_approved_description">now you can benefit from all the services of the application offered to employers</string>
+    <string name="payment_approved_description">Now you can benefit from all the services of the application offered to employers.</string>
     <string name="start">Start</string>
     <string name="account_owner">Account owner</string>
     <string name="iban">IBAN</string>
     <string name="bic">BIC</string>
-<<<<<<< HEAD
     <string name="card_number">Card number</string>
-    <string name="expiration_date">Expiration date</string>
-    <string name="cvc">CVC</string>
+    <string name="expiration_date">JJ/AA</string>
+    <string name="cvc">CVV</string>
     <string name="choose_your_plan">Choose your plan</string>
     <string name="start_plan">Start</string>
     <string name="basic_plan">Basic</string>
@@ -46,7 +45,6 @@
     <string name="credit_card">Credit card</string>
     <string name="direct_debit">Direct debit</string>
     <string name="info">Info</string>
-=======
     <string name="schedule">Schedule</string>
     <string name="candidacy_label">Candidacy</string>
     <string name="offers_label">Offers</string>
@@ -58,7 +56,21 @@
     <string name="company_name">Company name</string>
     <string name="postal_adress">Postal adress</string>
     <string name="country">Country</string>
-
->>>>>>> e37cdaac9c47d62b07bf9a1816da75730685405a
-
+    <string name="cash_str">€ %.2f</string>
+    <string name="salary_range_str">%.2f - %.2f</string>
+    <string name="apply">APPLY</string>
+    <string name="setting_button_description">Setting Button</string>
+    <string name="next_arrow_left_description">Return Arrow</string>
+    <string name="profile_name">HENRY Nathan</string>
+    <string name="profile_groups">Groups</string>
+    <string name="profile_candidacy">Spontaneous Candidacy</string>
+    <string name="profile_documents">Documents</string>
+    <string name="profile_blocked_users">Blocked Users</string>
+    <string name="error_msg">A system error has occured!</string>
+    <string name="profile_date_birth">15/07/2001</string>
+    <string name="profile_nationality">French</string>
+    <string name="job_application_pending_state">Pending</string>
+    <string name="job_application_in_progress_state">In Progress</string>
+    <string name="job_application_refused_state">Refused</string>
+    <string name="job_application_accepted_state">Accepted</string>
 </resources>

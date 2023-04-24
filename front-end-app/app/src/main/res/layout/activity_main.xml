@@ -1,124 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:gravity="center_horizontal"
-    android:orientation="vertical"
-    tools:context=".MainActivity">
-
-    <ImageView
-        android:id="@+id/image_view_hire_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/hirelink"
-        tools:ignore="ContentDescription"
-        tools:src="@drawable/hirelink" />
-
-    <ImageView
-        android:id="@+id/image_view_welcome_illustration"
-        android:layout_width="248dp"
-        android:layout_height="259dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="50dp"
-        android:layout_marginTop="35dp"
-        android:layout_marginEnd="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/welcome_img"
-        tools:ignore="ContentDescription" />
-
-    <TextView
-        android:id="@+id/text_view_welcome_title"
-        style="@style/AppWelcomeStyle"
+    android:fillViewport="true"
+    >
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_50pxh"
-        android:layout_marginTop="@dimen/_22pxv"
-        android:layout_marginEnd="@dimen/_50pxh"
-        android:ellipsize="end"
         android:gravity="center_horizontal"
-        android:singleLine="true"
-        android:text="@string/welcome_to_hirelink" />
+        android:orientation="vertical"
+        tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/text_view_welcome_description"
-        style="@style/AppTextRegular"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_50pxh"
-        android:layout_marginTop="@dimen/_18pxv"
-        android:layout_marginEnd="@dimen/_50pxh"
-        android:gravity="center_horizontal"
-        android:letterSpacing="0.04"
-        android:lineSpacingExtra="@dimen/_7pxh"
-        android:text="@string/welcome_summary_msg" />
+        <ImageView
+            android:id="@+id/image_view_hire_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/hirelink_logo"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/hirelink_logo" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_register"
-        style="@style/AppButtonIndigoRounded"
-        android:layout_width="@dimen/_206pxh"
-        android:layout_height="@dimen/_60pxv"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="@dimen/_50pxh"
-        android:layout_marginTop="110dp"
-        android:layout_marginEnd="@dimen/_50pxh"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:letterSpacing="0.05"
-        android:lineSpacingExtra="@dimen/_9pxh"
-        android:paddingStart="@dimen/_30pxh"
-        android:paddingTop="@dimen/_16pxv"
-        android:paddingEnd="@dimen/_30pxh"
-        android:paddingBottom="@dimen/_16pxv"
-        android:singleLine="true"
-        android:text="Register"
-        android:textAllCaps="false" />
+        <ImageView
+            android:id="@+id/image_view_welcome_illustration"
+            android:layout_width="248dp"
+            android:layout_height="259dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="35dp"
+            android:layout_marginEnd="50dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/welcome_illustration"
+            tools:ignore="ContentDescription" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button_login"
-        style="@style/AppButtonIndigoRounded"
-        android:layout_width="@dimen/_206pxh"
-        android:layout_height="@dimen/_60pxv"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="@dimen/_50pxh"
-        android:layout_marginTop="@dimen/_17pxv"
-        android:layout_marginEnd="@dimen/_50pxh"
-        android:ellipsize="end"
-        android:gravity="center"
-        android:letterSpacing="0.05"
-        android:lineSpacingExtra="@dimen/_9pxh"
-        android:paddingStart="@dimen/_30pxh"
-        android:paddingTop="@dimen/_16pxv"
-        android:paddingEnd="@dimen/_30pxh"
-        android:paddingBottom="@dimen/_16pxv"
-        android:singleLine="true"
-        android:text="@string/login"
-        android:textAllCaps="false" />
+        <TextView
+            android:id="@+id/text_view_welcome_title"
+            style="@style/AppWelcomeStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_50pxh"
+            android:layout_marginTop="@dimen/_22pxv"
+            android:layout_marginEnd="@dimen/_50pxh"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:singleLine="true"
+            android:text="@string/welcome_to_hirelink" />
 
-    <Button
-        android:id="@+id/button_view_offers"
-        style="@style/Widget.MaterialComponents.Button.TextButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginStart="@dimen/_50pxh"
-        android:layout_marginTop="38dp"
-        android:layout_marginEnd="@dimen/_50pxh"
-        android:layout_marginBottom="@dimen/_20pxv"
-        android:ellipsize="end"
-        android:letterSpacing="0.05"
-        android:lineSpacingExtra="@dimen/_9pxh"
-        android:singleLine="true"
-        android:textFontWeight="700"
-        android:fontFamily="@font/poppins"
-        android:textSize="@dimen/_18pxh"
-        app:textAllCaps="false"
-        android:text="@string/view_offers" />
+        <TextView
+            android:id="@+id/text_view_welcome_description"
+            style="@style/AppTextRegular"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_50pxh"
+            android:layout_marginTop="@dimen/_18pxv"
+            android:layout_marginEnd="@dimen/_50pxh"
+            android:gravity="center_horizontal"
+            android:letterSpacing="0.04"
+            android:lineSpacingExtra="@dimen/_7pxh"
+            android:text="@string/welcome_summary_msg" />
 
-</LinearLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_register"
+            style="@style/AppButtonIndigoRounded"
+            android:layout_width="@dimen/_206pxh"
+            android:layout_height="@dimen/_60pxv"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/_50pxh"
+            android:layout_marginTop="90dp"
+            android:layout_marginEnd="@dimen/_50pxh"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:letterSpacing="0.05"
+            android:lineSpacingExtra="@dimen/_9pxh"
+            android:paddingStart="@dimen/_30pxh"
+            android:paddingTop="@dimen/_16pxv"
+            android:paddingEnd="@dimen/_30pxh"
+            android:paddingBottom="@dimen/_16pxv"
+            android:singleLine="true"
+            android:text="Register"
+            android:textAllCaps="false" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button_login"
+            style="@style/AppButtonIndigoRounded"
+            android:layout_width="@dimen/_206pxh"
+            android:layout_height="@dimen/_60pxv"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/_50pxh"
+            android:layout_marginTop="@dimen/_17pxv"
+            android:layout_marginEnd="@dimen/_50pxh"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:letterSpacing="0.05"
+            android:lineSpacingExtra="@dimen/_9pxh"
+            android:paddingStart="@dimen/_30pxh"
+            android:paddingTop="@dimen/_16pxv"
+            android:paddingEnd="@dimen/_30pxh"
+            android:paddingBottom="@dimen/_16pxv"
+            android:singleLine="true"
+            android:text="@string/login"
+            android:textAllCaps="false" />
+
+        <Button
+            android:id="@+id/button_view_offers"
+            style="@style/Widget.MaterialComponents.Button.TextButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginStart="@dimen/_50pxh"
+            android:layout_marginTop="38dp"
+            android:layout_marginEnd="@dimen/_50pxh"
+            android:layout_marginBottom="@dimen/_20pxv"
+            android:ellipsize="end"
+            android:letterSpacing="0.05"
+            android:lineSpacingExtra="@dimen/_9pxh"
+            android:singleLine="true"
+            android:textFontWeight="700"
+            android:fontFamily="@font/poppins"
+            android:textSize="@dimen/_18pxh"
+            app:textAllCaps="false"
+            android:text="@string/view_offers" />
+
+    </LinearLayout>
+</ScrollView>

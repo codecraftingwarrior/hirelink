@@ -35,17 +35,17 @@
                     android:scaleType="fitXY"
                     android:layout_marginStart="12dp"
                     android:background="@android:color/transparent"
-                    android:src="@drawable/img_logoarrow"
+                    android:src="@drawable/next_arrow_left_icon"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
-                    tools:src="@drawable/img_logoarrow" />
+                    tools:src="@drawable/next_arrow_left_icon" />
 
                 <ImageView
                     android:id="@+id/image_view_hire_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/hirelink"
+                    android:src="@drawable/hirelink_logo"
                     app:layout_constraintBottom_toBottomOf="@id/image_view_back_arrow"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.460"
@@ -53,7 +53,7 @@
                     app:layout_constraintTop_toTopOf="@id/image_view_back_arrow"
                     app:layout_constraintVertical_bias="1.0"
                     tools:ignore="ContentDescription"
-                    tools:src="@drawable/hirelink" />
+                    tools:src="@drawable/hirelink_logo" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

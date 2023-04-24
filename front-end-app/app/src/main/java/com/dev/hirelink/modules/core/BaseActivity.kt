@@ -1,24 +1,29 @@
 package com.dev.hirelink.modules.core
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageButton
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.constraintlayout.widget.ConstraintSet.Constraint
-import androidx.core.view.get
-import androidx.databinding.DataBindingUtil
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.commit
+import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.ActivityBaseBinding
+import com.dev.hirelink.modules.core.offers.fragment.JobApplicationListFragment
+import com.dev.hirelink.modules.core.offers.fragment.JobOfferListFragment
+import com.dev.hirelink.modules.core.profil.ProfilActivity
 import com.dev.hirelink.modules.core.sheets.FilterBottomSheetFragment
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.button.MaterialButton
+import com.dev.hirelink.network.auth.AuthRepository
+import io.reactivex.disposables.CompositeDisposable
 
 class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
+    private val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
+    private val compositeDisposable: CompositeDisposable = CompositeDisposable()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,6 +34,17 @@ class BaseActivity : AppCompatActivity() {
 
         setupNavigationBar();
         bindListeners()
+
+        val disposable = authRepository
+            .currentUser
+            .subscribe { applicationUser ->
+                Log.d(
+                    javaClass.simpleName,
+                    applicationUser.toString()
+                )
+            }
+
+        compositeDisposable.add(disposable)
     }
 
     private fun bindListeners() {
@@ -46,23 +62,27 @@ class BaseActivity : AppCompatActivity() {
             )
         }
 
+        binding.imgBtnProfile.setOnClickListener {
+            startActivity(Intent(this, ProfilActivity::class.java))
+        }
+
     }
 
     private fun setupNavigationBar() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
+            binding.searchHeader.background = ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray)
             when (item.itemId) {
                 R.id.menu_item_schedule -> {
-                    // Respond to navigation item 1 click
-                    Log.d(javaClass.simpleName, "schedule item is clicked")
                     true
                 }
                 R.id.menu_item_candidacy -> {
                     // Respond to navigation item 2 click
-                    Log.d(javaClass.simpleName, "candidacy item is clicked")
+                    binding.searchHeader.background = ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray_reg)
+                    replaceFragment(JobApplicationListFragment())
                     true
                 }
                 R.id.menu_item_offers -> {
-                    Log.d(javaClass.simpleName, "offers item is clicked")
+                    replaceFragment(JobOfferListFragment())
                     true
                 }
                 R.id.menu_item_notifications -> {
@@ -72,8 +92,15 @@ class BaseActivity : AppCompatActivity() {
                 else -> false
             }
         }
-
         binding.bottomNavigation.menu.getItem(2).isChecked = true
+        replaceFragment(JobOfferListFragment())
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.commit {
+            setReorderingAllowed(true)
+            replace(R.id.register_activity_fragment_container, fragment)
+        }
     }
 
     private fun hideKeyboard(view: View) {

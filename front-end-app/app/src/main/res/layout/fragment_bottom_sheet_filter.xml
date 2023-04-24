@@ -24,7 +24,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/mic_icon"
+                android:src="@drawable/microphone_icon"
                 android:layout_margin="8dp" />
 
             <TextView
@@ -46,7 +46,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/mic_icon"
+                android:src="@drawable/microphone_icon"
                 android:layout_margin="8dp" />
 
             <TextView
@@ -69,7 +69,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/mic_icon"
+                android:src="@drawable/microphone_icon"
                 android:layout_margin="8dp" />
 
             <TextView
@@ -92,7 +92,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/mic_icon"
+                android:src="@drawable/microphone_icon"
                 android:layout_margin="8dp" />
 
             <TextView
@@ -114,7 +114,7 @@
             <ImageView
                 android:layout_width="24dp"
                 android:layout_height="24dp"
-                android:src="@drawable/mic_icon"
+                android:src="@drawable/microphone_icon"
                 android:layout_margin="8dp" />
 
             <TextView

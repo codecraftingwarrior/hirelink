@@ -1,6 +1,7 @@
 package com.dev.hirelink.modules.auth.register.fragments
 
 import android.content.Context
+import android.os.Bundle
 import androidx.fragment.app.Fragment
 import com.dev.hirelink.enums.RegistrationStep
 
@@ -8,7 +9,7 @@ open class StepFragment : Fragment() {
     protected lateinit var listener: NextButtonClickListener
 
     interface NextButtonClickListener {
-        fun onNextButtonTouched(step: RegistrationStep);
+        fun onNextButtonTouched(step: RegistrationStep, data: Bundle? = null);
     }
 
     override fun onAttach(context: Context) {

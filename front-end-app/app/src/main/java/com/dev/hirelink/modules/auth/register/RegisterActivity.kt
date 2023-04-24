@@ -4,30 +4,27 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.TextUtils.replace
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageButton
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.ActivityRegisterBinding
+import com.dev.hirelink.enums.PaymentType
 import com.dev.hirelink.enums.RegistrationStep
 import com.dev.hirelink.enums.RoleType
 import com.dev.hirelink.modules.auth.register.fragments.StepFragment
 import com.dev.hirelink.modules.auth.register.fragments.candidateregister.CandidateRegisterFragment
 import com.dev.hirelink.modules.auth.register.fragments.candidateregister.ConfirmationCandidateRegisterFragment
-import com.dev.hirelink.modules.auth.register.fragments.employerregister.EmployerRegisterStep1Fragment
-import com.dev.hirelink.modules.auth.register.fragments.employerregister.EmployerRegisterStep2Fragment
-import com.dev.hirelink.modules.auth.register.fragments.employerregister.EmployerRegisterStep3Fragment
+import com.dev.hirelink.modules.auth.register.fragments.employerregister.*
 import com.dev.hirelink.modules.auth.register.fragments.rolechoose.RoleChooseRegisterFragment
+import com.dev.hirelink.modules.core.BaseActivity
 
 class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSelectionListener,
     StepFragment.NextButtonClickListener,
-    CandidateRegisterFragment.ApplicantRegistrationTerminationListener {
+    CandidateRegisterFragment.RegistrationTerminationListener {
     private lateinit var binding: ActivityRegisterBinding
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -73,27 +70,61 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
         }
     }
 
-    override fun onNextButtonTouched(step: RegistrationStep) {
+    override fun onNextButtonTouched(step: RegistrationStep, data: Bundle?) {
         when (step) {
-            RegistrationStep.STEP_1 -> createAccount()
-            RegistrationStep.STEP_2 -> verifyOTPCode()
+            RegistrationStep.STEP_1 -> replaceFragment(
+                "otp_code_fill",
+                EmployerRegisterStep2Fragment()
+            )
+            RegistrationStep.STEP_2 -> replaceFragment(
+                "password_creation",
+                EmployerRegisterStep3Fragment()
+            )
+            RegistrationStep.STEP_3 -> replaceFragment(
+                "choose_plan",
+                EmployerRegisterStep4Fragment()
+            )
+            RegistrationStep.STEP_4 -> replaceFragment(
+                "choose_payment",
+                EmployerRegisterStep5Fragment()
+            )
+            RegistrationStep.STEP_5 -> showPaymentTypeView(data?.getString("paymentType")!!)
+            RegistrationStep.STEP_6_CREDIT_CARD, RegistrationStep.STEP_6_DIRECT_DEBIT -> replaceFragment(
+                "start_using_service",
+                EmployerRegisterStep7Fragment()
+            )
             else -> Log.e(TAG, "feature not implemented yet")
         }
     }
 
-    override fun onApplicantRegistrationTerminated() {
-        replaceFragment(
-            "applicant_registration_terminated",
-            ConfirmationCandidateRegisterFragment()
-        )
+    override fun onRegistrationTerminated(role: RoleType) {
+        when (role) {
+            RoleType.APPLICANT -> replaceFragment(
+                "applicant_registration_terminated",
+                ConfirmationCandidateRegisterFragment()
+            )
+            RoleType.EMPLOYER, RoleType.INTERIM_AGENCY -> startActivity(
+                Intent(
+                    applicationContext,
+                    BaseActivity::class.java
+                )
+            )
+            else -> Log.d(TAG, "Feature not implemented yet.")
+        }
     }
 
-    private fun createAccount() {
-        replaceFragment("otp_code_fill", EmployerRegisterStep2Fragment())
-    }
+    private fun showPaymentTypeView(paymentType: String) {
+        when (paymentType) {
+            PaymentType.CREDIT_CARD.name -> replaceFragment(
+                "credit_card_payment",
+                EmployerRegisterStep6CreditCardFragment()
+            )
+            PaymentType.DIRECT_DEBIT.name -> replaceFragment(
+                "direct_debit_payment",
+                EmployerRegisterStep6DirectDebitFragment()
+            )
+        }
 
-    private fun verifyOTPCode() {
-        replaceFragment("password_creation", EmployerRegisterStep3Fragment())
     }
 
     private fun hideKeyboard(view: View) {

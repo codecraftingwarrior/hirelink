@@ -75,7 +75,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/text_view_choose_password_title"
+                    android:id="@+id/choose_your_plan_text"
                     style="@style/AppWelcomeStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -90,15 +90,14 @@
                     app:layout_constraintTop_toBottomOf="@+id/image_view_step4_card_header" />
 
                 <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recycler_view_offers"
+                    android:id="@+id/recycler_view_plan"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="140dp"
-                    android:layout_marginTop="44dp"
+                    android:layout_marginStart="9dp"
+                    android:layout_marginTop="30dp"
                     android:scrollbars="vertical"
-                    app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/text_view_choose_password_title" />
+                    app:layout_constraintTop_toBottomOf="@+id/choose_your_plan_text" />
 
                 <Button
                     android:id="@+id/button_next"
