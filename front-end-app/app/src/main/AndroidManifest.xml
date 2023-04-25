@@ -2,8 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- Demande l'autorisation d'accéder à Internet -->
     <uses-permission android:name="android.permission.INTERNET" />
 
+    <!-- Configuration de l'application -->
     <application
         android:name=".HirelinkApplication"
         android:allowBackup="true"
@@ -15,18 +17,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hirelinkfront"
         tools:targetApi="31">
+
+        <!-- Activités de l'application -->
+
+        <!-- Activité JobApplication -->
         <activity
             android:name=".JobApplicationActivity"
             android:exported="false" />
+
+        <!-- Activité ProfilSettings -->
         <activity
             android:name=".ProfilSettingsActivity"
             android:exported="false" />
+
+        <!-- Activité Profil -->
         <activity
             android:name=".modules.core.profil.ProfilActivity"
             android:exported="false" />
+
+        <!-- Activité BaseActivity -->
         <activity
             android:name=".modules.core.BaseActivity"
             android:exported="false" />
+
+        <!-- Activité PageNotFound -->
         <activity
             android:name=".modules.common.PageNotFoundActivity"
             android:exported="false">
@@ -34,6 +48,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <!-- Activité LoginActivity -->
         <activity
             android:name=".modules.auth.login.LoginActivity"
             android:exported="false">
@@ -41,6 +57,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <!-- Activité RegisterActivity -->
         <activity
             android:name=".modules.auth.register.RegisterActivity"
             android:exported="false">
@@ -48,6 +66,8 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+        <!-- Activité principale (MainActivity) -->
         <activity
             android:name=".MainActivity"
             android:exported="true">
