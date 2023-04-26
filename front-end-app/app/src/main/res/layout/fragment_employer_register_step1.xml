@@ -9,7 +9,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="667dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         tools:context=".modules.auth.register.fragments.employerregister.EmployerRegisterStep1Fragment">
 
@@ -47,7 +47,7 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/card_step1"
             android:layout_width="320dp"
-            android:layout_height="@dimen/_560pxh"
+            android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:layout_marginTop="48dp"
             android:layout_marginBottom="306dp"
@@ -93,6 +93,26 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_field_national_unique_number"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="@dimen/_283pxh"
+                    android:layout_height="@dimen/_60pxh"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="16dp"
+                    android:hint="@string/national_unique_number"
+                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                    app:boxCornerRadiusTopEnd="@dimen/_15pxh">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_national_unique_number"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_field_email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="@dimen/_283pxh"
@@ -130,6 +150,20 @@
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <com.mapbox.search.ui.view.SearchResultsView
+                    android:id="@+id/search_results_view"
+                    android:layout_width="@dimen/_283pxh"
+                    android:layout_height="250dp"
+                    android:background="@drawable/address_search_bg"
+                    android:clipToPadding="false"
+                    android:layout_marginTop="16dp"
+                    android:elevation="4dp"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="22dp"
+                    />
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/text_field_city"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -147,6 +181,9 @@
                         android:id="@+id/edit_text_city"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:cursorVisible="false"
                         tools:ignore="TouchTargetSizeCheck" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -166,6 +203,9 @@
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/edit_text_country"
                         android:layout_width="match_parent"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:cursorVisible="false"
                         android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -179,6 +219,8 @@
                     android:text="@string/next"
                     android:enabled="false"
                     android:textSize="18sp" />
+
+
 
             </LinearLayout>
 

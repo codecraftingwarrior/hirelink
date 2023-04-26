@@ -76,4 +76,9 @@
     <string name="job_application_accepted_state">Accepted</string>
     <string name="employer">Employer</string>
     <string name="date_select_prompt">Choose a date</string>
+    <string name="national_unique_number">National unique number</string>
+
+
+
+    <string name="mapbox_access_token">pk.eyJ1IjoiY29kZWNyYWZ0aW5nd2FycmlvciIsImEiOiJjbGdpNGd5aHYwZ2Z4M2RwZzRucGFlajF6In0.3efBYpHbBE22AIIQT6q1rg</string>
 </resources>
