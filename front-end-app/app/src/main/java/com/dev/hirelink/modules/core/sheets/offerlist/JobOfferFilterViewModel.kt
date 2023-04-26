@@ -1,13 +1,10 @@
 package com.dev.hirelink.modules.core.sheets.offerlist
 
-import android.app.Activity
 import android.content.Context
-import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dev.hirelink.modules.auth.viewmodel.AuthViewModel
 
 class JobOfferFilterViewModel : ViewModel() {
     private val _criteria: MutableLiveData<JobOfferFilterCriteria> by lazy {

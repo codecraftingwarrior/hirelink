@@ -7,9 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.viewModels
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.ActivityRegisterBinding
 import com.dev.hirelink.enums.PaymentType
@@ -17,15 +20,33 @@ import com.dev.hirelink.enums.RegistrationStep
 import com.dev.hirelink.enums.RoleType
 import com.dev.hirelink.modules.auth.register.fragments.StepFragment
 import com.dev.hirelink.modules.auth.register.fragments.candidateregister.CandidateRegisterFragment
+import com.dev.hirelink.modules.auth.register.fragments.candidateregister.CandidateRegisterViewModel
 import com.dev.hirelink.modules.auth.register.fragments.candidateregister.ConfirmationCandidateRegisterFragment
 import com.dev.hirelink.modules.auth.register.fragments.employerregister.*
 import com.dev.hirelink.modules.auth.register.fragments.rolechoose.RoleChooseRegisterFragment
+import com.dev.hirelink.modules.auth.viewmodel.AuthViewModel
+import com.dev.hirelink.modules.auth.viewmodel.AuthViewModelFactory
+import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.BaseActivity
 
 class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSelectionListener,
     StepFragment.NextButtonClickListener,
     CandidateRegisterFragment.RegistrationTerminationListener {
     private lateinit var binding: ActivityRegisterBinding
+    val candidateRegisterViewModel: CandidateRegisterViewModel by viewModels {
+        CandidateRegisterViewModel.CandidateRegisterViewModelFactory(
+            this,
+            (application as HirelinkApplication).authRepository,
+            (application as HirelinkApplication).roleRepository
+        )
+    }
+    val authViewModel: AuthViewModel by viewModels {
+        AuthViewModelFactory(
+            (application as HirelinkApplication).authRepository,
+            this
+        )
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_register)
@@ -34,8 +55,10 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
         supportActionBar?.hide()
         bindListeners()
 
+
         if (savedInstanceState == null)
             inflateRootFragment()
+
     }
 
     private fun bindListeners() {
@@ -46,7 +69,7 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
                 supportFragmentManager.popBackStack()
         }
 
-        binding.rootLinearLayout.apply { setOnClickListener { hideKeyboard(this) } }
+        binding.rootLinearLayoutRegister.apply { setOnClickListener { hideKeyboard(this) } }
 
     }
 

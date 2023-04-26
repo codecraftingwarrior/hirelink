@@ -15,7 +15,7 @@
         tools:context=".modules.auth.register.RegisterActivity">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/root_linear_layout"
+            android:id="@+id/root_linear_layout_register"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

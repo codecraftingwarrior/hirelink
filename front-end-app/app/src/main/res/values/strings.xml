@@ -16,6 +16,7 @@
     <string name="page_not_found">Page not found</string>
     <string name="issue_msg">Something went wrong, please try again.</string>
     <string name="basic_msg">Let’s start with the basics</string>
+    <string name="candidate_registration_msg">Complete this step to be able to apply to our partner companies\' offers.</string>
     <string name="register_confirmation">Register confirmation</string>
     <string name="registration_confirmation_msg">Your subscription was succefuly cofirmed, you can now start candidate to job offers.</string>
     <string name="choose_password">choose a password</string>

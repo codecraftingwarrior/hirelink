@@ -8,6 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_constraint_layout_candidate_register"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -32,16 +33,16 @@
         <TextView
             android:id="@+id/text_view_description"
             style="@style/AppTextRegular"
-            android:layout_width="wrap_content"
+            android:layout_width="@dimen/_283pxh"
             android:layout_height="wrap_content"
-            android:layout_marginStart="116dp"
             android:layout_marginTop="8dp"
             android:gravity="center_horizontal"
             android:letterSpacing="0.04"
             android:lineSpacingExtra="@dimen/_7pxh"
-            android:text="@string/basic_msg"
+            android:text="@string/candidate_registration_msg"
             android:textColor="@color/black_900_99"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/text_view_register" />
 
         <com.google.android.material.textfield.TextInputLayout
