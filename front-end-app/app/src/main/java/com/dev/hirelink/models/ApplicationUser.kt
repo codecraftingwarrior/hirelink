@@ -14,6 +14,7 @@ data class ApplicationUser(
     val token: String? = null,
     val email: String? = null,
     val plainPassword: String? = null,
+    val company: Company? = null,
     @SerializedName("appRole") val role: Role? = null
     //TODO: continue for other fields
 )
@@ -30,13 +31,15 @@ data class ApplicationUserRequest(
     val token: String? = null,
     val email: String? = null,
     val plainPassword: String? = null,
+    val company: Company? = null,
     @SerializedName("appRole") val role: String? = null
 )
 
-data class RegistrationErrorResponse(
+data class BasicErrorResponse(
     val title: String? = null,
     val description: String? = null,
-    val violations: List<ConstraintViolation>? = null
+    val violations: List<ConstraintViolation>? = null,
+    val message: String? = null
 )
 
 data class ConstraintViolation(

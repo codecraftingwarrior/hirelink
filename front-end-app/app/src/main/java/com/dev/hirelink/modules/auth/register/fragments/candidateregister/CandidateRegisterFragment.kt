@@ -1,7 +1,6 @@
 package com.dev.hirelink.modules.auth.register.fragments.candidateregister
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -17,11 +16,9 @@ import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.FragmentCandidateRegisterBinding
 import com.dev.hirelink.enums.RoleType
 import com.dev.hirelink.models.*
-import com.dev.hirelink.modules.auth.dto.LoginErrorResponse
 import com.dev.hirelink.modules.auth.register.RegisterActivity
 import com.dev.hirelink.modules.auth.viewmodel.AuthViewModel
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
-import com.dev.hirelink.modules.core.BaseActivity
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -31,7 +28,7 @@ import retrofit2.HttpException
 class CandidateRegisterFragment : Fragment() {
     private lateinit var listener: RegistrationTerminationListener
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
-    private lateinit var candidateRegisterViewModel: CandidateRegisterViewModel
+    private lateinit var registerViewModel: RegisterViewModel
     private lateinit var authViewModel: AuthViewModel
     private lateinit var sharedPrefs: SharedPreferenceManager
     private lateinit var customLoadingOverlay: CustomLoadingOverlay
@@ -53,8 +50,8 @@ class CandidateRegisterFragment : Fragment() {
             container,
             false
         )
-        candidateRegisterViewModel =
-            (requireActivity() as RegisterActivity).candidateRegisterViewModel
+        registerViewModel =
+            (requireActivity() as RegisterActivity).registerViewModel
         authViewModel = (requireActivity() as RegisterActivity).authViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         sharedPrefs = SharedPreferenceManager(requireContext())
@@ -123,10 +120,10 @@ class CandidateRegisterFragment : Fragment() {
             phoneNumber = binding.editTextPhoneNumber.text.toString(),
             email = binding.editTextEmail.text.toString(),
             plainPassword = binding.editTextPassword.text.toString(),
-            role = candidateRegisterViewModel.roleRepository.toIRI(this.applicantRole)
+            role = registerViewModel.roleRepository.toIRI(this.applicantRole)
         )
 
-        val disposable = candidateRegisterViewModel
+        val disposable = registerViewModel
             .register(applicationUser)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -159,7 +156,7 @@ class CandidateRegisterFragment : Fragment() {
         when (error) {
             is HttpException -> {
                 try {
-                    val errorResponse = HttpExceptionParser.parse(error, RegistrationErrorResponse::class.java)
+                    val errorResponse = HttpExceptionParser.parse(error, BasicErrorResponse::class.java)
                     if(errorResponse.violations?.isEmpty() == false)
                         for (violation in errorResponse.violations)
                             Snackbar.make(binding.buttonRegister, violation.message ?: "no message", Snackbar.LENGTH_SHORT).show()
