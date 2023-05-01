@@ -38,7 +38,8 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
             (application as HirelinkApplication).roleRepository,
             (application as HirelinkApplication).userRepository,
             (application as HirelinkApplication).planRepository,
-            (application as HirelinkApplication).paymentInformationRepository
+            (application as HirelinkApplication).paymentInformationRepository,
+            (application as HirelinkApplication).bankInformationRepository
         )
     }
     val authViewModel: AuthViewModel by viewModels {
@@ -139,7 +140,9 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
                 Intent(
                     applicationContext,
                     BaseActivity::class.java
-                )
+                ).apply {
+                    flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+                }
             )
             else -> Log.d(TAG, "Feature not implemented yet.")
         }

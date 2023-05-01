@@ -40,7 +40,7 @@ class BankInformation
 
     #[ORM\ManyToOne(inversedBy: 'bankInformations')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['bank-information:read', 'bank-information:writable'])]
+    #[Groups(['bank-information:writable'])]
     private ?ApplicationUser $owner = null;
 
     public function getId(): ?int

@@ -86,7 +86,7 @@ class EmployerRegisterStep6CreditCardFragment : StepFragment() {
             .subscribe(
                 { paymentInformation ->
                     Log.d(javaClass.simpleName, paymentInformation.toString())
-                    sharedPrefs.storeRegistrationAchievedStep(RegistrationStep.STEP_6_DIRECT_DEBIT)
+                    sharedPrefs.clearRegistrationStep()
                     listener.onNextButtonTouched(RegistrationStep.STEP_6_CREDIT_CARD)
                 },
                 { error: Throwable -> handleError(error) }
