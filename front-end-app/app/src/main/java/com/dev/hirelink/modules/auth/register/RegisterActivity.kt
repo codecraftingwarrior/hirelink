@@ -36,7 +36,9 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
             this,
             (application as HirelinkApplication).authRepository,
             (application as HirelinkApplication).roleRepository,
-            (application as HirelinkApplication).userRepository
+            (application as HirelinkApplication).userRepository,
+            (application as HirelinkApplication).planRepository,
+            (application as HirelinkApplication).paymentInformationRepository
         )
     }
     val authViewModel: AuthViewModel by viewModels {

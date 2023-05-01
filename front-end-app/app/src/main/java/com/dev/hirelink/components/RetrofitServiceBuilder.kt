@@ -18,7 +18,7 @@ class RetrofitServiceBuilder(private val context: Context) {
         val loggingInterceptor = HttpLoggingInterceptor()
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
 
-        val jwtTokenInterceptor = JWTTokenInterceptor(SharedPreferenceManager(context).getJwtToken() ?: "")
+        val jwtTokenInterceptor = JWTTokenInterceptor(context)
 
         this.client = OkHttpClient
             .Builder()

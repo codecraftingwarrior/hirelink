@@ -52,6 +52,14 @@ class PaymentInformation extends TrackableEntity
     #[NotBlank]
     private ?ApplicationUser $owner = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['payment-information:writable', 'payment-information:read'])]
+    private ?string $holderName = null;
+
+    #[ORM\Column(length: 20, nullable: true)]
+    #[Groups(['payment-information:writable', 'payment-information:read'])]
+    private ?string $expDate = null;
+
     public function __construct()
     {
         $this->payments = new ArrayCollection();
@@ -124,6 +132,30 @@ class PaymentInformation extends TrackableEntity
     public function setOwner(?ApplicationUser $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getHolderName(): ?string
+    {
+        return $this->holderName;
+    }
+
+    public function setHolderName(?string $holderName): self
+    {
+        $this->holderName = $holderName;
+
+        return $this;
+    }
+
+    public function getExpDate(): ?string
+    {
+        return $this->expDate;
+    }
+
+    public function setExpDate(?string $expDate): self
+    {
+        $this->expDate = $expDate;
 
         return $this;
     }

@@ -11,8 +11,3 @@ data class Plan(
 ) {
     fun toIRI() = PLAN_RESOURCE_PREFIX + id
 }
-
-sealed class PlanType {
-    data class APIPlan(val iri: String) : PlanType()
-    data class UserPlan(val plan: Plan) : PlanType()
-}

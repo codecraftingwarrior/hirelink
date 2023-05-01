@@ -127,7 +127,7 @@
                             app:layout_constraintTop_toBottomOf="@+id/text_view_order_summary" />
 
                         <TextView
-                            android:id="@+id/text_view_chosen_plan"
+                            android:id="@+id/text_view_chosen_plan_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="20dp"
@@ -159,7 +159,7 @@
                             android:textFontWeight="300"
                             android:textSize="@dimen/_13pxh"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/text_view_chosen_plan_title" />
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_chosen_plan_name" />
 
                         <TextView
                             android:id="@+id/text_view_total_price"
@@ -177,7 +177,7 @@
                             android:textFontWeight="300"
                             android:textSize="@dimen/_13pxh"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toBottomOf="@+id/text_view_chosen_plan" />
+                            app:layout_constraintTop_toBottomOf="@+id/text_view_chosen_plan_title" />
 
                         <TextView
                             android:id="@+id/text_view_saved_money_title"

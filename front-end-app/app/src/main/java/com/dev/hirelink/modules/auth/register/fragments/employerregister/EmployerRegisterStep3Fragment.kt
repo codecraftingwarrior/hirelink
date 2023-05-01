@@ -100,7 +100,7 @@ class EmployerRegisterStep3Fragment : StepFragment() {
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 { user ->
-                    Log.d(javaClass.simpleName, user.toString())
+                    sharedPrefs.storeJwtToken(user?.token!!)
                     onRegistrationSuccess(user)
                 },
                 { error: Throwable -> handleError(error) }
@@ -108,12 +108,11 @@ class EmployerRegisterStep3Fragment : StepFragment() {
 
         compositeDisposable.add(disposable)
 
-        listener.onNextButtonTouched(RegistrationStep.STEP_3)
     }
 
     private fun onRegistrationSuccess(user: ApplicationUser?) {
         Log.d(javaClass.simpleName, user.toString())
-        sharedPrefs.storeJwtToken(user?.token!!)
+        Log.d(javaClass.simpleName, "jwt local storage ${sharedPrefs.getJwtToken()}")
         val disposable = authViewModel
             .fetchCurrentUser()
             .subscribeOn(Schedulers.io())

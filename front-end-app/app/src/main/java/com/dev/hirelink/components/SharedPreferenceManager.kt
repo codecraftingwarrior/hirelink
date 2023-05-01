@@ -8,7 +8,7 @@ class SharedPreferenceManager(private val context: Context) {
 
     companion object {
         private const val PREFS_NAME = "com.dev.hirelink.PREFERENCE_FILE_KEY"
-        private const val JWT_TOKEN_KEY = "access_token"
+        const val JWT_TOKEN_KEY = "access_token"
         private const val REGISTRATION_STEP_KEY = "registration_step"
     }
 
@@ -20,6 +20,8 @@ class SharedPreferenceManager(private val context: Context) {
         editor.putString(JWT_TOKEN_KEY, token)
         editor.apply()
     }
+
+    fun hasKey(key: String) = sharedPreferences.contains(key)
 
     fun storeRegistrationAchievedStep(step: RegistrationStep) {
         val editor = sharedPreferences.edit()
@@ -33,6 +35,12 @@ class SharedPreferenceManager(private val context: Context) {
     fun clearRegistrationStep() {
         val editor = sharedPreferences.edit()
         editor.remove(REGISTRATION_STEP_KEY)
+        editor.apply()
+    }
+
+    fun removeJwtToken() {
+        val editor = sharedPreferences.edit()
+        editor.remove(JWT_TOKEN_KEY)
         editor.apply()
     }
 

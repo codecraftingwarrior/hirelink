@@ -19,6 +19,7 @@ import com.dev.hirelink.databinding.FragmentEmployerRegisterStep4Binding
 import com.dev.hirelink.enums.RegistrationStep
 import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.models.BasicErrorResponse
+import com.dev.hirelink.models.Plan
 import com.dev.hirelink.modules.auth.dto.EmployerChoosePlanRequest
 import com.dev.hirelink.modules.auth.register.RegisterActivity
 import com.dev.hirelink.modules.auth.register.adapters.PlanItemAdapter
@@ -41,6 +42,7 @@ class EmployerRegisterStep4Fragment : StepFragment() {
     private lateinit var sharedPrefs: SharedPreferenceManager
     private lateinit var planItemAdapter: PlanItemAdapter
     private lateinit var currentUser: ApplicationUser
+    private lateinit var plans: List<Plan>
     private val compositeDisposable = CompositeDisposable()
 
 
@@ -58,6 +60,7 @@ class EmployerRegisterStep4Fragment : StepFragment() {
         sharedPrefs = SharedPreferenceManager(requireContext())
         registerViewModel = (requireActivity() as RegisterActivity).registerViewModel
         fetchCurrentUser()
+        checkStep()
         return binding.root
     }
 
@@ -68,12 +71,33 @@ class EmployerRegisterStep4Fragment : StepFragment() {
             R.id.card_step4,
             R.layout.loading_overlay_centered
         )
-        initRecyclerView()
+        findPlans()
 
         binding.buttonNext.setOnClickListener { updatePlanForUser() }
     }
 
+    private fun findPlans() {
+        customLoadingOverlay.showLoading()
+
+        val disposable = registerViewModel
+            .planRepository
+            .findAll()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doFinally { customLoadingOverlay.hideLoading() }
+            .subscribe(
+                { plans ->
+                    this.plans = plans
+                    initRecyclerView()
+                },
+                { error: Throwable -> handleError(error) }
+            )
+
+        compositeDisposable.add(disposable)
+    }
+
     private fun updatePlanForUser() {
+        customLoadingOverlay.showLoading()
         val payload = EmployerChoosePlanRequest(planItemAdapter.selectedPlan.toIRI())
         val userID = currentUser.id
 
@@ -85,13 +109,11 @@ class EmployerRegisterStep4Fragment : StepFragment() {
             .subscribe(
                 { user ->
                     Log.d(javaClass.simpleName, user.toString())
+                    registerViewModel.authRepository.emitUser(user)
                     sharedPrefs.storeRegistrationAchievedStep(RegistrationStep.STEP_4)
                     val bundle = bundleOf(
-                        USER_ID_KEY  to arguments?.getInt(USER_ID_KEY),
-                        USER_EMAIL_KEY to arguments?.getString(USER_EMAIL_KEY),
-                        NATIONAL_UNIQUE_NUMBER_KEY to arguments?.getString(
-                            NATIONAL_UNIQUE_NUMBER_KEY
-                        )
+                        PLAN_NAME_KEY to planItemAdapter.selectedPlan.name,
+                        PLAN_PRICE_KEY to planItemAdapter.selectedPlan.price
                     )
                     listener.onNextButtonTouched(RegistrationStep.STEP_4, bundle)
                 },
@@ -102,13 +124,15 @@ class EmployerRegisterStep4Fragment : StepFragment() {
     }
 
     private fun initRecyclerView() {
-        val plans = MockDataSource().loadPlans()
-
         val recyclerView = binding.recyclerViewPlan
         planItemAdapter = PlanItemAdapter(requireContext(), plans)
         recyclerView.adapter = planItemAdapter
         recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
         recyclerView.setHasFixedSize(true)
+    }
+
+    private fun fetchPlans() {
+
     }
 
     private fun handleError(error: Throwable) {
@@ -160,5 +184,22 @@ class EmployerRegisterStep4Fragment : StepFragment() {
     override fun onDestroy() {
         super.onDestroy()
         compositeDisposable.clear()
+    }
+
+    private fun checkStep() {
+        val currentRegistrationStep = sharedPrefs.getCurrentRegistrationStep()
+        if (currentRegistrationStep == null || currentRegistrationStep.isEmpty())
+            return
+
+        if (currentRegistrationStep == RegistrationStep.STEP_4.name || RegistrationStep.valueOf(
+                currentRegistrationStep
+            ).number > RegistrationStep.STEP_4.number
+        )
+            listener.onNextButtonTouched(RegistrationStep.STEP_4)
+    }
+
+    companion object {
+        const val PLAN_NAME_KEY = "plan_name"
+        const val PLAN_PRICE_KEY = "plan_price"
     }
 }

@@ -100,7 +100,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
         ),
         new Put(
             uriTemplate: 'users/{id}',
-            normalizationContext: ['groups' => ['user:read', 'role:read']]
+            normalizationContext: ['groups' => ['user:read', 'role:read', 'plan:read']]
         ),
         new Get(
             uriTemplate: '/users/current-user',
@@ -108,7 +108,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
                 'summary' => 'Retrieves the current logged in user.',
                 'parameters' => []
             ],
-            normalizationContext: ['groups' => ['user:read', 'role:read']],
+            normalizationContext: ['groups' => ['user:read', 'role:read', 'plan:read', 'company:first-write']],
             provider: CurrentUserProvider::class
         )
     ],
@@ -165,7 +165,7 @@ class ApplicationUser extends BaseUser
     private ?Role $role = null;
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
-    #[Groups(['user:writable'])]
+    #[Groups(['user:writable', 'user:read', 'plan:read'])]
     private ?Plan $plan = null;
 
     #[ORM\ManyToOne(cascade: ["persist"], inversedBy: 'applicationUsers')]
