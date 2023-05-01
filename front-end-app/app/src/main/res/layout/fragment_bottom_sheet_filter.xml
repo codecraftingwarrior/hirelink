@@ -3,126 +3,377 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.dev.hirelink.modules.core.sheets.offerlist.JobOfferFilterViewModel" />
     </data>
 
-    <LinearLayout
-        android:background="@drawable/rectange_bg_gray_rounded_top"
-        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
-        android:orientation="vertical"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/download"
-            android:background="@drawable/ripple_effect_sheet_item"
-            android:padding="8dp">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/microphone_icon"
-                android:layout_margin="8dp" />
+            android:layout_height="match_parent"
+            android:background="@drawable/rectange_bg_gray_rounded_top"
+            android:orientation="vertical"
+            android:padding="20dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
             <TextView
+                android:id="@+id/text_view_filter_txt"
+                style="@style/AppTextSemiBold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Download File"
-                android:layout_gravity="center_vertical"
-                android:padding="8dp" />
-        </LinearLayout>
+                android:text="Filter"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintBottom_toBottomOf="@id/button_reset"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/button_reset" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/shareLinearLayout"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_reset"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="90dp"
+                android:layout_height="38dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginEnd="4dp"
+                android:text="reset"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/microphone_icon"
-                android:layout_margin="8dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Share"
-                android:layout_gravity="center_vertical"
-                android:padding="8dp" />
+                android:orientation="vertical"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/button_reset">
 
-        </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/uploadLinearLaySout"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="22dp"
+                    android:id="@+id/constraint_layout_employer_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/microphone_icon"
-                android:layout_margin="8dp" />
+                    <TextView
+                        android:id="@+id/text_view_employer"
+                        style="@style/AppTextSemiBoldBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="Employer" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Upload To Google Drive"
-                android:layout_gravity="center_vertical"
-                android:padding="8dp" />
+                    <TextView
+                        android:id="@+id/text_view_employer_filter_val"
+                        android:text="Google, Facebook"
+                        android:layout_marginTop="1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_employer"
+                        style="@style/AppTextRegularIndigo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-        </LinearLayout>
+                    <Button
+                        android:id="@+id/button_modify_employer"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#797979"
+                        android:text="Modify"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/poppins"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/text_view_employer"
+                        app:layout_constraintBottom_toBottomOf="@id/text_view_employer_filter_val"
+                        />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/copyLinearLayout"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp">
+                </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/microphone_icon"
-                android:layout_margin="8dp" />
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:dividerInsetStart="0dp"
+                    android:layout_marginTop="7dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:dividerInsetEnd="0dp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Copy Link"
-                android:layout_gravity="center_vertical"
-                android:padding="8dp" />
-        </LinearLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="25dp"
+                    android:id="@+id/constraint_layout_Profession_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:id="@+id/delete"
-            android:background="?attr/selectableItemBackground"
-            android:padding="8dp">
+                    <TextView
+                        android:id="@+id/text_view_profession"
+                        style="@style/AppTextSemiBoldBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="Profession" />
 
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/microphone_icon"
-                android:layout_margin="8dp" />
+                    <TextView
+                        android:id="@+id/text_view_profession_filter_val"
+                        android:text="Data Analyst, Software Engineer"
+                        android:layout_marginTop="1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_profession"
+                        style="@style/AppTextRegularIndigo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Delete File Selection"
-                android:layout_gravity="center_vertical"
-                android:padding="8dp" />
-        </LinearLayout>
-    </LinearLayout>
+                    <Button
+                        android:id="@+id/button_modify_profession"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#797979"
+                        android:text="Modify"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/poppins"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/text_view_profession"
+                        app:layout_constraintBottom_toBottomOf="@id/text_view_profession_filter_val"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    app:dividerInsetStart="0dp"
+                    app:dividerInsetEnd="0dp"/>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="25dp"
+                    android:id="@+id/constraint_layout_localisation_filter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content" >
+
+                    <TextView
+                        android:id="@+id/text_view_localisation"
+                        style="@style/AppTextSemiBoldBlack"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="Localisation" />
+
+                    <TextView
+                        android:id="@+id/text_view_localisation_filter_val"
+                        android:text="Tulum, Mexico"
+                        android:layout_marginTop="1dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_localisation"
+                        style="@style/AppTextRegularIndigo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" />
+
+                    <Button
+                        android:id="@+id/button_modify_localisation"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#797979"
+                        android:text="Modify"
+                        android:textAllCaps="false"
+                        android:fontFamily="@font/poppins"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/text_view_localisation"
+                        app:layout_constraintBottom_toBottomOf="@id/text_view_localisation_filter_val"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="7dp"
+                    app:dividerInsetStart="0dp"
+                    app:dividerInsetEnd="0dp"/>
+
+                <TextView
+                    android:id="@+id/text_view_salary"
+                    style="@style/AppTextSemiBoldBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Salary" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_field_min_salary"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Min. salary"
+                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_field_account_owner">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_min_salary"
+                        android:inputType="number"
+                        android:text="0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/text_view_salary_to"
+                    style="@style/AppTextSemiBoldBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="To" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_field_max_salary"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Max. salary"
+                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_field_account_owner">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_max_salary"
+                        android:inputType="number"
+                        android:text="0"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    app:dividerInsetStart="0dp"
+                    app:dividerInsetEnd="0dp"/>
+
+                <TextView
+                    android:id="@+id/text_view_publish_date"
+                    style="@style/AppTextSemiBoldBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="Date" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_field_start_date"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Start date"
+                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_field_account_owner">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_start_date"
+                        android:layout_width="match_parent"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:layout_height="wrap_content"/>
+
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/text_view_to_date"
+                    style="@style/AppTextSemiBoldBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="To" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/text_field_to_date"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="To date"
+                    app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                    app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                    app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                    app:endIconMode="clear_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_field_account_owner">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/edit_text_end_date"
+                        android:layout_width="match_parent"
+                        android:focusable="false"
+                        android:clickable="true"
+                        android:cursorVisible="false"
+                        android:layout_height="wrap_content"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.divider.MaterialDivider
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="25dp"
+                    app:dividerInsetStart="0dp"
+                    app:dividerInsetEnd="0dp"/>
+
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_apply"
+                    style="@style/AppButtonIndigoRounded"
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="@dimen/_150pxh"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:text="APPLY"
+                    android:layout_marginTop="22dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/text_field_password" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
 </layout>

@@ -73,4 +73,6 @@
     <string name="job_application_in_progress_state">In Progress</string>
     <string name="job_application_refused_state">Refused</string>
     <string name="job_application_accepted_state">Accepted</string>
+    <string name="employer">Employer</string>
+    <string name="date_select_prompt">Choose a date</string>
 </resources>
