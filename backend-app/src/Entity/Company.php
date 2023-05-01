@@ -91,6 +91,14 @@ class Company extends TrackableEntity
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: ApplicationUser::class)]
     private Collection $applicationUsers;
 
+    #[ORM\Column(nullable: true)]
+    #[Groups(['company:first-write'])]
+    private ?float $lat = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['company:first-write'])]
+    private ?float $lng = null;
+
     public function __construct()
     {
         $this->applicationUsers = new ArrayCollection();
@@ -319,6 +327,30 @@ class Company extends TrackableEntity
                 $applicationUser->setCompany(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(?float $lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }

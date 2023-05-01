@@ -1,17 +1,19 @@
 package com.dev.hirelink.network.auth
 
 import com.dev.hirelink.models.ApplicationUser
-import com.dev.hirelink.modules.auth.dto.Credentials
-import com.dev.hirelink.modules.auth.dto.LoginResponse
+import com.dev.hirelink.dto.ApplicationUserRequest
+import com.dev.hirelink.dto.Credentials
+import com.dev.hirelink.dto.EmployerCreatePasswordRequest
+import com.dev.hirelink.dto.LoginResponse
+import com.dev.hirelink.dto.OTPVerificationRequest
 import io.reactivex.Single
-import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.POST
+import retrofit2.http.PUT
+import retrofit2.http.Path
 
-// Définition d'une constante pour le chemin de base des requêtes d'authentification
-private const val basePath = "auth"
 interface AuthService {
 
     // Déclaration de la méthode login avec une annotation POST pour envoyer une requête POST
@@ -25,6 +27,13 @@ interface AuthService {
     fun fetchCurrentUser(): Single<ApplicationUser?>
 
     // Déclaration de la méthode register avec une annotation POST pour envoyer une requête POST
-    // Cette méthode est déclarée en utilisant le mot-clé "suspend" pour la prise en charge de la coroutines
-    suspend fun register(@Body user: ApplicationUser): Call<ApplicationUser>
+
+    @POST("auth/register")
+    fun register(@Body user: ApplicationUserRequest): Single<ApplicationUser?>
+
+    @POST("auth/verify-digit")
+    fun verifyDigit(@Body otpVerificationRequest: OTPVerificationRequest): Single<ApplicationUser?>
+
+    @PUT("auth/{id}/create-password")
+    fun createPassword(@Path("id") id: Int, @Body payload: EmployerCreatePasswordRequest): Single<ApplicationUser?>
 }

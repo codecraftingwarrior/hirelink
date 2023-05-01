@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.dev.hirelink.R
 
-class CustomLoadingOverlay(private val context: Context, private val rootViewResourceId: Int) {
+class CustomLoadingOverlay(private val context: Context, private val rootViewResourceId: Int, private val loadingResId: Int) {
 
     private val layoutInflater = LayoutInflater.from(context)
     private val rootView = (context as? Activity)?.findViewById<ViewGroup>(rootViewResourceId)
@@ -14,7 +14,7 @@ class CustomLoadingOverlay(private val context: Context, private val rootViewRes
 
     fun showLoading() {
         if (overlayView == null && rootView != null) {
-            overlayView = layoutInflater.inflate(R.layout.loading_overlay, rootView, false) as ViewGroup
+            overlayView = layoutInflater.inflate(loadingResId, rootView, false) as ViewGroup
             rootView.addView(overlayView)
         }
     }

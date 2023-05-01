@@ -16,19 +16,15 @@ import com.dev.hirelink.R
 import com.dev.hirelink.components.HttpExceptionParser
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityLoginBinding
-import com.dev.hirelink.enums.RoleType
-import com.dev.hirelink.models.ApplicationUser
-import com.dev.hirelink.modules.auth.dto.Credentials
-import com.dev.hirelink.modules.auth.dto.LoginErrorResponse
-import com.dev.hirelink.modules.auth.dto.LoginResponse
+import com.dev.hirelink.dto.Credentials
+import com.dev.hirelink.dto.LoginErrorResponse
+import com.dev.hirelink.dto.LoginResponse
 import com.dev.hirelink.modules.auth.register.RegisterActivity
 import com.dev.hirelink.modules.auth.viewmodel.AuthViewModel
 import com.dev.hirelink.modules.auth.viewmodel.AuthViewModelFactory
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.BaseActivity
-import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
-import com.google.gson.JsonSyntaxException
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -54,7 +50,7 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         setContentView(binding.root)
 
-        customLoadingOverlay = CustomLoadingOverlay(this, R.id.root_constraint_layout)
+        customLoadingOverlay = CustomLoadingOverlay(this, R.id.root_constraint_layout_login, R.layout.loading_overlay)
         sharedPrefs = SharedPreferenceManager(this)
 
         supportActionBar?.hide()
@@ -91,7 +87,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.imageViewBackArrow.setOnClickListener { finish() }
-        binding.rootConstraintLayout.apply {
+        binding.rootConstraintLayoutLogin.apply {
             setOnClickListener {
                 hideKeyboard(
                     this
