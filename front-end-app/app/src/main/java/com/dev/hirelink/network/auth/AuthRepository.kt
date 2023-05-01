@@ -5,7 +5,9 @@ import com.dev.hirelink.components.RetrofitServiceBuilder
 import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.models.ApplicationUserRequest
 import com.dev.hirelink.modules.auth.dto.Credentials
+import com.dev.hirelink.modules.auth.dto.EmployerCreatePasswordRequest
 import com.dev.hirelink.modules.auth.dto.LoginResponse
+import com.dev.hirelink.modules.auth.dto.OTPVerificationRequest
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 
@@ -28,4 +30,8 @@ class AuthRepository(private val context: Context) {
     fun emitUser(user: ApplicationUser) = currentUser.onNext(user)
 
     fun register(user: ApplicationUserRequest) = service.register(user)
+
+    fun verifyOTPDigit(otpVerificationRequest: OTPVerificationRequest) = service.verifyDigit(otpVerificationRequest)
+
+    fun createPassword(id: Int, payload: EmployerCreatePasswordRequest) = service.createPassword(id, payload)
 }

@@ -35,7 +35,8 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
         RegisterViewModel.RegisterViewModelFactory(
             this,
             (application as HirelinkApplication).authRepository,
-            (application as HirelinkApplication).roleRepository
+            (application as HirelinkApplication).roleRepository,
+            (application as HirelinkApplication).userRepository
         )
     }
     val authViewModel: AuthViewModel by viewModels {
@@ -95,19 +96,27 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
         when (step) {
             RegistrationStep.STEP_1 -> replaceFragment(
                 "otp_code_fill",
-                EmployerRegisterStep2Fragment()
+                EmployerRegisterStep2Fragment().apply {
+                    arguments = data
+                }
             )
             RegistrationStep.STEP_2 -> replaceFragment(
                 "password_creation",
-                EmployerRegisterStep3Fragment()
+                EmployerRegisterStep3Fragment().apply {
+                    arguments = data
+                }
             )
             RegistrationStep.STEP_3 -> replaceFragment(
                 "choose_plan",
-                EmployerRegisterStep4Fragment()
+                EmployerRegisterStep4Fragment().apply {
+                    arguments = data
+                }
             )
             RegistrationStep.STEP_4 -> replaceFragment(
                 "choose_payment",
-                EmployerRegisterStep5Fragment()
+                EmployerRegisterStep5Fragment().apply {
+                    arguments = data
+                }
             )
             RegistrationStep.STEP_5 -> showPaymentTypeView(data?.getString("paymentType")!!)
             RegistrationStep.STEP_6_CREDIT_CARD, RegistrationStep.STEP_6_DIRECT_DEBIT -> replaceFragment(

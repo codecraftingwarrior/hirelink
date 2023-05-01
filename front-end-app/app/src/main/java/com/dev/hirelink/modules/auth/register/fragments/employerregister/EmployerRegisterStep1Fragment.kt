@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.lifecycleScope
@@ -100,8 +101,13 @@ class EmployerRegisterStep1Fragment : StepFragment() {
             .subscribe(
                 { user ->
                     Log.d(javaClass.simpleName, user.toString())
+                    val bundle = bundleOf(
+                        USER_ID_KEY to user?.id,
+                        USER_EMAIL_KEY to user?.email,
+                        NATIONAL_UNIQUE_NUMBER_KEY to company.nationalUniqueNumber
+                    )
                     sharedPrefs.storeRegistrationAchievedStep(RegistrationStep.STEP_1)
-                    listener.onNextButtonTouched(currentStep)
+                    listener.onNextButtonTouched(currentStep, bundle)
                 },
                 { error: Throwable -> handleError(error) }
             )
@@ -160,8 +166,15 @@ class EmployerRegisterStep1Fragment : StepFragment() {
     }
 
     private fun checkStep() {
-        if (sharedPrefs.getCurrentRegistrationStep() == RegistrationStep.STEP_1.name)
-            listener.onNextButtonTouched(currentStep)
+        val currentRegistrationStep = sharedPrefs.getCurrentRegistrationStep()
+        if (currentRegistrationStep == null || currentRegistrationStep.isEmpty())
+            return
+
+        if (currentRegistrationStep == RegistrationStep.STEP_1.name || RegistrationStep.valueOf(
+                currentRegistrationStep
+            ).number > RegistrationStep.STEP_1.number
+        )
+            listener.onNextButtonTouched(RegistrationStep.STEP_1)
     }
 
     private fun attachTextWatchers() {
@@ -211,6 +224,11 @@ class EmployerRegisterStep1Fragment : StepFragment() {
         searchResultsView.isVisible = false
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
+    }
+
     private fun handleError(error: Throwable) {
         customLoadingOverlay.hideLoading()
         when (error) {
@@ -248,5 +266,9 @@ class EmployerRegisterStep1Fragment : StepFragment() {
         }
     }
 
-
+    companion object {
+        const val USER_EMAIL_KEY = "userEmail"
+        const val USER_ID_KEY = "userID"
+        const val NATIONAL_UNIQUE_NUMBER_KEY = "nationalUniqueNumber"
+    }
 }

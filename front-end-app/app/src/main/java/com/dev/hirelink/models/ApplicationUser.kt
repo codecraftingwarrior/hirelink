@@ -15,7 +15,8 @@ data class ApplicationUser(
     val email: String? = null,
     val plainPassword: String? = null,
     val company: Company? = null,
-    @SerializedName("appRole") val role: Role? = null
+    @SerializedName("appRole") val role: Role? = null,
+    val plan: Plan? = null
     //TODO: continue for other fields
 )
 

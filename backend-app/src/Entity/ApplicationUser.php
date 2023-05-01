@@ -67,6 +67,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
                 ),
                 security: []
             ),
+            normalizationContext: ['groups' => ['user:read', 'role:read']],
             denormalizationContext: ['groups' => ['create-pwd:writable']],
             input: CreatePasswordInput::class,
             processor: CreatePasswordStateProcessor::class
@@ -98,7 +99,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
             processor: RegistrationStateProcessor::class,
         ),
         new Put(
-            uriTemplate: 'users/{id}'
+            uriTemplate: 'users/{id}',
+            normalizationContext: ['groups' => ['user:read', 'role:read']]
         ),
         new Get(
             uriTemplate: '/users/current-user',
