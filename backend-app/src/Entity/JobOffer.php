@@ -15,15 +15,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: JobOfferRepository::class)]
 #[ApiResource(
     operations:[
         new GetCollection(),
-        new Get(
-            normalizationContext: ['groups' => ['jobOffer:read']]
-        )
-    ]
+        new Get()
+    ],
+    normalizationContext: ['groups' => ['job-offer:read']]
 ),
 ApiFilter(
     SearchFilter::class,
@@ -78,12 +78,11 @@ class JobOffer extends TrackableEntity
     private ?float $lng = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
-    #[Groups(['job-offer:read'])]
+    #[ORM\JoinColumn(nullable: false)]
     private ?JobOfferCategory $category = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer:read'])]
     private ?Profession $profession = null;
 
     #[ORM\ManyToOne]
@@ -95,7 +94,6 @@ class JobOffer extends TrackableEntity
     private Collection $jobApplications;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'jobOffers')]
-    #[Groups(['job-offer:read'])]
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]

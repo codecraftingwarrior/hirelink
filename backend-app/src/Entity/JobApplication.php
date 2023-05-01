@@ -2,11 +2,23 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Put;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobApplicationRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: JobApplicationRepository::class)]
+#[ApiResource(
+    operations:[
+        new GetCollection(),
+        new Get(),
+        new Put()
+    ],
+    normalizationContext: ['groups' => ['contract-type:read']]
+)]
 class JobApplication extends TrackableEntity
 {
     #[ORM\Id]
