@@ -2,7 +2,7 @@ package com.dev.hirelink.network.user
 
 import android.content.Context
 import com.dev.hirelink.components.RetrofitServiceBuilder
-import com.dev.hirelink.modules.auth.dto.EmployerChoosePlanRequest
+import com.dev.hirelink.dto.EmployerChoosePlanRequest
 import com.dev.hirelink.network.role.RoleService
 
 class UserRepository(private val context: Context) {

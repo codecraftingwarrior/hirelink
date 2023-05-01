@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,8 +15,8 @@ import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.FragmentEmployerRegisterStep3Binding
 import com.dev.hirelink.enums.RegistrationStep
 import com.dev.hirelink.models.ApplicationUser
-import com.dev.hirelink.models.BasicErrorResponse
-import com.dev.hirelink.modules.auth.dto.EmployerCreatePasswordRequest
+import com.dev.hirelink.dto.BasicErrorResponse
+import com.dev.hirelink.dto.EmployerCreatePasswordRequest
 import com.dev.hirelink.modules.auth.register.RegisterActivity
 import com.dev.hirelink.modules.auth.register.fragments.StepFragment
 import com.dev.hirelink.modules.auth.register.fragments.candidateregister.RegisterViewModel

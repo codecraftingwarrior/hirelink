@@ -1,9 +1,9 @@
-package com.dev.hirelink.models
+package com.dev.hirelink.dto
 
-data class PaymentInformation(
+data class PaymentInformationDTO(
     var creditCardNumber: String? = null,
     var cvv: String? = null,
     var holderName: String? = null,
     var expDate: String? = null,
-    var owner: ApplicationUser? = null
+    var owner: String? = null
 )

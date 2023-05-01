@@ -16,9 +16,9 @@ import com.dev.hirelink.R
 import com.dev.hirelink.components.HttpExceptionParser
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityLoginBinding
-import com.dev.hirelink.modules.auth.dto.Credentials
-import com.dev.hirelink.modules.auth.dto.LoginErrorResponse
-import com.dev.hirelink.modules.auth.dto.LoginResponse
+import com.dev.hirelink.dto.Credentials
+import com.dev.hirelink.dto.LoginErrorResponse
+import com.dev.hirelink.dto.LoginResponse
 import com.dev.hirelink.modules.auth.register.RegisterActivity
 import com.dev.hirelink.modules.auth.viewmodel.AuthViewModel
 import com.dev.hirelink.modules.auth.viewmodel.AuthViewModelFactory

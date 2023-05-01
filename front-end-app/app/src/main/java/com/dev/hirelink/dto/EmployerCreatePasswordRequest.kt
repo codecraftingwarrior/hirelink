@@ -1,4 +1,4 @@
-package com.dev.hirelink.modules.auth.dto
+package com.dev.hirelink.dto
 
 data class EmployerCreatePasswordRequest(
     var nationalUniqueNumber: String? = null,

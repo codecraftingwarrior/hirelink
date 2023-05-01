@@ -1,4 +1,4 @@
-package com.dev.hirelink.modules.auth.dto
+package com.dev.hirelink.dto
 
 data class OTPVerificationRequest(
     var userEmail: String? = null,

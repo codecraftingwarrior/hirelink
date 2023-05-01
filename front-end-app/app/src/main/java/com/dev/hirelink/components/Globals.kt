@@ -5,4 +5,5 @@ object Globals {
     const val PLAN_RESOURCE_PREFIX = "/api/plans/"
     const val APPLICATION_USER_RESOURCE_PREFIX = "/api/users/"
     const val BANK_INFORMATIONS_RESOURCE_PREFIX = "/api/bank-informations/"
+    const val ROLE_RESOURCE_PREFIX = "/api/roles/"
 }

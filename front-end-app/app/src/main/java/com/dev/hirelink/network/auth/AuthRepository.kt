@@ -3,11 +3,11 @@ package com.dev.hirelink.network.auth
 import android.content.Context
 import com.dev.hirelink.components.RetrofitServiceBuilder
 import com.dev.hirelink.models.ApplicationUser
-import com.dev.hirelink.models.ApplicationUserRequest
-import com.dev.hirelink.modules.auth.dto.Credentials
-import com.dev.hirelink.modules.auth.dto.EmployerCreatePasswordRequest
-import com.dev.hirelink.modules.auth.dto.LoginResponse
-import com.dev.hirelink.modules.auth.dto.OTPVerificationRequest
+import com.dev.hirelink.dto.ApplicationUserRequest
+import com.dev.hirelink.dto.Credentials
+import com.dev.hirelink.dto.EmployerCreatePasswordRequest
+import com.dev.hirelink.dto.LoginResponse
+import com.dev.hirelink.dto.OTPVerificationRequest
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 

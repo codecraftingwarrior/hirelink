@@ -3,11 +3,8 @@ package com.dev.hirelink.modules.auth.register.fragments.candidateregister
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.dev.hirelink.dto.*
 import com.dev.hirelink.models.*
-import com.dev.hirelink.modules.auth.dto.BankInformationDTO
-import com.dev.hirelink.modules.auth.dto.EmployerChoosePlanRequest
-import com.dev.hirelink.modules.auth.dto.EmployerCreatePasswordRequest
-import com.dev.hirelink.modules.auth.dto.OTPVerificationRequest
 import com.dev.hirelink.network.auth.AuthRepository
 import com.dev.hirelink.network.bankinformation.BankInformationRepository
 import com.dev.hirelink.network.paymentinformation.PaymentInformationRepository

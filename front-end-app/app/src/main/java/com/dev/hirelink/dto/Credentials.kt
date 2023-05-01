@@ -1,4 +1,4 @@
-package com.dev.hirelink.modules.auth.dto
+package com.dev.hirelink.dto
 
 import com.google.gson.annotations.SerializedName
 

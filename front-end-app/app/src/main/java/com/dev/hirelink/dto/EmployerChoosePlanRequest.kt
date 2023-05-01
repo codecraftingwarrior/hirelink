@@ -1,3 +1,3 @@
-package com.dev.hirelink.modules.auth.dto
+package com.dev.hirelink.dto
 
 data class EmployerChoosePlanRequest(val plan: String)

@@ -1,7 +1,7 @@
 package com.dev.hirelink.models
 
-sealed class RoleType {
-    data class APIRole(val iri: String) : RoleType()
-}
+import com.dev.hirelink.components.Globals
 
-data class Role(val id: Int?, val code: String?, val name: String?)
+data class Role(val id: Int?, val code: String?, val name: String?) {
+    fun toIRI() = Globals.ROLE_RESOURCE_PREFIX + id
+}

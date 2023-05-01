@@ -14,6 +14,8 @@ import com.dev.hirelink.R
 import com.dev.hirelink.components.HttpExceptionParser
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.FragmentCandidateRegisterBinding
+import com.dev.hirelink.dto.ApplicationUserRequest
+import com.dev.hirelink.dto.BasicErrorResponse
 import com.dev.hirelink.enums.RoleType
 import com.dev.hirelink.models.*
 import com.dev.hirelink.modules.auth.register.RegisterActivity

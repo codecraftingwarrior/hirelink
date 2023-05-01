@@ -1,9 +1,9 @@
-package com.dev.hirelink.models
+package com.dev.hirelink.dto
 
-import com.dev.hirelink.components.Globals.APPLICATION_USER_RESOURCE_PREFIX
+import com.dev.hirelink.models.Company
 import com.google.gson.annotations.SerializedName
 
-data class ApplicationUser(
+data class ApplicationUserRequest(
     val id: Int? = null,
     val firstName: String? = null,
     val lastName: String? = null,
@@ -16,9 +16,5 @@ data class ApplicationUser(
     val email: String? = null,
     val plainPassword: String? = null,
     val company: Company? = null,
-    @SerializedName("appRole") val role: Role? = null,
-    val plan: Plan? = null
-    //TODO: continue for other fields
-) {
-    fun toIRI() = APPLICATION_USER_RESOURCE_PREFIX + id
-}
+    @SerializedName("appRole") val role: String? = null
+)
