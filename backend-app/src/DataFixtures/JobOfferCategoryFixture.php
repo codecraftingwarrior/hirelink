@@ -4,18 +4,31 @@ namespace App\DataFixtures;
 
 use App\Entity\JobOfferCategory;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class JobOfferCategoryFixture extends Fixture
+class JobOfferCategoryFixture extends Fixture implements FixtureGroupInterface
 {
-    public const COMPUTER_SCIENCE_REFERENCE = 'Computer Science';
+    public static array $refs = [];
+
     public function load(ObjectManager $manager): void
     {
-        $computerScience = new JobOfferCategory();
-        $computerScience->setName('Computer Science');
-        $this->addReference(self::COMPUTER_SCIENCE_REFERENCE, $computerScience);
-        $manager->persist($computerScience);
+        $names = ['Marketing', 'Finance', 'Sales', 'Human Resources', 'Engineering', 'Design', 'Operations', 'Customer Service', 'Legal', 'Research', 'Computer Science'];
+
+        foreach ($names as $name) {
+            $ref = md5(microtime());
+            self::$refs[] = $ref;
+            $jobOfferCategory = new JobOfferCategory();
+            $jobOfferCategory->setName($name);
+            $this->addReference($ref, $jobOfferCategory);
+            $manager->persist($jobOfferCategory);
+        }
 
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['group1'];
     }
 }

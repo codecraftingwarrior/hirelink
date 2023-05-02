@@ -4,21 +4,45 @@ namespace App\DataFixtures;
 
 use App\Entity\Role;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
 
-class RoleFixture extends Fixture
+class RoleFixture extends Fixture implements FixtureGroupInterface
 {
-    public const ROLE_EMPLOYER_REFERENCE = 'employer';
-    public function load(ObjectManager $manager): void
+    public const ROLE_EMPLOYER_REFERENCE = EMPLOYER_ROLE_CODE;
+
+    public function load(ObjectManager $manager)
     {
-        $employer = new Role();
-        $employer->setName('EMPLOYER')
-            ->setCode('EMP')
-        ;
+        $applicantRole = new Role();
+        $applicantRole->setCode('APP')
+            ->setName('APPLICANT');
 
-        $this->setReference(self::ROLE_EMPLOYER_REFERENCE,$employer);
+        $manager->persist($applicantRole);
 
-        $manager->persist($employer);
+        $employerRole = new Role();
+        $employerRole->setCode('EMP')
+            ->setName('EMPLOYER');
+        $manager->persist($employerRole);
+
+        $this->addReference(self::ROLE_EMPLOYER_REFERENCE, $employerRole);
+
+        $agencyRole = new Role();
+        $agencyRole->setCode('AGC')
+            ->setName('AGENCY');
+
+        $manager->persist($agencyRole);
+
+        $managerRole = new Role();
+        $managerRole->setCode('MAN')
+            ->setName('MANAGER');
+
+        $manager->persist($managerRole);
+
         $manager->flush();
+    }
+
+    public static function getGroups(): array
+    {
+        return ['group1'];
     }
 }
