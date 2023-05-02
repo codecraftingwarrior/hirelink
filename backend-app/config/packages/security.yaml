@@ -22,6 +22,10 @@ security:
       pattern: ^/api/auth
       security: false
 
+    roles_open:
+      pattern: ^/api/roles
+      security: false
+
     login:
       pattern: ^/api/login-check$
       stateless: true
