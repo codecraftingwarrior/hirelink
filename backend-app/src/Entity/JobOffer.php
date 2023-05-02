@@ -53,9 +53,13 @@ class JobOffer extends TrackableEntity
     #[Groups(['job-offer:read'])]
     private ?string $description = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'min_salary')]
     #[Groups(['job-offer:read'])]
-    private ?float $salary = null;
+    private ?float $minSalary = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['job-offer:read'])]
+    private ?float $maxSalary = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['job-offer:read'])]
@@ -101,6 +105,7 @@ class JobOffer extends TrackableEntity
     #[Groups(['job-offer:read'])]
     private ?ApplicationUser $owner = null;
 
+
     public function __construct()
     {
         $this->jobApplications = new ArrayCollection();
@@ -136,14 +141,14 @@ class JobOffer extends TrackableEntity
         return $this;
     }
 
-    public function getSalary(): ?float
+    public function getMinSalary(): ?float
     {
-        return $this->salary;
+        return $this->minSalary;
     }
 
-    public function setSalary(float $salary): self
+    public function setMinSalary(float $minSalary): self
     {
-        $this->salary = $salary;
+        $this->minSalary = $minSalary;
 
         return $this;
     }
@@ -306,6 +311,18 @@ class JobOffer extends TrackableEntity
     public function setOwner(?ApplicationUser $owner): self
     {
         $this->owner = $owner;
+
+        return $this;
+    }
+
+    public function getMaxSalary(): ?float
+    {
+        return $this->maxSalary;
+    }
+
+    public function setMaxSalary(?float $maxSalary): self
+    {
+        $this->maxSalary = $maxSalary;
 
         return $this;
     }

@@ -3,46 +3,52 @@
 namespace App\DataFixtures;
 
 use App\Entity\ApplicationUser;
+use App\Enum\RegistrationState;
 use Doctrine\Bundle\FixturesBundle\Fixture;
+use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class ApplicationUserFixture extends Fixture implements DependentFixtureInterface
+class ApplicationUserFixture extends Fixture implements DependentFixtureInterface, FixtureGroupInterface
 {
     public const APPLE_MANAGER_REFERENCE = 'apple manager';
+
+    public static $refs = [];
 
     public function __construct(private readonly UserPasswordHasherInterface $hasher)
     {
     }
+
     public function load(ObjectManager $manager): void
     {
-        $ahmed = new ApplicationUser();
-        $ahmed->setPhoneNumber('123-456-789')
-            ->setEmail('ahmed@gmail.com')
-            ->setRegistrationState('pending')
-            ->setEnabled(true)
-            ->setRole($this->getReference(RoleFixture::ROLE_EMPLOYER_REFERENCE))
-        ;
+        $faker = Factory::create('fr_FR');
 
-        $hashPassword = $this->hasher->hashPassword($ahmed, '123456');
-        $ahmed->setPassword($hashPassword);
+        for ($i = 0; $i < 3; $i++) {
+            $ref = md5(microtime());
+            self::$refs[] = $ref;
 
-        $manager->persist($ahmed);
+            $user = new ApplicationUser();
 
-        $appleManager = new ApplicationUser();
-        $appleManager->setPhoneNumber('123-456-789')
-            ->setEmail('apple-manager@apple.com')
-            ->setPassword('apple')
-            ->setRegistrationState('pending')
-            ->setEnabled(true)
-            ->setRole($this->getReference(RoleFixture::ROLE_EMPLOYER_REFERENCE))
-            ->setCompany($this->getReference(CompanyFixture::APPLE_REFERENCE))
-        ;
-        $this->addReference(self::APPLE_MANAGER_REFERENCE,$appleManager);
+            $user
+                ->setPhoneNumber($faker->phoneNumber())
+                ->setEmail($faker->email())
+                ->setFirstName($faker->firstName())
+                ->setLastName($faker->lastName())
+                ->setRegistrationState(RegistrationState::PENDING->name)
+                ->setEnabled(true)
+                ->setRole($this->getReference(RoleFixture::ROLE_EMPLOYER_REFERENCE))
+                ->setCompany($this->getReference(CompanyFixture::$refs[$i]));
 
-        $manager->persist($appleManager);
+            $hashPassword = $this->hasher->hashPassword($user, DEFAULT_PASSWORD);
+            $user->setPassword($hashPassword);
+
+            $this->addReference($ref, $user);
+
+            $manager->persist($user);
+        }
         $manager->flush();
     }
 
@@ -51,6 +57,14 @@ class ApplicationUserFixture extends Fixture implements DependentFixtureInterfac
      */
     public function getDependencies(): array
     {
-        return [CompanyFixture::class,RoleFixture::class];
+        return [
+            CompanyFixture::class,
+            RoleFixture::class
+        ];
+    }
+
+    public static function getGroups(): array
+    {
+        return ['group1'];
     }
 }
