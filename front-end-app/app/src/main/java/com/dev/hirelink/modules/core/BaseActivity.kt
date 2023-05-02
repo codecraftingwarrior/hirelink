@@ -8,14 +8,15 @@ import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import androidx.fragment.app.viewModels
 import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
+import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityBaseBinding
+import com.dev.hirelink.modules.auth.login.LoginActivity
 import com.dev.hirelink.modules.core.offers.fragment.JobApplicationListFragment
 import com.dev.hirelink.modules.core.offers.fragment.JobOfferListFragment
 import com.dev.hirelink.modules.core.profil.ProfilActivity
@@ -28,6 +29,8 @@ class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
     private val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private var isLoggedIn = false
+    private lateinit var sharedPrefs: SharedPreferenceManager
     val jobOfferListfilterViewModel: JobOfferFilterViewModel by viewModels {
         JobOfferFilterViewModel.JobOfferFilterViewModelFactory(applicationContext)
     }
@@ -35,13 +38,18 @@ class BaseActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBaseBinding.inflate(layoutInflater);
+        fetchCurrentUser()
         setContentView(binding.root)
+        sharedPrefs = SharedPreferenceManager(applicationContext)
 
         supportActionBar?.hide()
 
         setupNavigationBar();
         bindListeners()
 
+    }
+
+    private fun fetchCurrentUser() {
         val disposable = authRepository
             .currentUser
             .subscribe { applicationUser ->
@@ -49,6 +57,16 @@ class BaseActivity : AppCompatActivity() {
                     javaClass.simpleName,
                     applicationUser.toString()
                 )
+                isLoggedIn = applicationUser?.id != null
+                if (isLoggedIn) {
+                    binding.imgBtnProfile.visibility = View.VISIBLE
+                    binding.buttonLogin.visibility = View.GONE
+                    binding.bottomNavigation.visibility = View.VISIBLE
+                } else {
+                    binding.imgBtnProfile.visibility = View.GONE
+                    binding.buttonLogin.visibility = View.VISIBLE
+                    binding.bottomNavigation.visibility = View.GONE
+                }
             }
 
         compositeDisposable.add(disposable)
@@ -73,18 +91,29 @@ class BaseActivity : AppCompatActivity() {
             startActivity(Intent(this, ProfilActivity::class.java))
         }
 
+        binding.buttonLogin.setOnClickListener {
+            startActivity(
+                Intent(
+                    this,
+                    LoginActivity::class.java
+                )
+            )
+        }
+
     }
 
     private fun setupNavigationBar() {
         binding.bottomNavigation.setOnItemSelectedListener { item ->
-            binding.searchHeader.background = ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray)
+            binding.searchHeader.background =
+                ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray)
             when (item.itemId) {
                 R.id.menu_item_schedule -> {
                     true
                 }
                 R.id.menu_item_candidacy -> {
                     // Respond to navigation item 2 click
-                    binding.searchHeader.background = ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray_reg)
+                    binding.searchHeader.background =
+                        ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray_reg)
                     replaceFragment(JobApplicationListFragment())
                     true
                 }
@@ -114,5 +143,10 @@ class BaseActivity : AppCompatActivity() {
         val inputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        compositeDisposable.clear()
     }
 }
