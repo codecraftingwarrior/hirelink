@@ -1,4 +1,4 @@
-package com.dev.hirelink.modules.core.offers.adapter
+package com.dev.hirelink.modules.core.offers.list
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -9,8 +9,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import com.dev.hirelink.R
+import com.dev.hirelink.components.toTimeAgo
 import com.dev.hirelink.models.JobOffer
-import com.dev.hirelink.modules.auth.register.adapters.PlanItemAdapter
 
 class JobOfferItemAdapter(
     val context: Context,
@@ -26,14 +26,15 @@ class JobOfferItemAdapter(
         private val timeagoText: TextView = view.findViewById(R.id.text_view_timeago)
 
         fun bind(jobOffer: JobOffer) {
-            companyName.text = jobOffer.companyName
+            companyName.text = jobOffer.owner?.company?.name ?: "unknown"
             jobTitle.text = jobOffer.title
             salaryRange.text = view.context.getString(
                 R.string.salary_range_str,
-                jobOffer.salary - 10000.0f,
-                jobOffer.salary
+                jobOffer.minSalary,
+                jobOffer.maxSalary
             )
             location.text = jobOffer.address
+            timeagoText.text = toTimeAgo(jobOffer.createdAt ?: "")
         }
     }
 

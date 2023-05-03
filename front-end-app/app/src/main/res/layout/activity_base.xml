@@ -8,7 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_constraint_layout"
+        android:id="@+id/root_constraint_layout_activity_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -104,7 +104,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
-            android:id="@+id/register_activity_fragment_container"
+            android:id="@+id/base_activity_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"

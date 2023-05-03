@@ -6,6 +6,7 @@ use App\Entity\Company;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Bundle\FixturesBundle\FixtureGroupInterface;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class CompanyFixture extends Fixture implements FixtureGroupInterface
 {
@@ -15,6 +16,8 @@ class CompanyFixture extends Fixture implements FixtureGroupInterface
     public function load(ObjectManager $manager): void
     {
         $ref = md5(microtime());
+
+        $faker = Factory::create();
 
         $apple = new Company();
         $apple->setName('Apple')
@@ -53,6 +56,23 @@ class CompanyFixture extends Fixture implements FixtureGroupInterface
                 ->setMailAddress($data['mail_address'])
                 ->setPhoneNumber($data['phone_number'])
                 ->setAddress($data['address']);
+
+            self::$refs[] = $ref;
+            $this->addReference($ref, $company);
+
+            $manager->persist($company);
+        }
+
+        for ($i = 0; $i < 15; $i++) {
+            $ref = md5(microtime());
+            $company = new Company();
+            $company->setName($faker->unique()->company())
+                ->setNationalUniqueNumber($faker->ean13())
+                ->setMailAddress($faker->companyEmail())
+                ->setPhoneNumber($faker->phoneNumber())
+                ->setLat($faker->latitude())
+                ->setLng($faker->longitude())
+                ->setAddress($faker->address());
 
             self::$refs[] = $ref;
             $this->addReference($ref, $company);

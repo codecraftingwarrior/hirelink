@@ -26,7 +26,7 @@ class ApplicationUserFixture extends Fixture implements DependentFixtureInterfac
     {
         $faker = Factory::create('fr_FR');
 
-        for ($i = 0; $i < 3; $i++) {
+        for ($i = 0; $i < 15; $i++) {
             $ref = md5(microtime());
             self::$refs[] = $ref;
 
@@ -40,6 +40,7 @@ class ApplicationUserFixture extends Fixture implements DependentFixtureInterfac
                 ->setRegistrationState(RegistrationState::PENDING->name)
                 ->setEnabled(true)
                 ->setRole($this->getReference(RoleFixture::ROLE_EMPLOYER_REFERENCE))
+                ->setPlan($this->getReference($faker->randomElement(PlanFixtures::$refs)))
                 ->setCompany($this->getReference(CompanyFixture::$refs[$i]));
 
             $hashPassword = $this->hasher->hashPassword($user, DEFAULT_PASSWORD);

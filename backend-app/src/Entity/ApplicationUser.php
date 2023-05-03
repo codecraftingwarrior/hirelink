@@ -169,7 +169,7 @@ class ApplicationUser extends BaseUser
     private ?Plan $plan = null;
 
     #[ORM\ManyToOne(cascade: ["persist"], inversedBy: 'applicationUsers')]
-    #[Groups(['user:writable', 'company:writable:emp', 'company:first-write'])]
+    #[Groups(['user:writable', 'company:writable:emp', 'company:first-write', 'company:read:name'])]
     private ?Company $company = null;
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'applicationUsers')]

@@ -28,16 +28,18 @@ class JobOfferFixture extends Fixture implements DependentFixtureInterface, Fixt
         ];
 
         for ($i = 0; $i < 30; $i++) {
-            $maxSalary = $faker->randomFloat(300000);
-            $fromDate =  (new \DateTime())->add(new \DateInterval('P10D'));
-            $toDate = $fromDate->add(new \DateInterval('P230D'));
+            $minSalary = floor($faker->numberBetween(30000, 80000) / 10) * 10;
+            $maxSalary = $minSalary + floor($faker->numberBetween(20000, 70000) / 10) * 10;
+
+            $fromDate = new \DateTime('now + 1 week');
+            $toDate = new \DateTime('now + 16 weeks');
 
             $offer = new JobOffer();
             $offer
                 ->setTitle($faker->unique()->jobTitle())
                 ->setDescription($faker->paragraph(5))
                 ->setMaxSalary($maxSalary)
-                ->setMinSalary($maxSalary - (0.3 * $maxSalary))
+                ->setMinSalary($minSalary)
                 ->setFromDate($fromDate)
                 ->setToDate($toDate)
                 ->setAddress($faker->address())

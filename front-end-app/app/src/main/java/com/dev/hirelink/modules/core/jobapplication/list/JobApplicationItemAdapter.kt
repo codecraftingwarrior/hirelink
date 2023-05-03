@@ -1,4 +1,4 @@
-package com.dev.hirelink.modules.core.offers.adapter
+package com.dev.hirelink.modules.core.jobapplication.list
 
 import android.content.Context
 import android.graphics.drawable.GradientDrawable
@@ -34,7 +34,7 @@ class JobApplicationItemAdapter(
             jobTitle.text = jobApplication.jobOffer?.title
             salaryRange.text = view.context.getString(
                 R.string.salary_range_str,
-                jobApplication.jobOffer?.salary!! - 10000.0f, jobApplication.jobOffer.salary
+                jobApplication.jobOffer?.maxSalary!! - 10000.0f, jobApplication.jobOffer.maxSalary
             )
             location.text = jobApplication.jobOffer.address
             stateText.text = view.context.getString(JobApplicationState.valueOf(jobApplication.state!!).stringResourceId)

@@ -34,8 +34,7 @@ class CandidateRegisterFragment : Fragment() {
     private lateinit var authViewModel: AuthViewModel
     private lateinit var sharedPrefs: SharedPreferenceManager
     private lateinit var customLoadingOverlay: CustomLoadingOverlay
-    private val applicantRole =
-        Role(id = 1, code = RoleType.APPLICANT.code, name = RoleType.APPLICANT.name)
+    private lateinit var selectedRole: Role
 
     interface RegistrationTerminationListener {
         fun onRegistrationTerminated(role: RoleType = RoleType.APPLICANT)
@@ -74,6 +73,7 @@ class CandidateRegisterFragment : Fragment() {
         )
 
         attachTextWatchers()
+        fetchRole()
     }
 
     override fun onAttach(context: Context) {
@@ -83,6 +83,21 @@ class CandidateRegisterFragment : Fragment() {
         } catch (e: java.lang.Exception) {
             throw Exception("$context must implement ApplicantRegistrationTerminationListener")
         }
+    }
+
+    private fun fetchRole() {
+        customLoadingOverlay.showLoading()
+        val disposable = registerViewModel
+            .roleRepository
+            .findAll(code = listOf(RoleType.APPLICANT.code))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doFinally { customLoadingOverlay.hideLoading() }
+            .subscribe(
+                { roles -> this.selectedRole = roles[0] },
+                { error: Throwable -> handleError(error) }
+            )
+        compositeDisposable.add(disposable)
     }
 
     private fun attachTextWatchers() {
@@ -122,7 +137,7 @@ class CandidateRegisterFragment : Fragment() {
             phoneNumber = binding.editTextPhoneNumber.text.toString(),
             email = binding.editTextEmail.text.toString(),
             plainPassword = binding.editTextPassword.text.toString(),
-            role = registerViewModel.roleRepository.toIRI(this.applicantRole)
+            role = this.selectedRole.toIRI()
         )
 
         val disposable = registerViewModel
@@ -158,10 +173,15 @@ class CandidateRegisterFragment : Fragment() {
         when (error) {
             is HttpException -> {
                 try {
-                    val errorResponse = HttpExceptionParser.parse(error, BasicErrorResponse::class.java)
-                    if(errorResponse.violations?.isEmpty() == false)
+                    val errorResponse =
+                        HttpExceptionParser.parse(error, BasicErrorResponse::class.java)
+                    if (errorResponse.violations?.isEmpty() == false)
                         for (violation in errorResponse.violations)
-                            Snackbar.make(binding.buttonRegister, violation.message ?: "no message", Snackbar.LENGTH_SHORT).show()
+                            Snackbar.make(
+                                binding.buttonRegister,
+                                violation.message ?: "no message",
+                                Snackbar.LENGTH_SHORT
+                            ).show()
 
                     Log.d(javaClass.simpleName, error.toString())
                 } catch (e: Exception) {
