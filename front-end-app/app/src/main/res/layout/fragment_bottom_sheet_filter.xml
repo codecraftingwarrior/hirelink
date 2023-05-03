@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dev.hirelink.modules.core.sheets.offerlist.JobOfferFilterViewModel" />
+            type="com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView

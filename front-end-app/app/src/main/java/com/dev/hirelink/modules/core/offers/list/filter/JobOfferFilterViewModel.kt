@@ -1,4 +1,4 @@
-package com.dev.hirelink.modules.core.sheets.offerlist
+package com.dev.hirelink.modules.core.offers.list.filter
 
 import android.content.Context
 import androidx.lifecycle.LiveData

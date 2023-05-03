@@ -9,4 +9,5 @@ class RoleRepository(private val context: Context) {
     private val service: RoleService by lazy { RetrofitServiceBuilder(context).create(RoleService::class.java) }
 
     fun toIRI(role: Role): String = role.toIRI()
+    fun findAll(pageNumber: Int = 1, code: List<String>? = null)  = service.findAll(pageNumber, code)
 }

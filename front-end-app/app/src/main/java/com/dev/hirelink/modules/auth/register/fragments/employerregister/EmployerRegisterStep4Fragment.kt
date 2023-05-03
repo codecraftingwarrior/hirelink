@@ -124,10 +124,6 @@ class EmployerRegisterStep4Fragment : StepFragment() {
         recyclerView.setHasFixedSize(true)
     }
 
-    private fun fetchPlans() {
-
-    }
-
     private fun handleError(error: Throwable) {
         customLoadingOverlay.hideLoading()
         when (error) {

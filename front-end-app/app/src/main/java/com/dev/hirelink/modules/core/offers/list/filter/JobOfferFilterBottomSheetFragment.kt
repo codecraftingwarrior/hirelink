@@ -1,4 +1,4 @@
-package com.dev.hirelink.modules.core.sheets.offerlist
+package com.dev.hirelink.modules.core.offers.list.filter
 
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
@@ -6,18 +6,12 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.viewModels
-import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentBottomSheetFilterBinding
-import com.dev.hirelink.modules.auth.viewmodel.AuthViewModel
-import com.dev.hirelink.modules.auth.viewmodel.AuthViewModelFactory
 import com.dev.hirelink.modules.core.BaseActivity
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
-import com.google.android.material.textfield.TextInputEditText
 import java.util.*
 
 

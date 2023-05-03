@@ -11,6 +11,8 @@ class RoleChooseRegisterViewModel : ViewModel() {
         get() = _selectedRole
 
 
+
+
     fun onRoleSelected(role: String) {
         _selectedRole.value = role;
     }

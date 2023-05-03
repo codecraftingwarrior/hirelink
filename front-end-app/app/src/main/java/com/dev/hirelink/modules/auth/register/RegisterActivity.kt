@@ -89,7 +89,11 @@ class RegisterActivity : AppCompatActivity(), RoleChooseRegisterFragment.RoleSel
             }
             RoleType.EMPLOYER -> replaceFragment(
                 "employer_registration",
-                EmployerRegisterStep1Fragment()
+                EmployerRegisterStep1Fragment(RoleType.EMPLOYER)
+            )
+            RoleType.INTERIM_AGENCY -> replaceFragment(
+                "interim_agency_registration",
+                EmployerRegisterStep1Fragment(RoleType.INTERIM_AGENCY)
             )
             else -> Log.e(TAG, "Feature not implemented yet.")
         }

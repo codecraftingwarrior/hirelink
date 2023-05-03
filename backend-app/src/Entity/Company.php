@@ -33,7 +33,7 @@ class Company extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
-    #[Groups(['company:read', 'company:writable', 'company:first-write'])]
+    #[Groups(['company:read', 'company:writable', 'company:first-write', 'company:read:name'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 80, nullable: true)]

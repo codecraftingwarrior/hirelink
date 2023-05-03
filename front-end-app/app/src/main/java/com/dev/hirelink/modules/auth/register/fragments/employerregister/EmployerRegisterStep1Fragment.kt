@@ -38,7 +38,7 @@ import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 
 
-class EmployerRegisterStep1Fragment : StepFragment() {
+class EmployerRegisterStep1Fragment(private val roleType: RoleType) : StepFragment() {
     private lateinit var binding: FragmentEmployerRegisterStep1Binding
     private val currentStep = RegistrationStep.STEP_1
     private lateinit var addressAutofill: AddressAutofill
@@ -49,8 +49,7 @@ class EmployerRegisterStep1Fragment : StepFragment() {
 
     private val compositeDisposable = CompositeDisposable()
     private lateinit var customLoadingOverlay: CustomLoadingOverlay
-    private val employerRole =
-        Role(id = 2, code = RoleType.EMPLOYER.code, name = RoleType.EMPLOYER.name)
+    private lateinit var selectedRole: Role
     private lateinit var registerViewModel: RegisterViewModel
 
 
@@ -80,6 +79,22 @@ class EmployerRegisterStep1Fragment : StepFragment() {
         )
         attachTextWatchers()
         setupAddressAutofillField()
+        fetchRole()
+    }
+
+    private fun fetchRole() {
+        customLoadingOverlay.showLoading()
+        val disposable = registerViewModel
+            .roleRepository
+            .findAll(code = listOf(roleType.code))
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .doFinally { customLoadingOverlay.hideLoading() }
+            .subscribe(
+                { roles -> this.selectedRole = roles[0] },
+                { error: Throwable -> handleError(error) }
+            )
+        compositeDisposable.add(disposable)
     }
 
     private fun createAccount() {
@@ -90,7 +105,7 @@ class EmployerRegisterStep1Fragment : StepFragment() {
 
         val applicationUser = ApplicationUserRequest(
             company = company,
-            role = registerViewModel.roleRepository.toIRI(employerRole),
+            role = registerViewModel.roleRepository.toIRI(selectedRole),
             phoneNumber = binding.editTextPhoneNumber.text.toString(),
             email = binding.editTextEmail.text.toString()
         )

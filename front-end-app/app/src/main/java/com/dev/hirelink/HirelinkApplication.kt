@@ -9,6 +9,7 @@ import com.dev.hirelink.modules.auth.viewmodel.AuthViewModelFactory
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.network.auth.AuthRepository
 import com.dev.hirelink.network.bankinformation.BankInformationRepository
+import com.dev.hirelink.network.joboffer.JobOfferRepository
 import com.dev.hirelink.network.paymentinformation.PaymentInformationRepository
 import com.dev.hirelink.network.plan.PlanRepository
 import com.dev.hirelink.network.role.RoleRepository
@@ -23,6 +24,7 @@ class HirelinkApplication : Application() {
     val roleRepository: RoleRepository by lazy { RoleRepository(applicationContext) }
     val userRepository: UserRepository by lazy { UserRepository(applicationContext) }
     val planRepository: PlanRepository by lazy { PlanRepository(applicationContext) }
+    val jobOfferRepository: JobOfferRepository by lazy { JobOfferRepository(applicationContext) }
     val bankInformationRepository: BankInformationRepository by lazy {
         BankInformationRepository(
             applicationContext

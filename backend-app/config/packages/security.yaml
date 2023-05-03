@@ -18,8 +18,12 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
 
-    auth:
-      pattern: ^/api/auth
+    open_endpoints:
+      pattern: ^/api/(auth|roles|job-offers)
+      security: false
+
+    roles_open:
+      pattern: ^/api/roles
       security: false
 
     login:

@@ -11,17 +11,18 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.fragment.app.viewModels
 import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityBaseBinding
 import com.dev.hirelink.modules.auth.login.LoginActivity
-import com.dev.hirelink.modules.core.offers.fragment.JobApplicationListFragment
-import com.dev.hirelink.modules.core.offers.fragment.JobOfferListFragment
+import com.dev.hirelink.modules.common.CustomLoadingOverlay
+import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
+import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
+import com.dev.hirelink.modules.core.offers.list.JobOfferViewModel
 import com.dev.hirelink.modules.core.profil.ProfilActivity
-import com.dev.hirelink.modules.core.sheets.offerlist.JobOfferFilterBottomSheetFragment
-import com.dev.hirelink.modules.core.sheets.offerlist.JobOfferFilterViewModel
+import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterBottomSheetFragment
+import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
 import com.dev.hirelink.network.auth.AuthRepository
 import io.reactivex.disposables.CompositeDisposable
 
@@ -34,12 +35,19 @@ class BaseActivity : AppCompatActivity() {
     val jobOfferListfilterViewModel: JobOfferFilterViewModel by viewModels {
         JobOfferFilterViewModel.JobOfferFilterViewModelFactory(applicationContext)
     }
+    val jobOfferViewModel: JobOfferViewModel by viewModels {
+        JobOfferViewModel.JobOfferViewModelFactory(
+            applicationContext,
+            (application as HirelinkApplication).jobOfferRepository
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBaseBinding.inflate(layoutInflater);
         fetchCurrentUser()
         setContentView(binding.root)
+
         sharedPrefs = SharedPreferenceManager(applicationContext)
 
         supportActionBar?.hide()
@@ -53,10 +61,6 @@ class BaseActivity : AppCompatActivity() {
         val disposable = authRepository
             .currentUser
             .subscribe { applicationUser ->
-                Log.d(
-                    javaClass.simpleName,
-                    applicationUser.toString()
-                )
                 isLoggedIn = applicationUser?.id != null
                 if (isLoggedIn) {
                     binding.imgBtnProfile.visibility = View.VISIBLE
@@ -73,7 +77,7 @@ class BaseActivity : AppCompatActivity() {
     }
 
     private fun bindListeners() {
-        binding.rootConstraintLayout.apply {
+        binding.rootConstraintLayoutActivityBase.apply {
             setOnClickListener {
                 hideKeyboard(
                     this
@@ -135,7 +139,7 @@ class BaseActivity : AppCompatActivity() {
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.commit {
             setReorderingAllowed(true)
-            replace(R.id.register_activity_fragment_container, fragment)
+            replace(R.id.base_activity_fragment_container, fragment)
         }
     }
 
