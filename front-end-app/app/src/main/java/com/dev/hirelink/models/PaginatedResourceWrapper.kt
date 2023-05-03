@@ -7,7 +7,7 @@ data class PaginatedResourceWrapper<T>(
     @SerializedName("@id") val id: String? = null,
     @SerializedName("@type") val type: String? = null,
     @SerializedName("hydra:totalItems") val totalItems: Int? = null,
-    @SerializedName("hydra:member") val items: List<T>? = null,
+    @SerializedName("hydra:member") val items: MutableList<T?>? = null,
     @SerializedName("hydra:view") val paginationView: PaginationView? = null
 )
 
