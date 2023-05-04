@@ -10,5 +10,10 @@ class JobOfferRepository(private val context: Context) {
         )
     }
 
-    fun findAll(pageNumber: Int = 1) = service.findAll(pageNumber)
+    fun findAll(
+        pageNumber: Int = 1,
+        lat: Double? = null,
+        lng: Double? = null,
+        maxDistance: Double? = null
+    ) = service.findAll(pageNumber, latitude = lat, longitude = lng, maxDistance = maxDistance)
 }

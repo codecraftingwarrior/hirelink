@@ -20,10 +20,13 @@ class JobOfferFilterViewModel : ViewModel() {
     }
 
     data class JobOfferFilterCriteria(
-        var startDate: String? = null,
-        var endDate: String? = null,
+        var fromDate: String? = null,
+        var toDate: String? = null,
         var minSalary: Float? = 0f,
-        var maxSalary: Float? = 0f
+        var maxSalary: Float? = 0f,
+        var latitude: Double? = null,
+        var longitude: Double? = null,
+        var maxDistance: Double? = null
     )
 
     class JobOfferFilterViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

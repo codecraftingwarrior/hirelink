@@ -45,8 +45,8 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
         bindListener()
 
         filterViewModel.criteria.observe(viewLifecycleOwner) {
-            binding.editTextStartDate.setText(it.startDate)
-            binding.editTextEndDate.setText(it.endDate)
+            binding.editTextStartDate.setText(it.fromDate)
+            binding.editTextEndDate.setText(it.toDate)
             binding.editTextMinSalary.setText(it.minSalary.toString())
             binding.editTextMaxSalary.setText(it.maxSalary.toString())
             this.criteria = it
@@ -61,7 +61,7 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
                     SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(selectedDate))
 
                 binding.editTextStartDate.setText(startDate)
-                criteria.startDate = startDate
+                criteria.fromDate = startDate
             }
         }
 
@@ -73,7 +73,7 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
                 ).format(Date(selectedDate))
 
                 binding.editTextEndDate.setText(endDate)
-                criteria.endDate = endDate
+                criteria.toDate = endDate
             }
         }
     }

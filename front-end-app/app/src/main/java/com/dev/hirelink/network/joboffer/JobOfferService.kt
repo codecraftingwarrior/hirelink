@@ -9,5 +9,10 @@ import retrofit2.http.Query
 interface JobOfferService {
 
     @GET("job-offers")
-    fun findAll(@Query("page") pageNumber: Int = 1): Single<PaginatedResourceWrapper<JobOffer>>
+    fun findAll(
+        @Query("page") pageNumber: Int = 1,
+        @Query("latitude") latitude: Double? = null,
+        @Query("longitude") longitude: Double? = null,
+        @Query("maxDistance") maxDistance: Double? = null
+    ): Single<PaginatedResourceWrapper<JobOffer>>
 }
