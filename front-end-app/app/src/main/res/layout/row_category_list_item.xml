@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <RadioButton
+        android:id="@+id/radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins"
+        android:text="Category"
+        android:textColor="@color/black_900"
+        android:textFontWeight="300"
+        android:textSize="@dimen/_20pxh"
+        android:drawablePadding="@dimen/_30pxh"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+</layout>
