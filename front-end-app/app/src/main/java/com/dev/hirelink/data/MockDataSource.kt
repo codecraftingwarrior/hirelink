@@ -1,10 +1,7 @@
 package com.dev.hirelink.data
 
 import com.dev.hirelink.enums.JobApplicationState
-import com.dev.hirelink.models.ApplicationUser
-import com.dev.hirelink.models.JobApplication
-import com.dev.hirelink.models.JobOffer
-import com.dev.hirelink.models.Plan
+import com.dev.hirelink.models.*
 
 class MockDataSource {
     fun loadPlans(): List<Plan> {
@@ -206,6 +203,32 @@ class MockDataSource {
                 applicant = ApplicationUser(id = 1),
                 state = JobApplicationState.PENDING.name
             ),
+        )
+    }
+
+    fun loadCompanies(): MutableList<Company> {
+        return mutableListOf(
+            Company(
+                id = 1,
+                name = "Amazon",
+                mailAddress = "amazon@amzon.fr"
+            ),
+            Company(
+                id = 2,
+                name = "Google"
+            ),
+            Company(
+                id = 3,
+                name = "Facebook"
+            ),
+            Company(
+                id = 5,
+                name = "Grill House"
+            ),
+            Company(
+                id = 6,
+                name = "Atos"
+            )
         )
     }
 }

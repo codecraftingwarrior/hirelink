@@ -4,6 +4,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -16,7 +18,6 @@ import com.dev.hirelink.R
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityBaseBinding
 import com.dev.hirelink.modules.auth.login.LoginActivity
-import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
 import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
 import com.dev.hirelink.modules.core.offers.list.JobOfferViewModel
@@ -24,16 +25,24 @@ import com.dev.hirelink.modules.core.profil.ProfilActivity
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterBottomSheetFragment
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
 import com.dev.hirelink.network.auth.AuthRepository
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.google.android.material.internal.ViewUtils.hideKeyboard
 import io.reactivex.disposables.CompositeDisposable
 
 class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
     private val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private lateinit var jobOfferFilterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
     private var isLoggedIn = false
     private lateinit var sharedPrefs: SharedPreferenceManager
     val jobOfferListfilterViewModel: JobOfferFilterViewModel by viewModels {
-        JobOfferFilterViewModel.JobOfferFilterViewModelFactory(applicationContext)
+        JobOfferFilterViewModel.JobOfferFilterViewModelFactory(
+            applicationContext,
+            (application as HirelinkApplication).companyRepository,
+            (application as HirelinkApplication).professionRepository
+        )
     }
     val jobOfferViewModel: JobOfferViewModel by viewModels {
         JobOfferViewModel.JobOfferViewModelFactory(
@@ -55,6 +64,11 @@ class BaseActivity : AppCompatActivity() {
         setupNavigationBar();
         bindListeners()
 
+        //binding.chipAll.isChecked = true
+
+        jobOfferFilterCriteria = jobOfferListfilterViewModel.getCriteria()
+
+        jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
     }
 
     private fun fetchCurrentUser() {
@@ -104,6 +118,57 @@ class BaseActivity : AppCompatActivity() {
             )
         }
 
+        binding.chipGroupDistanceFilter.setOnCheckedStateChangeListener { chipGroup, _ ->
+            fetchClosestOffers(chipGroup)
+        }
+
+        setupSearchField()
+
+    }
+
+    private fun setupSearchField() {
+        val watcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {}
+
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (s == null || s.isEmpty()) {
+                    jobOfferFilterCriteria.jobTitle = null
+                    jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
+                } else if (s.length >= 4) {
+                    jobOfferFilterCriteria.jobTitle = s.toString()
+                    jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
+                }
+
+            }
+        }
+
+        binding.editTextJobOfferListSearch.addTextChangedListener(watcher)
+    }
+
+    private fun fetchClosestOffers(chipGroup: ChipGroup) {
+        val currentCheckedChipId = findViewById<Chip>(chipGroup.checkedChipId)
+        val maxDistance = when (currentCheckedChipId?.text.toString()) {
+            getString(R.string._10_km) -> 10
+            getString(R.string._20_km) -> 20
+            getString(R.string._30_km) -> 30
+            getString(R.string._40_km) -> 40
+            getString(R.string._50_km) -> 50
+            else -> null
+        }
+
+        if (maxDistance != null) {
+            jobOfferFilterCriteria.latitude = sharedPrefs.deviceLatitude()
+            jobOfferFilterCriteria.longitude = sharedPrefs.deviceLongitude()
+            jobOfferFilterCriteria.maxDistance = maxDistance.toDouble()
+        } else {
+            jobOfferFilterCriteria.latitude = null
+            jobOfferFilterCriteria.longitude = null
+            jobOfferFilterCriteria.maxDistance = null
+        }
+
+        jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
     }
 
     private fun setupNavigationBar() {
@@ -112,20 +177,26 @@ class BaseActivity : AppCompatActivity() {
                 ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray)
             when (item.itemId) {
                 R.id.menu_item_schedule -> {
+                    binding.horizontalScrollViewChipDistance.visibility = View.GONE
+
                     true
                 }
                 R.id.menu_item_candidacy -> {
                     // Respond to navigation item 2 click
                     binding.searchHeader.background =
                         ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray_reg)
+                    binding.horizontalScrollViewChipDistance.visibility = View.GONE
+
                     replaceFragment(JobApplicationListFragment())
                     true
                 }
                 R.id.menu_item_offers -> {
+                    binding.horizontalScrollViewChipDistance.visibility = View.VISIBLE
                     replaceFragment(JobOfferListFragment())
                     true
                 }
                 R.id.menu_item_notifications -> {
+                    binding.horizontalScrollViewChipDistance.visibility = View.VISIBLE
                     Log.d(javaClass.simpleName, "Notifications is clicked")
                     true
                 }

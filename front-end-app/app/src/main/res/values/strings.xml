@@ -96,6 +96,16 @@
 
 
 
-
     <string name="mapbox_access_token">pk.eyJ1IjoiY29kZWNyYWZ0aW5nd2FycmlvciIsImEiOiJjbGdpNGd5aHYwZ2Z4M2RwZzRucGFlajF6In0.3efBYpHbBE22AIIQT6q1rg</string>
+    <string name="all">All</string>
+    <string name="_10_km">10 Km</string>
+    <string name="_20_km">20 Km</string>
+    <string name="_30_km">30 Km</string>
+    <string name="_40_km">40 Km</string>
+    <string name="_50_km">50 Km</string>
+    <string name="done">Done</string>
+    <string name="company">Company</string>
+    <string name="company_filter_hint">Choose a set of companies</string>
+    <string name="profession_filter_hint">Choose a set of professions</string>
+
 </resources>

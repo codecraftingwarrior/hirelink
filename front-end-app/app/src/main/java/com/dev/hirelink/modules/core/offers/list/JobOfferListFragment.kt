@@ -1,23 +1,38 @@
 package com.dev.hirelink.modules.core.offers.list
 
+import android.Manifest
+import android.annotation.SuppressLint
+import android.content.pm.PackageManager
+import android.location.Location
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dev.hirelink.R
 import com.dev.hirelink.components.HttpExceptionParser
+import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.FragmentJobOfferListBinding
 import com.dev.hirelink.dto.BasicErrorResponse
 import com.dev.hirelink.models.JobOffer
 import com.dev.hirelink.models.PaginatedResourceWrapper
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.BaseActivity
+import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.SupportMapFragment
+import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -29,10 +44,30 @@ class JobOfferListFragment : Fragment() {
     private lateinit var jobOfferItemAdapter: JobOfferItemAdapter
     private lateinit var binding: FragmentJobOfferListBinding
     private lateinit var jobOfferViewModel: JobOfferViewModel
+    private lateinit var jobOfferFilterViewModel: JobOfferFilterViewModel
     private lateinit var customLoadingOverlay: CustomLoadingOverlay
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private lateinit var recyclerView: RecyclerView
     private lateinit var jobOffers: MutableList<JobOffer?>
+    private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
+    private var locationPermissionGranted: Boolean = false;
+    private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2;
+    private lateinit var filterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
+    private var lastKnownLocation: Location? = null
+    private lateinit var sharedPrefs: SharedPreferenceManager
+    private var loaded = false
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted: Boolean ->
+            if (isGranted) {
+                locationPermissionGranted = true
+                fetchDeviceLocation()
+            } else {
+                Toast.makeText(requireContext(), "Permission refusée", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
     private var isLoading = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,6 +77,8 @@ class JobOfferListFragment : Fragment() {
             DataBindingUtil.inflate(inflater, R.layout.fragment_job_offer_list, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         jobOfferViewModel = (requireActivity() as BaseActivity).jobOfferViewModel
+        sharedPrefs = SharedPreferenceManager(requireContext())
+        jobOfferFilterViewModel = (requireActivity() as BaseActivity).jobOfferListfilterViewModel
         return binding.root
     }
 
@@ -53,13 +90,33 @@ class JobOfferListFragment : Fragment() {
             R.layout.loading_overlay_centered
         )
 
-        fetchJobOffers { data: PaginatedResourceWrapper<JobOffer> ->
-            jobOffers = data.items ?: mutableListOf()
-            paginatedResource = data
-            initRecyclerView()
-            initScrollListener()
-        }
+        fusedLocationProviderClient =
+            LocationServices.getFusedLocationProviderClient(requireActivity())
 
+        requestLocationPermission()
+
+        attachObservers()
+    }
+
+    private fun attachObservers() {
+        jobOfferFilterViewModel.criteria.observe(viewLifecycleOwner) {
+            filterCriteria = it
+
+            fetchJobOffers { data: PaginatedResourceWrapper<JobOffer> ->
+                jobOffers = data.items ?: mutableListOf()
+                paginatedResource = data
+
+                if (!loaded) {
+                    initRecyclerView()
+                    loaded = true
+                } else {
+                    isLoading = false
+                    jobOfferItemAdapter.dataset = jobOffers
+                    jobOfferItemAdapter.notifyDataSetChanged()
+                }
+
+            }
+        }
     }
 
     private fun initRecyclerView() {
@@ -68,6 +125,7 @@ class JobOfferListFragment : Fragment() {
         recyclerView.adapter = jobOfferItemAdapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
+        initScrollListener()
     }
 
     private fun fetchJobOffers(
@@ -77,11 +135,24 @@ class JobOfferListFragment : Fragment() {
         customLoadingOverlay.showLoading()
         val disposable = jobOfferViewModel
             .jobOfferRepository
-            .findAll(pageNumber = pageNumber)
+            .findAll(
+                pageNumber = pageNumber,
+                lat = filterCriteria.latitude,
+                lng = filterCriteria.longitude,
+                maxDistance = filterCriteria.maxDistance,
+                jobTitle = filterCriteria.jobTitle,
+                minSalary = filterCriteria.minSalary,
+                maxSalary = filterCriteria.maxSalary,
+                fromDate = filterCriteria.fromDate,
+                toDate = filterCriteria.toDate,
+                companyIDs = filterCriteria.chosenCompanyIds,
+                professionIDs = filterCriteria.chosenProfessionIds
+            )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .doFinally { customLoadingOverlay.hideLoading() }
             .subscribe(onDataReceived) { error: Throwable -> handleError(error) }
+
         compositeDisposable.add(disposable)
     }
 
@@ -95,8 +166,7 @@ class JobOfferListFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-
-                if (!isLoading && layoutManager.findLastCompletelyVisibleItemPosition() + recyclerView.childCount >= layoutManager.itemCount) {
+                if (!isLoading && layoutManager.findLastCompletelyVisibleItemPosition() == jobOffers.size - 1) {
                     loadMore()
                     isLoading = true
                 }
@@ -105,8 +175,11 @@ class JobOfferListFragment : Fragment() {
     }
 
     private fun loadMore() {
-        if (paginatedResource.paginationView?.nextItemLink == null)
+
+        if (paginatedResource.paginationView?.nextItemLink == null) {
+            isLoading = false
             return
+        }
 
         jobOffers.add(null)
         jobOfferItemAdapter.notifyItemInserted(jobOffers.size - 1)
@@ -161,6 +234,46 @@ class JobOfferListFragment : Fragment() {
                     getString(R.string.error_msg),
                     Snackbar.LENGTH_SHORT
                 ).show()
+            }
+        }
+    }
+
+
+    private fun requestLocationPermission() {
+        when {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) == PackageManager.PERMISSION_GRANTED -> {
+                locationPermissionGranted = true
+                fetchDeviceLocation()
+            }
+            shouldShowRequestPermissionRationale(Manifest.permission.ACCESS_FINE_LOCATION) -> {
+                // Afficher une boîte de dialogue pour expliquer à l'utilisateur pourquoi vous avez besoin de la permission
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Location permission")
+                    .setMessage("We need your location to show you nearby offers")
+                    .setPositiveButton("Ok") { _, _ ->
+                        requestPermissionLauncher.launch(
+                            Manifest.permission.ACCESS_FINE_LOCATION
+                        )
+                    }
+                    .setNegativeButton("Cancel", null)
+                    .show()
+            }
+            else -> {
+                requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
+            }
+        }
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun fetchDeviceLocation() {
+        val task: Task<Location> = fusedLocationProviderClient.lastLocation
+        task.addOnSuccessListener { location ->
+            if (location != null) {
+                lastKnownLocation = location
+                sharedPrefs.storeCoordinates(location.latitude, location.longitude)
             }
         }
     }

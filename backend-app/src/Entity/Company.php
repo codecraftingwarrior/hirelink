@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -18,6 +20,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new Get(),
+        new GetCollection(
+            paginationEnabled: true,
+            paginationItemsPerPage: 10,
+            paginationMaximumItemsPerPage: 10,
+            normalizationContext: ['groups' => ['company:read:filter']]
+        )
     ],
     normalizationContext: ['groups' => ['company:read']],
     denormalizationContext: ['groups' => ['company:writable']]
@@ -25,15 +33,22 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[UniqueEntity(fields: ['nationalUniqueNumber'], message: 'There is already a company with this national number.')]
 #[UniqueEntity(fields: ['mailAddress'], message: 'There is already a company with this mail address.')]
 #[UniqueEntity(fields: ['phoneNumber'], message: 'There is already a company with this phone number.')]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'name' => 'partial'
+    ]
+)]
 class Company extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['company:read:filter'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
-    #[Groups(['company:read', 'company:writable', 'company:first-write', 'company:read:name'])]
+    #[Groups(['company:read', 'company:writable', 'company:first-write', 'company:read:name', 'company:read:filter'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 80, nullable: true)]
