@@ -145,7 +145,8 @@ class JobOfferListFragment : Fragment() {
                 maxSalary = filterCriteria.maxSalary,
                 fromDate = filterCriteria.fromDate,
                 toDate = filterCriteria.toDate,
-                companyIDs = filterCriteria.chosenCompanyIds
+                companyIDs = filterCriteria.chosenCompanyIds,
+                professionIDs = filterCriteria.chosenProfessionIds
             )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())

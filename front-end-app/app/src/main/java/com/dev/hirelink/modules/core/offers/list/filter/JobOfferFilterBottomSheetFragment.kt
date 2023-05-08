@@ -11,14 +11,17 @@ import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import com.dev.hirelink.R
 import com.dev.hirelink.models.Company
+import com.dev.hirelink.models.Profession
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.offers.list.filter.company.CompanyFilterChooseFragment
+import com.dev.hirelink.modules.core.offers.list.filter.profession.ProfessionFilterChooseFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.util.*
 
 
 class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
+    private var chosenProfessions: MutableList<Profession?>? = mutableListOf()
     private var chosenCompanies: MutableList<Company?>? = mutableListOf()
     private lateinit var binding: com.dev.hirelink.databinding.FragmentBottomSheetFilterBinding
     private lateinit var criteria: JobOfferFilterViewModel.JobOfferFilterCriteria
@@ -64,8 +67,17 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
         filterViewModel.chosenCompanies.observe(viewLifecycleOwner) {
             binding.textViewEmployerFilterVal.text = it?.map { c -> c?.name }?.joinToString(", ")
             chosenCompanies = it
-            if(binding.textViewEmployerFilterVal.text.isNullOrEmpty())
+            if (binding.textViewEmployerFilterVal.text.isNullOrEmpty())
                 binding.textViewEmployerFilterVal.text = getString(R.string.company_filter_hint)
+        }
+
+        filterViewModel.chosenProfessions.observe(viewLifecycleOwner) {
+            binding.textViewProfessionFilterVal.text = it?.map { c -> c?.name }?.joinToString(", ")
+            Log.d(TAG, it.toString())
+            chosenProfessions = it
+            if (binding.textViewProfessionFilterVal.text.isNullOrEmpty())
+                binding.textViewProfessionFilterVal.text =
+                    getString(R.string.profession_filter_hint)
         }
     }
 
@@ -108,7 +120,7 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
             }
 
             criteria.chosenCompanyIds = chosenCompanies?.map { it?.id!! }
-
+            criteria.chosenProfessionIds = chosenProfessions?.map { it?.id!! }
 
             filterViewModel.updateCriteria(criteria)
             dismiss()
@@ -121,8 +133,17 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
             )
         }
 
+        binding.buttonModifyProfession.setOnClickListener {
+            (ProfessionFilterChooseFragment()).show(
+                childFragmentManager,
+                ProfessionFilterChooseFragment.TAG
+            )
+        }
+
+
         binding.rootConstraintLayoutJobOfferFilter.setOnClickListener {
-            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            val imm =
+                requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
 
             imm.hideSoftInputFromWindow(
                 binding.rootConstraintLayoutJobOfferFilter.windowToken,

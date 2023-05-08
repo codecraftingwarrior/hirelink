@@ -20,7 +20,8 @@ class JobOfferRepository(private val context: Context) {
         maxSalary: Float? = null,
         fromDate: String? = null,
         toDate: String? = null,
-        companyIDs: List<Int>? = null
+        companyIDs: List<Int>? = null,
+        professionIDs: List<Int>? = null
     ) = service.findAll(pageNumber,
         latitude = lat,
         longitude = lng,
@@ -30,6 +31,7 @@ class JobOfferRepository(private val context: Context) {
         maxSalary = maxSalary,
         fromDate = fromDate,
         toDate = toDate,
-        companyIDs = companyIDs
+        companyIDs = companyIDs,
+        professionIDs = professionIDs
     )
 }

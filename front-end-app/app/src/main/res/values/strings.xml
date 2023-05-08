@@ -89,5 +89,6 @@
     <string name="done">Done</string>
     <string name="company">Company</string>
     <string name="company_filter_hint">Choose a set of companies</string>
+    <string name="profession_filter_hint">Choose a set of professions</string>
 
 </resources>

@@ -19,7 +19,7 @@ security:
       security: false
 
     open_endpoints:
-      pattern: ^/api/(auth|roles|job-offers|companies)
+      pattern: ^/api/(auth|roles|job-offers|companies|professions)
       security: false
 
     roles_open:

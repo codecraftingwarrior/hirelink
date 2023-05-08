@@ -40,7 +40,8 @@ class BaseActivity : AppCompatActivity() {
     val jobOfferListfilterViewModel: JobOfferFilterViewModel by viewModels {
         JobOfferFilterViewModel.JobOfferFilterViewModelFactory(
             applicationContext,
-            (application as HirelinkApplication).companyRepository
+            (application as HirelinkApplication).companyRepository,
+            (application as HirelinkApplication).professionRepository
         )
     }
     val jobOfferViewModel: JobOfferViewModel by viewModels {

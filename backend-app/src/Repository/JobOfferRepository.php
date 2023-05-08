@@ -83,9 +83,9 @@ class JobOfferRepository extends ServiceEntityRepository
                 ->setParameter('companyIDs', $criteria['companyIDs']);
         }
 
-        if (isset($criteria['professionID']) && is_array($criteria['professionID'])) {
+        if (isset($criteria['professionIDs']) && is_array($criteria['professionIDs'])) {
             $qb->join('o.profession', 'p', Join::WITH, $qb->expr()->in('p.id', ':professionIDs'))
-                ->setParameter('professionIDs', $criteria['professionID']);
+                ->setParameter('professionIDs', $criteria['professionIDs']);
         }
 
         if (isset($criteria['minSalary'])) {
