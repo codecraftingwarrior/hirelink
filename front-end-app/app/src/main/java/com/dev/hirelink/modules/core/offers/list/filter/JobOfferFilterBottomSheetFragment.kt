@@ -1,23 +1,27 @@
 package com.dev.hirelink.modules.core.offers.list.filter
 
+import android.content.Context
 import android.icu.text.SimpleDateFormat
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import com.dev.hirelink.R
-import com.dev.hirelink.databinding.FragmentBottomSheetFilterBinding
+import com.dev.hirelink.models.Company
 import com.dev.hirelink.modules.core.BaseActivity
+import com.dev.hirelink.modules.core.offers.list.filter.company.CompanyFilterChooseFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.util.*
 
 
 class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
-    private lateinit var binding: FragmentBottomSheetFilterBinding
-    private var criteria = JobOfferFilterViewModel.JobOfferFilterCriteria()
+    private var chosenCompanies: MutableList<Company?>? = mutableListOf()
+    private lateinit var binding: com.dev.hirelink.databinding.FragmentBottomSheetFilterBinding
+    private lateinit var criteria: JobOfferFilterViewModel.JobOfferFilterCriteria
     private lateinit var filterViewModel: JobOfferFilterViewModel
 
 
@@ -33,6 +37,7 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
         )
 
         filterViewModel = (requireActivity() as BaseActivity).jobOfferListfilterViewModel
+        criteria = filterViewModel.getCriteria() ?: JobOfferFilterViewModel.JobOfferFilterCriteria()
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = filterViewModel
 
@@ -44,12 +49,23 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
 
         bindListener()
 
+        attachObservers()
+    }
+
+    private fun attachObservers() {
         filterViewModel.criteria.observe(viewLifecycleOwner) {
             binding.editTextStartDate.setText(it.fromDate)
             binding.editTextEndDate.setText(it.toDate)
-            binding.editTextMinSalary.setText(it.minSalary.toString())
-            binding.editTextMaxSalary.setText(it.maxSalary.toString())
+            binding.editTextMinSalary.setText(if (it.minSalary == null) "" else it.minSalary.toString())
+            binding.editTextMaxSalary.setText(if (it.maxSalary == null) "" else it.maxSalary.toString())
             this.criteria = it
+        }
+
+        filterViewModel.chosenCompanies.observe(viewLifecycleOwner) {
+            binding.textViewEmployerFilterVal.text = it?.map { c -> c?.name }?.joinToString(", ")
+            chosenCompanies = it
+            if(binding.textViewEmployerFilterVal.text.isNullOrEmpty())
+                binding.textViewEmployerFilterVal.text = getString(R.string.company_filter_hint)
         }
     }
 
@@ -58,7 +74,7 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
         binding.editTextStartDate.setOnClickListener {
             showDatePicker { selectedDate ->
                 val startDate =
-                    SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(Date(selectedDate))
+                    SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Date(selectedDate))
 
                 binding.editTextStartDate.setText(startDate)
                 criteria.fromDate = startDate
@@ -68,13 +84,50 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
         binding.editTextEndDate.setOnClickListener {
             showDatePicker { selectedDate ->
                 val endDate = SimpleDateFormat(
-                    "dd/MM/yyyy",
+                    "yyyy-MM-dd",
                     Locale.getDefault()
                 ).format(Date(selectedDate))
 
                 binding.editTextEndDate.setText(endDate)
                 criteria.toDate = endDate
             }
+        }
+
+        binding.buttonApply.setOnClickListener {
+
+            try {
+                criteria.minSalary = binding.editTextMinSalary.text?.toString()?.toFloat()
+            } catch (e: Exception) {
+                criteria.minSalary = null
+            }
+
+            try {
+                criteria.maxSalary = binding.editTextMaxSalary.text?.toString()?.toFloat()
+            } catch (e: Exception) {
+                criteria.maxSalary = null
+            }
+
+            criteria.chosenCompanyIds = chosenCompanies?.map { it?.id!! }
+
+
+            filterViewModel.updateCriteria(criteria)
+            dismiss()
+        }
+
+        binding.buttonModifyEmployer.setOnClickListener {
+            (CompanyFilterChooseFragment()).show(
+                childFragmentManager,
+                CompanyFilterChooseFragment.TAG
+            )
+        }
+
+        binding.rootConstraintLayoutJobOfferFilter.setOnClickListener {
+            val imm = requireContext().getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+
+            imm.hideSoftInputFromWindow(
+                binding.rootConstraintLayoutJobOfferFilter.windowToken,
+                0
+            )
         }
     }
 
@@ -91,11 +144,19 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
     override fun onStop() {
         super.onStop()
 
-        this.criteria.minSalary = binding.editTextMinSalary.text.toString().toFloat()
-        this.criteria.maxSalary = binding.editTextMaxSalary.text.toString().toFloat()
+        try {
+            this.criteria.minSalary = binding.editTextMinSalary.text.toString().toFloat()
+        } catch (e: Exception) {
+            this.criteria.minSalary = null
+        }
+
+        try {
+            this.criteria.maxSalary = binding.editTextMaxSalary.text.toString().toFloat()
+        } catch (e: Exception) {
+            this.criteria.maxSalary = null
+        }
 
         filterViewModel.updateCriteria(this.criteria)
-        Log.d(TAG, "saving ${this.criteria}")
     }
 
 

@@ -101,7 +101,6 @@ class JobOfferListFragment : Fragment() {
     private fun attachObservers() {
         jobOfferFilterViewModel.criteria.observe(viewLifecycleOwner) {
             filterCriteria = it
-            Log.d(javaClass.simpleName, filterCriteria.toString())
 
             fetchJobOffers { data: PaginatedResourceWrapper<JobOffer> ->
                 jobOffers = data.items ?: mutableListOf()
@@ -140,7 +139,13 @@ class JobOfferListFragment : Fragment() {
                 pageNumber = pageNumber,
                 lat = filterCriteria.latitude,
                 lng = filterCriteria.longitude,
-                maxDistance = filterCriteria.maxDistance
+                maxDistance = filterCriteria.maxDistance,
+                jobTitle = filterCriteria.jobTitle,
+                minSalary = filterCriteria.minSalary,
+                maxSalary = filterCriteria.maxSalary,
+                fromDate = filterCriteria.fromDate,
+                toDate = filterCriteria.toDate,
+                companyIDs = filterCriteria.chosenCompanyIds
             )
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -160,7 +165,6 @@ class JobOfferListFragment : Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                Log.d(javaClass.simpleName, "Loading $isLoading")
                 if (!isLoading && layoutManager.findLastCompletelyVisibleItemPosition() == jobOffers.size - 1) {
                     loadMore()
                     isLoading = true
@@ -170,10 +174,11 @@ class JobOfferListFragment : Fragment() {
     }
 
     private fun loadMore() {
-        Log.d(javaClass.simpleName, "loading more")
 
-        if (paginatedResource.paginationView?.nextItemLink == null)
+        if (paginatedResource.paginationView?.nextItemLink == null) {
+            isLoading = false
             return
+        }
 
         jobOffers.add(null)
         jobOfferItemAdapter.notifyItemInserted(jobOffers.size - 1)

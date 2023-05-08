@@ -4,12 +4,13 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.dev.hirelink.HirelinkApplication
@@ -17,7 +18,6 @@ import com.dev.hirelink.R
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityBaseBinding
 import com.dev.hirelink.modules.auth.login.LoginActivity
-import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
 import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
 import com.dev.hirelink.modules.core.offers.list.JobOfferViewModel
@@ -27,16 +27,21 @@ import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
 import com.dev.hirelink.network.auth.AuthRepository
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.internal.ViewUtils.hideKeyboard
 import io.reactivex.disposables.CompositeDisposable
 
 class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
     private val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    private lateinit var jobOfferFilterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
     private var isLoggedIn = false
     private lateinit var sharedPrefs: SharedPreferenceManager
     val jobOfferListfilterViewModel: JobOfferFilterViewModel by viewModels {
-        JobOfferFilterViewModel.JobOfferFilterViewModelFactory(applicationContext)
+        JobOfferFilterViewModel.JobOfferFilterViewModelFactory(
+            applicationContext,
+            (application as HirelinkApplication).companyRepository
+        )
     }
     val jobOfferViewModel: JobOfferViewModel by viewModels {
         JobOfferViewModel.JobOfferViewModelFactory(
@@ -57,7 +62,12 @@ class BaseActivity : AppCompatActivity() {
 
         setupNavigationBar();
         bindListeners()
-        jobOfferListfilterViewModel.updateCriteria(JobOfferFilterViewModel.JobOfferFilterCriteria())
+
+        //binding.chipAll.isChecked = true
+
+        jobOfferFilterCriteria = jobOfferListfilterViewModel.getCriteria()
+
+        jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
     }
 
     private fun fetchCurrentUser() {
@@ -111,10 +121,34 @@ class BaseActivity : AppCompatActivity() {
             fetchClosestOffers(chipGroup)
         }
 
+        setupSearchField()
+
+    }
+
+    private fun setupSearchField() {
+        val watcher = object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+
+            override fun afterTextChanged(p0: Editable?) {}
+
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                if (s == null || s.isEmpty()) {
+                    jobOfferFilterCriteria.jobTitle = null
+                    jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
+                } else if (s.length >= 4) {
+                    jobOfferFilterCriteria.jobTitle = s.toString()
+                    jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
+                }
+
+            }
+        }
+
+        binding.editTextJobOfferListSearch.addTextChangedListener(watcher)
     }
 
     private fun fetchClosestOffers(chipGroup: ChipGroup) {
-        val maxDistance = when (findViewById<Chip>(chipGroup.checkedChipId).text.toString()) {
+        val currentCheckedChipId = findViewById<Chip>(chipGroup.checkedChipId)
+        val maxDistance = when (currentCheckedChipId?.text.toString()) {
             getString(R.string._10_km) -> 10
             getString(R.string._20_km) -> 20
             getString(R.string._30_km) -> 30
@@ -122,15 +156,18 @@ class BaseActivity : AppCompatActivity() {
             getString(R.string._50_km) -> 50
             else -> null
         }
-        val criteria = JobOfferFilterViewModel.JobOfferFilterCriteria()
 
         if (maxDistance != null) {
-            criteria.latitude = sharedPrefs.deviceLatitude()
-            criteria.longitude = sharedPrefs.deviceLongitude()
-            criteria.maxDistance = maxDistance.toDouble()
+            jobOfferFilterCriteria.latitude = sharedPrefs.deviceLatitude()
+            jobOfferFilterCriteria.longitude = sharedPrefs.deviceLongitude()
+            jobOfferFilterCriteria.maxDistance = maxDistance.toDouble()
+        } else {
+            jobOfferFilterCriteria.latitude = null
+            jobOfferFilterCriteria.longitude = null
+            jobOfferFilterCriteria.maxDistance = null
         }
 
-        jobOfferListfilterViewModel.updateCriteria(criteria)
+        jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
     }
 
     private fun setupNavigationBar() {

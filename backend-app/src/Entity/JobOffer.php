@@ -12,7 +12,7 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Controller\FindClosestOfferController;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobOfferRepository;
-use App\State\ClosestJobOfferStateProvider;
+use App\State\JobOfferListStateProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -27,7 +27,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             paginationItemsPerPage: 5,
             paginationMaximumItemsPerPage: 5,
             normalizationContext: ['groups' => ['job-offer:read-collection', 'company:read:name']],
-            provider: ClosestJobOfferStateProvider::class
+            provider: JobOfferListStateProvider::class
         ),
         new Get()
     ],

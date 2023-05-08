@@ -84,9 +84,10 @@
                >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_job_offer_list_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -118,14 +119,14 @@
                     app:singleLine="true"
                     >
 
-                    <com.google.android.material.chip.Chip
+                    <!--<com.google.android.material.chip.Chip
                         android:id="@+id/chip_all"
                         style="@style/Widget.MaterialComponents.Chip.Choice"
                         android:layout_width="70dp"
                         android:layout_height="wrap_content"
                         android:textAlignment="center"
                         android:checked="true"
-                        android:text="@string/all"/>
+                        android:text="@string/all"/>-->
 
                     <com.google.android.material.chip.Chip
                         android:id="@+id/chip_10km"

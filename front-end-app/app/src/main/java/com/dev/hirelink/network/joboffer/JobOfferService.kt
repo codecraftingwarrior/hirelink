@@ -13,6 +13,12 @@ interface JobOfferService {
         @Query("page") pageNumber: Int = 1,
         @Query("latitude") latitude: Double? = null,
         @Query("longitude") longitude: Double? = null,
-        @Query("maxDistance") maxDistance: Double? = null
+        @Query("maxDistance") maxDistance: Double? = null,
+        @Query("jobTitle") jobTitle: String? = null,
+        @Query("minSalary") minSalary: Float? = null,
+        @Query("maxSalary") maxSalary: Float? = null,
+        @Query("fromDate") fromDate: String? = null,
+        @Query("toDate") toDate: String? = null,
+        @Query("companyIDs[]") companyIDs: List<Int>? = null
     ): Single<PaginatedResourceWrapper<JobOffer>>
 }

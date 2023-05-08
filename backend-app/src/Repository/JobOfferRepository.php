@@ -53,12 +53,20 @@ class JobOfferRepository extends ServiceEntityRepository
         $firstResult = ($page - 1) * JOB_OFFER_ITEM_PER_PAGE;
         $qb = $this->createQueryBuilder('o');
 
-        $qb1 = $this->createQueryBuilder('o1');
 
         $qb->select('o');
 
-        if (isset($criteria['latitude']) && isset($criteria['longitude']) && isset($criteria['maxDistance'])) {
+        if(isset($criteria['jobTitle'])) {
             $qb->where(
+                $qb->expr()->like(
+                    'o.title',
+                    ':jobTitle'
+                )
+            )->setParameter('jobTitle', "%{$criteria['jobTitle']}%");
+        }
+
+        if (isset($criteria['latitude']) && isset($criteria['longitude']) && isset($criteria['maxDistance'])) {
+            $qb->andWhere(
                 $qb->expr()->lte(
                     'ROUND(DISTANCE(:latitude, :longitude, o.lat, o.lng)) * 1.609344',
                     ':maxDistance'
@@ -68,11 +76,11 @@ class JobOfferRepository extends ServiceEntityRepository
                 ->setParameter('maxDistance', $criteria['maxDistance']);
         }
 
-        if (isset($criteria['companyID']) && is_array($criteria['companyID'])) {
+        if (isset($criteria['companyIDs']) && is_array($criteria['companyIDs'])) {
             $qb
                 ->join('o.owner', 'u')
                 ->join('u.company', 'c', Join::WITH, $qb->expr()->in('c.id', ':companyIDs'))
-                ->setParameter('companyIDs', $criteria['companyID']);
+                ->setParameter('companyIDs', $criteria['companyIDs']);
         }
 
         if (isset($criteria['professionID']) && is_array($criteria['professionID'])) {
@@ -80,16 +88,16 @@ class JobOfferRepository extends ServiceEntityRepository
                 ->setParameter('professionIDs', $criteria['professionID']);
         }
 
-        if (isset($criteria['minSalary']) && is_numeric($criteria['minSalary'])) {
+        if (isset($criteria['minSalary'])) {
             $qb
                 ->andWhere('o.minSalary >= :minSalary')
                 ->setParameter('minSalary', $criteria['minSalary']);
         }
 
-        if (isset($criteria['maxSalary']) && is_numeric($criteria['maxSalary'])) {
+        if (isset($criteria['maxSalary'])) {
             $qb
                 ->andWhere(
-                    $qb->expr()->gte('o.maxSalary', ':maxSalary')
+                    $qb->expr()->lte('o.maxSalary', ':maxSalary')
                 )->setParameter('maxSalary', $criteria['maxSalary']);
         }
 

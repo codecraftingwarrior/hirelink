@@ -8,7 +8,7 @@ use App\Repository\JobOfferRepository;
 use Doctrine\ORM\Query\QueryException;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class ClosestJobOfferStateProvider implements ProviderInterface
+class JobOfferListStateProvider implements ProviderInterface
 {
 
     public function __construct(
