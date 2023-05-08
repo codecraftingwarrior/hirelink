@@ -77,6 +77,23 @@
     <string name="employer">Employer</string>
     <string name="date_select_prompt">Choose a date</string>
     <string name="national_unique_number">National unique number</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="put_in_category">Put in a category</string>
+    <string name="add_category">Add a category</string>
+    <string name="accept">Accept</string>
+    <string name="refuse">Refuse</string>
+    <string name="block">Block</string>
+    <string name="report">Report</string>
+    <string name="see_your_plan">See your plan</string>
+    <string name="add_credit_card">Add a credit card</string>
+    <string name="call">Call</string>
+    <string name="send_msg">Message</string>
+    <string name="send_email">Email</string>
+    <string name="cover_letter">Cover letter</string>
+    <string name="cv">Curriculum vitae</string>
+
+
 
 
     <string name="mapbox_access_token">pk.eyJ1IjoiY29kZWNyYWZ0aW5nd2FycmlvciIsImEiOiJjbGdpNGd5aHYwZ2Z4M2RwZzRucGFlajF6In0.3efBYpHbBE22AIIQT6q1rg</string>
