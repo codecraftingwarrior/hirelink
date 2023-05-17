@@ -14,7 +14,7 @@ class ProfessionFixture extends Fixture implements FixtureGroupInterface
 
     public function load(ObjectManager $manager): void
     {
-        $faker = Factory::create('fr_FR');
+        $faker = Factory::create();
 
         for ($i = 0; $i < 20; $i++) {
             $ref = md5(microtime());

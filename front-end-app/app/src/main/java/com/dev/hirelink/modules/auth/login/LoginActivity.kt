@@ -151,6 +151,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleError(error: Throwable) {
+        customLoadingOverlay.hideLoading()
         when (error) {
             is HttpException -> {
                 try {

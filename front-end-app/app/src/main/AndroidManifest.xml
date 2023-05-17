@@ -45,6 +45,7 @@
             android:exported="false" />
         <activity
             android:name=".modules.core.BaseActivity"
+            android:windowSoftInputMode="adjustResize"
             android:exported="false" />
         <activity
             android:name=".modules.common.PageNotFoundActivity"

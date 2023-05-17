@@ -9,9 +9,11 @@ import com.dev.hirelink.modules.auth.viewmodel.AuthViewModelFactory
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.network.auth.AuthRepository
 import com.dev.hirelink.network.bankinformation.BankInformationRepository
+import com.dev.hirelink.network.company.CompanyRepository
 import com.dev.hirelink.network.joboffer.JobOfferRepository
 import com.dev.hirelink.network.paymentinformation.PaymentInformationRepository
 import com.dev.hirelink.network.plan.PlanRepository
+import com.dev.hirelink.network.profession.ProfessionRepository
 import com.dev.hirelink.network.role.RoleRepository
 import com.dev.hirelink.network.user.UserRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -25,6 +27,8 @@ class HirelinkApplication : Application() {
     val userRepository: UserRepository by lazy { UserRepository(applicationContext) }
     val planRepository: PlanRepository by lazy { PlanRepository(applicationContext) }
     val jobOfferRepository: JobOfferRepository by lazy { JobOfferRepository(applicationContext) }
+    val companyRepository: CompanyRepository by lazy { CompanyRepository(applicationContext) }
+    val professionRepository: ProfessionRepository by lazy { ProfessionRepository(applicationContext) }
     val bankInformationRepository: BankInformationRepository by lazy {
         BankInformationRepository(
             applicationContext

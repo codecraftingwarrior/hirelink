@@ -16,7 +16,7 @@ import com.dev.hirelink.models.JobOffer
 
 class JobOfferItemAdapter(
     val context: Context,
-    private val dataset: MutableList<JobOffer?>?
+    var dataset: MutableList<JobOffer?>?
 ) : Adapter<ViewHolder>() {
 
     private val VIEW_TYPE_ITEM = 0
