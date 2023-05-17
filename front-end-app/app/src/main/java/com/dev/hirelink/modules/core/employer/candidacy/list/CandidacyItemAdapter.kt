@@ -35,7 +35,7 @@ class CandidacyItemAdapter : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_candidacy_item_adapter, container, false)
+            return inflater.inflate(R.layout.fragment_candidacy_list, container, false)
     }
 
     companion object {

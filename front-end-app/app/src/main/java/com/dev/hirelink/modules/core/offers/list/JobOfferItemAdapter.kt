@@ -1,26 +1,39 @@
 package com.dev.hirelink.modules.core.offers.list
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatButton
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.Adapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import com.dev.hirelink.R
 import com.dev.hirelink.components.toTimeAgo
+import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.models.JobOffer
+import com.dev.hirelink.modules.core.BaseActivity
+import com.dev.hirelink.modules.core.jobapplication.create.JobApplicationCreateFragment
 
 
 class JobOfferItemAdapter(
     val context: Context,
     var dataset: MutableList<JobOffer?>?
 ) : Adapter<ViewHolder>() {
-
+    private lateinit var currentUser: ApplicationUser
     private val VIEW_TYPE_ITEM = 0
     private val VIEW_TYPE_LOADING = 1
+
+    override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
+        super.onAttachedToRecyclerView(recyclerView)
+
+        currentUser = (context as BaseActivity).currentUser
+    }
 
     class JobOfferItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val logo: ImageView =
@@ -33,6 +46,7 @@ class JobOfferItemAdapter(
         private val location: TextView = view.findViewById(com.dev.hirelink.R.id.text_view_location)
         private val timeagoText: TextView =
             view.findViewById(com.dev.hirelink.R.id.text_view_timeago)
+        val buttonApply: Button = view.findViewById(R.id.button_apply_offer)
 
         fun bind(jobOffer: JobOffer) {
             companyName.text = jobOffer.owner?.company?.name ?: "unknown"
@@ -52,12 +66,23 @@ class JobOfferItemAdapter(
             val adapterLayout = LayoutInflater
                 .from(parent.context)
                 .inflate(com.dev.hirelink.R.layout.row_offer_list_item, parent, false)
-
+            bindListeners(adapterLayout)
             return JobOfferItemViewHolder(adapterLayout)
         }
         val view: View =
-            LayoutInflater.from(parent.context).inflate(com.dev.hirelink.R.layout.loading_item_row, parent, false)
+            LayoutInflater.from(parent.context)
+                .inflate(com.dev.hirelink.R.layout.loading_item_row, parent, false)
+
         return LoadingViewHolder(view)
+    }
+
+    private fun bindListeners(view: View) {
+        view.findViewById<AppCompatButton>(R.id.button_apply_offer)?.setOnClickListener {
+            (JobApplicationCreateFragment()).show(
+                (context as BaseActivity).supportFragmentManager,
+                JobApplicationCreateFragment.TAG
+            )
+        }
     }
 
     override fun getItemCount(): Int = dataset?.size ?: 0
@@ -77,8 +102,10 @@ class JobOfferItemAdapter(
 
     private class LoadingViewHolder(itemView: View) : ViewHolder(itemView) {
         var progressBar: ProgressBar
+
         init {
-            progressBar = itemView.findViewById(com.dev.hirelink.R.id.item_circular_progress_indicator)
+            progressBar =
+                itemView.findViewById(com.dev.hirelink.R.id.item_circular_progress_indicator)
         }
     }
 

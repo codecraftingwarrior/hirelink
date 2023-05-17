@@ -17,6 +17,7 @@ import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityBaseBinding
+import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.modules.auth.login.LoginActivity
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
 import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
@@ -34,6 +35,7 @@ class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
     private val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
+    lateinit var currentUser: ApplicationUser
     private lateinit var jobOfferFilterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
     private var isLoggedIn = false
     private lateinit var sharedPrefs: SharedPreferenceManager
@@ -75,6 +77,7 @@ class BaseActivity : AppCompatActivity() {
         val disposable = authRepository
             .currentUser
             .subscribe { applicationUser ->
+                currentUser = applicationUser ?: ApplicationUser()
                 isLoggedIn = applicationUser?.id != null
                 if (isLoggedIn) {
                     binding.imgBtnProfile.visibility = View.VISIBLE
