@@ -158,7 +158,7 @@
                 />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_login"
+                android:id="@+id/button_apply_offer"
                 style="@style/AppButtonIndigoApplyRounded"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
