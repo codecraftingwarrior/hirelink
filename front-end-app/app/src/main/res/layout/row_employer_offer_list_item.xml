@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+
+<data>
+
+</data>
+
+<com.google.android.material.card.MaterialCardView
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:cardElevation="5dp"
+    style="?attr/materialCardViewElevatedStyle"
+    app:cardCornerRadius="10dp"
+    app:rippleColor="@color/gray_app"
+    android:layout_marginTop="25dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="26dp"
+    android:layout_marginEnd="26dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:checkable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/root_constraint_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="13dp">
+
+        <TextView
+            android:id="@+id/job_title"
+            style="@style/OfferListItemStyleHeader"
+            android:layout_width="205dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:letterSpacing="0.05"
+            android:lineSpacingExtra="@dimen/_9pxh"
+            android:singleLine="true"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="13dp"
+            tools:text="Job Title" />
+
+        <ImageView
+            android:id="@+id/icon_salary"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="20dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/dollar_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/job_title"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/dollar_icon" />
+
+        <TextView
+            android:id="@+id/text_view_salary_range"
+            style="@style/AppOfferTextRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:letterSpacing="0.08"
+            android:lineSpacingExtra="@dimen/_7pxh"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@id/icon_salary"
+            app:layout_constraintStart_toEndOf="@id/icon_salary"
+            app:layout_constraintTop_toTopOf="@id/icon_salary"
+            tools:text="4.500 - 2.000" />
+
+        <ImageView
+            android:id="@+id/icon_location"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginTop="14dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/gray_location_icon"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_salary"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/gray_location_icon" />
+
+        <TextView
+            android:id="@+id/text_view_location"
+            style="@style/AppOfferTextRegular"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:letterSpacing="0.08"
+            android:lineSpacingExtra="@dimen/_7pxh"
+            android:singleLine="true"
+            app:layout_constraintBottom_toBottomOf="@id/icon_location"
+            app:layout_constraintStart_toEndOf="@id/icon_location"
+            app:layout_constraintTop_toTopOf="@id/icon_location"
+            tools:text="Tulum, Mexico" />
+
+        <TextView
+            android:id="@+id/text_view_timeago"
+            style="@style/AppOfferTextRegular"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="20dp"
+            android:letterSpacing="0.08"
+            android:lineSpacingExtra="@dimen/_7pxh"
+            android:singleLine="true"
+            android:text="4 Days ago"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_location"
+            tools:text="4 Days ago" />
+
+        <ImageButton
+            android:id="@+id/image_view_more_arrow"
+            android:layout_width="@dimen/_30pxh"
+            android:layout_height="@dimen/_30pxh"
+            android:background="@android:color/transparent"
+            android:scaleType="fitXY"
+            android:src="@drawable/bookmark_icon"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/logo_chevron" />
+
+        <TextView
+            android:id="@+id/numberTextView"
+            android:layout_width="@dimen/_30pxh"
+            android:layout_height="@dimen/_30pxh"
+            android:background="@drawable/back_ground_circle_icon"
+            android:backgroundTint="@color/indigo_main"
+            android:gravity="center"
+            android:text="5"
+            android:fontFamily="@font/poppins"
+            android:textFontWeight="500"
+            android:textColor="@color/indigo_main"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
+</layout>

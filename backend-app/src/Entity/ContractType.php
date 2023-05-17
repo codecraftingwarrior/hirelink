@@ -2,10 +2,21 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
 use App\Repository\ContractTypeRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ContractTypeRepository::class)]
+#[ApiResource(
+    operations:[
+        new Get()
+    ],
+    normalizationContext: ['groups' => ['contract-type:read']]
+)]
+
 class ContractType
 {
     #[ORM\Id]
@@ -14,9 +25,11 @@ class ContractType
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['contract-type:read'])]
     private ?string $code = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['contract-type:read'])]
     private ?string $name = null;
 
     public function getId(): ?int

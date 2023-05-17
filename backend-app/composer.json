@@ -7,11 +7,14 @@
         "php": ">=8.1",
         "ext-ctype": "*",
         "ext-iconv": "*",
+        "alexandret/doctrine2-spatial": "^1.2",
         "api-platform/core": "^3.1",
+        "beberlei/doctrineextensions": "dev-master",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.9",
         "doctrine/doctrine-migrations-bundle": "^3.2",
         "doctrine/orm": "^2.14",
+        "fakerphp/faker": "^1.21",
         "lexik/jwt-authentication-bundle": "^2.18",
         "nelmio/cors-bundle": "^2.3",
         "phpdocumentor/reflection-docblock": "^5.3",
@@ -84,6 +87,11 @@
         }
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.48"
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
+        "symfony/debug-bundle": "6.2.*",
+        "symfony/maker-bundle": "^1.48",
+        "symfony/stopwatch": "6.2.*",
+        "symfony/var-dumper": "6.2.*",
+        "symfony/web-profiler-bundle": "6.2.*"
     }
 }

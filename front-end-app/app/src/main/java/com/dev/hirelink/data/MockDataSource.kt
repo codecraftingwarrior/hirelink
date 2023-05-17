@@ -1,10 +1,7 @@
 package com.dev.hirelink.data
 
 import com.dev.hirelink.enums.JobApplicationState
-import com.dev.hirelink.models.ApplicationUser
-import com.dev.hirelink.models.JobApplication
-import com.dev.hirelink.models.JobOffer
-import com.dev.hirelink.models.Plan
+import com.dev.hirelink.models.*
 
 class MockDataSource {
     fun loadPlans(): List<Plan> {
@@ -60,7 +57,7 @@ class MockDataSource {
                 id = 1,
                 title = "Cleaning Agent",
                 description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                salary = 45000.0f,
+                maxSalary = 45000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
                 address = "6648 Shantae Brooks",
@@ -72,7 +69,7 @@ class MockDataSource {
                 id = 2,
                 title = "Machine Learning Engineer",
                 description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                salary = 85000.0f,
+                maxSalary = 85000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
                 address = "6648 Shantae Brooks",
@@ -84,7 +81,7 @@ class MockDataSource {
                 id = 3,
                 title = "Software Engineer",
                 description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                salary = 65000.0f,
+                maxSalary = 65000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
                 address = "6648 Shantae Brooks",
@@ -96,7 +93,7 @@ class MockDataSource {
                 id = 4,
                 title = "Cleaning Agent",
                 description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                salary = 45000.0f,
+                maxSalary = 45000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
                 address = "6648 Shantae Brooks",
@@ -108,7 +105,7 @@ class MockDataSource {
                 id = 5,
                 title = "UI/UX Designer",
                 description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                salary = 105000.0f,
+                maxSalary = 105000.0f,
                 fromDate = "10/10/2023",
                 toDate = "10/10/2024",
                 address = "6648 Shantae Brooks",
@@ -127,7 +124,7 @@ class MockDataSource {
                     id = 1,
                     title = "Cleaning Agent",
                     description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                    salary = 45000.0f,
+                    maxSalary = 45000.0f,
                     fromDate = "10/10/2023",
                     toDate = "10/10/2024",
                     address = "6648 Shantae Brooks",
@@ -144,7 +141,7 @@ class MockDataSource {
                     id = 2,
                     title = "Machine Learning Engineer",
                     description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                    salary = 85000.0f,
+                    maxSalary = 85000.0f,
                     fromDate = "10/10/2023",
                     toDate = "10/10/2024",
                     address = "6648 Shantae Brooks",
@@ -161,7 +158,7 @@ class MockDataSource {
                     id = 3,
                     title = "Software Engineer",
                     description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                    salary = 65000.0f,
+                    maxSalary = 65000.0f,
                     fromDate = "10/10/2023",
                     toDate = "10/10/2024",
                     address = "6648 Shantae Brooks",
@@ -178,7 +175,7 @@ class MockDataSource {
                     id = 5,
                     title = "UI/UX Designer",
                     description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                    salary = 105000.0f,
+                    maxSalary = 105000.0f,
                     fromDate = "10/10/2023",
                     toDate = "10/10/2024",
                     address = "6648 Shantae Brooks",
@@ -195,7 +192,7 @@ class MockDataSource {
                     id = 1,
                     title = "Cleaning Agent",
                     description = "Nunc ut viverra ac massa agam tincidunt tritani. Vero audire sumo curae corrumpit possim etiam tritani.",
-                    salary = 45000.0f,
+                    maxSalary = 45000.0f,
                     fromDate = "10/10/2023",
                     toDate = "10/10/2024",
                     address = "6648 Shantae Brooks",
@@ -206,6 +203,32 @@ class MockDataSource {
                 applicant = ApplicationUser(id = 1),
                 state = JobApplicationState.PENDING.name
             ),
+        )
+    }
+
+    fun loadCompanies(): MutableList<Company> {
+        return mutableListOf(
+            Company(
+                id = 1,
+                name = "Amazon",
+                mailAddress = "amazon@amzon.fr"
+            ),
+            Company(
+                id = 2,
+                name = "Google"
+            ),
+            Company(
+                id = 3,
+                name = "Facebook"
+            ),
+            Company(
+                id = 5,
+                name = "Grill House"
+            ),
+            Company(
+                id = 6,
+                name = "Atos"
+            )
         )
     }
 }

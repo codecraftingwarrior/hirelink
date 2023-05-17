@@ -8,7 +8,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_constraint_layout"
+        android:id="@+id/root_constraint_layout_activity_base"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
@@ -45,8 +45,25 @@
                 android:src="@drawable/profil_icon"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                android:visibility="gone"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/profil_icon" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/button_login"
+                style="@style/AppButtonIndigoRounded"
+                android:layout_width="90dp"
+                android:layout_height="30dp"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:letterSpacing="0.05"
+                android:lineSpacingExtra="@dimen/_9pxh"
+                android:singleLine="true"
+                android:text="@string/login"
+                android:textAllCaps="false"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/text_field_search"
@@ -67,9 +84,10 @@
                >
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/edit_text_job_offer_list_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword" />
+                    android:inputType="text" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <Button
@@ -84,10 +102,78 @@
                 app:layout_constraintStart_toEndOf="@id/text_field_search"
                 app:icon="@drawable/filter_search_icon" />
 
+            <HorizontalScrollView
+                android:id="@+id/horizontal_scroll_view_chip_distance"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:scrollbars="none"
+                app:layout_constraintTop_toBottomOf="@id/img_btn_filter"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <com.google.android.material.chip.ChipGroup
+                    android:id="@+id/chip_group_distance_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:singleSelection="true"
+                    app:singleLine="true"
+                    >
+
+                    <!--<com.google.android.material.chip.Chip
+                        android:id="@+id/chip_all"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:checked="true"
+                        android:text="@string/all"/>-->
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_10km"
+                        android:layout_width="70dp"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="@string/_10_km"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_20km"
+                        android:layout_width="70dp"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="@string/_20_km"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_30km"
+                        android:layout_width="70dp"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="@string/_30_km"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_40km"
+                        android:layout_width="70dp"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="@string/_40_km"/>
+
+                    <com.google.android.material.chip.Chip
+                        android:id="@+id/chip_50km"
+                        android:layout_width="70dp"
+                        style="@style/Widget.MaterialComponents.Chip.Choice"
+                        android:layout_height="wrap_content"
+                        android:textAlignment="center"
+                        android:text="@string/_50_km"/>
+
+                </com.google.android.material.chip.ChipGroup>
+            </HorizontalScrollView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
-            android:id="@+id/register_activity_fragment_container"
+            android:id="@+id/base_activity_fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:orientation="vertical"

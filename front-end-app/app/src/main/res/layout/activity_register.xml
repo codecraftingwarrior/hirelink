@@ -15,7 +15,7 @@
         tools:context=".modules.auth.register.RegisterActivity">
 
         <androidx.appcompat.widget.LinearLayoutCompat
-            android:id="@+id/root_linear_layout"
+            android:id="@+id/root_linear_layout_register"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -24,7 +24,7 @@
                 android:id="@+id/custom_action_bar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="50dp"
+                android:layout_marginBottom="30dp"
                 android:layout_marginTop="15dp">
 
                 <ImageButton

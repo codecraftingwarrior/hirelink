@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+tools:context=".modules.core.employer.CandidacyActivity">
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/search_header"
+    android:background="@drawable/rectangle_bg_gray"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintStart_toEndOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
+    android:padding="14dp"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageButton
+        android:id="@+id/img_btn_arrow_left"
+        android:layout_width="@dimen/_25pxh"
+        android:layout_height="@dimen/_25pxh"
+        android:layout_marginTop="6dp"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/next_arrow_left_description"
+        android:scaleType="fitXY"
+        android:src="@drawable/next_arrow_left_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/next_arrow_left_icon" />
+
+    <ImageView
+        android:id="@+id/image_view_hire_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="14dp"
+        android:layout_marginTop="4dp"
+        android:src="@drawable/hirelink_logo"
+        app:layout_constraintStart_toEndOf="@+id/img_btn_arrow_left"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/hirelink_logo" />
+
+    <ImageButton
+        android:id="@+id/img_btn_profile"
+        android:layout_width="@dimen/_35pxh"
+        android:layout_height="@dimen/_35pxh"
+        android:scaleType="fitXY"
+        android:background="@android:color/transparent"
+        android:layout_marginEnd="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="ContentDescription"
+        tools:src="@drawable/profil_icon" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<FrameLayout
+    android:id="@+id/candidacy_activity_fragment_container"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/search_header" >
+</FrameLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.dev.hirelink.modules.core.sheets.offerlist.JobOfferFilterViewModel" />
+            type="com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel" />
     </data>
 
     <androidx.core.widget.NestedScrollView
@@ -13,6 +13,7 @@
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_constraint_layout_job_offer_filter"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/rectange_bg_gray_rounded_top"
@@ -73,8 +74,9 @@
                         android:layout_marginTop="1dp"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/text_view_employer"
+                        android:singleLine="true"
                         style="@style/AppTextRegularIndigo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="280dp"
                         android:layout_height="wrap_content" />
 
                     <Button
@@ -124,7 +126,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/text_view_profession"
                         style="@style/AppTextRegularIndigo"
-                        android:layout_width="wrap_content"
+                        android:layout_width="280dp"
                         android:layout_height="wrap_content" />
 
                     <Button
@@ -139,54 +141,6 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/text_view_profession"
                         app:layout_constraintBottom_toBottomOf="@id/text_view_profession_filter_val"
-                        />
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <com.google.android.material.divider.MaterialDivider
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="7dp"
-                    app:dividerInsetStart="0dp"
-                    app:dividerInsetEnd="0dp"/>
-
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_marginTop="25dp"
-                    android:id="@+id/constraint_layout_localisation_filter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" >
-
-                    <TextView
-                        android:id="@+id/text_view_localisation"
-                        style="@style/AppTextSemiBoldBlack"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        android:text="Localisation" />
-
-                    <TextView
-                        android:id="@+id/text_view_localisation_filter_val"
-                        android:text="Tulum, Mexico"
-                        android:layout_marginTop="1dp"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/text_view_localisation"
-                        style="@style/AppTextRegularIndigo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-
-                    <Button
-                        android:id="@+id/button_modify_localisation"
-                        style="@style/Widget.MaterialComponents.Button.TextButton"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textColor="#797979"
-                        android:text="Modify"
-                        android:textAllCaps="false"
-                        android:fontFamily="@font/poppins"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintTop_toTopOf="@id/text_view_localisation"
-                        app:layout_constraintBottom_toBottomOf="@id/text_view_localisation_filter_val"
                         />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>

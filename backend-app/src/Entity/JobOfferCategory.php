@@ -2,13 +2,22 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobOfferCategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: JobOfferCategoryRepository::class)]
+#[ApiResource(
+    operations:[
+        new Get()
+    ],
+    normalizationContext: ['groups' => ['job-offer-category:read']]
+)]
 class JobOfferCategory extends TrackableEntity
 {
     #[ORM\Id]
@@ -17,6 +26,7 @@ class JobOfferCategory extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['job-offer-category:read'])]
     private ?string $name = null;
 
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: JobOffer::class)]

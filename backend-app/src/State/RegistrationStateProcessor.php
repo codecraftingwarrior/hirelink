@@ -94,11 +94,12 @@ class RegistrationStateProcessor implements ProcessorInterface
                 'otpCode' => $otp,
             ]);
 
-        /*try {
+        try {
             $this->mailer->send($email);
         } catch (TransportExceptionInterface $e) {
-            throw new UnprocessableEntityHttpException('An error occurred while sending the verification code by email.');
-        }*/
+
+            throw $e;
+        }
 
         $this->applicationUserRepository->save($user, true);
 

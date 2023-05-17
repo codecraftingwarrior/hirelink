@@ -10,6 +10,19 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven {
+            url 'https://api.mapbox.com/downloads/v2/releases/maven'
+            authentication {
+                basic(BasicAuthentication)
+            }
+            credentials {
+                // Do not change the username below.
+                // This should always be `mapbox` (not your username).
+                username = "mapbox"
+                // Use the secret token you stored in gradle.properties as the password
+                password = "sk.eyJ1IjoiY29kZWNyYWZ0aW5nd2FycmlvciIsImEiOiJjbGd4dXM1YWQwM2I5M2RvZ3k2bzhuaGg1In0.fU6YEoDN9c3GDEtyja7atg"
+            }
+        }
     }
 }
 rootProject.name = "hirelink-front"

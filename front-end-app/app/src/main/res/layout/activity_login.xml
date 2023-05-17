@@ -13,7 +13,7 @@
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/root_constraint_layout"
+            android:id="@+id/root_constraint_layout_login"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             tools:context=".modules.auth.login.LoginActivity">

@@ -47,7 +47,7 @@ class OtpVerificationProcessor implements ProcessorInterface
         if (new DateTime() < $user->getOtpCodeRequestedAt()->add(new DateInterval('P2D'))) {
             $user->setEnabled(true);
             $user->eraseCredentials();
-            $user->setOtpCodeVerifiedAt(new DateTime());
+            $user->setOtpCodeVerifiedAt(new DateTime()); 
             $this->userRepository->save($user, true);
             $output = new DigitVerificationOutput();
             $output->status = true;

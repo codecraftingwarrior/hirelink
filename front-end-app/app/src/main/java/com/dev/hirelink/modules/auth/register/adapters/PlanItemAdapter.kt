@@ -17,6 +17,7 @@ class PlanItemAdapter(
 ) : Adapter<PlanItemAdapter.ItemViewHolder>() {
 
     private var currentSelectedItemPosition: Int = 0;
+    var selectedPlan : Plan = Plan()
 
     class ItemViewHolder(private val view: View) : ViewHolder(view) {
         private val planTitle: TextView = view.findViewById(R.id.text_view_plan_title)
@@ -46,6 +47,7 @@ class PlanItemAdapter(
         if (position == currentSelectedItemPosition) {
             cardPlan.strokeWidth = 5
             cardPlan.strokeColor = context.getColor(R.color.indigo_main)
+            selectedPlan = dataset[position]
         } else {
             cardPlan.strokeWidth = 1
             cardPlan.strokeColor = context.getColor(R.color.stroke_color)
