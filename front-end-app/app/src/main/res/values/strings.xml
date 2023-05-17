@@ -50,12 +50,12 @@
     <string name="candidacy_label">Candidacy</string>
     <string name="offers_label">Offers</string>
     <string name="notifications_label">Notifications</string>
-    <string name="first_name">First name</string>
-    <string name="last_name">Last name</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
     <string name="email">Email</string>
     <string name="username">Username</string>
-    <string name="company_name">Company name</string>
-    <string name="postal_adress">Postal adress</string>
+    <string name="company_name">Company Name</string>
+    <string name="postal_adress">Postal Adress</string>
     <string name="country">Country</string>
     <string name="cash_str">€ %.2f</string>
     <string name="salary_range_str">%.2f - %.2f</string>
@@ -63,6 +63,7 @@
     <string name="setting_button_description">Setting Button</string>
     <string name="next_arrow_left_description">Return Arrow</string>
     <string name="profile_name">HENRY Nathan</string>
+    <string name="profile_information">PROFIL INFORMATIONS</string>
     <string name="profile_favorites">Favorites</string>
     <string name="profile_groups">Groups</string>
     <string name="profile_candidacy">Spontaneous Candidacy</string>
@@ -70,7 +71,10 @@
     <string name="profile_blocked_users">Blocked Users</string>
     <string name="error_msg">A system error has occured!</string>
     <string name="profile_date_birth">15/07/2001</string>
+    <string name="profile_date_birth_text_field">Date of Birth</string>
+    <string name="profile_phone_number">Phone Number</string>
     <string name="profile_nationality">French</string>
+    <string name="profile_nationality_text_field">Nationality</string>
     <string name="job_application_pending_state">Pending</string>
     <string name="job_application_in_progress_state">In Progress</string>
     <string name="job_application_refused_state">Refused</string>

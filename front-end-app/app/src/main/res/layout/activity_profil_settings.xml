@@ -118,6 +118,176 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/text_another" />
 
+            <TextView
+                android:id="@+id/profil_information"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile_information"
+                android:textSize="20sp"
+                android:fontFamily="@font/poppins"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/horizontal_divider" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_step3"
+                android:layout_width="370dp"
+                android:layout_height="@dimen/_560pxh"
+                android:layout_margin="10dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.494"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/profil_information"
+                app:layout_constraintVertical_bias="0.13999999">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_first_name"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_340pxh"
+                        android:layout_height="@dimen/_70pxh"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/first_name"
+                        android:foregroundGravity="center_horizontal"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_first_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60pxh" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_last_name"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_340pxh"
+                        android:layout_height="@dimen/_70pxh"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/last_name"
+                        android:foregroundGravity="center_horizontal"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_field_first_name">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_field_last_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60pxh" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_nationality"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_340pxh"
+                        android:layout_height="@dimen/_70pxh"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/profile_nationality_text_field"
+                        android:foregroundGravity="center_horizontal"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_field_last_name">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_field_nationality"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60pxh" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_date_of_birth"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_340pxh"
+                        android:layout_height="@dimen/_70pxh"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/profile_date_birth_text_field"
+                        android:foregroundGravity="center_horizontal"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_field_nationality">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_date_of_birth"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60pxh" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_phone_number"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_340pxh"
+                        android:layout_height="@dimen/_70pxh"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/profile_phone_number"
+                        android:foregroundGravity="center_horizontal"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_field_date_of_birth">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_phone_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60pxh" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_email"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="@dimen/_340pxh"
+                        android:layout_height="@dimen/_70pxh"
+                        android:layout_marginTop="20dp"
+                        android:hint="@string/profile_phone_number"
+                        android:foregroundGravity="center_horizontal"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_field_date_of_birth">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_phone_number"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60pxh" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
