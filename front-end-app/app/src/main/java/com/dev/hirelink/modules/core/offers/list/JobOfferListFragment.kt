@@ -130,9 +130,12 @@ class JobOfferListFragment : Fragment() {
 
     private fun fetchJobOffers(
         pageNumber: Int = 1,
+        showLoader: Boolean = true,
         onDataReceived: (data: PaginatedResourceWrapper<JobOffer>) -> Unit
     ) {
-        customLoadingOverlay.showLoading()
+        if (showLoader)
+            customLoadingOverlay.showLoading()
+
         val disposable = jobOfferViewModel
             .jobOfferRepository
             .findAll(
@@ -188,7 +191,7 @@ class JobOfferListFragment : Fragment() {
         val nextPageNumber = nextPageUri.getQueryParameter("page")?.toIntOrNull()
 
         if (nextPageNumber != null) {
-            fetchJobOffers(pageNumber = nextPageNumber) {
+            fetchJobOffers(pageNumber = nextPageNumber, showLoader = false) {
                 jobOffers.removeAt(jobOffers.size - 1)
                 val scrollPosition: Int = jobOffers.size
                 jobOfferItemAdapter.notifyItemRemoved(scrollPosition)
