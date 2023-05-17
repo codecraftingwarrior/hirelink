@@ -97,6 +97,9 @@
     <string name="send_email">Email</string>
     <string name="cover_letter">Cover letter</string>
     <string name="cv">Curriculum vitae</string>
+    <string name="cv_bis">CV</string>
+    <string name="city">City</string>
+    <string name="motivaiton_letter">Motivation Letter</string>
 
 
 
