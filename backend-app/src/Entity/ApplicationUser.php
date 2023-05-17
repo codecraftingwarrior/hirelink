@@ -125,11 +125,11 @@ class ApplicationUser extends BaseUser
     private ?int $id = null;
 
     #[ORM\Column(length: 80, nullable: true)]
-    #[Groups(['user:read', 'user:writable'])]
+    #[Groups(['user:read','user:read:first-name', 'user:writable'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 80, nullable: true)]
-    #[Groups(['user:read', 'user:writable'])]
+    #[Groups(['user:read', 'user:writable','user:read:last-name'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 80, nullable: true)]

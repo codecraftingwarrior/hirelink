@@ -5,21 +5,26 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobApplicationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: JobApplicationRepository::class)]
 #[ApiResource(
     operations:[
-        new GetCollection(),
-        new Get(),
-        new Put()
+        new Get(
+            normalizationContext: ['groups' => ['job-application:read', 'user:read', 'document:read']]
+        ),
+        new Post(
+            denormalizationContext: ['groups' => ['job-application:writable',
+                                                  'document:writable']]
+        )
     ],
-    normalizationContext: ['groups' => ['contract-type:read']]
 )]
 class JobApplication extends TrackableEntity
 {
@@ -29,17 +34,20 @@ class JobApplication extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
-    private ?string $state = null;
+    private ?string $state = 'null';
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-application:read', 'job-application:writable'])]
     private ?JobOffer $jobOffer = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-application:read', 'job-application:writable', 'job-application:read:applicant'])]
     private ?ApplicationUser $applicant = null;
 
-    #[ORM\ManyToMany(targetEntity: Document::class, inversedBy: 'jobApplications')]
+    #[ORM\ManyToMany(targetEntity: Document::class, inversedBy: 'jobApplications', cascade: ['persist'])]
+    #[Groups(['job-application:read', 'job-application:writable'])]
     private Collection $documents;
 
     public function __construct()
