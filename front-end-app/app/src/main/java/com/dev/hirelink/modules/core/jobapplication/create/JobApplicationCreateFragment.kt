@@ -102,11 +102,12 @@ class JobApplicationCreateFragment(
         when (type) {
             "cv" -> {
                 cvPDFFile = uriToFile(uri, requireContext(), requireContext().contentResolver)
-                Log.d(javaClass.simpleName, uri.toString())
+                cvUri = uri
             }
             "cl" -> {
                 coverLetterPDFFile =
                     uriToFile(uri, requireContext(), requireContext().contentResolver)
+                coverLetterUri = uri
             }
         }
 
