@@ -18,7 +18,7 @@
             android:id="@+id/text_view_candidacy_new_initials"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@drawable/circle_initials"
+            android:background="@drawable/circle_blue_initial"
             android:layout_marginStart="12dp"
             android:text="AG"
             android:textColor="@color/black"

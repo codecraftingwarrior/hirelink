@@ -155,7 +155,7 @@
 
             <View
                 android:id="@+id/state_indicator"
-                android:background="@drawable/red_circle"
+                android:background="@drawable/circle_red"
                 android:layout_gravity="center"
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="4dp"
