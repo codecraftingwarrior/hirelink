@@ -12,6 +12,8 @@ use ApiPlatform\Metadata\GetCollection;
 use App\Controller\FindClosestOfferController;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobOfferRepository;
+
+use App\State\FindJobOffersByOwnerIdProvider;
 use App\State\JobOfferListStateProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -29,9 +31,43 @@ use Symfony\Component\Serializer\Annotation\Groups;
             normalizationContext: ['groups' => ['job-offer:read-collection', 'company:read:name']],
             provider: JobOfferListStateProvider::class
         ),
-        new Get()
+        new Get(normalizationContext: ['groups' => ['job-offer:read', 'company:read:name']]),
+        new Get(
+            uriTemplate: '/job-offers/owner/{id}',
+            requirements: ['id' => '\d+'],
+            openapiContext: [
+                'summary' => 'Retrieves the job offers for the given owner id'
+            ],
+            paginationEnabled: true,
+            paginationItemsPerPage: 5,
+            paginationMaximumItemsPerPage: 5,
+            normalizationContext: ['groups' => [
+                'job-offer:read-collection',
+                'job-offer-by-owner:read-collection'
+                ]
+            ],
+            provider: FindJobOffersByOwnerIdProvider::class
+        ),
+        new Get(
+            uriTemplate: '/job-offers/{id}/category',
+            requirements: ['id' => '\d+'],
+            openapiContext: [
+                'summary' => 'Retrieves the job offer category for the given job offer id'
+            ],
+            normalizationContext: ['groups' => ['job-offer-category:read']]
+        ),
+        new Get(
+            uriTemplate: '/job-offers/{id}/job-applications',
+            requirements: ['id' => '\d+'],
+            openapiContext: [
+                'summary' => 'Retrieves the job applications for the given job offer id'
+            ],
+            normalizationContext: ['groups' => ['job-offer-applications:read',
+                                                'job-application:read:applicant',
+                                                'user:read:first-name',
+                                                'user:read:last-name']]
+        ),
     ],
-    normalizationContext: ['groups' => ['job-offer:read']]
 ),
 /*ApiFilter(
     SearchFilter::class,
@@ -91,10 +127,12 @@ class JobOffer extends TrackableEntity
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-offer-category:read'])]
     private ?JobOfferCategory $category = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-offer:read'])]
     private ?Profession $profession = null;
 
     #[ORM\ManyToOne]
@@ -103,9 +141,11 @@ class JobOffer extends TrackableEntity
     private ?ContractType $contractType = null;
 
     #[ORM\OneToMany(mappedBy: 'jobOffer', targetEntity: JobApplication::class)]
+    #[Groups(['job-offer-by-owner:read-collection','job-offer-applications:read'])]
     private Collection $jobApplications;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'jobOffers')]
+    #[Groups(['job-offer:read'])]
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
