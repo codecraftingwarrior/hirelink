@@ -28,8 +28,8 @@ class CreateJobApplicationController extends AbstractController
 
     public function __invoke(Request $request)
     {
-        $files = $request->files->all()['document'];
-        $allDocuments = $request->request->all()['document'];
+        $files = $request->files->all()['documents'];
+        $allDocuments = $request->request->all()['documents'];
         $currentUser = $this->userRepository->findOneBy([
            'email' => $this->security->getUser()->getUserIdentifier()
         ]);

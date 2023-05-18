@@ -66,19 +66,18 @@ class JobOfferItemAdapter(
             val adapterLayout = LayoutInflater
                 .from(parent.context)
                 .inflate(com.dev.hirelink.R.layout.row_offer_list_item, parent, false)
-            bindListeners(adapterLayout)
             return JobOfferItemViewHolder(adapterLayout)
         }
         val view: View =
             LayoutInflater.from(parent.context)
-                .inflate(com.dev.hirelink.R.layout.loading_item_row, parent, false)
+                .inflate(R.layout.loading_item_row, parent, false)
 
         return LoadingViewHolder(view)
     }
 
-    private fun bindListeners(view: View) {
+    private fun bindListeners(view: View, jobOffer: JobOffer) {
         view.findViewById<AppCompatButton>(R.id.button_apply_offer)?.setOnClickListener {
-            (JobApplicationCreateFragment()).show(
+            (JobApplicationCreateFragment(jobOffer)).show(
                 (context as BaseActivity).supportFragmentManager,
                 JobApplicationCreateFragment.TAG
             )
@@ -94,6 +93,7 @@ class JobOfferItemAdapter(
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder is JobOfferItemViewHolder) {
             holder.bind(dataset?.get(position)!!)
+            bindListeners(holder.itemView, dataset?.get(position)!!)
         } else if (holder is LoadingViewHolder) {
             (holder as LoadingViewHolder?)?.let { showLoadingView(it, position) }
         }

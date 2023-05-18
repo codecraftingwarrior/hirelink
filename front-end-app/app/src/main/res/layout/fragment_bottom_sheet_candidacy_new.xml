@@ -7,11 +7,27 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/candidacy_new_root_constraint_layout"
         android:background="@drawable/rectange_bg_gray_rounded_top"
         android:paddingTop="20dp"
         android:layout_width="match_parent"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior"
         android:layout_height="match_parent">
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/progress_bar_job_application_process"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="25dp"
+            app:indicatorSize="70dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginTop="20dp"
+            app:indicatorColor="@color/indigo_main"
+            android:indeterminate="true" />
 
         <TextView
             android:id="@+id/text_view_candidacy_new_initials"
@@ -40,7 +56,6 @@
             android:layout_marginStart="16dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
-
 
         <TextView
             android:id="@+id/text_view_candidacy_first_name"
@@ -72,7 +87,8 @@
             app:layout_constraintTop_toBottomOf="@id/text_view_candidacy_new_initials">
 
             <TextView
-                android:layout_width="60dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:background="@drawable/rectangle_bg_pdf_background"
@@ -85,56 +101,95 @@
 
             <TextView
                 android:id="@+id/text_view_cv_chooser_hint_candidacy_new"
-                android:layout_width="match_parent"
+                android:layout_width="0dp"
+                android:layout_weight="2"
                 android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:fontFamily="@font/poppins"
-                android:gravity="center"
+                android:layout_marginStart="8dp"
+                android:gravity="center|start"
                 android:text="Choose your C.V"
                 android:textColor="@color/black"
                 android:textStyle="bold" />
 
+            <Button
+                android:id="@+id/button_view_cv_candidacy_new"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_gravity="center|end"
+                android:layout_width="70dp"
+                android:visibility="gone"
+                android:layout_marginEnd="8dp"
+                android:layout_height="wrap_content"
+                android:text="view" />
+
         </androidx.appcompat.widget.LinearLayoutCompat>
 
-        <TextView
-            android:id="@+id/label_cover_letter"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/linear_layout_cv_choose"
-            android:text="Cover letter"
-            android:layout_marginStart="15dp"
-            style="@style/AppTextRegular"
-            android:layout_marginTop="24dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/text_field_cover_letter"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:id="@+id/linear_layout_cover_letter_choose"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-            app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-            app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-            app:boxCornerRadiusTopStart="@dimen/_15pxh"
+            android:layout_height="60dp"
+            android:layout_marginTop="32dp"
             android:layout_marginEnd="15dp"
             android:layout_marginStart="15dp"
-            app:endIconMinSize="@dimen/_20pxh"
-            app:layout_constraintTop_toBottomOf="@id/label_cover_letter"
-            android:layout_marginTop="5dp"
+            android:background="@drawable/rectangle_bg_file_choose"
+            app:rippleColor="@color/gray_app"
+            android:elevation="9dp"
+            android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.551"
             app:layout_constraintStart_toStartOf="parent"
-            >
+            app:layout_constraintTop_toBottomOf="@id/linear_layout_cv_choose">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/edit_text_cover_letter"
-                android:inputType="textMultiLine"
-                android:lines="15"
-                android:scrollbars="none"
-                android:layout_width="match_parent"
-                android:gravity="top|start"
-                android:layout_height="wrap_content" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@drawable/rectangle_bg_pdf_background"
+                android:fontFamily="@font/poppins"
+                android:gravity="center"
+                android:text="PDF"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
 
-        </com.google.android.material.textfield.TextInputLayout>
+            <TextView
+                android:id="@+id/text_view_cover_letter_hint_candidacy_new"
+                android:layout_width="0dp"
+                android:layout_weight="2"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:fontFamily="@font/poppins"
+                android:gravity="start|center"
+                android:layout_marginStart="8dp"
+                android:text="Choose your Cover letter"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+
+            <Button
+                android:id="@+id/button_view_cover_letter_candidacy_new"
+                style="@style/Widget.MaterialComponents.Button.TextButton"
+                android:layout_gravity="center|end"
+                android:layout_width="70dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                android:layout_height="wrap_content"
+                android:text="view" />
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+        <com.github.barteksc.pdfviewer.PDFView
+            android:id="@+id/pdfView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/linear_layout_cover_letter_choose"
+            android:layout_marginEnd="15dp"
+            android:layout_marginStart="15dp"
+            android:layout_marginBottom="15dp"
+            android:layout_width="match_parent"
+            android:visibility="gone"
+            android:layout_height="400dp"/>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/button_candidacy_new"
@@ -153,11 +208,12 @@
             android:singleLine="true"
             android:layout_marginBottom="19dp"
             android:text="Candidate"
-            android:layout_marginTop="8dp"
+            android:visibility="gone"
+            android:layout_marginTop="20dp"
             android:textAllCaps="false"
             android:layout_marginEnd="14dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/text_field_cover_letter"
+            app:layout_constraintTop_toBottomOf="@id/pdfView"
             />
 
         <Space

@@ -25,7 +25,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             deserialize: false
         )
     ],
-    normalizationContext: ['groups' => ['job-application:read', 'user:read', 'document:read']],
+    normalizationContext: ['groups' => ['job-application:read', 'user:read', 'document:read', 'role:read']],
     denormalizationContext: ['groups' => ['job-application:writable', 'document:writable']]
 )]
 class JobApplication extends TrackableEntity
@@ -36,11 +36,12 @@ class JobApplication extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['job-application:read'])]
     private ?string $state = 'PENDING';
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-application:read', 'job-application:writable'])]
+    #[Groups(['job-application:writable'])]
     private ?JobOffer $jobOffer = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
