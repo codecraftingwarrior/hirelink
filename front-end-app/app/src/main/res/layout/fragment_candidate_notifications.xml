@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/search_header"
+                android:background="@drawable/rectangle_bg_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:padding="14dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:id="@+id/image_view_hire_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/hirelink_logo"
+                    android:layout_marginStart="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/hirelink_logo" />
+
+                <ImageButton
+                    android:id="@+id/img_btn_profile"
+                    android:layout_width="@dimen/_35pxh"
+                    android:layout_height="@dimen/_35pxh"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/profil_icon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/today_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/today"
+                android:textSize="20sp"
+                android:fontFamily="@font/poppins"
+                android:textStyle="bold"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/search_header" />
+
+            <View
+                android:id="@+id/circular_view"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/circular_border"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/today_text"/>
+
+            <ImageView
+                android:id="@+id/logo_inside_circle"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:src="@drawable/apple_logo_icon"
+                android:layout_marginBottom="5dp"
+                app:layout_constraintStart_toStartOf="@id/circular_view"
+                app:layout_constraintEnd_toEndOf="@id/circular_view"
+                app:layout_constraintTop_toTopOf="@id/circular_view"
+                app:layout_constraintBottom_toBottomOf="@id/circular_view"/>
+
+            <TextView
+                android:id="@+id/candidacy_accepted"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/candidacy_accepted"
+                android:fontFamily="@font/poppins"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@id/today_text"
+                app:layout_constraintStart_toEndOf="@+id/circular_view"
+                app:layout_constraintTop_toTopOf="@+id/circular_view"/>
+
+            <ImageView
+                android:id="@+id/blue_suitcase"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/suitcase_blue_icon"
+                android:layout_marginStart="8dp"
+                tools:ignore="ContentDescription"
+                app:layout_constraintTop_toBottomOf="@id/candidacy_accepted"
+                app:layout_constraintStart_toEndOf="@+id/circular_view" />
+
+            <TextView
+                android:id="@+id/text_view_notification_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="Votre description ici"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/image_view_notification_logo"
+                app:layout_constraintTop_toTopOf="@+id/image_view_notification_logo"
+                app:layout_constraintBottom_toBottomOf="@+id/image_view_notification_logo"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

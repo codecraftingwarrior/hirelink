@@ -100,6 +100,8 @@
     <string name="cv_bis">CV</string>
     <string name="city">City</string>
     <string name="motivaiton_letter">Motivation Letter</string>
+    <string name="today">Today</string>
+    <string name="candidacy_accepted">Your candidacy has been accepted !</string>
 
 
 
