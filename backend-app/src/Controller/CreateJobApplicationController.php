@@ -33,7 +33,7 @@ class CreateJobApplicationController extends AbstractController
         $currentUser = $this->userRepository->findOneBy([
            'email' => $this->security->getUser()->getUserIdentifier()
         ]);
-        
+
         $jobApplication = new JobApplication();
 
         if (!$files || count($files) == 0)
