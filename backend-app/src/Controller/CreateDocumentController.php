@@ -20,8 +20,7 @@ class CreateDocumentController extends AbstractController
     {
     }
 
-    #[NoReturn]
-    public function __invoke(Request $request)
+    public function __invoke(Request $request): Document
     {
         $document = new Document();
 

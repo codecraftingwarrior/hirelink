@@ -7,6 +7,7 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\CreateJobApplicationController;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Enum\JobApplicationState;
 use App\Repository\JobApplicationRepository;
@@ -17,15 +18,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: JobApplicationRepository::class)]
 #[ApiResource(
-    operations:[
-        new Get(
-            normalizationContext: ['groups' => ['job-application:read', 'user:read', 'document:read']]
-        ),
+    operations: [
+        new Get(),
         new Post(
-            denormalizationContext: ['groups' => ['job-application:writable',
-                                                  'document:writable']]
+            controller: CreateJobApplicationController::class,
+            deserialize: false
         )
     ],
+    normalizationContext: ['groups' => ['job-application:read', 'user:read', 'document:read']],
+    denormalizationContext: ['groups' => ['job-application:writable', 'document:writable']]
 )]
 class JobApplication extends TrackableEntity
 {
