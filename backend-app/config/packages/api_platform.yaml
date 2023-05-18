@@ -1,6 +1,13 @@
 api_platform:
   path_segment_name_generator: api_platform.path_segment_name_generator.dash
   show_webby: false
+  formats:
+    json: ['application/json']
+    jsonld: ['application/ld+json']
+    html: ['text/html']
+    multipart: ['mutlipart/form-data']
+  patch_formats:
+    multipart: [ 'multipart/form-data' ]
   swagger:
     api_keys:
       JWT:

@@ -8,6 +8,7 @@ use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Entity\RootEntity\TrackableEntity;
+use App\Enum\JobApplicationState;
 use App\Repository\JobApplicationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -34,7 +35,7 @@ class JobApplication extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
-    private ?string $state = 'null';
+    private ?string $state = 'PENDING';
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
