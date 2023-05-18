@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Main Colors -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
@@ -7,43 +9,55 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-
     <color name="gray_app">#F2F2F2</color>
-
     <color name="indigo_main">#3E4F88</color>
     <color name="register_role_choose_button_color">#F4F4F4</color>
     <color name="stroke_color">#919191</color>
     <color name="transparent_grey">#80000000</color>
-
     <color name="button_disabled">#80CCCCCC</color>
 
-
+    <!-- Plan Colors -->
     <color name="plan_color">#883d3d</color>
+
+    <!-- Green Variants -->
     <color name="green_800">#1da507</color>
+    <color name="state_green" >#4CAF50</color>
+    <color name="green_800_b7">#b71ca406</color>
+
+    <!-- Black Variants -->
     <color name="black_900_3f">#3f000000</color>
-    <color name="indigo_700_99">#993e4f88</color>
-    <color name="indigo_700_cc">#cc3e4f88</color>
-    <color name="bluegray_100_59">#59d9d9d9</color>
     <color name="black_900_66">#66000000</color>
     <color name="black_900">#000000</color>
-    <color name="bluegray_100_4c">#4cd9d9d9</color>
-    <color name="red_A701">#ff0000</color>
-    <color name="red_A700">#d10000</color>
-    <color name="amber_600">#e9b604</color>
-    <color name="gray_900">#202020</color>
-    <color name="bluegray_100">#d9d9d9</color>
     <color name="black_900_81">#81000000</color>
-    <color name="gray_200">#eeeeee</color>
-    <color name="gray_300">#dbdbdb</color>
-    <color name="amber_600_bf">#bfe8b603</color>
-    <color name="gray_100">#F4F4F4</color>
     <color name="black_900_cc">#cc000000</color>
     <color name="black_900_99">#99000000</color>
     <color name="black_900_33">#33000000</color>
-    <color name="red_A700_c9">#c9d10000</color>
     <color name="black_900_19">#19000000</color>
-    <color name="white_A700">#ffffff</color>
-    <color name="green_800_b7">#b71ca406</color>
 
-    <color name="state_green" >#4CAF50</color>
+    <!-- Indigo Variants -->
+    <color name="indigo_700_99">#993e4f88</color>
+    <color name="indigo_700_cc">#cc3e4f88</color>
+
+    <!-- Bluegray Variants -->
+    <color name="bluegray_100_59">#59d9d9d9</color>
+    <color name="bluegray_100_4c">#4cd9d9d9</color>
+    <color name="bluegray_100">#d9d9d9</color>
+
+    <!-- Red Variants -->
+    <color name="red_A701">#ff0000</color>
+    <color name="red_A700">#d10000</color>
+    <color name="red_A700_c9">#c9d10000</color>
+
+    <!-- Amber Variants -->
+    <color name="amber_600">#e9b604</color>
+    <color name="amber_600_bf">#bfe8b603</color>
+
+    <!-- Gray Variants -->
+    <color name="gray_900">#202020</color>
+    <color name="gray_200">#eeeeee</color>
+    <color name="gray_300">#dbdbdb</color>
+    <color name="gray_100">#F4F4F4</color>
+
+    <!-- White Variants -->
+    <color name="white_A700">#ffffff</color>
 </resources>
