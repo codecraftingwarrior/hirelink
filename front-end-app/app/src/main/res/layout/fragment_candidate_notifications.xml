@@ -112,16 +112,48 @@
                 app:layout_constraintStart_toEndOf="@+id/circular_view" />
 
             <TextView
-                android:id="@+id/text_view_notification_description"
+                android:id="@+id/first_job_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="Votre description ici"
+                android:text="@string/data_analyst"
+                android:fontFamily="@font/poppins"
                 android:textSize="16sp"
-                app:layout_constraintStart_toEndOf="@+id/image_view_notification_logo"
-                app:layout_constraintTop_toTopOf="@+id/image_view_notification_logo"
-                app:layout_constraintBottom_toBottomOf="@+id/image_view_notification_logo"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                app:layout_constraintTop_toBottomOf="@id/candidacy_accepted"
+                app:layout_constraintStart_toEndOf="@+id/blue_suitcase"/>
+
+            <TextView
+                android:id="@+id/first_point_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="@string/center_point"
+                android:fontFamily="@font/poppins"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@id/candidacy_accepted"
+                app:layout_constraintStart_toEndOf="@+id/first_job_text"/>
+
+            <ImageView
+                android:id="@+id/green_point"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:src="@drawable/point_green"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="6dp"
+                tools:ignore="ContentDescription"
+                app:layout_constraintTop_toBottomOf="@id/candidacy_accepted"
+                app:layout_constraintStart_toEndOf="@+id/first_point_text" />
+
+            <com.google.android.material.divider.MaterialDivider
+                android:id="@+id/horizontal_divider"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginTop="25dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/circular_view" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

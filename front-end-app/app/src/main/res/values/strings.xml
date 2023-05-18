@@ -3,7 +3,6 @@
     <string name="welcome_to_hirelink">Welcome to HireLink</string>
     <string name="welcome_summary_msg">This mobile application allows users to find job opportunities in different fields, apply online, and connect with potential employers.</string>
     <string name="view_offers">View offers</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="candidate_role_title">Looking for a job</string>
     <string name="next">next</string>
@@ -102,7 +101,8 @@
     <string name="motivaiton_letter">Motivation Letter</string>
     <string name="today">Today</string>
     <string name="candidacy_accepted">Your candidacy has been accepted !</string>
-
+    <string name="data_analyst">Data Analyst</string>
+    <string name="center_point">·</string>
 
 
 
