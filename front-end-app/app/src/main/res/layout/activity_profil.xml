@@ -7,14 +7,15 @@
 
     </data>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/header_bar"
@@ -35,7 +36,6 @@
                     android:background="@android:color/transparent"
                     android:scaleType="fitXY"
                     android:src="@drawable/next_arrow_left_icon"
-                    android:contentDescription="@string/next_arrow_left_description"
                     android:layout_marginTop="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -63,14 +63,13 @@
                     android:layout_marginEnd="10dp"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/baseline_logout_24"
-                    android:contentDescription="@string/setting_button_description"
-                    app:layout_constraintEnd_toStartOf="@id/img_btn_setting"
+                    app:layout_constraintEnd_toStartOf="@id/img_btn_setting_activity_profil"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
                     tools:src="@drawable/baseline_logout_24"/>
 
                 <ImageButton
-                    android:id="@+id/img_btn_setting"
+                    android:id="@+id/img_btn_setting_activity_profil"
                     android:layout_width="@dimen/_27pxh"
                     android:layout_height="@dimen/_27pxh"
                     android:scaleType="fitXY"
@@ -78,7 +77,6 @@
                     android:layout_marginEnd="4dp"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/setting_icon"
-                    android:contentDescription="@string/setting_button_description"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
@@ -379,7 +377,7 @@
                 app:cardCornerRadius="10dp"
                 app:rippleColor="@color/gray_app"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="50dp"
                 android:layout_marginStart="26dp"
                 android:layout_marginEnd="26dp"
                 android:clickable="true"
@@ -407,12 +405,13 @@
                         android:id="@+id/blocked_users_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/profile_blocked_users"
-                        android:textStyle="bold"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/poppins"
                         android:paddingTop="8dp"
+                        android:text="@string/profile_blocked_users"
                         android:textColor="@color/indigo_main"
                         android:textSize="18dp"
-                        android:fontFamily="@font/poppins"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/blocked_users_logo" />
 
@@ -430,6 +429,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

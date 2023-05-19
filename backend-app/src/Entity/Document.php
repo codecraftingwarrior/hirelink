@@ -2,13 +2,35 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use App\Controller\CreateDocumentController;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\DocumentRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Component\HttpFoundation\File\File;
 
 #[ORM\Entity(repositoryClass: DocumentRepository::class)]
+#[Vich\Uploadable]
+#[ApiResource(
+    operations: [
+        new Get(),
+        new GetCollection(),
+        new Post(
+            controller: CreateDocumentController::class,
+            deserialize: false,
+        )
+    ],
+    normalizationContext: ['groups' => ['document:read']],
+    denormalizationContext: ['groups' => ['document:writable']]
+)]
 class Document extends TrackableEntity
 {
     #[ORM\Id]
@@ -17,17 +39,27 @@ class Document extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['document:writable', 'document:read'])]
     private ?string $title = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $url = null;
+    #[Groups(['document:read'])]
+    private ?string $fileName = null;
+
+    #[Groups(['document:read'])]
+    private ?string $filePath = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Groups(['document:writable', 'document:read'])]
     private ?string $content = null;
 
     #[ORM\ManyToOne(inversedBy: 'documents')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['document:writable'])]
     private ?ApplicationUser $owner = null;
+
+    #[Vich\UploadableField(mapping: 'document_files', fileNameProperty: 'fileName')]
+    private ?File $file = null;
 
     #[ORM\ManyToMany(targetEntity: JobApplication::class, mappedBy: 'documents')]
     private Collection $jobApplications;
@@ -54,14 +86,14 @@ class Document extends TrackableEntity
         return $this;
     }
 
-    public function getUrl(): ?string
+    public function getFileName(): ?string
     {
-        return $this->url;
+        return $this->fileName;
     }
 
-    public function setUrl(?string $url): self
+    public function setFileName(?string $fileName): self
     {
-        $this->url = $url;
+        $this->fileName = $fileName;
 
         return $this;
     }
@@ -116,4 +148,42 @@ class Document extends TrackableEntity
 
         return $this;
     }
+
+    /**
+     * @return File|null
+     */
+    public function getFile(): ?File
+    {
+        return $this->file;
+    }
+
+    /**
+     * @param File|null $file
+     */
+    public function setFile(?File $file): self
+    {
+        $this->file = $file;
+
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getFilePath(): ?string
+    {
+        return $this->filePath;
+    }
+
+    /**
+     * @param string|null $filePath
+     */
+    public function setFilePath(?string $filePath): self
+    {
+        $this->filePath = $filePath;
+
+        return $this;
+    }
+
+
 }

@@ -13,12 +13,14 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
+import androidx.lifecycle.lifecycleScope
 import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityBaseBinding
 import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.modules.auth.login.LoginActivity
+import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
 import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
 import com.dev.hirelink.modules.core.offers.list.JobOfferViewModel
@@ -26,14 +28,17 @@ import com.dev.hirelink.modules.core.profil.ProfilActivity
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterBottomSheetFragment
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
 import com.dev.hirelink.network.auth.AuthRepository
+import com.dev.hirelink.network.jobapplication.JobApplicationRepository
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.internal.ViewUtils.hideKeyboard
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.disposables.CompositeDisposable
+import kotlinx.coroutines.Job
 
 class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
-    private val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
+    val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var currentUser: ApplicationUser
     private lateinit var jobOfferFilterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
@@ -50,6 +55,12 @@ class BaseActivity : AppCompatActivity() {
         JobOfferViewModel.JobOfferViewModelFactory(
             applicationContext,
             (application as HirelinkApplication).jobOfferRepository
+        )
+    }
+    val jobApplicationViewModel: JobApplicationViewModel by viewModels {
+        JobApplicationViewModel.JobApplicationViewModelFactory(
+            applicationContext,
+            (application as HirelinkApplication).jobApplicationRepository
         )
     }
 
@@ -71,6 +82,15 @@ class BaseActivity : AppCompatActivity() {
         jobOfferFilterCriteria = jobOfferListfilterViewModel.getCriteria()
 
         jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
+
+        jobApplicationViewModel.jobApplicationDone.observe(this) {
+            if (it)
+                Snackbar.make(
+                    binding.bottomNavigation,
+                    getString(R.string.job_application_success_msg),
+                    Snackbar.LENGTH_LONG
+                ).show()
+        }
     }
 
     private fun fetchCurrentUser() {
