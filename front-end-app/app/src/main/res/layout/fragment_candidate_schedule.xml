@@ -16,8 +16,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/root_constraint_layout_activity_schedule"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
+            android:layout_height="wrap_content"
             tools:context=".modules.core.BaseActivity">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -121,6 +120,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <com.google.android.material.card.MaterialCardView
+                android:id="@+id/first_material_card"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 app:cardElevation="5dp"
@@ -138,7 +138,7 @@
                 android:checkable="true">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/root_constraint_layout"
+                    android:id="@+id/first_card"
                     android:padding="13dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -192,7 +192,7 @@
 
                     <TextView
                         android:id="@+id/text_view_job_title"
-                        tools:text="Data Analyst"
+                        tools:text="@string/data_analyst"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -219,7 +219,7 @@
 
                     <TextView
                         android:id="@+id/text_view_location"
-                        tools:text="Tulum, Mexico"
+                        tools:text="@string/tulum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginStart="10dp"
@@ -230,6 +230,142 @@
                         app:layout_constraintStart_toEndOf="@id/icon_location"
                         app:layout_constraintTop_toTopOf="@id/icon_location"
                         app:layout_constraintBottom_toBottomOf="@id/icon_location" />
+
+                    <TextView
+                        android:id="@+id/bottom_right_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/duration_1"
+                        style="@style/AppTextSemiBold"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/second_material_card"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:cardElevation="5dp"
+                style="?attr/materialCardViewElevatedStyle"
+                app:cardCornerRadius="10dp"
+                app:rippleColor="@color/gray_app"
+                android:layout_marginTop="25dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                app:layout_constraintTop_toBottomOf="@id/first_material_card"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/second_card"
+                    android:padding="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/candidacy_date_2"
+                        tools:text="@string/date_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        style="@style/OfferListItemStyleHeader"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:id="@+id/mcdo_logo"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/mcdo_logo_icon"
+                        android:layout_marginStart="10dp"
+                        tools:ignore="ContentDescription"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/candidacy_date_2" />
+
+                    <TextView
+                        android:id="@+id/company_name_2"
+                        tools:text="@string/mcdo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:textSize="15sp"
+                        android:letterSpacing="0.05"
+                        android:layout_marginTop="4dp"
+                        style="@style/AppTextSemiBoldBlack"
+                        app:layout_constraintStart_toEndOf="@id/mcdo_logo"
+                        app:layout_constraintTop_toBottomOf="@id/candidacy_date_2" />
+
+                    <ImageView
+                        android:id="@+id/icon_job_title_2"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:scaleType="fitXY"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/gray_suitcase_icon"
+                        tools:ignore="ContentDescription"
+                        tools:src="@drawable/gray_suitcase_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/mcdo_logo" />
+
+                    <TextView
+                        android:id="@+id/text_view_job_title_2"
+                        tools:text="@string/cleaning_agent"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:letterSpacing="0.08"
+                        android:lineSpacingExtra="@dimen/_7pxh"
+                        android:singleLine="true"
+                        style="@style/AppOfferTextRegular"
+                        app:layout_constraintStart_toEndOf="@id/icon_job_title_2"
+                        app:layout_constraintTop_toTopOf="@id/icon_job_title_2"
+                        app:layout_constraintBottom_toBottomOf="@id/icon_job_title_2" />
+
+                    <ImageView
+                        android:id="@+id/icon_location_2"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:scaleType="fitXY"
+                        android:layout_marginTop="14dp"
+                        android:layout_marginStart="10dp"
+                        android:src="@drawable/gray_location_icon"
+                        tools:ignore="ContentDescription"
+                        tools:src="@drawable/gray_location_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_job_title_2" />
+
+                    <TextView
+                        android:id="@+id/text_view_location_2"
+                        tools:text="@string/paris"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:letterSpacing="0.08"
+                        android:lineSpacingExtra="@dimen/_7pxh"
+                        android:singleLine="true"
+                        style="@style/AppOfferTextRegular"
+                        app:layout_constraintStart_toEndOf="@id/icon_location_2"
+                        app:layout_constraintTop_toTopOf="@id/icon_location_2"
+                        app:layout_constraintBottom_toBottomOf="@id/icon_location_2" />
+
+                    <TextView
+                        android:id="@+id/bottom_right_text_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/duration_2"
+                        style="@style/AppTextSemiBold"
+                        android:textSize="14dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 

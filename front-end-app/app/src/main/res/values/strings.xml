@@ -117,6 +117,10 @@
     <string name="schedule_label">Schedule</string>
     <string name="search">Search</string>
 
+    <!-- Location -->
+    <string name="tulum">Tulum, Mexico</string>
+    <string name="paris">Paris, France</string>
+    <string name="barcelona">Barcelona, Spain</string>
 
 
     <string name="profile_date_birth_text_field">Date of Birth</string>
@@ -126,6 +130,8 @@
 
     <!-- Employer -->
     <string name="apple">Apple</string>
+    <string name="mcdo">McDonald\'s</string>
+    <string name="google">Google</string>
 
     <!-- Location -->
     <string name="city">City</string>
@@ -137,6 +143,11 @@
     <string name="today">Today</string>
     <string name="this_month">This month</string>
     <string name="date_1">27 March 2023</string>
+    <string name="date_2">13 February 2023</string>
+    <string name="date_3">5 January 2023</string>
+    <string name="duration_1">In 4 days</string>
+    <string name="duration_2">In 25 days</string>
+    <string name="duration_3">In 45 days</string>
 
     <!-- Candidacy -->
     <string name="candidacy_accepted">Your candidacy has been accepted !</string>
