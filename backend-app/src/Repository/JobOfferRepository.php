@@ -57,14 +57,27 @@ class JobOfferRepository extends ServiceEntityRepository
 
         $qb->select('o');
 
-        if(isset($criteria['jobTitle'])) {
+        if (isset($criteria['userID'])) {
             $qb->where(
+                $qb->expr()->notIn(
+                    'o',
+                    'SELECT jo
+                    FROM App\Entity\JobApplication ja
+                    JOIN ja.jobOffer jo
+                    WHERE ja.applicant = :applicant'
+                )
+            )->setParameter('applicant', $criteria['userID']);
+        }
+
+        if (isset($criteria['jobTitle'])) {
+            $qb->andWhere(
                 $qb->expr()->like(
                     'o.title',
                     ':jobTitle'
                 )
             )->setParameter('jobTitle', "%{$criteria['jobTitle']}%");
         }
+
 
         if (isset($criteria['latitude']) && isset($criteria['longitude']) && isset($criteria['maxDistance'])) {
             $qb->andWhere(

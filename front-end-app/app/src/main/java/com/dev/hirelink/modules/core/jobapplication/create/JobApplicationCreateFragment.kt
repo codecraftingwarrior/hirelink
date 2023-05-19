@@ -146,14 +146,20 @@ class JobApplicationCreateFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        init()
+
+        bindListeners()
+    }
+
+    private fun init() {
         binding.textViewCandidacyNewInitials.text = listOfNotNull(
             currentUser.firstName?.get(0),
             currentUser.lastName?.get(0)
         ).joinToString("")
         binding.textViewCandidacyFirstName.text = currentUser.firstName
         binding.textViewCandidacyLastName.text = currentUser.lastName
-
-        bindListeners()
+        binding.textViewCandidacyCompanyName.text = jobOffer.owner?.company?.name
+        binding.textViewCandidacyJobTitle.text = jobOffer.title
     }
 
     private fun bindListeners() {

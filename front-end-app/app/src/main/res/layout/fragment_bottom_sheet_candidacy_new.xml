@@ -70,6 +70,35 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
+        <TextView
+            android:id="@+id/text_view_candidacy_company_name"
+            android:text="Apple"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/text_view_candidacy_new_initials"
+            android:textStyle="bold"
+            android:gravity="end"
+            android:fontFamily="@font/poppins"
+            android:layout_marginEnd="16dp"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/text_view_candidacy_job_title"
+            android:text="Sys Admin"
+            android:singleLine="true"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/text_view_candidacy_company_name"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_candidacy_new_initials"
+            android:textStyle="normal"
+            android:gravity="end|center"
+            android:fontFamily="@font/poppins"
+            android:layout_marginEnd="16dp"
+            android:layout_width="170dp"
+            android:layout_height="wrap_content" />
+
         <androidx.appcompat.widget.LinearLayoutCompat
             android:id="@+id/linear_layout_cv_choose"
             android:layout_width="match_parent"
