@@ -147,6 +147,7 @@
     <string name="published_at_applicants_first">%s • Be the first applicant</string>
     <string name="offer_category_contract_profession">%s • %s • %s</string>
     <string name="date_range">%s - %s</string>
+    <string name="job_offer_location">Job offer Location</string>
 
 
 </resources>
