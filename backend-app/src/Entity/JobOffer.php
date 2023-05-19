@@ -23,7 +23,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: JobOfferRepository::class)]
 #[ApiResource(
-    operations:[
+    operations: [
         new GetCollection(
             paginationEnabled: true,
             paginationItemsPerPage: 5,
@@ -31,7 +31,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
             normalizationContext: ['groups' => ['job-offer:read-collection', 'company:read:name']],
             provider: JobOfferListStateProvider::class
         ),
-        new Get(normalizationContext: ['groups' => ['job-offer:read', 'company:read:name']]),
+        new Get(normalizationContext: ['groups' => [
+            'job-offer:read',
+            'company:read:name',
+            'contract-type:read',
+            'job-offer-category:read',
+            'profession:read',
+            'tag:read',
+            'company:read:name'
+        ]]),
         new Get(
             uriTemplate: '/job-offers/owner/{id}',
             requirements: ['id' => '\d+'],
@@ -44,7 +52,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             normalizationContext: ['groups' => [
                 'job-offer:read-collection',
                 'job-offer-by-owner:read-collection'
-                ]
+            ]
             ],
             provider: FindJobOffersByOwnerIdProvider::class
         ),
@@ -63,9 +71,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
                 'summary' => 'Retrieves the job applications for the given job offer id'
             ],
             normalizationContext: ['groups' => ['job-offer-applications:read',
-                                                'job-application:read:applicant',
-                                                'user:read:first-name',
-                                                'user:read:last-name']]
+                'job-application:read:applicant',
+                'user:read:first-name',
+                'user:read:last-name']]
         ),
     ],
 )
@@ -116,7 +124,7 @@ class JobOffer extends TrackableEntity
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer-category:read'])]
+    #[Groups(['job-offer-category:read', 'job-offer:read'])]
     private ?JobOfferCategory $category = null;
 
     #[ORM\ManyToOne]
@@ -130,7 +138,7 @@ class JobOffer extends TrackableEntity
     private ?ContractType $contractType = null;
 
     #[ORM\OneToMany(mappedBy: 'jobOffer', targetEntity: JobApplication::class)]
-    #[Groups(['job-offer-by-owner:read-collection','job-offer-applications:read'])]
+    #[Groups(['job-offer-by-owner:read-collection', 'job-offer-applications:read'])]
     private Collection $jobApplications;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'jobOffers')]
@@ -147,6 +155,9 @@ class JobOffer extends TrackableEntity
 
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $country = null;
+
+    #[Groups(['job-offer:read'])]
+    private int $applicantCount = 0;
 
 
     public function __construct()
@@ -399,4 +410,22 @@ class JobOffer extends TrackableEntity
 
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getApplicantCount(): int
+    {
+        return $this->jobApplications->count();
+    }
+
+    /**
+     * @param int $applicantCount
+     */
+    public function setApplicantCount(int $applicantCount): void
+    {
+        $this->applicantCount = $applicantCount;
+    }
+
+
 }

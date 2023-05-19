@@ -109,10 +109,10 @@
     <string name="cv_bis">CV</string>
 
     <string name="data_analyst">Data Analyst</string>
+    <string name="fake_description">Epicuri fugit finibus quis sed euripidis lectus vehicula. Lorem commune quem vim nec nisl. Facilis adipisci minim erat putent. Rhoncus definitiones iuvaret expetenda omnesque dicit intellegat. Aliquet facilisi error constituam iisque. Pretium legimus assueverit nunc aenean pretium consequat pretium vel pretium.</string>
 
     <string name="schedule_label">Schedule</string>
     <string name="search">Search</string>
-
 
 
     <string name="profile_date_birth_text_field">Date of Birth</string>
@@ -142,6 +142,11 @@
     <!-- Other -->
     <string name="center_point">·</string>
     <string name="profile_information">Profil Informations</string>
+    <string name="job_offer_description">Job offer description</string>
+    <string name="published_at_applicants">%s • %d Applicants</string>
+    <string name="published_at_applicants_first">%s • Be the first applicant</string>
+    <string name="offer_category_contract_profession">%s • %s • %s</string>
+    <string name="date_range">%s - %s</string>
 
 
 </resources>

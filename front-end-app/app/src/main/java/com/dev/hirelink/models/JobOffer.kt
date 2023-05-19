@@ -15,7 +15,11 @@ data class JobOffer(
     val lng: Float? = null,
     val owner: ApplicationUser? = null,
     val companyName: String? = null,
-    val createdAt: String? = null
+    val createdAt: String? = null,
+    val contractType: ContractType? = null,
+    val category: JobOfferCategory? = null,
+    val applicantCount: Int? = 0,
+    val profession: Profession? = null
 ) {
     fun toIRI() = JOB_OFFER_RESOURCE_PREFIX + id
 }
