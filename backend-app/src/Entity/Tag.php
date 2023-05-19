@@ -7,6 +7,7 @@ use App\Repository\TagRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: TagRepository::class)]
 class Tag extends TrackableEntity
@@ -17,6 +18,7 @@ class Tag extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+    #[Groups(['tag:read'])]
     private ?string $name = null;
 
     #[ORM\ManyToMany(targetEntity: JobOffer::class, mappedBy: 'tags')]

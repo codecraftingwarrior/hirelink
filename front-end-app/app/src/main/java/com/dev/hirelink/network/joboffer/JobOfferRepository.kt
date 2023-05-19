@@ -34,4 +34,6 @@ class JobOfferRepository(private val context: Context) {
         companyIDs = companyIDs,
         professionIDs = professionIDs
     )
+
+    fun findById(id: Int) = service.findById(id)
 }

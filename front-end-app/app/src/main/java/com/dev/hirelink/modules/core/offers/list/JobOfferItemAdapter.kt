@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.*
 import com.dev.hirelink.R
@@ -18,6 +19,7 @@ import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.models.JobOffer
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.jobapplication.create.JobApplicationCreateFragment
+import com.dev.hirelink.modules.core.offers.detail.JobOfferBottomSheetDetailFragment
 import com.dev.hirelink.network.auth.AuthRepository
 import io.reactivex.disposables.CompositeDisposable
 
@@ -86,6 +88,12 @@ class JobOfferItemAdapter(
             (JobApplicationCreateFragment(jobOffer)).show(
                 (context as BaseActivity).supportFragmentManager,
                 JobApplicationCreateFragment.TAG
+            )
+        }
+        view.findViewById<ConstraintLayout>(R.id.root_constraint_layout)?.setOnClickListener {
+            (JobOfferBottomSheetDetailFragment(jobOffer)).show(
+                (context as BaseActivity).supportFragmentManager,
+                JobOfferBottomSheetDetailFragment.TAG
             )
         }
     }
