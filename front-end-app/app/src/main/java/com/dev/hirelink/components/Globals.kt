@@ -16,7 +16,7 @@ import java.util.*
 
 
 object Globals {
-    const val API_BASE_URL = "https://edd0-46-193-64-92.ngrok-free.app/api/";
+    const val API_BASE_URL = "https://7dec-46-193-64-92.ngrok-free.app/api/";
     const val PLAN_RESOURCE_PREFIX = "/api/plans/"
     const val JOB_OFFER_RESOURCE_PREFIX = "/api/job-offers/"
     const val APPLICATION_USER_RESOURCE_PREFIX = "/api/users/"

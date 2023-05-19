@@ -37,16 +37,17 @@ class JobOfferItemAdapter(
 
     class JobOfferItemViewHolder(private val view: View) : RecyclerView.ViewHolder(view) {
         private val logo: ImageView =
-            view.findViewById(com.dev.hirelink.R.id.offer_img_view_company_logo)
-        private val companyName: TextView = view.findViewById(com.dev.hirelink.R.id.company_name)
+            view.findViewById(R.id.offer_img_view_company_logo)
+        private val companyName: TextView = view.findViewById(R.id.company_name)
         private val jobTitle: TextView =
-            view.findViewById(com.dev.hirelink.R.id.text_view_job_title)
+            view.findViewById(R.id.text_view_job_title)
         private val salaryRange: TextView =
-            view.findViewById(com.dev.hirelink.R.id.text_view_salary_range)
-        private val location: TextView = view.findViewById(com.dev.hirelink.R.id.text_view_location)
+            view.findViewById(R.id.text_view_salary_range)
+        private val location: TextView = view.findViewById(R.id.text_view_location)
         private val timeagoText: TextView =
             view.findViewById(com.dev.hirelink.R.id.text_view_timeago)
         val buttonApply: Button = view.findViewById(R.id.button_apply_offer)
+        private val initials: TextView = view.findViewById(R.id.text_view_offer_initials)
 
         fun bind(jobOffer: JobOffer) {
             companyName.text = jobOffer.owner?.company?.name ?: "unknown"
@@ -57,6 +58,7 @@ class JobOfferItemAdapter(
                 jobOffer.maxSalary
             )
             location.text = jobOffer.address
+            initials.text = jobOffer.owner?.company?.name?.get(0).toString()
             timeagoText.text = toTimeAgo(jobOffer.createdAt ?: "2023-05-02T13:50:37+00:00")
         }
     }

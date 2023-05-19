@@ -24,7 +24,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/root_constraint_layout"
-            android:padding="13dp"
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -33,9 +33,24 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:scaleType="fitXY"
+                android:visibility="gone"
                 android:src="@drawable/apple_logo_icon"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/apple_logo_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/text_view_offer_initials"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/circle_initials"
+                android:text="A"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 />
@@ -51,9 +66,9 @@
                 android:layout_marginTop="4dp"
                 android:singleLine="true"
                 style="@style/OfferListItemStyleHeader"
-                app:layout_constraintStart_toEndOf="@id/offer_img_view_company_logo"
-                app:layout_constraintTop_toTopOf="@id/offer_img_view_company_logo"
-                app:layout_constraintBottom_toBottomOf="@id/offer_img_view_company_logo"
+                app:layout_constraintStart_toEndOf="@id/text_view_offer_initials"
+                app:layout_constraintTop_toTopOf="@id/text_view_offer_initials"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_offer_initials"
                 />
 
             <ImageView
@@ -65,8 +80,9 @@
                 android:src="@drawable/gray_suitcase_icon"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/gray_suitcase_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/offer_img_view_company_logo"
+                app:layout_constraintStart_toStartOf="@id/text_view_offer_initials"
+                app:layout_constraintEnd_toEndOf="@id/text_view_offer_initials"
+                app:layout_constraintTop_toBottomOf="@id/text_view_offer_initials"
                 />
 
             <TextView
@@ -93,7 +109,8 @@
                 android:src="@drawable/dollar_icon"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/dollar_icon"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/icon_job_title"
+                app:layout_constraintEnd_toEndOf="@id/icon_job_title"
                 app:layout_constraintTop_toBottomOf="@id/icon_job_title"
                 />
 
@@ -121,7 +138,8 @@
                 android:src="@drawable/gray_location_icon"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/gray_location_icon"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/icon_salary"
+                app:layout_constraintEnd_toEndOf="@id/icon_salary"
                 app:layout_constraintTop_toBottomOf="@id/icon_salary"
                 />
 
@@ -152,7 +170,7 @@
                 android:layout_marginTop="9dp"
                 android:singleLine="true"
                 style="@style/AppOfferTextRegular"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/icon_location"
                 app:layout_constraintTop_toBottomOf="@id/icon_location"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
