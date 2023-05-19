@@ -11,6 +11,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="none"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -71,7 +72,7 @@
                 tools:src="@drawable/profil_icon" />
 
             <TextView
-                android:id="@+id/text_bold"
+                android:id="@+id/text_view_fullname_profil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/profile_name"
@@ -95,7 +96,7 @@
                 android:fontFamily="@font/poppins"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/text_bold" />
+                app:layout_constraintTop_toBottomOf="@id/text_view_fullname_profil" />
 
             <TextView
                 android:id="@+id/text_another"
@@ -137,11 +138,14 @@
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/card_step3"
-                android:layout_width="370dp"
-                android:layout_height="@dimen/_560pxh"
+                android:layout_width="match_parent"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 app:cardCornerRadius="8dp"
                 app:cardElevation="8dp"
+                android:paddingBottom="16dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.494"
@@ -151,6 +155,7 @@
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
+                    android:paddingBottom="20dp"
                     android:layout_height="wrap_content">
 
                     <com.google.android.material.textfield.TextInputLayout
@@ -303,50 +308,6 @@
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/edit_text_field_city"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_60pxh" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/text_field_cv"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="@dimen/_340pxh"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="20dp"
-                        android:hint="@string/cv_bis"
-                        android:foregroundGravity="center_horizontal"
-                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/text_field_city">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edit_text_field_cv"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/_60pxh" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/text_field_motiv_letter"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="@dimen/_340pxh"
-                        android:layout_height="70dp"
-                        android:layout_marginTop="20dp"
-                        android:hint="@string/motivaiton_letter"
-                        android:foregroundGravity="center_horizontal"
-                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
-                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
-                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
-                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/text_field_cv">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/edit_text_motiv_letter"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/_60pxh" />
                     </com.google.android.material.textfield.TextInputLayout>

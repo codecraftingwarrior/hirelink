@@ -45,7 +45,7 @@
                 android:id="@+id/text_view_offer_initials"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:background="@drawable/circle_initials"
+                android:background="@drawable/circle_blue_initial"
                 android:text="A"
                 android:textColor="@color/black"
                 android:gravity="center"

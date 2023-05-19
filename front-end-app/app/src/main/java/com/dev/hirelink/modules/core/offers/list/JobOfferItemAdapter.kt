@@ -57,7 +57,7 @@ class JobOfferItemAdapter(
             companyName.text = jobOffer.owner?.company?.name ?: "unknown"
             jobTitle.text = jobOffer.title
             salaryRange.text = view.context.getString(
-                com.dev.hirelink.R.string.salary_range_str,
+                R.string.salary_range_str,
                 jobOffer.minSalary,
                 jobOffer.maxSalary
             )

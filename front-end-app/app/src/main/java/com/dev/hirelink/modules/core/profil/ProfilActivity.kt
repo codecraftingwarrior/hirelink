@@ -1,5 +1,6 @@
 package com.dev.hirelink.modules.core.profil
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -39,6 +40,10 @@ class ProfilActivity : AppCompatActivity() {
             val authRepository = (application as HirelinkApplication).authRepository
             authRepository.emitUser(ApplicationUser())
             finish()
+        }
+
+        binding.imgBtnSettingActivityProfil.setOnClickListener {
+            startActivity(Intent(this, ProfilSettingsActivity::class.java))
         }
     }
 
