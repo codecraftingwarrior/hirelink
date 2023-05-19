@@ -12,6 +12,9 @@
     <string name="employer_button_text">Employer</string>
     <string name="offers_label">Offers</string>
     <string name="notifications_label">Notifications</string>
+    <string name="candidacy_label">Candidacy</string>
+    <string name="schedule_label">Schedule</string>
+    <string name="search">Search</string>
 
     <!-- Login & Registration -->
     <string name="dont_have_acc">Don’t have an account yet ?</string>
