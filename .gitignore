@@ -98,3 +98,4 @@
 ###< symfony/framework-bundle ###
 .DS_Store
 /front-end-app/.DS_STORE
+/backend-app/public/

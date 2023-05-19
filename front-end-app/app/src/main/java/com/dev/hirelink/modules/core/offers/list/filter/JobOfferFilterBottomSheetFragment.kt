@@ -73,7 +73,6 @@ class JobOfferFilterBottomSheetFragment() : BottomSheetDialogFragment() {
 
         filterViewModel.chosenProfessions.observe(viewLifecycleOwner) {
             binding.textViewProfessionFilterVal.text = it?.map { c -> c?.name }?.joinToString(", ")
-            Log.d(TAG, it.toString())
             chosenProfessions = it
             if (binding.textViewProfessionFilterVal.text.isNullOrEmpty())
                 binding.textViewProfessionFilterVal.text =

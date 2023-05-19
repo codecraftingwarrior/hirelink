@@ -27,6 +27,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 
 #[ORM\Entity(repositoryClass: ApplicationUserRepository::class)]
@@ -142,7 +143,6 @@ class ApplicationUser extends BaseUser
 
     #[ORM\Column(length: 80)]
     #[Groups(['user:read', 'user:writable'])]
-    #[NotBlank]
     private ?string $phoneNumber = null;
 
 

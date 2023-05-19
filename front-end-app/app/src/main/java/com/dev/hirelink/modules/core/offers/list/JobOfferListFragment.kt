@@ -28,6 +28,7 @@ import com.dev.hirelink.models.JobOffer
 import com.dev.hirelink.models.PaginatedResourceWrapper
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.BaseActivity
+import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
@@ -45,6 +46,7 @@ class JobOfferListFragment : Fragment() {
     private lateinit var binding: FragmentJobOfferListBinding
     private lateinit var jobOfferViewModel: JobOfferViewModel
     private lateinit var jobOfferFilterViewModel: JobOfferFilterViewModel
+    private lateinit var jobApplicationViewModel: JobApplicationViewModel
     private lateinit var customLoadingOverlay: CustomLoadingOverlay
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private lateinit var recyclerView: RecyclerView
@@ -79,6 +81,7 @@ class JobOfferListFragment : Fragment() {
         jobOfferViewModel = (requireActivity() as BaseActivity).jobOfferViewModel
         sharedPrefs = SharedPreferenceManager(requireContext())
         jobOfferFilterViewModel = (requireActivity() as BaseActivity).jobOfferListfilterViewModel
+        jobApplicationViewModel = (requireActivity() as BaseActivity).jobApplicationViewModel
         return binding.root
     }
 
@@ -102,20 +105,30 @@ class JobOfferListFragment : Fragment() {
         jobOfferFilterViewModel.criteria.observe(viewLifecycleOwner) {
             filterCriteria = it
 
-            fetchJobOffers { data: PaginatedResourceWrapper<JobOffer> ->
-                jobOffers = data.items ?: mutableListOf()
-                paginatedResource = data
+            onCriteriaChange()
+        }
 
-                if (!loaded) {
-                    initRecyclerView()
-                    loaded = true
-                } else {
-                    isLoading = false
-                    jobOfferItemAdapter.dataset = jobOffers
-                    jobOfferItemAdapter.notifyDataSetChanged()
-                }
-
+        jobApplicationViewModel.jobApplicationDone.observe(viewLifecycleOwner) {
+            if (it) {
+                onCriteriaChange()
             }
+        }
+    }
+
+    private fun onCriteriaChange() {
+        fetchJobOffers { data: PaginatedResourceWrapper<JobOffer> ->
+            jobOffers = data.items ?: mutableListOf()
+            paginatedResource = data
+
+            if (!loaded) {
+                initRecyclerView()
+                loaded = true
+            } else {
+                isLoading = false
+                jobOfferItemAdapter.dataset = jobOffers
+                jobOfferItemAdapter.notifyDataSetChanged()
+            }
+
         }
     }
 
@@ -130,9 +143,12 @@ class JobOfferListFragment : Fragment() {
 
     private fun fetchJobOffers(
         pageNumber: Int = 1,
+        showLoader: Boolean = true,
         onDataReceived: (data: PaginatedResourceWrapper<JobOffer>) -> Unit
     ) {
-        customLoadingOverlay.showLoading()
+        if (showLoader)
+            customLoadingOverlay.showLoading()
+
         val disposable = jobOfferViewModel
             .jobOfferRepository
             .findAll(
@@ -188,7 +204,7 @@ class JobOfferListFragment : Fragment() {
         val nextPageNumber = nextPageUri.getQueryParameter("page")?.toIntOrNull()
 
         if (nextPageNumber != null) {
-            fetchJobOffers(pageNumber = nextPageNumber) {
+            fetchJobOffers(pageNumber = nextPageNumber, showLoader = false) {
                 jobOffers.removeAt(jobOffers.size - 1)
                 val scrollPosition: Int = jobOffers.size
                 jobOfferItemAdapter.notifyItemRemoved(scrollPosition)

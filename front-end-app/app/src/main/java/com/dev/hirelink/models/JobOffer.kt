@@ -1,5 +1,7 @@
 package com.dev.hirelink.models
 
+import com.dev.hirelink.components.Globals.JOB_OFFER_RESOURCE_PREFIX
+
 data class JobOffer(
     val id: Int? = null,
     val title: String? = null,
@@ -14,4 +16,6 @@ data class JobOffer(
     val owner: ApplicationUser? = null,
     val companyName: String? = null,
     val createdAt: String? = null
-)
+) {
+    fun toIRI() = JOB_OFFER_RESOURCE_PREFIX + id
+}

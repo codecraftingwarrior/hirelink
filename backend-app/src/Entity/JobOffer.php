@@ -68,18 +68,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
                                                 'user:read:last-name']]
         ),
     ],
-),
-/*ApiFilter(
-    SearchFilter::class,
-    properties: [
-        'id' => 'exact',
-        'address' => 'partial',
-        'profession' => 'partial',
-        'owner' => 'partial',
-    ]
-)*/
-//ApiFilter(RangeFilter::class, properties: ['minSalary']),
-//ApiFilter(DateFilter::class, properties: ['fromDate', 'toDate'])
+)
 ]
 class JobOffer extends TrackableEntity
 {

@@ -7,6 +7,6 @@ import com.dev.hirelink.R
 class CandidacyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_candidate_detail)
+        setContentView(R.layout.activity_candidacy)
     }
 }

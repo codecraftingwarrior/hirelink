@@ -91,4 +91,7 @@ dependencies {
     implementation "com.mapbox.search:autofill:1.0.0-rc.3"
     implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-rc.3"
 
+
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    implementation 'com.mindorks.android:prdownloader:0.6.0'
 }

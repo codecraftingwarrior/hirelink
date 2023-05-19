@@ -7,7 +7,9 @@ use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
+use App\Controller\CreateJobApplicationController;
 use App\Entity\RootEntity\TrackableEntity;
+use App\Enum\JobApplicationState;
 use App\Repository\JobApplicationRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -16,15 +18,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: JobApplicationRepository::class)]
 #[ApiResource(
-    operations:[
-        new Get(
-            normalizationContext: ['groups' => ['job-application:read', 'user:read', 'document:read']]
-        ),
+    operations: [
+        new Get(),
         new Post(
-            denormalizationContext: ['groups' => ['job-application:writable',
-                                                  'document:writable']]
+            controller: CreateJobApplicationController::class,
+            deserialize: false
         )
     ],
+    normalizationContext: ['groups' => ['job-application:read', 'user:read', 'document:read', 'role:read']],
+    denormalizationContext: ['groups' => ['job-application:writable', 'document:writable']]
 )]
 class JobApplication extends TrackableEntity
 {
@@ -34,11 +36,12 @@ class JobApplication extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
-    private ?string $state = 'null';
+    #[Groups(['job-application:read'])]
+    private ?string $state = 'PENDING';
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-application:read', 'job-application:writable'])]
+    #[Groups(['job-application:writable'])]
     private ?JobOffer $jobOffer = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
