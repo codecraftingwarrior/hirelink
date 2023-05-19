@@ -180,6 +180,7 @@
                 style="@style/AppButtonIndigoApplyRounded"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
+                android:visibility="gone"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:letterSpacing="0.05"

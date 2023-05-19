@@ -38,7 +38,7 @@ import kotlinx.coroutines.Job
 
 class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
-    private val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
+    val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var currentUser: ApplicationUser
     private lateinit var jobOfferFilterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
