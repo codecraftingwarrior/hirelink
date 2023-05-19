@@ -3,8 +3,8 @@
     <item
         android:id="@+id/menu_item_schedule"
         android:enabled="true"
-        android:icon="@drawable/schedule_icon"
-        android:title="@string/schedule"/>
+        android:icon="@drawable/schedule_black_icon"
+        android:title="@string/schedule_label"/>
     <item
         android:id="@+id/menu_item_candidacy"
         android:enabled="true"

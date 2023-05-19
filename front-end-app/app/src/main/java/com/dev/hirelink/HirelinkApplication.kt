@@ -22,7 +22,11 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
 
+// Classe HirelinkApplication héritant de la classe Application
 class HirelinkApplication : Application() {
+
+    // Propriété authRepository de type AuthRepository, initialisée avec un objet de type AuthRepository
+    // Utilise le mécanisme 'lazy' pour n'instancier l'objet qu'au moment de la première utilisation
     val authRepository: AuthRepository by lazy { AuthRepository(applicationContext) }
     val roleRepository: RoleRepository by lazy { RoleRepository(applicationContext) }
     val userRepository: UserRepository by lazy { UserRepository(applicationContext) }

@@ -140,7 +140,7 @@
             </com.google.android.material.card.MaterialCardView>
 
             <com.google.android.material.card.MaterialCardView
-                android:id="@+id/material_card_1"
+                android:id="@+id/material_card_0"
                 android:layout_height="wrap_content"
                 android:layout_width="match_parent"
                 app:cardElevation="5dp"
@@ -157,6 +157,64 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/material_card_profil">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_0"
+                    android:padding="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/favoris_logo"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/profil_favoris_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/favoris_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_favorites"
+                        android:textStyle="bold"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/poppins"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/favoris_logo"
+                        android:layout_marginTop="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/favoris_chevron"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/chevron_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_card_1"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:cardElevation="5dp"
+                style="?attr/materialCardViewElevatedStyle"
+                app:cardCornerRadius="10dp"
+                app:rippleColor="@color/gray_app"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/material_card_0">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/card_1"
