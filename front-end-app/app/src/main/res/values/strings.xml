@@ -65,9 +65,11 @@
     <string name="job_application_in_progress_state">In Progress</string>
     <string name="job_application_refused_state">Refused</string>
     <string name="job_application_accepted_state">Accepted</string>
+    <string name="apply">Apply</string>
 
     <!-- Employer -->
     <string name="employer">Employer</string>
+    <string name="apple">Apple</string>
 
     <!-- Date Selection -->
     <string name="date_select_prompt">Choose a date</string>
@@ -107,8 +109,10 @@
     <!-- Motivation Letter -->
     <string name="motivaiton_letter">Motivation Letter</string>
 
-    <!-- Today -->
+    <!-- Dates -->
     <string name="today">Today</string>
+    <string name="date_1">27 March 2023</string>
+
 
     <!-- Candidacy -->
     <string name="candidacy_accepted">Your candidacy has been accepted !</string>
