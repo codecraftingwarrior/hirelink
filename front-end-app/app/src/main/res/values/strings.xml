@@ -111,14 +111,18 @@
 
     <!-- Dates -->
     <string name="today">Today</string>
+    <string name="this_month">This month</string>
     <string name="date_1">27 March 2023</string>
-
 
     <!-- Candidacy -->
     <string name="candidacy_accepted">Your candidacy has been accepted !</string>
+    <string name="candidacy_seen">Your candidacy has been seen !</string>
+    <string name="candidacy_rejected">Your candidacy has been rejected !</string>
 
     <!-- Job Positions -->
     <string name="data_analyst">Data Analyst</string>
+    <string name="cleaning_agent">Cleaning Agent</string>
+    <string name="engineer">Engineer</string>
 
     <!-- Other -->
     <string name="center_point">·</string>
