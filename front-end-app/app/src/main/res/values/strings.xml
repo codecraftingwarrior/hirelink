@@ -94,9 +94,6 @@
     <string name="cv">Curriculum vitae</string>
     <string name="job_application_success_msg">Your application has been sent to the company.</string>
 
-
-
-
     <string name="mapbox_access_token">pk.eyJ1IjoiY29kZWNyYWZ0aW5nd2FycmlvciIsImEiOiJjbGdpNGd5aHYwZ2Z4M2RwZzRucGFlajF6In0.3efBYpHbBE22AIIQT6q1rg</string>
     <string name="all">All</string>
     <string name="_10_km">10 Km</string>
@@ -108,5 +105,43 @@
     <string name="company">Company</string>
     <string name="company_filter_hint">Choose a set of companies</string>
     <string name="profession_filter_hint">Choose a set of professions</string>
+    <string name="profile_favorites">Favorites</string>
+    <string name="cv_bis">CV</string>
+
+    <string name="data_analyst">Data Analyst</string>
+
+    <string name="schedule_label">Schedule</string>
+    <string name="search">Search</string>
+
+
+
+    <string name="profile_date_birth_text_field">Date of Birth</string>
+    <string name="profile_phone_number">Phone Number</string>
+    <string name="profile_nationality_text_field">Nationality</string>
+
+
+    <!-- Employer -->
+    <string name="apple">Apple</string>
+
+    <!-- Location -->
+    <string name="city">City</string>
+
+    <!-- Motivation Letter -->
+    <string name="motivaiton_letter">Motivation Letter</string>
+
+    <!-- Dates -->
+    <string name="today">Today</string>
+    <string name="date_1">27 March 2023</string>
+
+
+    <!-- Candidacy -->
+    <string name="candidacy_accepted">Your candidacy has been accepted !</string>
+
+    <!-- Job Positions -->
+
+    <!-- Other -->
+    <string name="center_point">·</string>
+    <string name="profile_information">Profil Informations</string>
+
 
 </resources>
