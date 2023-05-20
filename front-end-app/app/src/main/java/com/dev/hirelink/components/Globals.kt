@@ -37,6 +37,13 @@ fun toTimeAgo(dateString: String): String {
     }
 }
 
+fun dateAsString(inputDate: String): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
+    val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    val date = inputFormat.parse(inputDate)
+    return outputFormat.format(date)
+}
+
 fun getAbsolutePathFromUri(uri: Uri, contentResolver: ContentResolver): String {
     var path: String? = null
     val projection = arrayOf(MediaStore.Files.FileColumns.DATA)
