@@ -18,8 +18,10 @@ import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityBaseBinding
+import com.dev.hirelink.enums.RoleType
 import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.modules.auth.login.LoginActivity
+import com.dev.hirelink.modules.core.employer.EmployerProfilActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
 import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
@@ -102,7 +104,15 @@ class BaseActivity : AppCompatActivity() {
                 if (isLoggedIn) {
                     binding.imgBtnProfile.visibility = View.VISIBLE
                     binding.buttonLogin.visibility = View.GONE
-                    binding.bottomNavigation.visibility = View.VISIBLE
+                    binding.bottomNavigation.visibility =
+                        if (currentUser.role?.code == RoleType.APPLICANT.code) View.VISIBLE else View.GONE
+                    if (currentUser.role?.code != RoleType.APPLICANT.code) {
+                        binding.chipGroupDistanceFilter.visibility = View.GONE
+                        binding.addFloatingActionButton.visibility = View.VISIBLE
+                    } else {
+                        binding.chipGroupDistanceFilter.visibility = View.VISIBLE
+                        binding.addFloatingActionButton.visibility = View.GONE
+                    }
                 } else {
                     binding.imgBtnProfile.visibility = View.GONE
                     binding.buttonLogin.visibility = View.VISIBLE
@@ -129,7 +139,10 @@ class BaseActivity : AppCompatActivity() {
         }
 
         binding.imgBtnProfile.setOnClickListener {
-            startActivity(Intent(this, ProfilActivity::class.java))
+            if (currentUser.role?.code == RoleType.APPLICANT.code)
+                startActivity(Intent(this, ProfilActivity::class.java))
+            else
+                startActivity(Intent(this, EmployerProfilActivity::class.java))
         }
 
         binding.buttonLogin.setOnClickListener {

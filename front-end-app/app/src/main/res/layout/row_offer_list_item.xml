@@ -56,6 +56,20 @@
                 />
 
             <TextView
+                android:id="@+id/text_view_job_application_count"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/circle_blue_initial"
+                android:text="2"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
                 android:id="@+id/company_name"
                 tools:text="Apple"
                 android:layout_width="205dp"
@@ -192,7 +206,7 @@
                 app:layout_constraintBottom_toBottomOf="@id/text_view_timeago" />
 
             <ImageButton
-                android:id="@+id/image_view_back_arrow"
+                android:id="@+id/image_view_bookmark_arrow"
                 android:layout_width="@dimen/_35pxh"
                 android:layout_height="@dimen/_45pxh"
                 android:scaleType="fitXY"

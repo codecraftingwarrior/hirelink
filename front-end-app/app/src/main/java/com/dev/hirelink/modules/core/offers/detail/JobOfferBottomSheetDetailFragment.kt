@@ -22,6 +22,7 @@ import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.components.dateAsString
 import com.dev.hirelink.components.toTimeAgo
 import com.dev.hirelink.databinding.FragmentBottomSheetJobOfferDetailBinding
+import com.dev.hirelink.enums.RoleType
 import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.models.JobOffer
 import com.dev.hirelink.modules.core.BaseActivity
@@ -129,7 +130,7 @@ class JobOfferBottomSheetDetailFragment(
             .subscribe { applicationUser ->
                 currentUser = applicationUser ?: ApplicationUser()
                 binding.buttonJobOfferDetailApply.visibility =
-                    if (currentUser.id != null) View.VISIBLE else View.GONE
+                    if (currentUser.id != null && currentUser.role?.code == RoleType.APPLICANT.code) View.VISIBLE else View.GONE
             }
 
         compositeDisposable.add(disposable)

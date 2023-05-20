@@ -71,6 +71,7 @@
 
                 <ImageButton
                     android:id="@+id/img_btn_setting"
+                    android:visibility="gone"
                     android:layout_width="@dimen/_27pxh"
                     android:layout_height="@dimen/_27pxh"
                     android:scaleType="fitXY"

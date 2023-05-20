@@ -13,7 +13,6 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -24,30 +23,35 @@ import com.dev.hirelink.components.HttpExceptionParser
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.FragmentJobOfferListBinding
 import com.dev.hirelink.dto.BasicErrorResponse
+import com.dev.hirelink.enums.RoleType
+import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.models.JobOffer
-import com.dev.hirelink.models.PaginatedResourceWrapper
+import com.dev.hirelink.models.WrappedPaginatedResource
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
+import com.dev.hirelink.network.auth.AuthRepository
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
-import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.tasks.Task
 import com.google.android.material.snackbar.Snackbar
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import retrofit2.HttpException
 
 class JobOfferListFragment : Fragment() {
-    private lateinit var paginatedResource: PaginatedResourceWrapper<JobOffer>
+    private lateinit var paginatedResource: WrappedPaginatedResource<JobOffer>
     private lateinit var jobOfferItemAdapter: JobOfferItemAdapter
     private lateinit var binding: FragmentJobOfferListBinding
     private lateinit var jobOfferViewModel: JobOfferViewModel
     private lateinit var jobOfferFilterViewModel: JobOfferFilterViewModel
     private lateinit var jobApplicationViewModel: JobApplicationViewModel
+    private lateinit var authRepository: AuthRepository
     private lateinit var customLoadingOverlay: CustomLoadingOverlay
+    private lateinit var currentUser: ApplicationUser
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private lateinit var recyclerView: RecyclerView
     private lateinit var jobOffers: MutableList<JobOffer?>
@@ -82,6 +86,8 @@ class JobOfferListFragment : Fragment() {
         sharedPrefs = SharedPreferenceManager(requireContext())
         jobOfferFilterViewModel = (requireActivity() as BaseActivity).jobOfferListfilterViewModel
         jobApplicationViewModel = (requireActivity() as BaseActivity).jobApplicationViewModel
+        authRepository = (requireActivity() as BaseActivity).authRepository
+
         return binding.root
     }
 
@@ -96,9 +102,11 @@ class JobOfferListFragment : Fragment() {
         fusedLocationProviderClient =
             LocationServices.getFusedLocationProviderClient(requireActivity())
 
-        requestLocationPermission()
+        fetchCurrentUser {
+            requestLocationPermission()
 
-        attachObservers()
+            attachObservers()
+        }
     }
 
     private fun attachObservers() {
@@ -116,7 +124,7 @@ class JobOfferListFragment : Fragment() {
     }
 
     private fun onCriteriaChange() {
-        fetchJobOffers { data: PaginatedResourceWrapper<JobOffer> ->
+        fetchJobOffers { data: WrappedPaginatedResource<JobOffer> ->
             jobOffers = data.items ?: mutableListOf()
             paginatedResource = data
 
@@ -144,32 +152,41 @@ class JobOfferListFragment : Fragment() {
     private fun fetchJobOffers(
         pageNumber: Int = 1,
         showLoader: Boolean = true,
-        onDataReceived: (data: PaginatedResourceWrapper<JobOffer>) -> Unit
+        onDataReceived: (data: WrappedPaginatedResource<JobOffer>) -> Unit
     ) {
         if (showLoader)
             customLoadingOverlay.showLoading()
 
-        val disposable = jobOfferViewModel
+        jobOfferViewModel
             .jobOfferRepository
-            .findAll(
-                pageNumber = pageNumber,
-                lat = filterCriteria.latitude,
-                lng = filterCriteria.longitude,
-                maxDistance = filterCriteria.maxDistance,
-                jobTitle = filterCriteria.jobTitle,
-                minSalary = filterCriteria.minSalary,
-                maxSalary = filterCriteria.maxSalary,
-                fromDate = filterCriteria.fromDate,
-                toDate = filterCriteria.toDate,
-                companyIDs = filterCriteria.chosenCompanyIds,
-                professionIDs = filterCriteria.chosenProfessionIds
-            )
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .doFinally { customLoadingOverlay.hideLoading() }
-            .subscribe(onDataReceived) { error: Throwable -> handleError(error) }
+            .apply {
+                val jobOfferObservable: Single<WrappedPaginatedResource<JobOffer>> =
+                    if (currentUser.role?.code == RoleType.EMPLOYER.code || currentUser.role?.code == RoleType.INTERIM_AGENCY.code)
+                        findByOwnerId(currentUser.id!!, pageNumber = pageNumber)
+                    else this.findAll(
+                        pageNumber = pageNumber,
+                        lat = filterCriteria.latitude,
+                        lng = filterCriteria.longitude,
+                        maxDistance = filterCriteria.maxDistance,
+                        jobTitle = filterCriteria.jobTitle,
+                        minSalary = filterCriteria.minSalary,
+                        maxSalary = filterCriteria.maxSalary,
+                        fromDate = filterCriteria.fromDate,
+                        toDate = filterCriteria.toDate,
+                        companyIDs = filterCriteria.chosenCompanyIds,
+                        professionIDs = filterCriteria.chosenProfessionIds
+                    )
 
-        compositeDisposable.add(disposable)
+
+                val disposable = jobOfferObservable
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .doFinally { customLoadingOverlay.hideLoading() }
+                    .subscribe(onDataReceived) { error: Throwable -> handleError(error) }
+
+                compositeDisposable.add(disposable)
+            }
+
     }
 
     override fun onDestroy() {
@@ -292,6 +309,17 @@ class JobOfferListFragment : Fragment() {
                 sharedPrefs.storeCoordinates(location.latitude, location.longitude)
             }
         }
+    }
+
+    private fun fetchCurrentUser(onUserFetched: () -> Unit) {
+        val disposable = authRepository
+            .currentUser
+            .subscribe { applicationUser ->
+                currentUser = applicationUser!!
+                onUserFetched()
+            }
+
+        compositeDisposable.add(disposable)
     }
 
 

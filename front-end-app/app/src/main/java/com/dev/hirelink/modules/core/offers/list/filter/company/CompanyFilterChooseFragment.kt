@@ -1,13 +1,11 @@
 package com.dev.hirelink.modules.core.offers.list.filter.company
 
-import android.app.Activity
 import android.app.Dialog
 import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.DisplayMetrics
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -15,14 +13,10 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
-import android.widget.AutoCompleteTextView
-import android.widget.FrameLayout
-import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat.getSystemService
 import androidx.databinding.DataBindingUtil
 import com.dev.hirelink.R
 import com.dev.hirelink.models.Company
-import com.dev.hirelink.models.PaginatedResourceWrapper
+import com.dev.hirelink.models.WrappedPaginatedResource
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -34,7 +28,6 @@ import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import org.w3c.dom.Text
 
 
 class CompanyFilterChooseFragment : BottomSheetDialogFragment() {
@@ -197,7 +190,7 @@ class CompanyFilterChooseFragment : BottomSheetDialogFragment() {
 
     private fun fetchCompanies(
         showLoader: Boolean = true,
-        onDataReceived: (data: PaginatedResourceWrapper<Company>) -> Unit
+        onDataReceived: (data: WrappedPaginatedResource<Company>) -> Unit
     ) {
         if (showLoader)
             showLoader()

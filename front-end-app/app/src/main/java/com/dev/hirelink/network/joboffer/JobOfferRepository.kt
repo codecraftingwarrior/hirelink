@@ -36,4 +36,6 @@ class JobOfferRepository(private val context: Context) {
     )
 
     fun findById(id: Int) = service.findById(id)
+
+    fun findByOwnerId(id: Int, pageNumber: Int = 1 ) = service.findByOwnerId(id)
 }

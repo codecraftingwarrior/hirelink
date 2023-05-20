@@ -7,7 +7,6 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,8 +16,7 @@ import android.widget.ArrayAdapter
 import androidx.databinding.DataBindingUtil
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentProfessionFilterChooseBinding
-import com.dev.hirelink.models.Company
-import com.dev.hirelink.models.PaginatedResourceWrapper
+import com.dev.hirelink.models.WrappedPaginatedResource
 import com.dev.hirelink.models.Profession
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
@@ -195,7 +193,7 @@ class ProfessionFilterChooseFragment : BottomSheetDialogFragment() {
 
     private fun fetchProfessions(
         showLoader: Boolean = true,
-        onDataReceived: (data: PaginatedResourceWrapper<Profession>) -> Unit
+        onDataReceived: (data: WrappedPaginatedResource<Profession>) -> Unit
     ) {
         if (showLoader)
             showLoader()

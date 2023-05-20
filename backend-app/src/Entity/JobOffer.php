@@ -51,7 +51,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             paginationMaximumItemsPerPage: 5,
             normalizationContext: ['groups' => [
                 'job-offer:read-collection',
-                'job-offer-by-owner:read-collection'
+                'company:read:name'
             ]
             ],
             provider: FindJobOffersByOwnerIdProvider::class
@@ -138,7 +138,7 @@ class JobOffer extends TrackableEntity
     private ?ContractType $contractType = null;
 
     #[ORM\OneToMany(mappedBy: 'jobOffer', targetEntity: JobApplication::class)]
-    #[Groups(['job-offer-by-owner:read-collection', 'job-offer-applications:read'])]
+    #[Groups(['job-offer-applications:read'])]
     private Collection $jobApplications;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'jobOffers')]
@@ -156,7 +156,7 @@ class JobOffer extends TrackableEntity
     #[ORM\Column(length: 80, nullable: true)]
     private ?string $country = null;
 
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
     private int $applicantCount = 0;
 
 

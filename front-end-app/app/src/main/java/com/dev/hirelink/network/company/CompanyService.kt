@@ -1,7 +1,7 @@
 package com.dev.hirelink.network.company
 
 import com.dev.hirelink.models.Company
-import com.dev.hirelink.models.PaginatedResourceWrapper
+import com.dev.hirelink.models.WrappedPaginatedResource
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
@@ -12,5 +12,5 @@ interface CompanyService {
     fun findAll(
         @Query("page") pageNumber: Int = 1,
         @Query("name") name: String? = null,
-    ): Single<PaginatedResourceWrapper<Company>>
+    ): Single<WrappedPaginatedResource<Company>>
 }
