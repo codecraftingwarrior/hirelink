@@ -117,6 +117,7 @@ class BaseActivity : AppCompatActivity() {
                     binding.imgBtnProfile.visibility = View.GONE
                     binding.buttonLogin.visibility = View.VISIBLE
                     binding.bottomNavigation.visibility = View.GONE
+                    binding.addFloatingActionButton.visibility = View.GONE  
                 }
             }
 

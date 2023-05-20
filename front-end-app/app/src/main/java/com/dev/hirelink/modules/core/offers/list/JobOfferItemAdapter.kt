@@ -114,15 +114,49 @@ class JobOfferItemAdapter(
         if (holder is JobOfferItemViewHolder) {
             val applyButton = holder.itemView.findViewById<AppCompatButton>(R.id.button_apply_offer)
 
-            if (currentUser.id != null && currentUser.role?.code == RoleType.APPLICANT.code) {
-                applyButton.visibility = View.VISIBLE
+            if (currentUser.id != null) {
+                when(currentUser.role?.code) {
+                    RoleType.APPLICANT.code -> {
+                        with(holder.itemView) {
+                            findViewById<TextView>(R.id.text_view_offer_initials).visibility = View.VISIBLE
+                            findViewById<TextView>(R.id.company_name).visibility = View.VISIBLE
+                            findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = View.VISIBLE
+
+                            findViewById<TextView>(R.id.text_view_job_application_count).visibility = View.GONE
+                            findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility = View.GONE
+                            applyButton.visibility = View.VISIBLE
+                            holder.itemView.findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility = View.GONE
+                        }
+                    }
+                    RoleType.INTERIM_AGENCY.code, RoleType.EMPLOYER.code -> {
+                        with(holder.itemView) {
+                            findViewById<TextView>(R.id.text_view_offer_initials).visibility = View.GONE
+                            findViewById<TextView>(R.id.company_name).visibility = View.GONE
+                            findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = View.GONE
+
+                            findViewById<TextView>(R.id.text_view_job_application_count).visibility = View.VISIBLE
+                            findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility = View.VISIBLE
+
+                            val jobTitleIcon = findViewById<ImageView>(R.id.icon_job_title)
+
+                            val layoutParams = jobTitleIcon.layoutParams as ConstraintLayout.LayoutParams
+                            layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                            layoutParams.topToBottom = ConstraintLayout.LayoutParams.UNSET
+                            layoutParams.endToEnd = ConstraintLayout.LayoutParams.UNSET
+
+                            jobTitleIcon.layoutParams = layoutParams
+                        }
+                    }
+                }
+
             } else {
                 applyButton.visibility = View.GONE
+                holder.itemView.findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = View.GONE
+                holder.itemView.findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility = View.GONE
                 with(holder.itemView) {
                     val offerInitials = findViewById<TextView>(R.id.text_view_offer_initials)
                     offerInitials.visibility = View.VISIBLE
                     findViewById<TextView>(R.id.company_name).visibility = View.VISIBLE
-                    findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = View.VISIBLE
 
                     findViewById<TextView>(R.id.text_view_job_application_count).visibility = View.GONE
 
@@ -134,36 +168,6 @@ class JobOfferItemAdapter(
                     layoutParams.topToBottom = offerInitials.id
 
                     jobTitleIcon.layoutParams = layoutParams
-                }
-            }
-
-            when(currentUser.role?.code) {
-                RoleType.APPLICANT.code -> {
-                   with(holder.itemView) {
-                       findViewById<TextView>(R.id.text_view_offer_initials).visibility = View.VISIBLE
-                       findViewById<TextView>(R.id.company_name).visibility = View.VISIBLE
-                       findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = View.VISIBLE
-
-                       findViewById<TextView>(R.id.text_view_job_application_count).visibility = View.GONE
-                   }
-                }
-                RoleType.INTERIM_AGENCY.code, RoleType.EMPLOYER.code -> {
-                    with(holder.itemView) {
-                        findViewById<TextView>(R.id.text_view_offer_initials).visibility = View.GONE
-                        findViewById<TextView>(R.id.company_name).visibility = View.GONE
-                        findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = View.GONE
-
-                        findViewById<TextView>(R.id.text_view_job_application_count).visibility = View.VISIBLE
-
-                        val jobTitleIcon = findViewById<ImageView>(R.id.icon_job_title)
-
-                        val layoutParams = jobTitleIcon.layoutParams as ConstraintLayout.LayoutParams
-                        layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                        layoutParams.topToBottom = ConstraintLayout.LayoutParams.UNSET
-                        layoutParams.endToEnd = ConstraintLayout.LayoutParams.UNSET
-
-                        jobTitleIcon.layoutParams = layoutParams
-                    }
                 }
             }
 
