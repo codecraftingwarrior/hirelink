@@ -3,7 +3,9 @@ package com.dev.hirelink.network.joboffer
 import com.dev.hirelink.models.JobOffer
 import com.dev.hirelink.models.WrappedPaginatedResource
 import io.reactivex.Single
+import retrofit2.http.Body
 import retrofit2.http.GET
+import retrofit2.http.POST
 import retrofit2.http.Path
 import retrofit2.http.Query
 
@@ -34,4 +36,7 @@ interface JobOfferService {
         @Path("id") id: Int,
         @Query("page") pageNumber: Int = 1,
     ): Single<WrappedPaginatedResource<JobOffer>>
+
+    @POST("job-offers")
+    fun create(@Body jobOffer: JobOffer): Single<JobOffer>
 }

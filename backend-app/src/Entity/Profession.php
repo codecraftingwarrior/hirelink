@@ -15,11 +15,15 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ProfessionRepository::class)]
 #[ApiResource(
     operations:[
-        new Get(),
+        new Get(requirements: ['id' => '\d+']),
         new GetCollection(
             paginationEnabled: true,
             paginationItemsPerPage: 10,
             paginationMaximumItemsPerPage: 10
+        ),
+        new GetCollection(
+            uriTemplate: "/professions/all",
+            paginationEnabled: false
         )
     ],
     normalizationContext: ['groups' => ['profession:read']]

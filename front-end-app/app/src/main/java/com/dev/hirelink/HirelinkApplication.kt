@@ -10,7 +10,9 @@ import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.network.auth.AuthRepository
 import com.dev.hirelink.network.bankinformation.BankInformationRepository
 import com.dev.hirelink.network.company.CompanyRepository
+import com.dev.hirelink.network.contractype.ContractTypeRepository
 import com.dev.hirelink.network.jobapplication.JobApplicationRepository
+import com.dev.hirelink.network.jobcategory.JobCategoryRepository
 import com.dev.hirelink.network.joboffer.JobOfferRepository
 import com.dev.hirelink.network.paymentinformation.PaymentInformationRepository
 import com.dev.hirelink.network.plan.PlanRepository
@@ -34,6 +36,12 @@ class HirelinkApplication : Application() {
     val jobOfferRepository: JobOfferRepository by lazy { JobOfferRepository(applicationContext) }
     val companyRepository: CompanyRepository by lazy { CompanyRepository(applicationContext) }
     val professionRepository: ProfessionRepository by lazy { ProfessionRepository(applicationContext) }
+    val jobCategoryRepository: JobCategoryRepository by lazy { JobCategoryRepository(applicationContext) }
+    val contractTypeRepository: ContractTypeRepository by lazy {
+        ContractTypeRepository(
+            applicationContext
+        )
+    }
     val jobApplicationRepository: JobApplicationRepository by lazy {
         JobApplicationRepository(
             applicationContext

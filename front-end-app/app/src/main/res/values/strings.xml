@@ -150,4 +150,5 @@
     <string name="job_offer_location">Job offer Location</string>
 
 
+    <string name="job_offer_publish_succss">Your job offer has been successfully published.</string>
 </resources>

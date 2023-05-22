@@ -30,6 +30,7 @@ import com.dev.hirelink.models.WrappedPaginatedResource
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
+import com.dev.hirelink.modules.core.offers.JobOfferViewModel
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
 import com.dev.hirelink.network.auth.AuthRepository
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -57,7 +58,6 @@ class JobOfferListFragment : Fragment() {
     private lateinit var jobOffers: MutableList<JobOffer?>
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private var locationPermissionGranted: Boolean = false;
-    private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 2;
     private lateinit var filterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
     private var lastKnownLocation: Location? = null
     private lateinit var sharedPrefs: SharedPreferenceManager
@@ -109,6 +109,12 @@ class JobOfferListFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        attachObservers()
+    }
+
     private fun attachObservers() {
         jobOfferFilterViewModel.criteria.observe(viewLifecycleOwner) {
             filterCriteria = it
@@ -118,6 +124,13 @@ class JobOfferListFragment : Fragment() {
 
         jobApplicationViewModel.jobApplicationDone.observe(viewLifecycleOwner) {
             if (it) {
+                onCriteriaChange()
+            }
+        }
+
+        jobOfferViewModel.addedJobOffer.observe(viewLifecycleOwner) {
+            Log.d(javaClass.name, it.toString())
+            if(it.id != null) {
                 onCriteriaChange()
             }
         }
@@ -208,7 +221,6 @@ class JobOfferListFragment : Fragment() {
     }
 
     private fun loadMore() {
-
         if (paginatedResource.paginationView?.nextItemLink == null) {
             isLoading = false
             return
@@ -219,7 +231,6 @@ class JobOfferListFragment : Fragment() {
 
         val nextPageUri = Uri.parse(paginatedResource.paginationView?.nextItemLink)
         val nextPageNumber = nextPageUri.getQueryParameter("page")?.toIntOrNull()
-
         if (nextPageNumber != null) {
             fetchJobOffers(pageNumber = nextPageNumber, showLoader = false) {
                 jobOffers.removeAt(jobOffers.size - 1)

@@ -7,6 +7,7 @@ use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\Query\Expr\Join;
+use Doctrine\ORM\Query\Expr\OrderBy;
 use Doctrine\ORM\Query\QueryException;
 use Doctrine\Persistence\ManagerRegistry;
 use ApiPlatform\Doctrine\Orm\Paginator;
@@ -137,6 +138,31 @@ class JobOfferRepository extends ServiceEntityRepository
                 ->setParameter('cities', $criteria['city']);
         }
 
+        $qb->orderBy('o.createdAt', 'DESC');
+
+
+        $criteriaPaging = Criteria::create()
+            ->setFirstResult($firstResult)
+            ->setMaxResults(JOB_OFFER_ITEM_PER_PAGE);
+        $qb->addCriteria($criteriaPaging);
+
+
+        $doctrinePaginator = new DoctrinePaginator($qb);
+
+        return new Paginator($doctrinePaginator);
+    }
+
+    public function findByOwnerPaginated(int $page = 1, $criteria = []): Paginator {
+        $firstResult = ($page - 1) * 5;
+
+        $qb = $this
+            ->createQueryBuilder('jo');
+
+        $qb->where(
+            $qb
+                ->expr()
+                ->eq('jo.owner', $criteria['ownerID'])
+        )->orderBy('jo.createdAt', 'DESC');
 
         $criteriaPaging = Criteria::create()
             ->setFirstResult($firstResult)

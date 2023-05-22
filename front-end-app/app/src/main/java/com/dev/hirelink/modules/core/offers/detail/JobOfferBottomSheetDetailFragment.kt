@@ -27,7 +27,7 @@ import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.models.JobOffer
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.jobapplication.create.JobApplicationCreateFragment
-import com.dev.hirelink.modules.core.offers.list.JobOfferViewModel
+import com.dev.hirelink.modules.core.offers.JobOfferViewModel
 import com.dev.hirelink.network.auth.AuthRepository
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -35,16 +35,11 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.snackbar.Snackbar
 import com.mapbox.geojson.Point
 import com.mapbox.maps.CameraOptions
-import com.mapbox.maps.MapInitOptions
 import com.mapbox.maps.MapView
 import com.mapbox.maps.Style
 import com.mapbox.maps.plugin.annotation.annotations
 import com.mapbox.maps.plugin.annotation.generated.PointAnnotationOptions
 import com.mapbox.maps.plugin.annotation.generated.createPointAnnotationManager
-import com.mapbox.navigation.base.options.NavigationOptions
-import com.mapbox.navigation.core.lifecycle.MapboxNavigationApp
-import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineApi
-import com.mapbox.navigation.ui.maps.route.line.api.MapboxRouteLineView
 import com.mapbox.navigation.ui.maps.route.line.model.MapboxRouteLineOptions
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -210,7 +205,7 @@ class JobOfferBottomSheetDetailFragment(
         mapView = binding.mapViewJobOfferDetail
 
         val cameraPosition = CameraOptions.Builder()
-            .zoom(9.0)
+            .zoom(13.0)
             .center(
                 Point.fromLngLat(
                     fetchedJobOffer.lng?.toDouble()!!,

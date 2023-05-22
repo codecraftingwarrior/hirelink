@@ -13,4 +13,6 @@ class ProfessionRepository(private val context: Context) {
 
     fun findAll(pageNumber: Int = 1, name: String? = null): Single<WrappedPaginatedResource<Profession>> =
         service.findAll(pageNumber, name = name)
+
+    fun findAllNotPaginated() = service.findAllNotPaginated()
 }

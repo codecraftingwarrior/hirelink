@@ -13,7 +13,6 @@ import androidx.activity.viewModels
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
-import androidx.lifecycle.lifecycleScope
 import com.dev.hirelink.HirelinkApplication
 import com.dev.hirelink.R
 import com.dev.hirelink.components.SharedPreferenceManager
@@ -24,19 +23,17 @@ import com.dev.hirelink.modules.auth.login.LoginActivity
 import com.dev.hirelink.modules.core.employer.EmployerProfilActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
+import com.dev.hirelink.modules.core.offers.create.CreateJobOfferActivity
 import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
-import com.dev.hirelink.modules.core.offers.list.JobOfferViewModel
+import com.dev.hirelink.modules.core.offers.JobOfferViewModel
 import com.dev.hirelink.modules.core.profil.ProfilActivity
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterBottomSheetFragment
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
 import com.dev.hirelink.network.auth.AuthRepository
-import com.dev.hirelink.network.jobapplication.JobApplicationRepository
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
-import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.disposables.CompositeDisposable
-import kotlinx.coroutines.Job
 
 class BaseActivity : AppCompatActivity() {
     private lateinit var binding: ActivityBaseBinding
@@ -56,7 +53,11 @@ class BaseActivity : AppCompatActivity() {
     val jobOfferViewModel: JobOfferViewModel by viewModels {
         JobOfferViewModel.JobOfferViewModelFactory(
             applicationContext,
-            (application as HirelinkApplication).jobOfferRepository
+            (application as HirelinkApplication).jobOfferRepository,
+            (application as HirelinkApplication).contractTypeRepository,
+            (application as HirelinkApplication).jobCategoryRepository,
+            (application as HirelinkApplication).professionRepository,
+            (application as HirelinkApplication).authRepository
         )
     }
     val jobApplicationViewModel: JobApplicationViewModel by viewModels {
@@ -117,7 +118,7 @@ class BaseActivity : AppCompatActivity() {
                     binding.imgBtnProfile.visibility = View.GONE
                     binding.buttonLogin.visibility = View.VISIBLE
                     binding.bottomNavigation.visibility = View.GONE
-                    binding.addFloatingActionButton.visibility = View.GONE  
+                    binding.addFloatingActionButton.visibility = View.GONE
                 }
             }
 
@@ -157,6 +158,10 @@ class BaseActivity : AppCompatActivity() {
 
         binding.chipGroupDistanceFilter.setOnCheckedStateChangeListener { chipGroup, _ ->
             fetchClosestOffers(chipGroup)
+        }
+
+        binding.addFloatingActionButton.setOnClickListener {
+            startActivity(Intent(this, CreateJobOfferActivity::class.java))
         }
 
         setupSearchField()
