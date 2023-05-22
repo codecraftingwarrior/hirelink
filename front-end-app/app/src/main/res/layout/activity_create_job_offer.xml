@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        android:scrollbars="none">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_root_job_offer_new"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header_bar_create_job_offer"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:background="@drawable/rectangle_bg_gray"
+                android:paddingHorizontal="14dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="24dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/img_btn_arrow_left"
+                    android:layout_width="@dimen/_25pxh"
+                    android:layout_height="@dimen/_25pxh"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="346dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/next_arrow_left_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/next_arrow_left_icon" />
+
+                <ImageView
+                    android:id="@+id/image_view_hire_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="55dp"
+                    android:paddingTop="3dp"
+                    android:src="@drawable/hirelink_logo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/hirelink_logo" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:id="@+id/job_offer_new_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="20dp"
+                android:fontFamily="@font/poppins"
+                android:text="Create new Job Offer"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_bar_create_job_offer" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_new_offer_fields"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="15dp"
+                android:layout_margin="10dp"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/job_offer_new_title">
+
+
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingBottom="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_title"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:foregroundGravity="center_horizontal"
+                        android:hint="Title"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_new_offer_title"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_60pxh" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_min_salary"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:hint="Min. salary"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_field_new_offer_title">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_new_offer_min_salary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_max_salary"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:hint="Max. salary"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_field_new_offer_min_salary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_new_offer_max_salary"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:inputType="number" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_start_date"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:hint="Start date"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_field_new_offer_max_salary">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_new_offer_start_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:cursorVisible="false"
+                            android:focusable="false" />
+
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_end_date"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:visibility="gone"
+                        android:hint="End date"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/text_field_new_offer_start_date">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_new_offer_end_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:cursorVisible="false"
+                            android:focusable="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_postal_address"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:hint="@string/postal_adress"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_new_offer_postal_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.mapbox.search.ui.view.SearchResultsView
+                        android:id="@+id/search_new_offer_results_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="250dp"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:background="@drawable/address_search_bg"
+                        android:clipToPadding="false"
+                        android:elevation="4dp"
+                        android:paddingTop="8dp"
+                        android:paddingEnd="16dp"
+                        android:paddingBottom="22dp"
+                        android:visibility="gone" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_city"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:hint="City"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_new_offer_city"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:cursorVisible="false"
+                            android:focusable="false"
+                            tools:ignore="TouchTargetSizeCheck" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_country"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        android:hint="@string/country"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:endIconMode="clear_text"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_field_new_offer_city">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_new_offer_country"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:clickable="true"
+                            android:cursorVisible="false"
+                            android:focusable="false" />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_contract_type"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/edit_text_new_offer_contract_type"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:dropDownHeight="300dp"
+                            android:hint="Choose the contract type"
+                            android:inputType="none"
+                            android:nestedScrollingEnabled="true" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_category"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_company_txt">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/edit_text_new_offer_category"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:dropDownHeight="300dp"
+                            android:hint="Choose the job category"
+                            android:inputType="none"
+                            android:nestedScrollingEnabled="true" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_profession"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_company_txt">
+
+                        <AutoCompleteTextView
+                            android:id="@+id/edit_text_new_offer_profession"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:dropDownHeight="300dp"
+                            android:hint="Choose the profession"
+                            android:inputType="none"
+                            android:nestedScrollingEnabled="true" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/text_field_new_offer_description"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginEnd="20dp"
+                        app:boxCornerRadiusBottomEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusBottomStart="@dimen/_15pxh"
+                        app:boxCornerRadiusTopEnd="@dimen/_15pxh"
+                        app:boxCornerRadiusTopStart="@dimen/_15pxh"
+                        app:endIconMinSize="@dimen/_20pxh">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edit_text_new_offer_description"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="top|start"
+                            android:hint="Type a description of the job"
+                            android:inputType="textMultiLine"
+                            android:lines="15"
+                            android:scrollbars="none" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/button_job_offer_new"
+                        android:background="@drawable/rectangle_bg_indigo_rounded"
+                        android:layout_width="wrap_content"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/white"
+                        android:paddingEnd="10dp"
+                        android:paddingStart="10dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="end"
+                        android:ellipsize="end"
+                        android:gravity="center"
+                        android:letterSpacing="0.05"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:singleLine="true"
+                        android:text="Create"
+                        android:layout_marginTop="20dp"
+                        android:textAllCaps="false"
+                        android:layout_marginEnd="14dp"
+                        />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <Space
+                android:layout_width="match_parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_new_offer_fields"
+                android:layout_height="20dp" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</layout>

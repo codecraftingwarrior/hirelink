@@ -2,7 +2,7 @@ package com.dev.hirelink.models
 
 import com.google.gson.annotations.SerializedName
 
-data class PaginatedResourceWrapper<T>(
+data class WrappedPaginatedResource<T>(
     @SerializedName("@context") var context: String? = null,
     @SerializedName("@id") val id: String? = null,
     @SerializedName("@type") val type: String? = null,

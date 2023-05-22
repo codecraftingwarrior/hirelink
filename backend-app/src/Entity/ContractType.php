@@ -12,7 +12,10 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: ContractTypeRepository::class)]
 #[ApiResource(
     operations:[
-        new Get()
+        new Get(),
+        new GetCollection(
+            paginationEnabled: false
+        )
     ],
     normalizationContext: ['groups' => ['contract-type:read']]
 )]
@@ -22,6 +25,7 @@ class ContractType
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['contract-type:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]

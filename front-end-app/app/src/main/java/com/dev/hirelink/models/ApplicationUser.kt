@@ -19,8 +19,8 @@ data class ApplicationUser(
     @SerializedName("appRole") val role: Role? = null,
     val plan: Plan? = null
     //TODO: continue for other fields
-) {
-    fun toIRI() = APPLICATION_USER_RESOURCE_PREFIX + id
+): IRIConvertible {
+    override fun toIRI() = APPLICATION_USER_RESOURCE_PREFIX + id
 
     fun fullname() = "$firstName $lastName"
 }

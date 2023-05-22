@@ -10,6 +10,7 @@
         "alexandret/doctrine2-spatial": "^1.2",
         "api-platform/core": "^3.1",
         "beberlei/doctrineextensions": "dev-master",
+        "craue/geo-bundle": "^1.9",
         "doctrine/annotations": "^2.0",
         "doctrine/doctrine-bundle": "^2.9",
         "doctrine/doctrine-migrations-bundle": "^3.2",

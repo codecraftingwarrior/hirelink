@@ -15,7 +15,9 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: JobOfferCategoryRepository::class)]
 #[ApiResource(
     operations:[
-        new GetCollection(),
+        new GetCollection(
+            paginationEnabled: false
+        ),
         new Get()
     ],
     normalizationContext: ['groups' => ['job-offer-category:read']]
@@ -25,6 +27,7 @@ class JobOfferCategory extends TrackableEntity
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['job-offer-category:read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]

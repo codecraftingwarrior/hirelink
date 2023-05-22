@@ -16,11 +16,14 @@ import java.util.*
 
 
 object Globals {
-    const val API_BASE_URL = "https://7dec-46-193-64-92.ngrok-free.app/api/";
+    const val API_BASE_URL = "https://a6c1-46-193-64-92.ngrok-free.app/api/";
     const val PLAN_RESOURCE_PREFIX = "/api/plans/"
     const val JOB_OFFER_RESOURCE_PREFIX = "/api/job-offers/"
     const val APPLICATION_USER_RESOURCE_PREFIX = "/api/users/"
     const val BANK_INFORMATIONS_RESOURCE_PREFIX = "/api/bank-informations/"
+    const val CONTRACT_TYPE_RESOURCE_PREFIX = "/api/contract-types/"
+    const val PROFESSION_RESOURCE_PREFIX = "/api/professions/"
+    const val JOB_OFFER_CATEGORY_RESOURCE_PREFIX = "/api/job-offer-categories/"
     const val ROLE_RESOURCE_PREFIX = "/api/roles/"
 }
 

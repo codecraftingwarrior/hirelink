@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use App\Controller\FindClosestOfferController;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobOfferRepository;
@@ -24,6 +25,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ORM\Entity(repositoryClass: JobOfferRepository::class)]
 #[ApiResource(
     operations: [
+        new Post(
+            normalizationContext: ['groups' => [
+                'job-offer:read',
+                'company:read:name',
+                'contract-type:read',
+                'job-offer-category:read',
+                'profession:read',
+                'tag:read',
+                'company:read:name'
+            ]],
+            denormalizationContext: ['groups' => ['job-offer:writable']]
+        ),
         new GetCollection(
             paginationEnabled: true,
             paginationItemsPerPage: 5,
@@ -51,7 +64,7 @@ use Symfony\Component\Serializer\Annotation\Groups;
             paginationMaximumItemsPerPage: 5,
             normalizationContext: ['groups' => [
                 'job-offer:read-collection',
-                'job-offer-by-owner:read-collection'
+                'company:read:name'
             ]
             ],
             provider: FindJobOffersByOwnerIdProvider::class
@@ -87,58 +100,58 @@ class JobOffer extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?string $description = null;
 
     #[ORM\Column(name: 'min_salary')]
-    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?float $minSalary = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?float $maxSalary = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?\DateTimeInterface $fromDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?\DateTimeInterface $toDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?string $address = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?float $lat = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?float $lng = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer-category:read', 'job-offer:read'])]
+    #[Groups(['job-offer-category:read', 'job-offer:read', 'job-offer:writable'])]
     private ?JobOfferCategory $category = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?Profession $profession = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?ContractType $contractType = null;
 
     #[ORM\OneToMany(mappedBy: 'jobOffer', targetEntity: JobApplication::class)]
-    #[Groups(['job-offer-by-owner:read-collection', 'job-offer-applications:read'])]
+    #[Groups(['job-offer-applications:read'])]
     private Collection $jobApplications;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'jobOffers')]
@@ -147,16 +160,18 @@ class JobOffer extends TrackableEntity
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?ApplicationUser $owner = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?string $city = null;
 
     #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?string $country = null;
 
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
     private int $applicantCount = 0;
 
 

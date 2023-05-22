@@ -75,7 +75,7 @@
             <TextView
                 android:id="@+id/text_view_company_location_job_offer_detail"
                 style="@style/AppTextRegular"
-                android:layout_width="250dp"
+                android:layout_width="320dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:singleLine="true"

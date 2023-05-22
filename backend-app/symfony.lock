@@ -12,6 +12,9 @@
             "src/ApiResource/.gitignore"
         ]
     },
+    "craue/geo-bundle": {
+        "version": "1.9.0"
+    },
     "doctrine/annotations": {
         "version": "2.0",
         "recipe": {
