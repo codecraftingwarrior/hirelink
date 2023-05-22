@@ -55,11 +55,12 @@ class JobOfferRepository extends ServiceEntityRepository
         $firstResult = ($page - 1) * JOB_OFFER_ITEM_PER_PAGE;
         $qb = $this->createQueryBuilder('o');
 
-
         $qb->select('o');
 
+        $qb->where('o.id IS NOT NULL');
+
         if (isset($criteria['userID'])) {
-            $qb->where(
+            $qb->andWhere(
                 $qb->expr()->notIn(
                     'o',
                     'SELECT jo
@@ -81,13 +82,11 @@ class JobOfferRepository extends ServiceEntityRepository
 
 
         if (isset($criteria['latitude']) && isset($criteria['longitude']) && isset($criteria['maxDistance'])) {
-            $qb->andWhere(
-                $qb->expr()->lte(
-                    'ROUND(DISTANCE(:latitude, :longitude, o.lat, o.lng)) * 1.609344',
-                    ':maxDistance'
-                )
-            )->setParameter('longitude', $criteria['latitude'])
-                ->setParameter('latitude', $criteria['longitude'])
+            dump('calculating distance');
+            $qb
+                ->andWhere('GEO_DISTANCE(:latitude, :longitude, o.lat, o.lng) <= :maxDistance')
+                ->setParameter('longitude', $criteria['longitude'])
+                ->setParameter('latitude', $criteria['latitude'])
                 ->setParameter('maxDistance', $criteria['maxDistance']);
         }
 
@@ -140,7 +139,6 @@ class JobOfferRepository extends ServiceEntityRepository
 
         $qb->orderBy('o.createdAt', 'DESC');
 
-
         $criteriaPaging = Criteria::create()
             ->setFirstResult($firstResult)
             ->setMaxResults(JOB_OFFER_ITEM_PER_PAGE);
@@ -152,7 +150,8 @@ class JobOfferRepository extends ServiceEntityRepository
         return new Paginator($doctrinePaginator);
     }
 
-    public function findByOwnerPaginated(int $page = 1, $criteria = []): Paginator {
+    public function findByOwnerPaginated(int $page = 1, $criteria = []): Paginator
+    {
         $firstResult = ($page - 1) * 5;
 
         $qb = $this

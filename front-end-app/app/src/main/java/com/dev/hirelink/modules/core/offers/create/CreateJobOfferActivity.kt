@@ -67,15 +67,18 @@ class CreateJobOfferActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateJobOfferBinding.inflate(layoutInflater)
         fetchCurrentUser()
-        customLoadingOverlay = CustomLoadingOverlay(
-            applicationContext,
-            R.id.constraint_layout_root_job_offer_new,
-            R.layout.loading_overlay_centered
-        )
 
         supportActionBar?.hide()
 
         setContentView(binding.root)
+
+        customLoadingOverlay = CustomLoadingOverlay(
+            this,
+            R.id.card_new_offer_fields,
+            R.layout.loading_overlay
+        )
+
+
 
         fetchData()
 
@@ -87,6 +90,7 @@ class CreateJobOfferActivity : AppCompatActivity() {
 
     private fun fetchData() {
         customLoadingOverlay.showLoading()
+
         val contractDisposable = fetchContractTypes()
         val categoryDisposable = fetchJobCategories()
         val professionDisposable = fetchProfessions()
@@ -211,9 +215,7 @@ class CreateJobOfferActivity : AppCompatActivity() {
             maxSalary = binding.editTextNewOfferMaxSalary.text.toString().toFloat()
             owner = currentUser
         }
-
-        Log.d(javaClass.simpleName, jobOffer.toString())
-
+        
         val disposable = jobOfferViewModel
             .createJobOffer(jobOffer)
             .subscribeOn(Schedulers.io())
