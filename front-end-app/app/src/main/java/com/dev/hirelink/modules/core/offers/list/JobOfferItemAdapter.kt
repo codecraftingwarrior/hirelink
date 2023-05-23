@@ -36,9 +36,20 @@ class JobOfferItemAdapter(
     private val compositeDisposable = CompositeDisposable()
     private val VIEW_TYPE_ITEM = 0
     private val VIEW_TYPE_LOADING = 1
+    private lateinit var listener: MoreButtonClickListener
+
+    interface MoreButtonClickListener {
+        fun onMoreButtonClicked(jobOffer: JobOffer)
+    }
 
     override fun onAttachedToRecyclerView(recyclerView: RecyclerView) {
         super.onAttachedToRecyclerView(recyclerView)
+
+        try {
+            listener = (context as MoreButtonClickListener)
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
 
         authRepository = (context as BaseActivity).authRepository
         fetchCurrentUser()
@@ -53,7 +64,8 @@ class JobOfferItemAdapter(
         private val salaryRange: TextView =
             view.findViewById(R.id.text_view_salary_range)
         private val location: TextView = view.findViewById(R.id.text_view_location)
-        private val jobApplicationCount: TextView = view.findViewById(R.id.text_view_job_application_count)
+        private val jobApplicationCount: TextView =
+            view.findViewById(R.id.text_view_job_application_count)
         private val timeagoText: TextView =
             view.findViewById(com.dev.hirelink.R.id.text_view_timeago)
         val buttonApply: Button = view.findViewById(R.id.button_apply_offer)
@@ -102,7 +114,12 @@ class JobOfferItemAdapter(
                 JobOfferBottomSheetDetailFragment.TAG
             )
         }
+
+        view.findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item)?.setOnClickListener {
+            listener.onMoreButtonClicked(jobOffer)
+        }
     }
+
 
     override fun getItemCount(): Int = dataset?.size ?: 0
 
@@ -112,64 +129,7 @@ class JobOfferItemAdapter(
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         if (holder is JobOfferItemViewHolder) {
-            val applyButton = holder.itemView.findViewById<AppCompatButton>(R.id.button_apply_offer)
-
-            if (currentUser.id != null) {
-                when(currentUser.role?.code) {
-                    RoleType.APPLICANT.code -> {
-                        with(holder.itemView) {
-                            findViewById<TextView>(R.id.text_view_offer_initials).visibility = View.VISIBLE
-                            findViewById<TextView>(R.id.company_name).visibility = View.VISIBLE
-                            findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = View.VISIBLE
-
-                            findViewById<TextView>(R.id.text_view_job_application_count).visibility = View.GONE
-                            findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility = View.GONE
-                            applyButton.visibility = View.VISIBLE
-                            holder.itemView.findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility = View.GONE
-                        }
-                    }
-                    RoleType.INTERIM_AGENCY.code, RoleType.EMPLOYER.code -> {
-                        with(holder.itemView) {
-                            findViewById<TextView>(R.id.text_view_offer_initials).visibility = View.GONE
-                            findViewById<TextView>(R.id.company_name).visibility = View.GONE
-                            findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = View.GONE
-
-                            findViewById<TextView>(R.id.text_view_job_application_count).visibility = View.VISIBLE
-                            findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility = View.VISIBLE
-
-                            val jobTitleIcon = findViewById<ImageView>(R.id.icon_job_title)
-
-                            val layoutParams = jobTitleIcon.layoutParams as ConstraintLayout.LayoutParams
-                            layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
-                            layoutParams.topToBottom = ConstraintLayout.LayoutParams.UNSET
-                            layoutParams.endToEnd = ConstraintLayout.LayoutParams.UNSET
-
-                            jobTitleIcon.layoutParams = layoutParams
-                        }
-                    }
-                }
-
-            } else {
-                applyButton.visibility = View.GONE
-                holder.itemView.findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = View.GONE
-                holder.itemView.findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility = View.GONE
-                with(holder.itemView) {
-                    val offerInitials = findViewById<TextView>(R.id.text_view_offer_initials)
-                    offerInitials.visibility = View.VISIBLE
-                    findViewById<TextView>(R.id.company_name).visibility = View.VISIBLE
-
-                    findViewById<TextView>(R.id.text_view_job_application_count).visibility = View.GONE
-
-                    val jobTitleIcon = findViewById<ImageView>(R.id.icon_job_title)
-
-                    val layoutParams = jobTitleIcon.layoutParams as ConstraintLayout.LayoutParams
-                    layoutParams.startToStart = offerInitials.id
-                    layoutParams.endToEnd = offerInitials.id
-                    layoutParams.topToBottom = offerInitials.id
-
-                    jobTitleIcon.layoutParams = layoutParams
-                }
-            }
+            handleDynamicContent(holder, position)
 
             holder.bind(dataset?.get(position)!!)
             bindListeners(holder.itemView, dataset?.get(position)!!)
@@ -179,7 +139,77 @@ class JobOfferItemAdapter(
 
     }
 
-    private class LoadingViewHolder(itemView: View) : ViewHolder(itemView) {
+    private fun handleDynamicContent(holder: ViewHolder, position: Int) {
+        val applyButton = holder.itemView.findViewById<AppCompatButton>(R.id.button_apply_offer)
+
+        if (currentUser.id != null) {
+            when (currentUser.role?.code) {
+                RoleType.APPLICANT.code -> {
+                    with(holder.itemView) {
+                        findViewById<TextView>(R.id.text_view_offer_initials).visibility = VISIBLE
+                        findViewById<TextView>(R.id.company_name).visibility = VISIBLE
+                        findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility =
+                            VISIBLE
+
+                        findViewById<TextView>(R.id.text_view_job_application_count).visibility =
+                            GONE
+                        findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility =
+                            GONE
+                        applyButton.visibility = VISIBLE
+                        holder.itemView.findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility =
+                            GONE
+                    }
+                }
+                RoleType.INTERIM_AGENCY.code, RoleType.EMPLOYER.code -> {
+                    with(holder.itemView) {
+                        findViewById<TextView>(R.id.text_view_offer_initials).visibility = GONE
+                        findViewById<TextView>(R.id.company_name).visibility = GONE
+                        findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility = GONE
+
+                        findViewById<TextView>(R.id.text_view_job_application_count).visibility =
+                            VISIBLE
+                        findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility =
+                            if (dataset?.get(position)?.applicantCount!! > 0) VISIBLE else GONE
+
+                        val jobTitleIcon = findViewById<ImageView>(R.id.icon_job_title)
+
+                        val layoutParams =
+                            jobTitleIcon.layoutParams as ConstraintLayout.LayoutParams
+                        layoutParams.startToStart = ConstraintLayout.LayoutParams.PARENT_ID
+                        layoutParams.topToBottom = ConstraintLayout.LayoutParams.UNSET
+                        layoutParams.endToEnd = ConstraintLayout.LayoutParams.UNSET
+
+                        jobTitleIcon.layoutParams = layoutParams
+                    }
+                }
+            }
+
+        } else {
+            applyButton.visibility = GONE
+            holder.itemView.findViewById<ImageButton>(R.id.image_view_bookmark_arrow).visibility =
+                GONE
+            holder.itemView.findViewById<ImageButton>(R.id.image_view_more_arrow_offer_item).visibility =
+                GONE
+            with(holder.itemView) {
+                val offerInitials = findViewById<TextView>(R.id.text_view_offer_initials)
+                offerInitials.visibility = VISIBLE
+                findViewById<TextView>(R.id.company_name).visibility = VISIBLE
+
+                findViewById<TextView>(R.id.text_view_job_application_count).visibility = GONE
+
+                val jobTitleIcon = findViewById<ImageView>(R.id.icon_job_title)
+
+                val layoutParams = jobTitleIcon.layoutParams as ConstraintLayout.LayoutParams
+                layoutParams.startToStart = offerInitials.id
+                layoutParams.endToEnd = offerInitials.id
+                layoutParams.topToBottom = offerInitials.id
+
+                jobTitleIcon.layoutParams = layoutParams
+            }
+        }
+    }
+
+    class LoadingViewHolder(itemView: View) : ViewHolder(itemView) {
         var progressBar: ProgressBar
 
         init {

@@ -19,13 +19,16 @@ import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityBaseBinding
 import com.dev.hirelink.enums.RoleType
 import com.dev.hirelink.models.ApplicationUser
+import com.dev.hirelink.models.JobOffer
 import com.dev.hirelink.modules.auth.login.LoginActivity
 import com.dev.hirelink.modules.core.employer.EmployerProfilActivity
+import com.dev.hirelink.modules.core.employer.candidacy.list.CandidacyListActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
 import com.dev.hirelink.modules.core.offers.create.CreateJobOfferActivity
 import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
 import com.dev.hirelink.modules.core.offers.JobOfferViewModel
+import com.dev.hirelink.modules.core.offers.list.JobOfferItemAdapter
 import com.dev.hirelink.modules.core.profil.ProfilActivity
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterBottomSheetFragment
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
@@ -35,7 +38,7 @@ import com.google.android.material.chip.ChipGroup
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.disposables.CompositeDisposable
 
-class BaseActivity : AppCompatActivity() {
+class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickListener {
     private lateinit var binding: ActivityBaseBinding
     val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
@@ -260,6 +263,12 @@ class BaseActivity : AppCompatActivity() {
         val inputMethodManager =
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(view.windowToken, 0)
+    }
+
+    override fun onMoreButtonClicked(jobOffer: JobOffer) {
+        startActivity(Intent(this, CandidacyListActivity::class.java).apply {
+            putExtra("jobOfferID", jobOffer.id)
+        })
     }
 
     override fun onDestroy() {
