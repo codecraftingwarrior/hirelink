@@ -199,7 +199,6 @@ class JobOfferListFragment : Fragment() {
 
                 compositeDisposable.add(disposable)
             }
-
     }
 
     override fun onDestroy() {

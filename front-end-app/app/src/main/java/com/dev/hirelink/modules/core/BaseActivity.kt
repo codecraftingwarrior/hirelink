@@ -2,14 +2,17 @@ package com.dev.hirelink.modules.core
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.util.TypedValue
 import android.view.View
+import android.view.ViewGroup.LayoutParams
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
@@ -25,13 +28,13 @@ import com.dev.hirelink.modules.core.employer.EmployerProfilActivity
 import com.dev.hirelink.modules.core.employer.candidacy.list.CandidacyListActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
-import com.dev.hirelink.modules.core.offers.create.CreateJobOfferActivity
-import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
 import com.dev.hirelink.modules.core.offers.JobOfferViewModel
+import com.dev.hirelink.modules.core.offers.create.CreateJobOfferActivity
 import com.dev.hirelink.modules.core.offers.list.JobOfferItemAdapter
-import com.dev.hirelink.modules.core.profil.ProfilActivity
+import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterBottomSheetFragment
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
+import com.dev.hirelink.modules.core.profil.ProfilActivity
 import com.dev.hirelink.network.auth.AuthRepository
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -41,9 +44,13 @@ import io.reactivex.disposables.CompositeDisposable
 class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickListener {
     private lateinit var binding: ActivityBaseBinding
     val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
+    private var currentFragment = ""
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var currentUser: ApplicationUser
     private lateinit var jobOfferFilterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
+    private val jobApplicationFilterCriteria =
+        JobApplicationViewModel.JobApplicationFilterCriteria()
+
     private var isLoggedIn = false
     private lateinit var sharedPrefs: SharedPreferenceManager
     val jobOfferListfilterViewModel: JobOfferFilterViewModel by viewModels {
@@ -178,12 +185,25 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
             override fun afterTextChanged(p0: Editable?) {}
 
             override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if (s == null || s.isEmpty()) {
-                    jobOfferFilterCriteria.jobTitle = null
-                    jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
-                } else if (s.length >= 4) {
-                    jobOfferFilterCriteria.jobTitle = s.toString()
-                    jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
+                when (currentFragment) {
+                    "OFFERS" -> {
+                        if (s == null || s.isEmpty()) {
+                            jobOfferFilterCriteria.jobTitle = null
+                            jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
+                        } else if (s.length >= 4) {
+                            jobOfferFilterCriteria.jobTitle = s.toString()
+                            jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
+                        }
+                    }
+                    "CANDIDACY" -> {
+                        if (s == null || s.isEmpty()) {
+                            jobApplicationFilterCriteria.searchQuery = null
+                            jobApplicationViewModel.updateCriteria(jobApplicationFilterCriteria)
+                        } else if (s.length >= 4) {
+                            jobApplicationFilterCriteria.searchQuery = s.toString()
+                            jobApplicationViewModel.updateCriteria(jobApplicationFilterCriteria)
+                        }
+                    }
                 }
 
             }
@@ -223,6 +243,9 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
             when (item.itemId) {
                 R.id.menu_item_schedule -> {
                     binding.horizontalScrollViewChipDistance.visibility = View.GONE
+                    binding.imgBtnFilter.visibility = View.GONE
+                    currentFragment = "SCHEDULE"
+
 
                     true
                 }
@@ -231,18 +254,36 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                     binding.searchHeader.background =
                         ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray_reg)
                     binding.horizontalScrollViewChipDistance.visibility = View.GONE
+                    binding.imgBtnFilter.visibility = View.GONE
+                    currentFragment = "CANDIDACY"
+                    val layoutParams: LayoutParams = binding.textFieldSearch.layoutParams
+                    layoutParams.width = LayoutParams.MATCH_PARENT
+                    binding.textFieldSearch.layoutParams = layoutParams
 
                     replaceFragment(JobApplicationListFragment())
                     true
                 }
                 R.id.menu_item_offers -> {
                     binding.horizontalScrollViewChipDistance.visibility = View.VISIBLE
+                    binding.imgBtnFilter.visibility = View.VISIBLE
+
+                    val layoutParams: LayoutParams = binding.textFieldSearch.layoutParams
+                    layoutParams.width = TypedValue.applyDimension(
+                        TypedValue.COMPLEX_UNIT_DIP,
+                        330f,
+                        resources.displayMetrics
+                    ).toInt()
+                    binding.textFieldSearch.layoutParams = layoutParams
+
                     replaceFragment(JobOfferListFragment())
+                    currentFragment = "OFFERS"
                     true
                 }
                 R.id.menu_item_notifications -> {
+                    binding.imgBtnFilter.visibility = View.GONE
                     binding.horizontalScrollViewChipDistance.visibility = View.VISIBLE
                     Log.d(javaClass.simpleName, "Notifications is clicked")
+                    currentFragment = "NOTIFICATIONS"
                     true
                 }
                 else -> false

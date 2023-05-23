@@ -2,8 +2,12 @@
 
 namespace App\Repository;
 
+use ApiPlatform\Doctrine\Orm\Paginator;
 use App\Entity\JobApplication;
+use App\Enum\JobApplicationState;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\Criteria;
+use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +41,61 @@ class JobApplicationRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function filter(int $page = 1, $criteria = [])
+    {
+        $firstResult = ($page - 1) * JOB_APPLICATION_ITEM_PER_PAGE;
+
+        $qb = $this->createQueryBuilder('ja');
+
+        $qb->where('ja.id IS NOT NULL');
+
+        if (isset($criteria['userID'])) {
+            $qb->andWhere(
+                $qb->expr()->eq(
+                    'ja.applicant',
+                    ':applicant'
+                )
+            )->setParameter('applicant', $criteria['userID']);
+        }
+
+        if (isset($criteria['state'])) {
+            $qb->andWhere(
+                $qb->expr()->eq(
+                    'ja.state',
+                    ':state'
+                )
+            )->setParameter('state', $criteria['state']);
+        }
+
+        if (isset($criteria['searchQuery'])) {
+            $qb
+                ->join('ja.jobOffer', 'jo')
+                ->join('jo.owner', 'u')
+                ->join('u.company', 'c');
+
+
+            $qb->andWhere(
+                $qb->expr()->orX(
+                    $qb->expr()->like('jo.title', ':searchQuery'),
+                    $qb->expr()->like('c.name', ':searchQuery'),
+                    $qb->expr()->like('jo.address', ':searchQuery')
+                )
+            )->setParameter('searchQuery', '%' . $criteria['searchQuery'] . '%');
+        }
+
+        $qb->orderBy('ja.createdAt', 'DESC');
+
+        $criteriaPaging = Criteria::create()
+            ->setFirstResult($firstResult)
+            ->setMaxResults(JOB_APPLICATION_ITEM_PER_PAGE);
+        $qb->addCriteria($criteriaPaging);
+
+        $doctrinePaginator = new DoctrinePaginator($qb);
+
+        return new Paginator($doctrinePaginator);
+
     }
 
 //    /**

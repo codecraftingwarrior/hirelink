@@ -13,14 +13,18 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.dev.hirelink.R
 import com.dev.hirelink.enums.JobApplicationState
 import com.dev.hirelink.models.JobApplication
+import com.dev.hirelink.modules.core.offers.list.JobOfferItemAdapter
 
 class JobApplicationItemAdapter(
     val context: Context,
-    val dataset: MutableList<JobApplication?>?
-) : RecyclerView.Adapter<JobApplicationItemAdapter.JobApplicationItemViewHolder>() {
+    var dataset: MutableList<JobApplication?>?
+) : RecyclerView.Adapter<ViewHolder>() {
+
+    private val VIEW_TYPE_ITEM = 0
+    private val VIEW_TYPE_LOADING = 1
 
     class JobApplicationItemViewHolder(private val view: View) : ViewHolder(view) {
-        private val logo: ImageView = view.findViewById(R.id.offer_img_view_company_logo)
+        private val initials: TextView = view.findViewById(R.id.text_view_offer_ja_initials)
         private val companyName: TextView = view.findViewById(R.id.company_name)
         private val jobTitle: TextView = view.findViewById(R.id.text_view_job_title)
         private val salaryRange: TextView = view.findViewById(R.id.text_view_salary_range)
@@ -30,14 +34,16 @@ class JobApplicationItemAdapter(
         private val stateText: TextView = view.findViewById(R.id.text_view_state_text)
 
         fun bind(jobApplication: JobApplication) {
-            companyName.text = jobApplication.jobOffer?.companyName
+            initials.text = jobApplication.jobOffer?.owner?.company?.name?.get(0).toString()
+            companyName.text = jobApplication.jobOffer?.owner?.company?.name
             jobTitle.text = jobApplication.jobOffer?.title
             salaryRange.text = view.context.getString(
                 R.string.salary_range_str,
-                jobApplication.jobOffer?.maxSalary!! - 10000.0f, jobApplication.jobOffer.maxSalary
+                jobApplication.jobOffer?.maxSalary!!, jobApplication.jobOffer.maxSalary
             )
             location.text = jobApplication.jobOffer.address
-            stateText.text = view.context.getString(JobApplicationState.valueOf(jobApplication.state!!).stringResourceId)
+            stateText.text =
+                view.context.getString(JobApplicationState.valueOf(jobApplication.state!!).stringResourceId)
 
             stateText.setTextColor(
                 ContextCompat.getColor(
@@ -60,17 +66,46 @@ class JobApplicationItemAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): JobApplicationItemViewHolder {
-        val adapterLayout = LayoutInflater
-            .from(parent.context)
-            .inflate(R.layout.row_job_application_list_item, parent, false)
+    ): ViewHolder {
+        if (viewType == VIEW_TYPE_ITEM) {
+            val adapterLayout = LayoutInflater
+                .from(parent.context)
+                .inflate(R.layout.row_job_application_list_item, parent, false)
+            return JobApplicationItemViewHolder(adapterLayout)
+        }
+        val view: View =
+            LayoutInflater.from(parent.context)
+                .inflate(R.layout.loading_item_row, parent, false)
 
-        return JobApplicationItemViewHolder(adapterLayout)
+        return JobOfferItemAdapter.LoadingViewHolder(view)
+
     }
 
     override fun getItemCount(): Int = dataset?.size!!
 
-    override fun onBindViewHolder(holder: JobApplicationItemViewHolder, position: Int) {
-        dataset?.get(position)?.let { holder.bind(it) }
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        if (holder is JobApplicationItemViewHolder) {
+            dataset?.get(position)?.let { holder.bind(it) }
+            bindListeners(holder.itemView, dataset?.get(position)!!)
+        } else if (holder is JobOfferItemAdapter.LoadingViewHolder) {
+            (holder as JobOfferItemAdapter.LoadingViewHolder?)?.let {
+                showLoadingView(
+                    it,
+                    position
+                )
+            }
+        }
+    }
+
+    private fun showLoadingView(viewHolder: JobOfferItemAdapter.LoadingViewHolder, position: Int) {
+        //ProgressBar would be displayed
+    }
+
+    private fun bindListeners(view: View, jobApplication: JobApplication) {
+
+    }
+
+    override fun getItemViewType(position: Int): Int {
+        return if (dataset?.get(position) == null) VIEW_TYPE_LOADING else VIEW_TYPE_ITEM
     }
 }
