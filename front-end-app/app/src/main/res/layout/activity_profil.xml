@@ -7,14 +7,15 @@
 
     </data>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
+        android:scrollbars="none"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/header_bar"
@@ -25,7 +26,7 @@
                 android:paddingTop="14dp"
                 android:paddingBottom="24dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="70dp">
 
                 <ImageButton
                     android:id="@+id/img_btn_arrow_left"
@@ -35,7 +36,6 @@
                     android:background="@android:color/transparent"
                     android:scaleType="fitXY"
                     android:src="@drawable/next_arrow_left_icon"
-                    android:contentDescription="@string/next_arrow_left_description"
                     android:layout_marginTop="5dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
@@ -55,7 +55,21 @@
                     tools:src="@drawable/hirelink_logo" />
 
                 <ImageButton
-                    android:id="@+id/img_btn_setting"
+                    android:id="@+id/img_btn_logout"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/baseline_logout_24"
+                    app:layout_constraintEnd_toStartOf="@id/img_btn_setting_activity_profil"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/baseline_logout_24"/>
+
+                <ImageButton
+                    android:id="@+id/img_btn_setting_activity_profil"
                     android:layout_width="@dimen/_27pxh"
                     android:layout_height="@dimen/_27pxh"
                     android:scaleType="fitXY"
@@ -63,11 +77,11 @@
                     android:layout_marginEnd="4dp"
                     android:layout_marginTop="2dp"
                     android:src="@drawable/setting_icon"
-                    android:contentDescription="@string/setting_button_description"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     tools:ignore="ContentDescription"
                     tools:src="@drawable/setting_icon"/>
+
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -106,7 +120,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/text_view"
+                        android:id="@+id/text_view_user_fullname"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/profile_name"
@@ -118,6 +132,64 @@
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginStart="20dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_card_0"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:cardElevation="5dp"
+                style="?attr/materialCardViewElevatedStyle"
+                app:cardCornerRadius="10dp"
+                app:rippleColor="@color/gray_app"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/material_card_profil">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_0"
+                    android:padding="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/favoris_logo"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/profil_favoris_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/favoris_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_favorites"
+                        android:textStyle="bold"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/poppins"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/favoris_logo"
+                        android:layout_marginTop="10dp"/>
+
+                    <ImageView
+                        android:id="@+id/favoris_chevron"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/chevron_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -140,7 +212,7 @@
                 android:checkable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/material_card_profil">
+                app:layout_constraintTop_toBottomOf="@id/material_card_0">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/card_1"
@@ -305,7 +377,7 @@
                 app:cardCornerRadius="10dp"
                 app:rippleColor="@color/gray_app"
                 android:layout_marginTop="25dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="50dp"
                 android:layout_marginStart="26dp"
                 android:layout_marginEnd="26dp"
                 android:clickable="true"
@@ -333,12 +405,13 @@
                         android:id="@+id/blocked_users_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/profile_blocked_users"
-                        android:textStyle="bold"
+                        android:layout_marginStart="12dp"
+                        android:fontFamily="@font/poppins"
                         android:paddingTop="8dp"
+                        android:text="@string/profile_blocked_users"
                         android:textColor="@color/indigo_main"
                         android:textSize="18dp"
-                        android:fontFamily="@font/poppins"
+                        android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/blocked_users_logo" />
 
@@ -356,6 +429,6 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </layout>

@@ -80,5 +80,21 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
 
+    implementation 'com.google.android.gms:play-services-location:21.0.1'
+    implementation 'com.google.android.gms:play-services-maps:18.1.0'
+    implementation 'com.google.android.libraries.places:places:3.0.0'
+
     implementation 'com.google.android.material:material:1.8.0'
+
+    //mapbox
+    implementation 'com.mapbox.maps:android:10.12.2'
+    implementation "com.mapbox.search:autofill:1.0.0-rc.3"
+    implementation "com.mapbox.search:mapbox-search-android-ui:1.0.0-rc.3"
+    implementation "com.mapbox.navigation:ui-dropin:2.13.0"
+    implementation "com.mapbox.navigation:android:2.13.0"
+
+
+
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    implementation 'com.mindorks.android:prdownloader:0.6.0'
 }

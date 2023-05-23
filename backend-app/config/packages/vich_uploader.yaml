@@ -1,0 +1,10 @@
+vich_uploader:
+    db_driver: orm
+    metadata:
+        type: attribute
+    mappings:
+        document_files:
+            uri_prefix: /documents
+            upload_destination: '%kernel.project_dir%/public/documents'
+            # Will rename uploaded files using a uniqueid as a prefix.
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer

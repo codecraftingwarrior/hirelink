@@ -9,8 +9,15 @@ use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
+use App\Controller\FindClosestOfferController;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobOfferRepository;
+
+use App\State\FindJobOffersByOwnerIdProvider;
+use App\State\JobOfferListStateProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
@@ -19,87 +26,169 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: JobOfferRepository::class)]
 #[ApiResource(
-    operations:[
-        new GetCollection(),
-        new Get()
+    operations: [
+        new Post(
+            normalizationContext: ['groups' => [
+                'job-offer:read',
+                'company:read:name',
+                'contract-type:read',
+                'job-offer-category:read',
+                'profession:read',
+                'tag:read',
+                'company:read:name'
+            ]],
+            denormalizationContext: ['groups' => ['job-offer:writable']]
+        ),
+        new GetCollection(
+            paginationEnabled: true,
+            paginationItemsPerPage: 5,
+            paginationMaximumItemsPerPage: 5,
+            normalizationContext: ['groups' => ['job-offer:read-collection', 'company:read:name']],
+            provider: JobOfferListStateProvider::class
+        ),
+        new Get(normalizationContext: ['groups' => [
+            'job-offer:read',
+            'company:read:name',
+            'contract-type:read',
+            'job-offer-category:read',
+            'profession:read',
+            'tag:read',
+            'company:read:name'
+        ]]),
+        new Get(
+            uriTemplate: '/job-offers/owner/{id}',
+            requirements: ['id' => '\d+'],
+            openapiContext: [
+                'summary' => 'Retrieves the job offers for the given owner id'
+            ],
+            paginationEnabled: true,
+            paginationItemsPerPage: 5,
+            paginationMaximumItemsPerPage: 5,
+            normalizationContext: ['groups' => [
+                'job-offer:read-collection',
+                'company:read:name'
+            ]
+            ],
+            provider: FindJobOffersByOwnerIdProvider::class
+        ),
+        new Get(
+            uriTemplate: '/job-offers/{id}/category',
+            requirements: ['id' => '\d+'],
+            openapiContext: [
+                'summary' => 'Retrieves the job offer category for the given job offer id'
+            ],
+            normalizationContext: ['groups' => ['job-offer-category:read']]
+        ),
+        new Get(
+            uriTemplate: '/job-offers/{id}/job-applications',
+            requirements: ['id' => '\d+'],
+            openapiContext: [
+                'summary' => 'Retrieves the job applications for the given job offer id'
+            ],
+            normalizationContext: ['groups' => ['job-offer-applications:read',
+                'job-application:read:applicant',
+                'job-application:read:id',
+                'job-application:read:createdAt',
+                'user:read:first-name',
+                'user:read:last-name']
+            ]
+        ),
+        new Patch(denormalizationContext: ['groups' => ['job-offer:writable']]),
+        new Patch(
+            uriTemplate: '/job-offers/{id}/category',
+            requirements: ['id' => '\d+'],
+            openapiContext: [
+                'summary' => 'Update the job offer category for the given job offer id'
+            ],
+            denormalizationContext: ['groups' => ['job-offer:write:category']]
+        ),
+        new Delete()
     ],
-    normalizationContext: ['groups' => ['job-offer:read']]
-),
-ApiFilter(
-    SearchFilter::class,
-    properties: [
-        'id' => 'exact',
-        'address' => 'partial',
-        'profession' => 'partial',
-        'owner' => 'partial',
-    ]
-),
-ApiFilter(RangeFilter::class, properties: ['salary']),
-ApiFilter(DateFilter::class, properties: ['fromDate', 'toDate'])
+)
 ]
 class JobOffer extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?string $description = null;
 
-    #[ORM\Column]
-    #[Groups(['job-offer:read'])]
-    private ?float $salary = null;
+    #[ORM\Column(name: 'min_salary')]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
+    private ?float $minSalary = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
+    private ?float $maxSalary = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?\DateTimeInterface $fromDate = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?\DateTimeInterface $toDate = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?string $address = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?float $lat = null;
 
     #[ORM\Column(nullable: true)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?float $lng = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-offer-category:read', 'job-offer:read', 'job-offer:writable', 'job-offer:write:category'])]
     private ?JobOfferCategory $category = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?Profession $profession = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
     private ?ContractType $contractType = null;
 
     #[ORM\OneToMany(mappedBy: 'jobOffer', targetEntity: JobApplication::class)]
+    #[Groups(['job-offer-applications:read'])]
     private Collection $jobApplications;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'jobOffers')]
+    #[Groups(['job-offer:read'])]
     private Collection $tags;
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer:read'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
     private ?ApplicationUser $owner = null;
+
+    #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
+    private ?string $city = null;
+
+    #[ORM\Column(length: 80, nullable: true)]
+    #[Groups(['job-offer:read', 'job-offer:writable'])]
+    private ?string $country = null;
+
+    #[Groups(['job-offer:read', 'job-offer:read-collection'])]
+    private int $applicantCount = 0;
+
 
     public function __construct()
     {
@@ -136,14 +225,14 @@ class JobOffer extends TrackableEntity
         return $this;
     }
 
-    public function getSalary(): ?float
+    public function getMinSalary(): ?float
     {
-        return $this->salary;
+        return $this->minSalary;
     }
 
-    public function setSalary(float $salary): self
+    public function setMinSalary(float $minSalary): self
     {
-        $this->salary = $salary;
+        $this->minSalary = $minSalary;
 
         return $this;
     }
@@ -309,4 +398,64 @@ class JobOffer extends TrackableEntity
 
         return $this;
     }
+
+    public function getMaxSalary(): ?float
+    {
+        return $this->maxSalary;
+    }
+
+    public function setMaxSalary(?float $maxSalary): self
+    {
+        $this->maxSalary = $maxSalary;
+
+        return $this;
+    }
+
+    #[Groups(['job-offer:read-collection', 'job-offer:read'])]
+    public function getCreatedAt(): ?\DateTimeInterface
+    {
+        return parent::getCreatedAt(); // TODO: Change the autogenerated stub
+    }
+
+    public function getCity(): ?string
+    {
+        return $this->city;
+    }
+
+    public function setCity(string $city): self
+    {
+        $this->city = $city;
+
+        return $this;
+    }
+
+    public function getCountry(): ?string
+    {
+        return $this->country;
+    }
+
+    public function setCountry(?string $country): self
+    {
+        $this->country = $country;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getApplicantCount(): int
+    {
+        return $this->jobApplications->count();
+    }
+
+    /**
+     * @param int $applicantCount
+     */
+    public function setApplicantCount(int $applicantCount): void
+    {
+        $this->applicantCount = $applicantCount;
+    }
+
+
 }

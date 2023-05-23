@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header_bar"
+                android:background="@drawable/rectangle_bg_gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingHorizontal="14dp"
+                android:paddingTop="14dp"
+                android:paddingBottom="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="70dp">
+
+                <ImageButton
+                    android:id="@+id/img_btn_arrow_left"
+                    android:layout_width="@dimen/_25pxh"
+                    android:layout_height="@dimen/_25pxh"
+                    android:layout_marginEnd="346dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/next_arrow_left_icon"
+                    android:contentDescription="@string/next_arrow_left_description"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/next_arrow_left_icon" />
+
+                <ImageView
+                    android:id="@+id/image_view_hire_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/hirelink_logo"
+                    android:layout_marginStart="55dp"
+                    android:paddingTop="3dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/hirelink_logo" />
+
+                <ImageButton
+                    android:id="@+id/img_btn_logout"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:layout_marginEnd="10dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/baseline_logout_24"
+                    android:contentDescription="@string/setting_button_description"
+                    app:layout_constraintEnd_toStartOf="@id/img_btn_setting"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/baseline_logout_24"/>
+
+                <ImageButton
+                    android:id="@+id/img_btn_setting"
+                    android:visibility="gone"
+                    android:layout_width="@dimen/_27pxh"
+                    android:layout_height="@dimen/_27pxh"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginTop="2dp"
+                    android:src="@drawable/setting_icon"
+                    android:contentDescription="@string/setting_button_description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/setting_icon"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_card_profil"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:cardElevation="5dp"
+                style="?attr/materialCardViewElevatedStyle"
+                app:cardCornerRadius="10dp"
+                app:rippleColor="@color/gray_app"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_bar">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/profil_card_view"
+                    android:padding="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/icon_image_view"
+                        android:layout_width="45dp"
+                        android:layout_height="45dp"
+                        android:src="@drawable/profil_icon"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_user_fullname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Company name"
+                        android:textStyle="bold"
+                        android:textSize="25dp"
+                        android:fontFamily="@font/poppins"
+                        android:textColor="@color/indigo_main"
+                        app:layout_constraintStart_toEndOf="@id/icon_image_view"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginStart="20dp" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_card_1"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:cardElevation="5dp"
+                style="?attr/materialCardViewElevatedStyle"
+                app:cardCornerRadius="10dp"
+                app:rippleColor="@color/gray_app"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/material_card_profil">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_1"
+                    android:padding="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/img_view_see_plan"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:layout_marginStart="6dp"
+                        android:src="@drawable/see_your_plan_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_see_your_plan"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:fontFamily="@font/poppins"
+                        android:text="@string/see_your_plan"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="18dp"
+                        android:textStyle="bold"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/img_view_see_plan" />
+
+                    <ImageView
+                        android:id="@+id/see_your_plan_chevron"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/chevron_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_card_2"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:cardElevation="5dp"
+                style="?attr/materialCardViewElevatedStyle"
+                app:cardCornerRadius="10dp"
+                app:rippleColor="@color/gray_app"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/material_card_1">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_2"
+                    android:padding="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/img_view_credit_card"
+                        android:layout_width="@dimen/_43pxh"
+                        android:layout_height="@dimen/_43pxh"
+                        android:src="@drawable/credit_card_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/text_view_credit_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/add_credit_card"
+                        android:textStyle="bold"
+                        android:paddingTop="8dp"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/poppins"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/img_view_credit_card" />
+
+                    <ImageView
+                        android:id="@+id/credit_card_chevron"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/chevron_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_card_3"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:cardElevation="5dp"
+                style="?attr/materialCardViewElevatedStyle"
+                app:cardCornerRadius="10dp"
+                app:rippleColor="@color/gray_app"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/material_card_2">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_3"
+                    android:padding="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/document_logo"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/document_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/document_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_documents"
+                        android:textStyle="bold"
+                        android:paddingTop="8dp"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/poppins"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/document_logo" />
+
+                    <ImageView
+                        android:id="@+id/document_chevron"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/chevron_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/material_card_4"
+                android:layout_height="wrap_content"
+                android:layout_width="match_parent"
+                app:cardElevation="5dp"
+                style="?attr/materialCardViewElevatedStyle"
+                app:cardCornerRadius="10dp"
+                app:rippleColor="@color/gray_app"
+                android:layout_marginTop="25dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginStart="26dp"
+                android:layout_marginEnd="26dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:checkable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/material_card_3">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_4"
+                    android:padding="13dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/blocked_users_logo"
+                        android:layout_width="55dp"
+                        android:layout_height="55dp"
+                        android:src="@drawable/blocked_users_icon"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/blocked_users_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/profile_blocked_users"
+                        android:textStyle="bold"
+                        android:paddingTop="8dp"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="18dp"
+                        android:fontFamily="@font/poppins"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/blocked_users_logo" />
+
+                    <ImageView
+                        android:id="@+id/blocked_users_chevron"
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:src="@drawable/chevron_icon"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>

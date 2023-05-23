@@ -24,7 +24,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/root_constraint_layout"
-            android:padding="13dp"
+            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -33,6 +33,7 @@
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:scaleType="fitXY"
+                android:visibility="gone"
                 android:src="@drawable/apple_logo_icon"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/apple_logo_icon"
@@ -41,18 +42,47 @@
                 />
 
             <TextView
+                android:id="@+id/text_view_offer_initials"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/circle_blue_initial"
+                android:text="A"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
+            <TextView
+                android:id="@+id/text_view_job_application_count"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/circle_blue_initial"
+                android:text="2"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <TextView
                 android:id="@+id/company_name"
                 tools:text="Apple"
-                android:layout_width="wrap_content"
+                android:layout_width="205dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:lineSpacingExtra="@dimen/_9pxh"
                 android:letterSpacing="0.05"
                 android:layout_marginTop="4dp"
+                android:singleLine="true"
                 style="@style/OfferListItemStyleHeader"
-                app:layout_constraintStart_toEndOf="@id/offer_img_view_company_logo"
-                app:layout_constraintTop_toTopOf="@id/offer_img_view_company_logo"
-                app:layout_constraintBottom_toBottomOf="@id/offer_img_view_company_logo"
+                app:layout_constraintStart_toEndOf="@id/text_view_offer_initials"
+                app:layout_constraintTop_toTopOf="@id/text_view_offer_initials"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_offer_initials"
                 />
 
             <ImageView
@@ -64,14 +94,15 @@
                 android:src="@drawable/gray_suitcase_icon"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/gray_suitcase_icon"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/offer_img_view_company_logo"
+                app:layout_constraintStart_toStartOf="@id/text_view_offer_initials"
+                app:layout_constraintEnd_toEndOf="@id/text_view_offer_initials"
+                app:layout_constraintTop_toBottomOf="@id/text_view_offer_initials"
                 />
 
             <TextView
                 android:id="@+id/text_view_job_title"
                 tools:text="Data Analyst"
-                android:layout_width="wrap_content"
+                android:layout_width="205dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:letterSpacing="0.08"
@@ -92,7 +123,8 @@
                 android:src="@drawable/dollar_icon"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/dollar_icon"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/icon_job_title"
+                app:layout_constraintEnd_toEndOf="@id/icon_job_title"
                 app:layout_constraintTop_toBottomOf="@id/icon_job_title"
                 />
 
@@ -120,14 +152,15 @@
                 android:src="@drawable/gray_location_icon"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/gray_location_icon"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/icon_salary"
+                app:layout_constraintEnd_toEndOf="@id/icon_salary"
                 app:layout_constraintTop_toBottomOf="@id/icon_salary"
                 />
 
             <TextView
                 android:id="@+id/text_view_location"
                 tools:text="Tulum, Mexico"
-                android:layout_width="wrap_content"
+                android:layout_width="202dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:letterSpacing="0.08"
@@ -151,16 +184,17 @@
                 android:layout_marginTop="9dp"
                 android:singleLine="true"
                 style="@style/AppOfferTextRegular"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toStartOf="@id/icon_location"
                 app:layout_constraintTop_toBottomOf="@id/icon_location"
                 app:layout_constraintBottom_toBottomOf="parent"
                 />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/button_login"
+                android:id="@+id/button_apply_offer"
                 style="@style/AppButtonIndigoApplyRounded"
                 android:layout_width="80dp"
                 android:layout_height="45dp"
+                android:visibility="gone"
                 android:ellipsize="end"
                 android:gravity="center"
                 android:letterSpacing="0.05"
@@ -172,9 +206,9 @@
                 app:layout_constraintBottom_toBottomOf="@id/text_view_timeago" />
 
             <ImageButton
-                android:id="@+id/image_view_back_arrow"
-                android:layout_width="@dimen/_35pxh"
-                android:layout_height="@dimen/_45pxh"
+                android:id="@+id/image_view_bookmark_arrow"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:scaleType="fitXY"
                 android:layout_marginStart="12dp"
                 android:background="@android:color/transparent"
@@ -183,6 +217,18 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/bookmark_icon" />
+
+            <ImageButton
+                android:id="@+id/image_view_more_arrow_offer_item"
+                android:layout_width="45dp"
+                android:layout_height="45dp"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/baseline_chevron_right_24"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/baseline_chevron_right_24" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

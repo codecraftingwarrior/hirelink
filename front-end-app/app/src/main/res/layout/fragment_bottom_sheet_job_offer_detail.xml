@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/job_offer_detail_root_constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rectange_bg_gray_rounded_top"
+            android:paddingTop="15dp"
+            app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+            <com.google.android.material.progressindicator.CircularProgressIndicator
+                android:id="@+id/progress_bar_job_offer_fetching"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="25dp"
+                android:indeterminate="true"
+                android:visibility="gone"
+                app:indicatorColor="@color/indigo_main"
+                app:indicatorSize="70dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/text_view_job_title_job_offer_detail"
+                style="@style/AppTextSemiBoldBlack"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:text="Machine Learning Engineer"
+                android:textSize="22sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/text_view_company_initials_job_offer_detail"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="9dp"
+                android:background="@drawable/square_blue_initials"
+                android:gravity="center"
+                android:text="A"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@id/text_view_job_title_job_offer_detail"
+                app:layout_constraintTop_toBottomOf="@id/text_view_job_title_job_offer_detail" />
+
+            <TextView
+                android:id="@+id/text_view_company_name_job_offer_detail"
+                style="@style/AppTextRegular"
+                android:layout_width="250dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:singleLine="true"
+                android:text="Apple"
+                app:layout_constraintStart_toEndOf="@id/text_view_company_initials_job_offer_detail"
+                app:layout_constraintTop_toTopOf="@id/text_view_company_initials_job_offer_detail" />
+
+            <TextView
+                android:id="@+id/text_view_company_location_job_offer_detail"
+                style="@style/AppTextRegular"
+                android:layout_width="320dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:singleLine="true"
+                android:text="Montpellier"
+                app:layout_constraintBottom_toBottomOf="@id/text_view_company_initials_job_offer_detail"
+                app:layout_constraintStart_toEndOf="@id/text_view_company_initials_job_offer_detail"
+                app:layout_constraintTop_toBottomOf="@id/text_view_company_name_job_offer_detail" />
+
+            <TextView
+                android:id="@+id/text_view_published_at_job_offer_detail"
+                style="@style/AppOfferTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/published_at_applicants"
+                app:layout_constraintStart_toStartOf="@id/text_view_company_initials_job_offer_detail"
+                app:layout_constraintTop_toBottomOf="@id/text_view_company_initials_job_offer_detail" />
+
+            <ImageView
+                android:id="@+id/icon_job_title_offer_detail"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="25dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/gray_suitcase_icon"
+                app:layout_constraintStart_toStartOf="@id/text_view_company_initials_job_offer_detail"
+                app:layout_constraintTop_toBottomOf="@id/text_view_published_at_job_offer_detail"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/gray_suitcase_icon" />
+
+            <TextView
+                android:id="@+id/text_view_contract_type_job_offer_detail"
+                style="@style/AppTextRegular"
+                android:layout_width="330dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:singleLine="true"
+                android:text="@string/offer_category_contract_profession"
+                app:layout_constraintBottom_toBottomOf="@id/icon_job_title_offer_detail"
+                app:layout_constraintStart_toEndOf="@id/icon_job_title_offer_detail"
+                app:layout_constraintTop_toTopOf="@id/icon_job_title_offer_detail" />
+
+            <ImageView
+                android:id="@+id/icon_salary_job_offer_detail"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="14dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/dollar_icon"
+                app:layout_constraintStart_toStartOf="@id/text_view_company_initials_job_offer_detail"
+                app:layout_constraintTop_toBottomOf="@id/icon_job_title_offer_detail"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/dollar_icon" />
+
+            <TextView
+                android:id="@+id/text_view_salary_range_job_offer_detail"
+                style="@style/AppTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="@id/icon_salary_job_offer_detail"
+                app:layout_constraintStart_toEndOf="@id/icon_salary_job_offer_detail"
+                app:layout_constraintTop_toTopOf="@id/icon_salary_job_offer_detail"
+                tools:text="4.500 - 2.000" />
+
+            <ImageView
+                android:id="@+id/icon_date_job_offer_detail"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginTop="14dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/outline_calendar_month_24"
+                app:layout_constraintStart_toStartOf="@id/text_view_company_initials_job_offer_detail"
+                app:layout_constraintTop_toBottomOf="@id/icon_salary_job_offer_detail"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/outline_calendar_month_24" />
+
+            <TextView
+                android:id="@+id/text_view_date_range_job_offer_detail"
+                style="@style/AppTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                android:text="@string/date_range"
+                app:layout_constraintBottom_toBottomOf="@id/icon_date_job_offer_detail"
+                app:layout_constraintStart_toEndOf="@id/icon_date_job_offer_detail"
+                app:layout_constraintTop_toTopOf="@id/icon_date_job_offer_detail"
+                tools:text="10/10/2023 - 10/11/2023" />
+
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginEnd="10dp"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="@id/text_view_company_initials_job_offer_detail"
+                app:layout_constraintTop_toBottomOf="@id/icon_date_job_offer_detail">
+
+                <TextView
+                    android:id="@+id/text_view_description_hint_job_offer_detail"
+                    style="@style/AppTextSemiBoldBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/job_offer_description"
+                    android:textSize="15sp" />
+
+                <TextView
+                    android:id="@+id/text_view_offer_detail_description"
+                    style="@style/AppOfferTextRegular"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="10dp"
+                    android:text="@string/fake_description"
+                    app:layout_constraintStart_toStartOf="@id/text_view_company_initials_job_offer_detail"
+                    app:layout_constraintTop_toBottomOf="@id/text_view_description_hint_job_offer_detail" />
+
+                <TextView
+                    android:id="@+id/text_view_location_hint_job_offer_detail"
+                    style="@style/AppTextSemiBoldBlack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/job_offer_location"
+                    android:textSize="15sp" />
+
+                <com.mapbox.maps.MapView xmlns:mapbox="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/map_view_job_offer_detail"
+                    android:layout_width="match_parent"
+                    android:layout_height="275dp"
+                    android:layout_marginTop="10dp"
+                    mapbox:mapbox_cameraTargetLat="40.7128"
+                    mapbox:mapbox_cameraTargetLng="-74.0060"
+                    mapbox:mapbox_cameraZoom="9.0" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/button_job_offer_detail_apply"
+                    style="@style/AppButtonIndigoRounded"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal"
+                    android:ellipsize="end"
+                    android:gravity="center"
+                    android:layout_marginTop="40dp"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:layout_marginBottom="10dp"
+                    android:text="Apply for this job"
+                    android:textAllCaps="false" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+</layout>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_constraint_layout_candidacy_list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            tools:context=".modules.core.employer.candidacy.list.CandidacyListActivity">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header_bar_candidacy_list"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/rectangle_bg_gray"
+                android:paddingHorizontal="14dp"
+                android:paddingTop="14dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/img_btn_arrow_left"
+                    android:layout_width="@dimen/_25pxh"
+                    android:layout_height="@dimen/_25pxh"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="346dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/next_arrow_left_description"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/next_arrow_left_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/next_arrow_left_icon" />
+
+                <ImageView
+                    android:id="@+id/image_view_hire_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="55dp"
+                    android:paddingTop="3dp"
+                    android:src="@drawable/hirelink_logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/hirelink_logo" />
+
+                <ImageButton
+                    android:id="@+id/img_btn_profile_candidacy_list"
+                    android:layout_width="@dimen/_35pxh"
+                    android:layout_height="@dimen/_35pxh"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    android:src="@drawable/profil_icon"
+                    tools:src="@drawable/profil_icon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_employer_job_offer_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_bar_candidacy_list" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</layout>

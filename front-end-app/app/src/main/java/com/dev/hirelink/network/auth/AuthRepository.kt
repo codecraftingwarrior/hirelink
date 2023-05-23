@@ -3,8 +3,11 @@ package com.dev.hirelink.network.auth
 import android.content.Context
 import com.dev.hirelink.components.RetrofitServiceBuilder
 import com.dev.hirelink.models.ApplicationUser
-import com.dev.hirelink.modules.auth.dto.Credentials
-import com.dev.hirelink.modules.auth.dto.LoginResponse
+import com.dev.hirelink.dto.ApplicationUserRequest
+import com.dev.hirelink.dto.Credentials
+import com.dev.hirelink.dto.EmployerCreatePasswordRequest
+import com.dev.hirelink.dto.LoginResponse
+import com.dev.hirelink.dto.OTPVerificationRequest
 import io.reactivex.Single
 import io.reactivex.subjects.BehaviorSubject
 
@@ -25,4 +28,10 @@ class AuthRepository(private val context: Context) {
     // La méthode emitUser prend en argument un objet ApplicationUser et émet les informations de
     // l'utilisateur à travers le BehaviorSubject currentUser
     fun emitUser(user: ApplicationUser) = currentUser.onNext(user)
+
+    fun register(user: ApplicationUserRequest) = service.register(user)
+
+    fun verifyOTPDigit(otpVerificationRequest: OTPVerificationRequest) = service.verifyDigit(otpVerificationRequest)
+
+    fun createPassword(id: Int, payload: EmployerCreatePasswordRequest) = service.createPassword(id, payload)
 }

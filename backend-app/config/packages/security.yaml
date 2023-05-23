@@ -18,8 +18,12 @@ security:
       pattern: ^/(_(profiler|wdt)|css|images|js)/
       security: false
 
-    auth:
-      pattern: ^/api/auth
+    open_endpoints:
+      pattern: ^/api/(auth|roles|job-offers|companies|professions)
+      security: false
+
+    roles_open:
+      pattern: ^/api/roles
       security: false
 
     login:
@@ -55,6 +59,8 @@ security:
     - { path: ^/api/login-check, roles: PUBLIC_ACCESS }
     - { path: ^/api,       roles: PUBLIC_ACCESS }
     #- { path: ^/api,       roles: IS_AUTHENTICATED_FULLY }
+
+
 
 when@test:
   security:

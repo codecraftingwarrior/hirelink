@@ -16,6 +16,7 @@
     <string name="page_not_found">Page not found</string>
     <string name="issue_msg">Something went wrong, please try again.</string>
     <string name="basic_msg">Let’s start with the basics</string>
+    <string name="candidate_registration_msg">Complete this step to be able to apply to our partner companies\' offers.</string>
     <string name="register_confirmation">Register confirmation</string>
     <string name="registration_confirmation_msg">Your subscription was succefuly cofirmed, you can now start candidate to job offers.</string>
     <string name="choose_password">choose a password</string>
@@ -75,4 +76,79 @@
     <string name="job_application_accepted_state">Accepted</string>
     <string name="employer">Employer</string>
     <string name="date_select_prompt">Choose a date</string>
+    <string name="national_unique_number">National unique number</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="put_in_category">Put in a category</string>
+    <string name="add_category">Add a category</string>
+    <string name="accept">Accept</string>
+    <string name="refuse">Refuse</string>
+    <string name="block">Block</string>
+    <string name="report">Report</string>
+    <string name="see_your_plan">See your plan</string>
+    <string name="add_credit_card">Add a credit card</string>
+    <string name="call">Call</string>
+    <string name="send_msg">Message</string>
+    <string name="send_email">Email</string>
+    <string name="cover_letter">Cover letter</string>
+    <string name="cv">Curriculum vitae</string>
+    <string name="job_application_success_msg">Your application has been sent to the company.</string>
+
+    <string name="mapbox_access_token">pk.eyJ1IjoiY29kZWNyYWZ0aW5nd2FycmlvciIsImEiOiJjbGdpNGd5aHYwZ2Z4M2RwZzRucGFlajF6In0.3efBYpHbBE22AIIQT6q1rg</string>
+    <string name="all">All</string>
+    <string name="_10_km">10 Km</string>
+    <string name="_20_km">20 Km</string>
+    <string name="_30_km">30 Km</string>
+    <string name="_40_km">40 Km</string>
+    <string name="_50_km">50 Km</string>
+    <string name="done">Done</string>
+    <string name="company">Company</string>
+    <string name="company_filter_hint">Choose a set of companies</string>
+    <string name="profession_filter_hint">Choose a set of professions</string>
+    <string name="profile_favorites">Favorites</string>
+    <string name="cv_bis">CV</string>
+
+    <string name="data_analyst">Data Analyst</string>
+    <string name="fake_description">Epicuri fugit finibus quis sed euripidis lectus vehicula. Lorem commune quem vim nec nisl. Facilis adipisci minim erat putent. Rhoncus definitiones iuvaret expetenda omnesque dicit intellegat. Aliquet facilisi error constituam iisque. Pretium legimus assueverit nunc aenean pretium consequat pretium vel pretium.</string>
+
+    <string name="schedule_label">Schedule</string>
+    <string name="search">Search</string>
+
+
+    <string name="profile_date_birth_text_field">Date of Birth</string>
+    <string name="profile_phone_number">Phone Number</string>
+    <string name="profile_nationality_text_field">Nationality</string>
+
+
+    <!-- Employer -->
+    <string name="apple">Apple</string>
+
+    <!-- Location -->
+    <string name="city">City</string>
+
+    <!-- Motivation Letter -->
+    <string name="motivaiton_letter">Motivation Letter</string>
+
+    <!-- Dates -->
+    <string name="today">Today</string>
+    <string name="date_1">27 March 2023</string>
+
+
+    <!-- Candidacy -->
+    <string name="candidacy_accepted">Your candidacy has been accepted !</string>
+
+    <!-- Job Positions -->
+
+    <!-- Other -->
+    <string name="center_point">·</string>
+    <string name="profile_information">Profil Informations</string>
+    <string name="job_offer_description">Job offer description</string>
+    <string name="published_at_applicants">%s • %d Applicants</string>
+    <string name="published_at_applicants_first">%s • Be the first applicant</string>
+    <string name="offer_category_contract_profession">%s • %s • %s</string>
+    <string name="date_range">%s - %s</string>
+    <string name="job_offer_location">Job offer Location</string>
+
+
+    <string name="job_offer_publish_succss">Your job offer has been successfully published.</string>
 </resources>

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
@@ -18,6 +20,12 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new Get(),
+        new GetCollection(
+            paginationEnabled: true,
+            paginationItemsPerPage: 10,
+            paginationMaximumItemsPerPage: 10,
+            normalizationContext: ['groups' => ['company:read:filter']]
+        )
     ],
     normalizationContext: ['groups' => ['company:read']],
     denormalizationContext: ['groups' => ['company:writable']]
@@ -25,15 +33,22 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[UniqueEntity(fields: ['nationalUniqueNumber'], message: 'There is already a company with this national number.')]
 #[UniqueEntity(fields: ['mailAddress'], message: 'There is already a company with this mail address.')]
 #[UniqueEntity(fields: ['phoneNumber'], message: 'There is already a company with this phone number.')]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'name' => 'partial'
+    ]
+)]
 class Company extends TrackableEntity
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['company:read:filter'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
-    #[Groups(['company:read', 'company:writable', 'company:first-write'])]
+    #[Groups(['company:read', 'company:writable', 'company:first-write', 'company:read:name', 'company:read:filter'])]
     private ?string $name = null;
 
     #[ORM\Column(length: 80, nullable: true)]
@@ -90,6 +105,14 @@ class Company extends TrackableEntity
 
     #[ORM\OneToMany(mappedBy: 'company', targetEntity: ApplicationUser::class)]
     private Collection $applicationUsers;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['company:first-write'])]
+    private ?float $lat = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['company:first-write'])]
+    private ?float $lng = null;
 
     public function __construct()
     {
@@ -319,6 +342,30 @@ class Company extends TrackableEntity
                 $applicationUser->setCompany(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(?float $lat): self
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(?float $lng): self
+    {
+        $this->lng = $lng;
 
         return $this;
     }

@@ -2,9 +2,12 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\OpenApi\Model\Operation;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\RoleRepository;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -16,9 +19,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[ApiResource(
     operations: [
         new Get(),
-        new GetCollection()
+        new GetCollection(paginationEnabled: false)
     ],
-    normalizationContext: ['groups' => ['role:read']]
+    normalizationContext: ['groups' => ['role:read']],
+    paginationEnabled: false
+)]
+#[ApiFilter(
+    SearchFilter::class,
+    properties: [
+        'code' => 'exact'
+    ]
 )]
 class Role extends TrackableEntity
 {

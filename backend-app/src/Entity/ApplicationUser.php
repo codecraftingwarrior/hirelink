@@ -27,6 +27,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints\NotBlank;
+use Symfony\Component\Validator\Constraints\NotNull;
 
 
 #[ORM\Entity(repositoryClass: ApplicationUserRepository::class)]
@@ -67,6 +68,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
                 ),
                 security: []
             ),
+            normalizationContext: ['groups' => ['user:read', 'role:read']],
             denormalizationContext: ['groups' => ['create-pwd:writable']],
             input: CreatePasswordInput::class,
             processor: CreatePasswordStateProcessor::class
@@ -98,7 +100,8 @@ use Symfony\Component\Validator\Constraints\NotBlank;
             processor: RegistrationStateProcessor::class,
         ),
         new Put(
-            uriTemplate: 'users/{id}'
+            uriTemplate: 'users/{id}',
+            normalizationContext: ['groups' => ['user:read', 'role:read', 'plan:read']]
         ),
         new Get(
             uriTemplate: '/users/current-user',
@@ -106,7 +109,7 @@ use Symfony\Component\Validator\Constraints\NotBlank;
                 'summary' => 'Retrieves the current logged in user.',
                 'parameters' => []
             ],
-            normalizationContext: ['groups' => ['user:read', 'role:read']],
+            normalizationContext: ['groups' => ['user:read', 'role:read', 'plan:read', 'company:first-write']],
             provider: CurrentUserProvider::class
         )
     ],
@@ -123,11 +126,11 @@ class ApplicationUser extends BaseUser
     private ?int $id = null;
 
     #[ORM\Column(length: 80, nullable: true)]
-    #[Groups(['user:read', 'user:writable'])]
+    #[Groups(['user:read','user:read:first-name', 'user:writable'])]
     private ?string $firstName = null;
 
     #[ORM\Column(length: 80, nullable: true)]
-    #[Groups(['user:read', 'user:writable'])]
+    #[Groups(['user:read', 'user:writable','user:read:last-name'])]
     private ?string $lastName = null;
 
     #[ORM\Column(length: 80, nullable: true)]
@@ -140,7 +143,6 @@ class ApplicationUser extends BaseUser
 
     #[ORM\Column(length: 80)]
     #[Groups(['user:read', 'user:writable'])]
-    #[NotBlank]
     private ?string $phoneNumber = null;
 
 
@@ -163,11 +165,11 @@ class ApplicationUser extends BaseUser
     private ?Role $role = null;
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
-    #[Groups(['user:writable'])]
+    #[Groups(['user:writable', 'user:read', 'plan:read'])]
     private ?Plan $plan = null;
 
     #[ORM\ManyToOne(cascade: ["persist"], inversedBy: 'applicationUsers')]
-    #[Groups(['user:writable', 'company:writable:emp', 'company:first-write'])]
+    #[Groups(['user:writable', 'company:writable:emp', 'company:first-write', 'company:read:name'])]
     private ?Company $company = null;
 
     #[ORM\ManyToMany(targetEntity: self::class, inversedBy: 'applicationUsers')]

@@ -12,16 +12,21 @@ import androidx.fragment.app.viewModels
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentRoleChooseRegisterBinding
 import com.dev.hirelink.enums.RoleType
+import com.dev.hirelink.modules.auth.register.RegisterActivity
+import com.dev.hirelink.modules.auth.register.fragments.candidateregister.RegisterViewModel
+import com.dev.hirelink.modules.common.CustomLoadingOverlay
 
 class RoleChooseRegisterFragment : Fragment() {
     private lateinit var listener: RoleSelectionListener
     private lateinit var selectedRoleType: RoleType
+    private lateinit var customLoadingOverlay: CustomLoadingOverlay
 
     interface RoleSelectionListener {
         fun onRoleChosen(role: RoleType);
     }
 
     private lateinit var binding: FragmentRoleChooseRegisterBinding
+    private lateinit var registerViewModel: RegisterViewModel
     private val viewModel: RoleChooseRegisterViewModel by viewModels()
 
     override fun onCreateView(
@@ -34,9 +39,14 @@ class RoleChooseRegisterFragment : Fragment() {
             container,
             false
         )
-
+        customLoadingOverlay = CustomLoadingOverlay(
+            requireContext(),
+            R.id.root_constraint_layout_role_choose,
+            R.layout.loading_overlay_centered
+        )
         binding.roleChooseViewModel = viewModel
         binding.lifecycleOwner = viewLifecycleOwner
+        registerViewModel = (requireActivity() as RegisterActivity).registerViewModel
 
         return binding.root;
     }
