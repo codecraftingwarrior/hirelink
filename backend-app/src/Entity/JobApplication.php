@@ -5,19 +5,26 @@ namespace App\Entity;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobApplicationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: JobApplicationRepository::class)]
 #[ApiResource(
     operations:[
         new GetCollection(),
         new Get(),
-        new Put()
+        new Post(
+            normalizationContext: ['groups' => ['job-application:read']],
+            denormalizationContext: ['groups' => ['job-application:writable']]
+        )
     ],
-    normalizationContext: ['groups' => ['contract-type:read']]
+    normalizationContext: ['groups' => ['job-application:read']]
 )]
 class JobApplication extends TrackableEntity
 {
@@ -27,15 +34,26 @@ class JobApplication extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
-    private ?string $state = null;
+    private ?string $state = "null";
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-application:read', 'job-application:writable'])]
     private ?JobOffer $jobOffer = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['job-application:read', 'job-application:writable'])]
     private ?ApplicationUser $applicant = null;
+
+    #[ORM\ManyToMany(targetEntity: Document::class, inversedBy: 'jobApplications', cascade: ['persist'])]
+    #[Groups(['job-application:read', 'job-application:writable'])]
+    private Collection $documents;
+
+    public function __construct()
+    {
+        $this->documents = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -74,6 +92,30 @@ class JobApplication extends TrackableEntity
     public function setApplicant(?ApplicationUser $applicant): self
     {
         $this->applicant = $applicant;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Document>
+     */
+    public function getDocuments(): Collection
+    {
+        return $this->documents;
+    }
+
+    public function addDocument(Document $document): self
+    {
+        if (!$this->documents->contains($document)) {
+            $this->documents->add($document);
+        }
+
+        return $this;
+    }
+
+    public function removeDocument(Document $document): self
+    {
+        $this->documents->removeElement($document);
 
         return $this;
     }

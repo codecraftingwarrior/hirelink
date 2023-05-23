@@ -90,7 +90,7 @@ class JobOffer extends TrackableEntity
     #[Groups(['job-offer:read'])]
     private ?ContractType $contractType = null;
 
-    #[ORM\OneToMany(mappedBy: 'job-offer', targetEntity: JobApplication::class)]
+    #[ORM\OneToMany(mappedBy: 'jobOffer', targetEntity: JobApplication::class)]
     private Collection $jobApplications;
 
     #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'jobOffers')]
