@@ -17,13 +17,14 @@ class JobOfferRepository(private val context: Context) {
         lng: Double? = null,
         maxDistance: Double? = null,
         jobTitle: String? = null,
-        minSalary: Float? =  null,
+        minSalary: Float? = null,
         maxSalary: Float? = null,
         fromDate: String? = null,
         toDate: String? = null,
         companyIDs: List<Int>? = null,
         professionIDs: List<Int>? = null
-    ) = service.findAll(pageNumber,
+    ) = service.findAll(
+        pageNumber,
         latitude = lat,
         longitude = lng,
         maxDistance = maxDistance,
@@ -38,7 +39,10 @@ class JobOfferRepository(private val context: Context) {
 
     fun findById(id: Int) = service.findById(id)
 
-    fun findByOwnerId(id: Int, pageNumber: Int = 1 ) = service.findByOwnerId(id, pageNumber)
+    fun findByOwnerId(id: Int, pageNumber: Int = 1) = service.findByOwnerId(id, pageNumber)
 
     fun create(jobOffer: JobOffer) = service.create(jobOffer)
+
+    fun findJobApplicationsByJobOfferId(jobOfferId: Int) =
+        service.findJobApplicationsByJobOfferId(jobOfferId)
 }

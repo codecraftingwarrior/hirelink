@@ -7,8 +7,10 @@ import android.icu.text.SimpleDateFormat
 import android.icu.util.TimeZone
 import android.net.ParseException
 import android.net.Uri
+import android.os.Environment
 import android.provider.MediaStore
 import android.text.format.DateUtils
+import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
@@ -16,7 +18,8 @@ import java.util.*
 
 
 object Globals {
-    const val API_BASE_URL = "https://a6c1-46-193-64-92.ngrok-free.app/api/";
+    const val BACKEND_DOMAIN = "https://a6c1-46-193-64-92.ngrok-free.app"
+    const val API_BASE_URL = "$BACKEND_DOMAIN/api/";
     const val PLAN_RESOURCE_PREFIX = "/api/plans/"
     const val JOB_OFFER_RESOURCE_PREFIX = "/api/job-offers/"
     const val APPLICATION_USER_RESOURCE_PREFIX = "/api/users/"
@@ -106,6 +109,18 @@ fun uriToFile(uri: Uri, context: Context, contentResolver: ContentResolver): Fil
     }
 
     return file
+}
+
+fun getRootDirPath(context: Context): String {
+    return if (Environment.MEDIA_MOUNTED == Environment.getExternalStorageState()) {
+        val file: File = ContextCompat.getExternalFilesDirs(
+            context.applicationContext,
+            null
+        )[0]
+        file.absolutePath
+    } else {
+        context.applicationContext.filesDir.absolutePath
+    }
 }
 
 

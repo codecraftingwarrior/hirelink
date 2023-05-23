@@ -16,7 +16,7 @@ import com.dev.hirelink.models.JobApplication
 
 class JobApplicationItemAdapter(
     val context: Context,
-    val dataset: List<JobApplication>
+    val dataset: MutableList<JobApplication?>?
 ) : RecyclerView.Adapter<JobApplicationItemAdapter.JobApplicationItemViewHolder>() {
 
     class JobApplicationItemViewHolder(private val view: View) : ViewHolder(view) {
@@ -42,7 +42,7 @@ class JobApplicationItemAdapter(
             stateText.setTextColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    JobApplicationState.valueOf(jobApplication.state).colorResourceId
+                    JobApplicationState.valueOf(jobApplication.state!!).colorResourceId
                 )
             )
 
@@ -50,7 +50,7 @@ class JobApplicationItemAdapter(
             stateIndicatorBg.setColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    JobApplicationState.valueOf(jobApplication.state).colorResourceId
+                    JobApplicationState.valueOf(jobApplication.state!!).colorResourceId
                 )
             )
 
@@ -68,9 +68,9 @@ class JobApplicationItemAdapter(
         return JobApplicationItemViewHolder(adapterLayout)
     }
 
-    override fun getItemCount(): Int = dataset.size
+    override fun getItemCount(): Int = dataset?.size!!
 
     override fun onBindViewHolder(holder: JobApplicationItemViewHolder, position: Int) {
-        holder.bind(dataset[position])
+        dataset?.get(position)?.let { holder.bind(it) }
     }
 }

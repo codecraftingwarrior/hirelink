@@ -32,6 +32,8 @@ class JobOfferViewModel(
 
     fun createJobOffer(jobOffer: JobOffer) = jobOfferRepository.create(jobOffer)
 
+    fun findJobApplicationsByJobOfferId(jobOffer: JobOffer) = jobOfferRepository.findJobApplicationsByJobOfferId(jobOffer.id!!)
+
     fun onAddedJobOffer(jobOffer: JobOffer)  {
         _addedJobOffer.value = jobOffer
     }

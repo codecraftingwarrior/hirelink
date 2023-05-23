@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.dev.hirelink.models.JobApplication
 import com.dev.hirelink.network.jobapplication.JobApplicationRepository
 
 class JobApplicationViewModel(
@@ -18,6 +19,10 @@ class JobApplicationViewModel(
     fun onJobApplicationDone()  {
         _jobApplicationDone.value = true
     }
+
+    fun findById(id: Int) = jobApplicationRepository.findById(id)
+
+    fun update(jobApplication: JobApplication) = jobApplicationRepository.update(jobApplication)
 
     class JobApplicationViewModelFactory(
         private val context: Context,

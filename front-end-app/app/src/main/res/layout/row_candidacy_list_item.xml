@@ -23,7 +23,7 @@ xmlns:tools="http://schemas.android.com/tools">
     android:checkable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_constraint_layout"
+        android:id="@+id/root_constraint_layout_candidacy_list_item"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="13dp">
@@ -39,24 +39,29 @@ xmlns:tools="http://schemas.android.com/tools">
             android:lineSpacingExtra="@dimen/_9pxh"
             android:textColor="@color/indigo_main"
             android:singleLine="true"
-            app:layout_constraintStart_toEndOf="@+id/icon_profil"
+            app:layout_goneMarginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/text_view_candidate_initials"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="GUEYE Ahmadou" />
 
-        <ImageView
-            android:id="@+id/icon_profil"
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:scaleType="fitXY"
-            android:src="@drawable/user_icon"
+
+        <TextView
+            android:id="@+id/text_view_candidate_initials"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/circle_blue_initial"
+            android:text="AG"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="@+id/text_view_candidate_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/text_view_candidate_name"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/profil_icon" />
+            />
 
         <TextView
-            android:id="@+id/text_view_timeago"
+            android:id="@+id/text_view_candidate_timeago"
             style="@style/AppOfferTextRegular"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -67,8 +72,8 @@ xmlns:tools="http://schemas.android.com/tools">
             android:singleLine="true"
             android:text="4 Days ago"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon_profil"
+            app:layout_constraintStart_toStartOf="@id/text_view_candidate_initials"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_candidate_initials"
             tools:text="4 Days ago" />
 
         <ImageButton

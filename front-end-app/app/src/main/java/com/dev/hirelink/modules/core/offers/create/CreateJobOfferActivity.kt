@@ -215,7 +215,7 @@ class CreateJobOfferActivity : AppCompatActivity() {
             maxSalary = binding.editTextNewOfferMaxSalary.text.toString().toFloat()
             owner = currentUser
         }
-        
+
         val disposable = jobOfferViewModel
             .createJobOffer(jobOffer)
             .subscribeOn(Schedulers.io())

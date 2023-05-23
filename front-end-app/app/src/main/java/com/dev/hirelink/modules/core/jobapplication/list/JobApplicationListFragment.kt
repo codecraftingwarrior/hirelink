@@ -32,7 +32,7 @@ class JobApplicationListFragment : Fragment() {
         val jobApplications = MockDataSource().loadJobApplications()
 
         val recyclerView = binding.recyclerViewJobApplicationList
-        recyclerView.adapter = JobApplicationItemAdapter(requireContext(), jobApplications)
+        recyclerView.adapter = JobApplicationItemAdapter(requireContext(), jobApplications.toMutableList())
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
     }
