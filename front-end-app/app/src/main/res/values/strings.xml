@@ -76,6 +76,7 @@
 
     <!-- Job Positions -->
     <string name="data_analyst">Data Analyst</string>
+    <string name="job_title_with_point">Data Analyst \u2022</string>
     <string name="cleaning_agent">Cleaning Agent</string>
     <string name="engineer">Engineer</string>
 

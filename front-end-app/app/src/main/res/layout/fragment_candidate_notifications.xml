@@ -135,14 +135,14 @@
 
             <ImageView
                 android:id="@+id/green_point"
-                android:layout_width="10dp"
-                android:layout_height="10dp"
-                android:src="@drawable/circle_green"
+                android:layout_width="6dp"
+                android:layout_height="8dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="6dp"
-                tools:ignore="ContentDescription"
+                android:src="@drawable/circle_green"
+                app:layout_constraintStart_toEndOf="@+id/first_point_text"
                 app:layout_constraintTop_toBottomOf="@id/candidacy_accepted"
-                app:layout_constraintStart_toEndOf="@+id/first_point_text" />
+                tools:ignore="ContentDescription" />
 
             <com.google.android.material.divider.MaterialDivider
                 android:id="@+id/horizontal_divider"

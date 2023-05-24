@@ -33,6 +33,8 @@ import com.dev.hirelink.modules.core.employer.EmployerProfilActivity
 import com.dev.hirelink.modules.core.employer.candidacy.list.CandidacyListActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
+import com.dev.hirelink.modules.core.notification.NotificationListFragment
+import com.dev.hirelink.modules.core.notification.NotificationViewModel
 import com.dev.hirelink.modules.core.offers.JobOfferViewModel
 import com.dev.hirelink.modules.core.offers.create.CreateJobOfferActivity
 import com.dev.hirelink.modules.core.offers.list.JobOfferItemAdapter
@@ -81,6 +83,12 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
         JobApplicationViewModel.JobApplicationViewModelFactory(
             applicationContext,
             (application as HirelinkApplication).jobApplicationRepository
+        )
+    }
+    val notificationViewModel: NotificationViewModel by viewModels {
+        NotificationViewModel.NotificationViewModelFactory(
+            applicationContext,
+            (application as HirelinkApplication).notificationRepository
         )
     }
     private val speechResultLauncher =
@@ -152,7 +160,8 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                 if (isLoggedIn) {
                     binding.imgBtnProfile.visibility = View.VISIBLE
                     binding.buttonLogin.visibility = View.GONE
-                    binding.bottomNavigation.visibility = if (currentUser.role?.code == RoleType.APPLICANT.code) View.VISIBLE else View.GONE
+                    binding.bottomNavigation.visibility =
+                        if (currentUser.role?.code == RoleType.APPLICANT.code) View.VISIBLE else View.GONE
                     if (currentUser.role?.code != RoleType.APPLICANT.code) {
                         binding.chipGroupDistanceFilter.visibility = View.GONE
                         binding.addFloatingActionButton.visibility = View.VISIBLE
@@ -286,6 +295,9 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                 ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray)
             when (item.itemId) {
                 R.id.menu_item_schedule -> {
+                    if (binding.textFieldSearch.visibility == View.GONE)
+                        binding.textFieldSearch.visibility = View.VISIBLE
+
                     binding.horizontalScrollViewChipDistance.visibility = View.GONE
                     binding.imgBtnFilter.visibility = View.GONE
                     currentFragment = "SCHEDULE"
@@ -299,7 +311,8 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                     true
                 }
                 R.id.menu_item_candidacy -> {
-                    // Respond to navigation item 2 click
+                    if (binding.textFieldSearch.visibility == View.GONE)
+                        binding.textFieldSearch.visibility = View.VISIBLE
                     binding.searchHeader.background =
                         ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray_reg)
                     binding.horizontalScrollViewChipDistance.visibility = View.GONE
@@ -315,6 +328,8 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                 R.id.menu_item_offers -> {
                     binding.horizontalScrollViewChipDistance.visibility = View.VISIBLE
                     binding.imgBtnFilter.visibility = View.VISIBLE
+                    if (binding.textFieldSearch.visibility == View.GONE)
+                        binding.textFieldSearch.visibility = View.VISIBLE
 
                     val layoutParams: LayoutParams = binding.textFieldSearch.layoutParams
                     layoutParams.width = TypedValue.applyDimension(
@@ -330,8 +345,10 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                 }
                 R.id.menu_item_notifications -> {
                     binding.imgBtnFilter.visibility = View.GONE
-                    binding.horizontalScrollViewChipDistance.visibility = View.VISIBLE
-                    Log.d(javaClass.simpleName, "Notifications is clicked")
+                    binding.horizontalScrollViewChipDistance.visibility = View.GONE
+                    binding.textFieldSearch.visibility = View.GONE
+                    
+                    replaceFragment(NotificationListFragment())
                     currentFragment = "NOTIFICATIONS"
                     true
                 }

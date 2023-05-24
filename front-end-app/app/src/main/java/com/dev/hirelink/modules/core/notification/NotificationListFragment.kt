@@ -1,4 +1,4 @@
-package com.dev.hirelink.modules.core.schedule
+package com.dev.hirelink.modules.core.notification
 
 import android.net.Uri
 import android.os.Bundle
@@ -10,57 +10,55 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dev.hirelink.R
-import com.dev.hirelink.databinding.FragmentCandidateScheduleBinding
-import com.dev.hirelink.enums.JobApplicationState
+import com.dev.hirelink.databinding.FragmentCandidateNotificationListBinding
 import com.dev.hirelink.models.JobApplication
+import com.dev.hirelink.models.Notification
 import com.dev.hirelink.models.WrappedPaginatedResource
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.common.NoDataView
 import com.dev.hirelink.modules.core.BaseActivity
-import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
+import com.dev.hirelink.modules.core.schedule.ScheduleItemAdapter
+import com.mapbox.navigation.core.lifecycle.MapboxNavigationApp.setup
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 
-class ScheduleListFragment: Fragment() {
-    private var jobApplicationFilterCriteria =
-        JobApplicationViewModel.JobApplicationFilterCriteria()
-    private lateinit var binding: FragmentCandidateScheduleBinding
+class NotificationListFragment : Fragment() {
+    private lateinit var binding: FragmentCandidateNotificationListBinding
+    private lateinit var notificationViewModel: NotificationViewModel
+    private lateinit var notifications: MutableList<Notification?>
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter: ScheduleItemAdapter
+    private lateinit var adapter: NotificationItemAdapter
     private val compositeDisposable = CompositeDisposable()
-    private var chosenState: String? = JobApplicationState.ACCEPTED.name
-    private var isLoading = false
-    private var loaded = false
-    private lateinit var jobApplicationViewModel: JobApplicationViewModel
-    private lateinit var jobApplications: MutableList<JobApplication?>
     private lateinit var customLoadingOverlay: CustomLoadingOverlay
     private lateinit var noDataView: NoDataView
-    private lateinit var paginatedResource: WrappedPaginatedResource<JobApplication>
+    private lateinit var paginatedResource: WrappedPaginatedResource<Notification>
+    private var isLoading = false
+    private var loaded = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(
-            layoutInflater,
-            R.layout.fragment_candidate_schedule,
+            inflater,
+            R.layout.fragment_candidate_notification_list,
             container,
             false
         )
-        jobApplicationViewModel = (requireActivity() as BaseActivity).jobApplicationViewModel
+        notificationViewModel = (requireActivity() as BaseActivity).notificationViewModel
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         customLoadingOverlay = CustomLoadingOverlay(
             requireContext(),
-            R.id.root_constraint_layout_schedule_list,
+            R.id.root_constraint_layout_notification_list,
             R.layout.loading_overlay_centered
         )
 
@@ -73,64 +71,24 @@ class ScheduleListFragment: Fragment() {
     }
 
     private fun setup() {
-        bindListeners()
         fullInitialization()
-        attachObservers()
     }
 
-    private fun attachObservers() {
-        jobApplicationViewModel.criteria.observe(viewLifecycleOwner) {
-            jobApplicationFilterCriteria = it
-
-            fullInitialization()
-        }
-    }
-
-
-    private fun fullInitialization() {
-        fetchJobApplications {
-            jobApplications = it.items ?: mutableListOf()
-            paginatedResource = it
-
-            if (!loaded) {
-                initRecyclerView()
-                loaded = true
-            } else {
-                isLoading = false
-                adapter.dataset = jobApplications
-                adapter.notifyDataSetChanged()
-            }
-
-            if (jobApplications.isEmpty()) {
-                noDataView.show()
-            } else {
-                noDataView.hide()
-            }
-        }
-    }
-
-    private fun bindListeners() {
-    }
-
-    private fun fetchJobApplications(
+    private fun fetchNotifications(
         pageNumber: Int = 1,
         showLoader: Boolean = true,
-        onDataReceived: (data: WrappedPaginatedResource<JobApplication>) -> Unit
+        onDataReceived: (data: WrappedPaginatedResource<Notification>) -> Unit
     ) {
 
         if (showLoader)
             customLoadingOverlay.showLoading()
 
-        jobApplicationViewModel
+        notificationViewModel
             .apply {
-                val jobOfferObservable: Single<WrappedPaginatedResource<JobApplication>> =
-                    findJobApplications(
-                        page = pageNumber,
-                        state = chosenState,
-                        searchQuery = jobApplicationFilterCriteria.searchQuery
-                    )
+                val observable: Single<WrappedPaginatedResource<Notification>> =
+                    fetchNotifications(page = pageNumber)
 
-                val disposable = jobOfferObservable
+                val disposable = observable
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doFinally { customLoadingOverlay.hideLoading() }
@@ -140,9 +98,31 @@ class ScheduleListFragment: Fragment() {
             }
     }
 
+    private fun fullInitialization() {
+        fetchNotifications {
+            notifications = it.items ?: mutableListOf()
+            paginatedResource = it
+
+            if (!loaded) {
+                initRecyclerView()
+                loaded = true
+            } else {
+                isLoading = false
+                adapter.dataset = notifications
+                adapter.notifyDataSetChanged()
+            }
+
+            if (notifications.isEmpty()) {
+                noDataView.show()
+            } else {
+                noDataView.hide()
+            }
+        }
+    }
+
     private fun initRecyclerView() {
-        recyclerView = binding.recyclerViewScheduleList
-        adapter = ScheduleItemAdapter(requireContext(), jobApplications.toMutableList())
+        recyclerView = binding.recyclerViewNotificationList
+        adapter = NotificationItemAdapter(requireContext(), notifications.toMutableList())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
@@ -155,7 +135,7 @@ class ScheduleListFragment: Fragment() {
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
                 super.onScrolled(recyclerView, dx, dy)
                 val layoutManager = recyclerView.layoutManager as LinearLayoutManager
-                if (!isLoading && layoutManager.findLastCompletelyVisibleItemPosition() == jobApplications.size - 1) {
+                if (!isLoading && layoutManager.findLastCompletelyVisibleItemPosition() == notifications.size - 1) {
                     loadMore()
                     isLoading = true
                 }
@@ -169,18 +149,18 @@ class ScheduleListFragment: Fragment() {
             return
         }
 
-        jobApplications.add(null)
-        adapter.notifyItemInserted(jobApplications.size - 1)
+        notifications.add(null)
+        adapter.notifyItemInserted(notifications.size - 1)
 
         val nextPageUri = Uri.parse(paginatedResource.paginationView?.nextItemLink)
         val nextPageNumber = nextPageUri.getQueryParameter("page")?.toIntOrNull()
         if (nextPageNumber != null) {
-            fetchJobApplications(pageNumber = nextPageNumber, showLoader = false) {
-                jobApplications.removeAt(jobApplications.size - 1)
-                val scrollPosition: Int = jobApplications.size
+            fetchNotifications(pageNumber = nextPageNumber, showLoader = false) {
+                notifications.removeAt(notifications.size - 1)
+                val scrollPosition: Int = notifications.size
                 adapter.notifyItemRemoved(scrollPosition)
 
-                it.items?.let { items -> jobApplications.addAll(items) }
+                it.items?.let { items -> notifications.addAll(items) }
 
                 paginatedResource = it
                 adapter.notifyItemRangeChanged(scrollPosition, it.items?.size ?: 0)
@@ -193,4 +173,5 @@ class ScheduleListFragment: Fragment() {
         super.onDestroy()
         compositeDisposable.clear()
     }
+
 }
