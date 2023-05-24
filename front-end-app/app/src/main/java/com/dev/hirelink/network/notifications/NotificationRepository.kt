@@ -10,5 +10,5 @@ class NotificationRepository(
         RetrofitServiceBuilder(context).create(NotificationService::class.java)
     }
 
-    fun findAll(page: Int? = 1) = service.findAll(page)
+    fun findAll(page: Int? = 1, user: Int? = null) = service.findAll(page, user)
 }

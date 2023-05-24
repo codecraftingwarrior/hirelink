@@ -9,7 +9,7 @@ class NotificationViewModel(
     val notificationRepository: NotificationRepository
 ): ViewModel() {
 
-    fun fetchNotifications(page: Int? = null) = notificationRepository.findAll(page)
+    fun fetchNotifications(page: Int? = null, user: Int? = null) = notificationRepository.findAll(page, user)
 
     class NotificationViewModelFactory(
         private val context: Context,
