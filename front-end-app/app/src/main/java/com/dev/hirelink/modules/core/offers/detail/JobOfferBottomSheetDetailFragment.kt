@@ -48,7 +48,8 @@ import io.reactivex.schedulers.Schedulers
 var mapView: MapView? = null
 
 class JobOfferBottomSheetDetailFragment(
-    private val jobOffer: JobOffer
+    private val jobOffer: JobOffer,
+    private val showApplyButton: Boolean = true
 ) : BottomSheetDialogFragment() {
 
     private lateinit var routeLineOptions: MapboxRouteLineOptions
@@ -108,6 +109,8 @@ class JobOfferBottomSheetDetailFragment(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        binding.buttonJobOfferDetailApply.visibility = if(showApplyButton) View.VISIBLE else View.GONE
+
         fetchJobOfferById()
         binding.buttonJobOfferDetailApply.setOnClickListener { applyForJob() }
     }
@@ -125,7 +128,7 @@ class JobOfferBottomSheetDetailFragment(
             .subscribe { applicationUser ->
                 currentUser = applicationUser ?: ApplicationUser()
                 binding.buttonJobOfferDetailApply.visibility =
-                    if (currentUser.id != null && currentUser.role?.code == RoleType.APPLICANT.code) View.VISIBLE else View.GONE
+                    if (currentUser.id != null && currentUser.role?.code == RoleType.APPLICANT.code && showApplyButton) View.VISIBLE else View.GONE
             }
 
         compositeDisposable.add(disposable)

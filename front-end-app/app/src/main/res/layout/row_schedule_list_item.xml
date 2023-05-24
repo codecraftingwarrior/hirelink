@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/first_material_card"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    app:cardElevation="5dp"
+    style="?attr/materialCardViewElevatedStyle"
+    app:cardCornerRadius="10dp"
+    app:rippleColor="@color/gray_app"
+    android:layout_marginTop="25dp"
+    android:layout_marginLeft="30dp"
+    android:layout_marginBottom="10dp"
+    android:layout_marginStart="26dp"
+    android:layout_marginEnd="26dp"
+    app:layout_constraintTop_toBottomOf="@id/search_header"
+    android:clickable="true"
+    android:focusable="true"
+    android:checkable="true">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/schedule_card"
+        android:padding="13dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/schedule_date"
+            tools:text="@string/date_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/OfferListItemStyleHeader"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/text_view_company_initials"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/circle_blue_initial"
+            android:text="A"
+            android:layout_marginTop="4dp"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/schedule_date" />
+
+        <TextView
+            android:id="@+id/schedule_company_name"
+            tools:text="@string/apple"
+            android:singleLine="true"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:lineSpacingExtra="@dimen/_9pxh"
+            android:textSize="15sp"
+            android:letterSpacing="0.05"
+            android:layout_marginTop="4dp"
+            style="@style/AppTextSemiBoldBlack"
+            app:layout_constraintStart_toEndOf="@id/text_view_company_initials"
+            app:layout_constraintBottom_toBottomOf="@id/text_view_company_initials"
+            app:layout_constraintTop_toTopOf="@id/text_view_company_initials" />
+
+        <ImageView
+            android:id="@+id/icon_job_title"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/gray_suitcase_icon"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/gray_suitcase_icon"
+            app:layout_constraintStart_toStartOf="@id/text_view_company_initials"
+            app:layout_constraintEnd_toEndOf="@id/text_view_company_initials"
+            app:layout_constraintTop_toBottomOf="@id/text_view_company_initials" />
+
+        <TextView
+            android:id="@+id/text_view_schedule_job_title"
+            tools:text="@string/data_analyst"
+            android:layout_width="202dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:letterSpacing="0.08"
+            android:lineSpacingExtra="@dimen/_7pxh"
+            android:singleLine="true"
+            style="@style/AppOfferTextRegular"
+            app:layout_constraintStart_toEndOf="@id/icon_job_title"
+            app:layout_constraintTop_toTopOf="@id/icon_job_title"
+            app:layout_constraintBottom_toBottomOf="@id/icon_job_title" />
+
+        <ImageView
+            android:id="@+id/icon_location"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:scaleType="fitXY"
+            android:layout_marginTop="14dp"
+            android:src="@drawable/gray_location_icon"
+            tools:ignore="ContentDescription"
+            tools:src="@drawable/gray_location_icon"
+            app:layout_constraintStart_toStartOf="@id/text_view_company_initials"
+            app:layout_constraintEnd_toEndOf="@id/text_view_company_initials"
+            app:layout_constraintTop_toBottomOf="@id/text_view_schedule_job_title" />
+
+        <TextView
+            android:id="@+id/text_view__schedule_location"
+            tools:text="@string/tulum"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:letterSpacing="0.08"
+            android:lineSpacingExtra="@dimen/_7pxh"
+            android:singleLine="true"
+            style="@style/AppOfferTextRegular"
+            app:layout_constraintStart_toEndOf="@id/icon_location"
+            app:layout_constraintTop_toTopOf="@id/icon_location"
+            app:layout_constraintBottom_toBottomOf="@id/icon_location" />
+
+        <TextView
+            android:id="@+id/schedule_future_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/duration_1"
+            style="@style/AppTextSemiBold"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

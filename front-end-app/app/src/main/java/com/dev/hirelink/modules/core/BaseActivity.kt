@@ -40,6 +40,7 @@ import com.dev.hirelink.modules.core.offers.list.JobOfferListFragment
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterBottomSheetFragment
 import com.dev.hirelink.modules.core.offers.list.filter.JobOfferFilterViewModel
 import com.dev.hirelink.modules.core.profil.ProfilActivity
+import com.dev.hirelink.modules.core.schedule.ScheduleListFragment
 import com.dev.hirelink.network.auth.AuthRepository
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -234,7 +235,7 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                             jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
                         }
                     }
-                    "CANDIDACY" -> {
+                    "CANDIDACY", "SCHEDULE" -> {
                         if (s == null || s.isEmpty()) {
                             jobApplicationFilterCriteria.searchQuery = null
                             jobApplicationViewModel.updateCriteria(jobApplicationFilterCriteria)
@@ -288,7 +289,12 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                     binding.horizontalScrollViewChipDistance.visibility = View.GONE
                     binding.imgBtnFilter.visibility = View.GONE
                     currentFragment = "SCHEDULE"
+                    binding.imgBtnFilter.visibility = View.GONE
+                    val layoutParams: LayoutParams = binding.textFieldSearch.layoutParams
+                    layoutParams.width = LayoutParams.MATCH_PARENT
+                    binding.textFieldSearch.layoutParams = layoutParams
 
+                    replaceFragment(ScheduleListFragment())
 
                     true
                 }
