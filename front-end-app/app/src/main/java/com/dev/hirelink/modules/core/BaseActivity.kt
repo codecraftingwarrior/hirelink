@@ -1,8 +1,15 @@
 package com.dev.hirelink.modules.core
 
+import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
 import android.speech.RecognitionListener
 import android.speech.RecognizerIntent
@@ -18,10 +25,14 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.dev.hirelink.HirelinkApplication
+import com.dev.hirelink.MainActivity
 import com.dev.hirelink.R
 import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityBaseBinding
@@ -33,6 +44,8 @@ import com.dev.hirelink.modules.core.employer.EmployerProfilActivity
 import com.dev.hirelink.modules.core.employer.candidacy.list.CandidacyListActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationListFragment
+import com.dev.hirelink.modules.core.notification.NotificationListFragment
+import com.dev.hirelink.modules.core.notification.NotificationViewModel
 import com.dev.hirelink.modules.core.offers.JobOfferViewModel
 import com.dev.hirelink.modules.core.offers.create.CreateJobOfferActivity
 import com.dev.hirelink.modules.core.offers.list.JobOfferItemAdapter
@@ -46,11 +59,15 @@ import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
 import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.schedulers.Schedulers
+import kotlin.properties.Delegates
 
-class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickListener {
+class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickListener, NotificationListFragment.NotificationMarkedListener {
     private lateinit var binding: ActivityBaseBinding
     val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
+    var unreadNotificationCount by Delegates.notNull<Int>()
     private var currentFragment = ""
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var currentUser: ApplicationUser
@@ -81,6 +98,12 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
         JobApplicationViewModel.JobApplicationViewModelFactory(
             applicationContext,
             (application as HirelinkApplication).jobApplicationRepository
+        )
+    }
+    val notificationViewModel: NotificationViewModel by viewModels {
+        NotificationViewModel.NotificationViewModelFactory(
+            applicationContext,
+            (application as HirelinkApplication).notificationRepository
         )
     }
     private val speechResultLauncher =
@@ -131,6 +154,10 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
 
     }
 
+    override fun onMarkedNotifications() {
+        binding.bottomNavigation.removeBadge(R.id.menu_item_notifications)
+    }
+
 
     private fun startSpeechRecognition() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
@@ -152,7 +179,8 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                 if (isLoggedIn) {
                     binding.imgBtnProfile.visibility = View.VISIBLE
                     binding.buttonLogin.visibility = View.GONE
-                    binding.bottomNavigation.visibility = if (currentUser.role?.code == RoleType.APPLICANT.code) View.VISIBLE else View.GONE
+                    binding.bottomNavigation.visibility =
+                        if (currentUser.role?.code == RoleType.APPLICANT.code) View.VISIBLE else View.GONE
                     if (currentUser.role?.code != RoleType.APPLICANT.code) {
                         binding.chipGroupDistanceFilter.visibility = View.GONE
                         binding.addFloatingActionButton.visibility = View.VISIBLE
@@ -161,6 +189,7 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                         layoutParams.width = LayoutParams.MATCH_PARENT
                         binding.textFieldSearch.layoutParams = layoutParams
                     } else {
+                        handleNotification()
                         binding.chipGroupDistanceFilter.visibility = View.VISIBLE
                         binding.addFloatingActionButton.visibility = View.GONE
                     }
@@ -280,12 +309,82 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
         jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
     }
 
+    private fun handleNotification() {
+        val disposable = notificationViewModel
+            .getUnreadNotificationCount()
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ fetched ->
+                val badge = binding.bottomNavigation.getOrCreateBadge(R.id.menu_item_notifications)
+                unreadNotificationCount = fetched.count!!
+                if(fetched.count > 0) {
+                    badge.isVisible = true
+                    badge.number = fetched.count
+                    showNotification()
+                } else {
+                    badge.isVisible = false
+                }
+            },
+                { error: Throwable -> error.printStackTrace() }
+            )
+
+        compositeDisposable.add(disposable)
+
+    }
+
+    @SuppressLint("MissingPermission")
+    private fun showNotification() {
+        Log.d(javaClass.simpleName, "showing notifications")
+        createNotificationChannel()
+
+        val intent = Intent(this, BaseActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
+        }
+        val pendingIntent: PendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE)
+
+        val builder = NotificationCompat.Builder(this, getString(R.string.channel_id))
+            .setSmallIcon(R.drawable.bell_icon)
+            .setContentTitle("Update on Your Job Application")
+            .setContentText("The recruiter has performed actions on your application. Check out the latest updates.")
+            .setPriority(NotificationCompat.PRIORITY_DEFAULT)
+            .setContentIntent(pendingIntent)
+            .setAutoCancel(true)
+
+
+        with(NotificationManagerCompat.from(this)) {
+            // notificationId is a unique int for each notification that you must define
+            notify(1, builder.build())
+        }
+
+    }
+
+    private fun createNotificationChannel() {
+        // Create the NotificationChannel, but only on API 26+ because
+        // the NotificationChannel class is new and not in the support library
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val name = getString(R.string.channel_name)
+            val descriptionText = getString(R.string.channel_description)
+            val importance = NotificationManager.IMPORTANCE_DEFAULT
+            val channel = NotificationChannel(getString(R.string.channel_id), name, importance).apply {
+                description = descriptionText
+            }
+            // Register the channel with the system
+            val notificationManager: NotificationManager = getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
+            notificationManager.createNotificationChannel(channel)
+        }
+    }
+
+
     private fun setupNavigationBar() {
+
         binding.bottomNavigation.setOnItemSelectedListener { item ->
             binding.searchHeader.background =
                 ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray)
             when (item.itemId) {
                 R.id.menu_item_schedule -> {
+                    if (binding.textFieldSearch.visibility == View.GONE)
+                        binding.textFieldSearch.visibility = View.VISIBLE
+
                     binding.horizontalScrollViewChipDistance.visibility = View.GONE
                     binding.imgBtnFilter.visibility = View.GONE
                     currentFragment = "SCHEDULE"
@@ -299,7 +398,8 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                     true
                 }
                 R.id.menu_item_candidacy -> {
-                    // Respond to navigation item 2 click
+                    if (binding.textFieldSearch.visibility == View.GONE)
+                        binding.textFieldSearch.visibility = View.VISIBLE
                     binding.searchHeader.background =
                         ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray_reg)
                     binding.horizontalScrollViewChipDistance.visibility = View.GONE
@@ -315,6 +415,8 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                 R.id.menu_item_offers -> {
                     binding.horizontalScrollViewChipDistance.visibility = View.VISIBLE
                     binding.imgBtnFilter.visibility = View.VISIBLE
+                    if (binding.textFieldSearch.visibility == View.GONE)
+                        binding.textFieldSearch.visibility = View.VISIBLE
 
                     val layoutParams: LayoutParams = binding.textFieldSearch.layoutParams
                     layoutParams.width = TypedValue.applyDimension(
@@ -330,8 +432,10 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                 }
                 R.id.menu_item_notifications -> {
                     binding.imgBtnFilter.visibility = View.GONE
-                    binding.horizontalScrollViewChipDistance.visibility = View.VISIBLE
-                    Log.d(javaClass.simpleName, "Notifications is clicked")
+                    binding.horizontalScrollViewChipDistance.visibility = View.GONE
+                    binding.textFieldSearch.visibility = View.GONE
+
+                    replaceFragment(NotificationListFragment())
                     currentFragment = "NOTIFICATIONS"
                     true
                 }

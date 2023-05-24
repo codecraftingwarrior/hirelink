@@ -18,9 +18,6 @@ import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.common.NoDataView
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
-import com.dev.hirelink.modules.core.jobapplication.list.JobApplicationItemAdapter
-import com.google.android.material.tabs.TabLayout
-import com.mapbox.navigation.core.lifecycle.MapboxNavigationApp.setup
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable

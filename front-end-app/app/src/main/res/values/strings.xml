@@ -76,6 +76,7 @@
 
     <!-- Job Positions -->
     <string name="data_analyst">Data Analyst</string>
+    <string name="job_title_with_point">%s \u2022</string>
     <string name="cleaning_agent">Cleaning Agent</string>
     <string name="engineer">Engineer</string>
 
@@ -170,4 +171,10 @@
 
 
     <string name="job_offer_publish_succss">Your job offer has been successfully published.</string>
+    <string name="no_data_msg_default">There is no data to display.</string>
+    <string name="no_data_msg_notifications">You do not have any notification yet.</string>
+
+    <string name="channel_id">main_notification_channel</string>
+    <string name="channel_name">main_notification_name</string>
+    <string name="channel_description">channel description</string>
 </resources>
