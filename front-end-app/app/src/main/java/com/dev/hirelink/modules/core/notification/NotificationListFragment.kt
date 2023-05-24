@@ -1,12 +1,15 @@
 package com.dev.hirelink.modules.core.notification
 
+import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dev.hirelink.R
@@ -64,7 +67,8 @@ class NotificationListFragment : Fragment() {
 
         noDataView = NoDataView(
             requireContext(),
-            R.id.root_coordinator_layout_ja_list
+            R.id.root_constraint_layout_notification_list,
+            getString(R.string.no_data_msg_notifications)
         )
 
         setup()
@@ -125,6 +129,7 @@ class NotificationListFragment : Fragment() {
         adapter = NotificationItemAdapter(requireContext(), notifications.toMutableList())
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.addItemDecoration(DividerItemDecoration(recyclerView.context, LinearLayout.VERTICAL))
         recyclerView.setHasFixedSize(true)
 
         initScrollListener()

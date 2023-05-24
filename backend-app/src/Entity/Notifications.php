@@ -14,20 +14,26 @@ use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: NotificationsRepository::class)]
 #[ApiResource(
-    operations : [
-        new GetCollection()
+    operations: [
+        new GetCollection(
+            paginationEnabled: true,
+            paginationItemsPerPage: 5,
+            paginationMaximumItemsPerPage: 5
+        )
     ],
     normalizationContext: ['groups' => ['notifications:read',
-                                        'job-application:read:jobOffer',
-                                        'job-offer:read:title',
-                                        'job-offer:read:owner',
-                                        'company:read:name']]
+        'job-application:read:jobOffer',
+        'job-offer:read:title',
+        'job-offer:read:owner',
+        'job-application:update-state',
+        'company:read:name'
+    ]]
 ),
-ApiFilter(
-    SearchFilter::class,
-    properties: [
-        'user' => 'exact'
-    ])
+    ApiFilter(
+        SearchFilter::class,
+        properties: [
+            'user' => 'exact'
+        ])
 ]
 class Notifications
 {

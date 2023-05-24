@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/AppTextSemiBoldBlack"
         android:textAlignment="center"
-        android:text="There is no data to display."
+        android:text="@string/no_data_msg_default"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 

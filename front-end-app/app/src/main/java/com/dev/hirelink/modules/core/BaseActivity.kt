@@ -347,7 +347,7 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                     binding.imgBtnFilter.visibility = View.GONE
                     binding.horizontalScrollViewChipDistance.visibility = View.GONE
                     binding.textFieldSearch.visibility = View.GONE
-                    
+
                     replaceFragment(NotificationListFragment())
                     currentFragment = "NOTIFICATIONS"
                     true

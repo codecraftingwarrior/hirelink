@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginTop="4dp"
+    android:layout_marginTop="10dp"
     android:paddingBottom="4dp"
+    android:layout_marginBottom="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
@@ -13,9 +14,9 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="5dp"
         android:background="@drawable/circular_border"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
@@ -44,7 +45,21 @@
         android:textStyle="bold"
         android:textColor="@color/black"
         app:layout_constraintStart_toEndOf="@+id/circular_view"
-        app:layout_constraintTop_toTopOf="@+id/circular_view"/>
+        app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/notification_company_name"
+        android:layout_width="244dp"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:layout_marginStart="8dp"
+        android:fontFamily="@font/poppins"
+        android:text="Apple"
+        android:textColor="@color/indigo_main"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/circular_view"
+        app:layout_constraintTop_toBottomOf="@+id/candidacy_title" />
 
     <ImageView
         android:id="@+id/blue_suitcase"
@@ -53,7 +68,7 @@
         android:src="@drawable/suitcase_blue_icon"
         android:layout_marginStart="8dp"
         tools:ignore="ContentDescription"
-        app:layout_constraintTop_toBottomOf="@id/candidacy_title"
+        app:layout_constraintTop_toBottomOf="@id/notification_company_name"
         app:layout_constraintStart_toEndOf="@+id/circular_view" />
 
     <TextView
@@ -64,12 +79,12 @@
         android:text="@string/job_title_with_point"
         android:fontFamily="@font/poppins"
         android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/candidacy_title"
+        app:layout_constraintTop_toBottomOf="@id/notification_company_name"
         app:layout_constraintStart_toEndOf="@+id/blue_suitcase"/>
 
     <View
-        android:id="@+id/state_indicator"
-        android:background="@drawable/circle_green"
+        android:id="@+id/state_indicator_notification"
+        android:background="@drawable/circle_red"
         android:layout_gravity="center"
         android:layout_marginStart="5dp"
         android:layout_marginBottom="4dp"

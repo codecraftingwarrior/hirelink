@@ -65,18 +65,18 @@ class UpdateJobApplicationStateProcessor implements ProcessorInterface
     private function handleJobApplicationAccepted(Notifications $notification, JobApplication $jobApplication): void
     {
         $notification->setTitle("Your candidacy has been accepted");
-        $jobApplication->setState("ACCEPTED");
+        $jobApplication->setState(JobApplicationState::ACCEPTED->name);
     }
 
     private function handleJobApplicationRefused(Notifications $notification, JobApplication $jobApplication): void
     {
         $notification->setTitle("Your candidacy has been rejected");
-        $jobApplication->setState("REFUSED");
+        $jobApplication->setState(JobApplicationState::REFUSED->name);
     }
 
     private function handleJobApplicationInProgress(Notifications $notification, JobApplication $jobApplication): void
     {
         $notification->setTitle("Your candidacy has been seen");
-        $jobApplication->setState("IN_PROGRESS");
+        $jobApplication->setState(JobApplicationState::REFUSED->name);
     }
 }

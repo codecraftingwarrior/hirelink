@@ -1,6 +1,7 @@
 package com.dev.hirelink.modules.core.notification
 
 import android.content.Context
+import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.GradientDrawable
 import android.view.LayoutInflater
 import android.view.View
@@ -16,26 +17,38 @@ import com.dev.hirelink.modules.core.offers.list.JobOfferItemAdapter
 
 class NotificationItemAdapter(
     val context: Context,
-    var dataset:  MutableList<Notification?>?
+    var dataset: MutableList<Notification?>?
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private val VIEW_TYPE_ITEM = 0
     private val VIEW_TYPE_LOADING = 1
 
     class NotificationItemViewHolder(private val view: View) : ViewHolder(view) {
         private val initials: TextView = view.findViewById(R.id.logo_inside_circle)
+        private val companyName: TextView = view.findViewById(R.id.notification_company_name)
         private val title: TextView = view.findViewById(R.id.candidacy_title)
         private val jobTitle: TextView = view.findViewById(R.id.first_job_text)
-        private val stateIndicator: View = view.findViewById(R.id.state_indicator)
+        private val stateIndicator: View = view.findViewById(R.id.state_indicator_notification)
 
         fun bind(notification: Notification) {
-            initials.text = notification.jobApplication?.jobOffer?.owner?.company?.name
+            initials.text =
+                notification.jobApplication?.jobOffer?.owner?.company?.name?.get(0).toString()
             title.text = notification.title
-            jobTitle.text = notification.jobApplication?.jobOffer?.title
+            jobTitle.text = itemView.context.getString(
+                R.string.job_title_with_point,
+                notification.jobApplication?.jobOffer?.title
+            )
+            companyName.text = notification.jobApplication?.jobOffer?.owner?.company?.name
+            val state =
+                if (notification.title?.contains("rejected") == true) JobApplicationState.REFUSED else if (notification.title?.contains(
+                        "accepted"
+                    ) == true
+                ) JobApplicationState.ACCEPTED else JobApplicationState.IN_PROGRESS
+
             val stateIndicatorBg = stateIndicator.background as GradientDrawable
             stateIndicatorBg.setColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    JobApplicationState.valueOf(notification.jobApplication?.state!!).colorResourceId
+                    state.colorResourceId
                 )
             )
 
