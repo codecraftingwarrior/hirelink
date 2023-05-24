@@ -18,7 +18,7 @@ interface NotificationService {
     fun findAll(
         @Query("page") page: Int? = 1,
         @Query("user") user: Int? = null,
-        @Query("seen") seen: Int = 0
+        @Query("seen") seen: Int? = null
     ): Single<WrappedPaginatedResource<Notification>>
 
     @GET("notifications/unread")
