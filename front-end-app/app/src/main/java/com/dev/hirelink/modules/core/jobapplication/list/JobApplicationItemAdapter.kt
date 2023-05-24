@@ -18,6 +18,7 @@ import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.offers.detail.JobOfferBottomSheetDetailFragment
 import com.dev.hirelink.modules.core.offers.list.JobOfferItemAdapter
 import com.google.android.material.card.MaterialCardView
+import com.dev.hirelink.modules.core.offers.list.JobOfferItemAdapter
 
 class JobApplicationItemAdapter(
     val context: Context,
@@ -113,6 +114,7 @@ class JobApplicationItemAdapter(
                 JobOfferBottomSheetDetailFragment.TAG
             )
         }
+
 
     }
 
