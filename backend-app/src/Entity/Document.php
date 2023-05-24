@@ -39,6 +39,7 @@ class Document extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
+
     #[Groups(['document:writable', 'document:read'])]
     private ?string $title = null;
 
@@ -55,7 +56,7 @@ class Document extends TrackableEntity
 
     #[ORM\ManyToOne(inversedBy: 'documents')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['document:writable'])]
+    #[Groups(['document:writable', 'job-application:writable'])]
     private ?ApplicationUser $owner = null;
 
     #[Vich\UploadableField(mapping: 'document_files', fileNameProperty: 'fileName')]
@@ -184,6 +185,5 @@ class Document extends TrackableEntity
 
         return $this;
     }
-
 
 }

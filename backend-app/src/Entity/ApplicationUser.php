@@ -111,6 +111,13 @@ use Symfony\Component\Validator\Constraints\NotNull;
             ],
             normalizationContext: ['groups' => ['user:read', 'role:read', 'plan:read', 'company:first-write']],
             provider: CurrentUserProvider::class
+        ),
+        new Get(
+            uriTemplate: '/users/{id}/notifications',
+            openapiContext: [
+                'summary' => 'Retrieves notifications for the given user id'
+            ],
+            normalizationContext: ['groups' => ['user:read:notifications', 'notifications:read']],
         )
     ],
     normalizationContext: ['groups' => ['user:read']]
@@ -199,6 +206,10 @@ class ApplicationUser extends BaseUser
     #[ORM\OneToMany(mappedBy: 'owner', targetEntity: BankInformation::class)]
     private Collection $bankInformations;
 
+    #[ORM\OneToMany(mappedBy: 'user', targetEntity: Notifications::class)]
+    #[Groups(['user:read:notifications'])]
+    private Collection $notifications;
+
     public function __construct()
     {
         $this->documents = new ArrayCollection();
@@ -210,6 +221,7 @@ class ApplicationUser extends BaseUser
         $this->tags = new ArrayCollection();
         $this->paymentInformations = new ArrayCollection();
         $this->bankInformations = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
 
@@ -622,6 +634,36 @@ class ApplicationUser extends BaseUser
             // set the owning side to null (unless already changed)
             if ($bankInformation->getOwner() === $this) {
                 $bankInformation->setOwner(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notifications>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notifications $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notifications $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getUser() === $this) {
+                $notification->setUser(null);
             }
         }
 

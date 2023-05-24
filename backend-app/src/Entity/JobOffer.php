@@ -10,10 +10,11 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
 use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Delete;
 use App\Controller\FindClosestOfferController;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobOfferRepository;
-
 use App\State\FindJobOffersByOwnerIdProvider;
 use App\State\JobOfferListStateProvider;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -91,6 +92,16 @@ use Symfony\Component\Serializer\Annotation\Groups;
                 'user:read:last-name']
             ]
         ),
+        new Patch(denormalizationContext: ['groups' => ['job-offer:writable']]),
+        new Patch(
+            uriTemplate: '/job-offers/{id}/category',
+            requirements: ['id' => '\d+'],
+            openapiContext: [
+                'summary' => 'Update the job offer category for the given job offer id'
+            ],
+            denormalizationContext: ['groups' => ['job-offer:write:category']]
+        ),
+        new Delete()
     ],
 )
 ]
@@ -103,7 +114,7 @@ class JobOffer extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable', 'job-offer:read:title'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -140,7 +151,7 @@ class JobOffer extends TrackableEntity
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer-category:read', 'job-offer:read', 'job-offer:writable'])]
+    #[Groups(['job-offer-category:read', 'job-offer:read', 'job-offer:writable', 'job-offer:write:category'])]
     private ?JobOfferCategory $category = null;
 
     #[ORM\ManyToOne]
@@ -163,7 +174,7 @@ class JobOffer extends TrackableEntity
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable', 'job-offer:read:owner'])]
     private ?ApplicationUser $owner = null;
 
     #[ORM\Column(length: 80, nullable: true)]

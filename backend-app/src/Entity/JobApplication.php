@@ -12,6 +12,7 @@ use App\Entity\RootEntity\TrackableEntity;
 use App\Enum\JobApplicationState;
 use App\Repository\JobApplicationRepository;
 use App\State\JobApplicationListStateProvider;
+use App\State\UpdateJobApplicationStateProcessor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -22,7 +23,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
     operations: [
         new Get(),
         new Put(
-          denormalizationContext: ['groups' => ['job-application:update-state']]
+          denormalizationContext: ['groups' => ['job-application:update-state']],
+          processor: UpdateJobApplicationStateProcessor::class
         ),
         new Post(
             controller: CreateJobApplicationController::class,
@@ -53,7 +55,7 @@ class JobApplication extends TrackableEntity
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-application:writable', 'job-application:read-collection'])]
+    #[Groups(['job-application:writable','job-application:read:jobOffer', 'job-application:read-collection'])]
     private ?JobOffer $jobOffer = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
@@ -65,9 +67,13 @@ class JobApplication extends TrackableEntity
     #[Groups(['job-application:read', 'job-application:writable'])]
     private Collection $documents;
 
+    #[ORM\OneToMany(mappedBy: 'jobApplication', targetEntity: Notifications::class, orphanRemoval: true)]
+    private Collection $notifications;
+
     public function __construct()
     {
         $this->documents = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -111,6 +117,7 @@ class JobApplication extends TrackableEntity
         return $this;
     }
 
+
     #[Groups(['job-application:read:createdAt', 'job-application:read'])]
     public function getCreatedAt(): ?\DateTimeInterface
     {
@@ -137,6 +144,36 @@ class JobApplication extends TrackableEntity
     public function removeDocument(Document $document): self
     {
         $this->documents->removeElement($document);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Notifications>
+     */
+    public function getNotifications(): Collection
+    {
+        return $this->notifications;
+    }
+
+    public function addNotification(Notifications $notification): self
+    {
+        if (!$this->notifications->contains($notification)) {
+            $this->notifications->add($notification);
+            $notification->setJobApplication($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNotification(Notifications $notification): self
+    {
+        if ($this->notifications->removeElement($notification)) {
+            // set the owning side to null (unless already changed)
+            if ($notification->getJobApplication() === $this) {
+                $notification->setJobApplication(null);
+            }
+        }
 
         return $this;
     }
