@@ -1,8 +1,12 @@
 package com.dev.hirelink.modules.core
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.speech.RecognitionListener
+import android.speech.RecognizerIntent
+import android.speech.SpeechRecognizer
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
@@ -10,6 +14,7 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup.LayoutParams
 import android.view.inputmethod.InputMethodManager
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -38,6 +43,7 @@ import com.dev.hirelink.modules.core.profil.ProfilActivity
 import com.dev.hirelink.network.auth.AuthRepository
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
+import com.google.android.material.internal.ViewUtils.hideKeyboard
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.disposables.CompositeDisposable
 
@@ -45,6 +51,8 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
     private lateinit var binding: ActivityBaseBinding
     val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
     private var currentFragment = ""
+    private lateinit var speechRecognizer: SpeechRecognizer
+    private lateinit var recognitionListener: RecognitionListener
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var currentUser: ApplicationUser
     private lateinit var jobOfferFilterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
@@ -76,22 +84,36 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
             (application as HirelinkApplication).jobApplicationRepository
         )
     }
-
+    private val speechResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val data: Intent? = result.data
+            // Récupérer les résultats de la recherche vocale ici
+            val matches: List<String>? = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+            // Traiter les résultats de la recherche vocale
+            if (matches != null && matches.isNotEmpty()) {
+                val spokenText = matches[0]
+                binding.editTextJobOfferListSearch.setText(spokenText)
+            }
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBaseBinding.inflate(layoutInflater);
+        currentFragment = "OFFERS"
         fetchCurrentUser()
         setContentView(binding.root)
 
+        setup()
+    }
+
+    private fun setup() {
         sharedPrefs = SharedPreferenceManager(applicationContext)
 
         supportActionBar?.hide()
 
         setupNavigationBar();
         bindListeners()
-
-        //binding.chipAll.isChecked = true
-
+        
         jobOfferFilterCriteria = jobOfferListfilterViewModel.getCriteria()
 
         jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
@@ -104,7 +126,32 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                     Snackbar.LENGTH_LONG
                 ).show()
         }
+
+        initTextRecognitionListener()
     }
+
+    private fun initTextRecognitionListener() {
+        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
+        recognitionListener = object : RecognitionListener {
+            override fun onReadyForSpeech(params: Bundle?) {}
+            override fun onBeginningOfSpeech() {}
+            override fun onRmsChanged(rmsdB: Float) {}
+            override fun onBufferReceived(buffer: ByteArray?) {}
+            override fun onEndOfSpeech() {}
+            override fun onError(p0: Int) {}
+            override fun onResults(p0: Bundle?) {}
+            override fun onPartialResults(p0: Bundle?) {}
+            override fun onEvent(p0: Int, p1: Bundle?) {}
+        }
+    }
+
+    private fun startSpeechRecognition() {
+        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start to talk")
+        speechResultLauncher.launch(intent)
+    }
+
 
     private fun fetchCurrentUser() {
         val disposable = authRepository
@@ -210,6 +257,10 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
         }
 
         binding.editTextJobOfferListSearch.addTextChangedListener(watcher)
+
+        binding.textFieldSearch.setEndIconOnClickListener {
+            startSpeechRecognition()
+        }
     }
 
     private fun fetchClosestOffers(chipGroup: ChipGroup) {

@@ -28,6 +28,7 @@ import com.dev.hirelink.models.ApplicationUser
 import com.dev.hirelink.models.JobOffer
 import com.dev.hirelink.models.WrappedPaginatedResource
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
+import com.dev.hirelink.modules.common.NoDataView
 import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.modules.core.jobapplication.JobApplicationViewModel
 import com.dev.hirelink.modules.core.offers.JobOfferViewModel
@@ -53,6 +54,7 @@ class JobOfferListFragment : Fragment() {
     private lateinit var authRepository: AuthRepository
     private lateinit var customLoadingOverlay: CustomLoadingOverlay
     private lateinit var currentUser: ApplicationUser
+    private lateinit var noDataView: NoDataView
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     private lateinit var recyclerView: RecyclerView
     private lateinit var jobOffers: MutableList<JobOffer?>
@@ -97,6 +99,11 @@ class JobOfferListFragment : Fragment() {
             requireContext(),
             R.id.root_constraint_layout_job_offer_list,
             R.layout.loading_overlay_centered
+        )
+
+        noDataView = NoDataView(
+            requireContext(),
+            R.id.root_constraint_layout_job_offer_list,
         )
 
         fusedLocationProviderClient =
@@ -148,6 +155,12 @@ class JobOfferListFragment : Fragment() {
                 isLoading = false
                 jobOfferItemAdapter.dataset = jobOffers
                 jobOfferItemAdapter.notifyDataSetChanged()
+            }
+
+            if (jobOffers.isEmpty()) {
+                noDataView.show()
+            } else {
+                noDataView.hide()
             }
 
         }
