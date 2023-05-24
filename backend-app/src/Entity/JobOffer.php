@@ -15,7 +15,6 @@ use ApiPlatform\Metadata\Delete;
 use App\Controller\FindClosestOfferController;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Repository\JobOfferRepository;
-
 use App\State\FindJobOffersByOwnerIdProvider;
 use App\State\JobOfferListStateProvider;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -115,7 +114,7 @@ class JobOffer extends TrackableEntity
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable', 'job-offer:read:title'])]
     private ?string $title = null;
 
     #[ORM\Column(type: Types::TEXT)]
@@ -175,7 +174,7 @@ class JobOffer extends TrackableEntity
 
     #[ORM\ManyToOne(inversedBy: 'jobOffers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable'])]
+    #[Groups(['job-offer:read', 'job-offer:read-collection', 'job-offer:writable', 'job-offer:read:owner'])]
     private ?ApplicationUser $owner = null;
 
     #[ORM\Column(length: 80, nullable: true)]
