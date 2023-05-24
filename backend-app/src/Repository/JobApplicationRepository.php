@@ -39,6 +39,19 @@ class JobApplicationRepository extends ServiceEntityRepository
         }
     }
 
+    public function findElementsWithHighestFrequency(int $limit = 3)
+    {
+        return $this->createQueryBuilder('ja')
+            ->select('p.name, COUNT(ja.jobOffer) AS frequency')
+            ->leftJoin('ja.jobOffer', 'jo')
+            ->leftJoin('jo.profession', 'p')
+            ->groupBy('p.name')
+            ->orderBy('frequency', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return JobApplication[] Returns an array of JobApplication objects
 //     */

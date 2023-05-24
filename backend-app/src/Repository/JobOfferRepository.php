@@ -174,6 +174,18 @@ class JobOfferRepository extends ServiceEntityRepository
         return new Paginator($doctrinePaginator);
     }
 
+    public function findElementsWithHighestFrequency(int $limit = 3)
+    {
+        return $this->createQueryBuilder('jo')
+            ->select('p.name, COUNT(jo) AS frequency')
+            ->leftJoin('jo.profession', 'p')
+            ->groupBy('p.name')
+            ->orderBy('frequency', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+    }
+
 //    /**
 //     * @return JobOffer[] Returns an array of JobOffer objects
 //     */
