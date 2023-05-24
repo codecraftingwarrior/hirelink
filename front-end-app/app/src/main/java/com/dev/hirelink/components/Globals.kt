@@ -7,13 +7,17 @@ import android.icu.text.SimpleDateFormat
 import android.icu.util.TimeZone
 import android.net.ParseException
 import android.net.Uri
+import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
 import android.text.format.DateUtils
+import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import java.io.File
 import java.io.FileOutputStream
 import java.io.IOException
+import java.time.LocalDate
+import java.time.Period
 import java.util.*
 
 
@@ -43,9 +47,9 @@ fun toTimeAgo(dateString: String): String {
     }
 }
 
-fun dateAsString(inputDate: String): String {
+fun dateAsString(inputDate: String, pattern: String = "dd/MM/yyyy"): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ", Locale.getDefault())
-    val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+    val outputFormat = SimpleDateFormat(pattern, Locale.getDefault())
     val date = inputFormat.parse(inputDate)
     return outputFormat.format(date)
 }
@@ -120,6 +124,36 @@ fun getRootDirPath(context: Context): String {
         file.absolutePath
     } else {
         context.applicationContext.filesDir.absolutePath
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun formatDateFromNow(date: LocalDate): String {
+    val currentDate = LocalDate.now()
+    val period = Period.between(currentDate, date)
+
+    return when {
+        period.isNegative -> {
+            val positivePeriod = period.negated()
+            buildPeriodString(positivePeriod, "ago")
+        }
+        period.isZero -> "today"
+        else -> buildPeriodString(period, "in")
+    }
+}
+
+@RequiresApi(Build.VERSION_CODES.O)
+fun buildPeriodString(period: Period, prefix: String): String {
+    val years = period.years
+    val months = period.months
+    val days = period.days
+
+    return buildString {
+        append("$prefix ")
+
+        if (years > 0) append("$years year ")
+        if (months > 0) append("$months month ")
+        if (days > 0) append("$days day ")
     }
 }
 

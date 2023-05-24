@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/job_application_card"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:cardElevation="5dp"

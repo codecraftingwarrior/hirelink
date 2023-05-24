@@ -1,35 +1,149 @@
 <resources>
     <string name="app_name">hirelink-front</string>
-    <string name="welcome_to_hirelink">Welcome to HireLink</string>
-    <string name="welcome_summary_msg">This mobile application allows users to find job opportunities in different fields, apply online, and connect with potential employers.</string>
-    <string name="view_offers">View offers</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="candidate_role_title">Looking for a job</string>
-    <string name="next">next</string>
-    <string name="interim_agency_button_text">Interim agency</string>
+    <string name="mapbox_access_token">pk.eyJ1IjoiY29kZWNyYWZ0aW5nd2FycmlvciIsImEiOiJjbGdpNGd5aHYwZ2Z4M2RwZzRucGFlajF6In0.3efBYpHbBE22AIIQT6q1rg</string>
+
+    <!-- Password and Registration-->
+    <string name="register_confirmation">Register confirmation</string>
     <string name="employer_button_text">Employer</string>
     <string name="welcome_text">Welcome</string>
-    <string name="dont_have_acc">Don’t have an account yet ?</string>
     <string name="register">Register</string>
     <string name="login">Login</string>
-    <string name="page_not_found">Page not found</string>
-    <string name="issue_msg">Something went wrong, please try again.</string>
-    <string name="basic_msg">Let’s start with the basics</string>
-    <string name="candidate_registration_msg">Complete this step to be able to apply to our partner companies\' offers.</string>
-    <string name="register_confirmation">Register confirmation</string>
-    <string name="registration_confirmation_msg">Your subscription was succefuly cofirmed, you can now start candidate to job offers.</string>
     <string name="choose_password">choose a password</string>
     <string name="password">Password</string>
     <string name="confirm_password">Confirm password</string>
     <string name="payment_approved">Payment approved</string>
-    <string name="payment_approved_description">Now you can benefit from all the services of the application offered to employers.</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="email">Email</string>
+    <string name="username">Username</string>
+    <string name="company_name">Company name</string>
+    <string name="postal_adress">Postal adress</string>
+    <string name="country">Country</string>
+    <string name="cash_str">€ %.2f</string>
+    <string name="salary_range_str">%.2f - %.2f</string>
+
+    <!-- Boutons -->
+    <string name="accept">Accept</string>
+    <string name="refuse">Refuse</string>
+    <string name="block">Block</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="job_application_pending_state">Pending</string>
+    <string name="job_application_in_progress_state">In Progress</string>
+    <string name="job_application_refused_state">Refused</string>
+    <string name="job_application_accepted_state">Accepted</string>
+    <string name="apply">APPLY</string>
+    <string name="setting_button_description">Setting Button</string>
+    <string name="next_arrow_left_description">Return Arrow</string>
+    <string name="schedule_label">Schedule</string>
+    <string name="search">Search</string>
+    <string name="all">All</string>
+    <string name="done">Done</string>
     <string name="start">Start</string>
+    <string name="next">next</string>
+    <string name="info">Info</string>
+    <string name="schedule">Schedule</string>
+    <string name="candidacy_label">Candidacy</string>
+    <string name="offers_label">Offers</string>
+    <string name="company">Company</string>
+    <string name="notifications_label">Notifications</string>
+
+    <!-- Descriptions -->
+    <string name="welcome_to_hirelink">Welcome to HireLink</string>
+    <string name="welcome_summary_msg">This mobile application allows users to find job opportunities in different fields, apply online, and connect with potential employers.</string>
+    <string name="dont_have_acc">Don’t have an account yet ?</string>
+    <string name="payment_approved_description">Now you can benefit from all the services of the application offered to employers.</string>
+    <string name="page_not_found">Page not found</string>
+    <string name="issue_msg">Something went wrong, please try again.</string>
+    <string name="basic_msg">Let’s start with the basics</string>
+    <string name="candidate_registration_msg">Complete this step to be able to apply to our partner companies\' offers.</string>
+    <string name="registration_confirmation_msg">Your subscription was succefuly cofirmed, you can now start candidate to job offers.</string>
+    <string name="fake_description">Epicuri fugit finibus quis sed euripidis lectus vehicula. Lorem commune quem vim nec nisl. Facilis adipisci minim erat putent. Rhoncus definitiones iuvaret expetenda omnesque dicit intellegat. Aliquet facilisi error constituam iisque. Pretium legimus assueverit nunc aenean pretium consequat pretium vel pretium.</string>
+    <string name="job_application_success_msg">Your application has been sent to the company.</string>
+    <string name="saving_summary">You are saving</string>
+    <string name="select_payment_method">Select a payment method</string>
+    <string name="view_offers">View offers</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="candidate_role_title">Looking for a job</string>
+    <string name="interim_agency_button_text">Interim agency</string>
+    <string name="date_select_prompt">Choose a date</string>
+    <string name="national_unique_number">National unique number</string>
+    <string name="put_in_category">Put in a category</string>
+    <string name="add_category">Add a category</string>
+    <string name="company_filter_hint">Choose a set of companies</string>
+    <string name="profession_filter_hint">Choose a set of professions</string>
+    <string name="error_msg">A system error has occured!</string>
+
+    <!-- Job Positions -->
+    <string name="data_analyst">Data Analyst</string>
+    <string name="cleaning_agent">Cleaning Agent</string>
+    <string name="engineer">Engineer</string>
+
+    <!-- Location -->
+    <string name="tulum">Tulum, Mexico</string>
+    <string name="paris">Paris, France</string>
+    <string name="barcelona">Barcelona, Spain</string>
+    <string name="city">City</string>
+
+    <!-- Candidate -->
+    <string name="profile_date_birth_text_field">Date of Birth</string>
+    <string name="profile_phone_number">Phone Number</string>
+    <string name="profile_nationality_text_field">Nationality</string>
+    <string name="profile_name">HENRY Nathan</string>
+    <string name="profile_groups">Groups</string>
+    <string name="profile_candidacy">Spontaneous Candidacy</string>
+    <string name="profile_documents">Documents</string>
+    <string name="profile_blocked_users">Blocked Users</string>
+    <string name="profile_date_birth">15/07/2001</string>
+    <string name="profile_nationality">French</string>
+    <string name="profile_favorites">Favorites</string>
+
+    <!-- Employer -->
+    <string name="apple">Apple</string>
+    <string name="mcdo">McDonald\'s</string>
+    <string name="google">Google</string>
+    <string name="employer">Employer</string>
+    <string name="report">Report</string>
+    <string name="see_your_plan">See your plan</string>
+    <string name="add_credit_card">Add a credit card</string>
+    <string name="call">Call</string>
+    <string name="send_msg">Message</string>
+    <string name="send_email">Email</string>
+    <string name="cover_letter">Cover letter</string>
+    <string name="cv">Curriculum vitae</string>
+    <string name="cv_bis">CV</string>
+
+    <!-- Motivation Letter -->
+    <string name="motivaiton_letter">Motivation Letter</string>
+
+    <!-- Dates -->
+    <string name="today">Today</string>
+    <string name="this_month">This month</string>
+    <string name="date_1">27 March 2023</string>
+    <string name="date_2">13 February 2023</string>
+    <string name="date_3">5 January 2023</string>
+    <string name="duration_1">In 4 days</string>
+    <string name="duration_2">In 25 days</string>
+    <string name="duration_3">In 45 days</string>
+    <string name="expiration_date">JJ/AA</string>
+
+    <!-- Candidacy -->
+    <string name="candidacy_accepted">Your candidacy has been accepted !</string>
+    <string name="candidacy_seen">Your candidacy has been seen !</string>
+    <string name="candidacy_rejected">Your candidacy has been rejected !</string>
+
+    <!-- Distance -->
+    <string name="_10_km">10 Km</string>
+    <string name="_20_km">20 Km</string>
+    <string name="_30_km">30 Km</string>
+    <string name="_40_km">40 Km</string>
+    <string name="_50_km">50 Km</string>
+
+    <!-- Credit Card -->
     <string name="account_owner">Account owner</string>
     <string name="iban">IBAN</string>
     <string name="bic">BIC</string>
     <string name="card_number">Card number</string>
-    <string name="expiration_date">JJ/AA</string>
     <string name="cvc">CVV</string>
     <string name="choose_your_plan">Choose your plan</string>
     <string name="start_plan">Start</string>
@@ -41,103 +155,8 @@
     <string name="order_summary">Order Summary</string>
     <string name="chosen_plan">Chosen plan</string>
     <string name="total_price">Total price</string>
-    <string name="saving_summary">You are saving</string>
-    <string name="select_payment_method">Select a payment method</string>
     <string name="credit_card">Credit card</string>
     <string name="direct_debit">Direct debit</string>
-    <string name="info">Info</string>
-    <string name="schedule">Schedule</string>
-    <string name="candidacy_label">Candidacy</string>
-    <string name="offers_label">Offers</string>
-    <string name="notifications_label">Notifications</string>
-    <string name="first_name">First name</string>
-    <string name="last_name">Last name</string>
-    <string name="email">Email</string>
-    <string name="username">Username</string>
-    <string name="company_name">Company name</string>
-    <string name="postal_adress">Postal adress</string>
-    <string name="country">Country</string>
-    <string name="cash_str">€ %.2f</string>
-    <string name="salary_range_str">%.2f - %.2f</string>
-    <string name="apply">APPLY</string>
-    <string name="setting_button_description">Setting Button</string>
-    <string name="next_arrow_left_description">Return Arrow</string>
-    <string name="profile_name">HENRY Nathan</string>
-    <string name="profile_groups">Groups</string>
-    <string name="profile_candidacy">Spontaneous Candidacy</string>
-    <string name="profile_documents">Documents</string>
-    <string name="profile_blocked_users">Blocked Users</string>
-    <string name="error_msg">A system error has occured!</string>
-    <string name="profile_date_birth">15/07/2001</string>
-    <string name="profile_nationality">French</string>
-    <string name="job_application_pending_state">Pending</string>
-    <string name="job_application_in_progress_state">In Progress</string>
-    <string name="job_application_refused_state">Refused</string>
-    <string name="job_application_accepted_state">Accepted</string>
-    <string name="employer">Employer</string>
-    <string name="date_select_prompt">Choose a date</string>
-    <string name="national_unique_number">National unique number</string>
-    <string name="edit">Edit</string>
-    <string name="delete">Delete</string>
-    <string name="put_in_category">Put in a category</string>
-    <string name="add_category">Add a category</string>
-    <string name="accept">Accept</string>
-    <string name="refuse">Refuse</string>
-    <string name="block">Block</string>
-    <string name="report">Report</string>
-    <string name="see_your_plan">See your plan</string>
-    <string name="add_credit_card">Add a credit card</string>
-    <string name="call">Call</string>
-    <string name="send_msg">Message</string>
-    <string name="send_email">Email</string>
-    <string name="cover_letter">Cover letter</string>
-    <string name="cv">Curriculum vitae</string>
-    <string name="job_application_success_msg">Your application has been sent to the company.</string>
-
-    <string name="mapbox_access_token">pk.eyJ1IjoiY29kZWNyYWZ0aW5nd2FycmlvciIsImEiOiJjbGdpNGd5aHYwZ2Z4M2RwZzRucGFlajF6In0.3efBYpHbBE22AIIQT6q1rg</string>
-    <string name="all">All</string>
-    <string name="_10_km">10 Km</string>
-    <string name="_20_km">20 Km</string>
-    <string name="_30_km">30 Km</string>
-    <string name="_40_km">40 Km</string>
-    <string name="_50_km">50 Km</string>
-    <string name="done">Done</string>
-    <string name="company">Company</string>
-    <string name="company_filter_hint">Choose a set of companies</string>
-    <string name="profession_filter_hint">Choose a set of professions</string>
-    <string name="profile_favorites">Favorites</string>
-    <string name="cv_bis">CV</string>
-
-    <string name="data_analyst">Data Analyst</string>
-    <string name="fake_description">Epicuri fugit finibus quis sed euripidis lectus vehicula. Lorem commune quem vim nec nisl. Facilis adipisci minim erat putent. Rhoncus definitiones iuvaret expetenda omnesque dicit intellegat. Aliquet facilisi error constituam iisque. Pretium legimus assueverit nunc aenean pretium consequat pretium vel pretium.</string>
-
-    <string name="schedule_label">Schedule</string>
-    <string name="search">Search</string>
-
-
-    <string name="profile_date_birth_text_field">Date of Birth</string>
-    <string name="profile_phone_number">Phone Number</string>
-    <string name="profile_nationality_text_field">Nationality</string>
-
-
-    <!-- Employer -->
-    <string name="apple">Apple</string>
-
-    <!-- Location -->
-    <string name="city">City</string>
-
-    <!-- Motivation Letter -->
-    <string name="motivaiton_letter">Motivation Letter</string>
-
-    <!-- Dates -->
-    <string name="today">Today</string>
-    <string name="date_1">27 March 2023</string>
-
-
-    <!-- Candidacy -->
-    <string name="candidacy_accepted">Your candidacy has been accepted !</string>
-
-    <!-- Job Positions -->
 
     <!-- Other -->
     <string name="center_point">·</string>
