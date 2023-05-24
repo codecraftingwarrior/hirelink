@@ -4,5 +4,6 @@ data class Notification(
     var id: Int? = null,
     var title: String? = null,
     var user: ApplicationUser? = null,
-    var jobApplication: JobApplication? = null
+    var jobApplication: JobApplication? = null,
+    var seen: Boolean = false
 )

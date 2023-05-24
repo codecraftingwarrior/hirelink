@@ -1,6 +1,5 @@
 package com.dev.hirelink.modules.core.notification
 
-import android.icu.lang.UCharacter.GraphemeClusterBreak.V
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,16 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.dev.hirelink.R
 import com.dev.hirelink.databinding.FragmentCandidateNotificationListBinding
+import com.dev.hirelink.dto.StatusResponse
 import com.dev.hirelink.models.ApplicationUser
-import com.dev.hirelink.models.JobApplication
 import com.dev.hirelink.models.Notification
 import com.dev.hirelink.models.WrappedPaginatedResource
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.common.NoDataView
 import com.dev.hirelink.modules.core.BaseActivity
-import com.dev.hirelink.modules.core.schedule.ScheduleItemAdapter
 import com.dev.hirelink.network.auth.AuthRepository
-import com.mapbox.navigation.core.lifecycle.MapboxNavigationApp.setup
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -44,6 +41,9 @@ class NotificationListFragment : Fragment() {
     private var isLoading = false
     private var loaded = false
 
+    interface NotificationMarkedListener {
+        fun onMarkedNotifications();
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -136,6 +136,22 @@ class NotificationListFragment : Fragment() {
                 noDataView.show()
             } else {
                 noDataView.hide()
+            }
+
+            if((requireActivity() as BaseActivity).unreadNotificationCount > 0 ) {
+                notificationViewModel
+                    .apply {
+                        val observable: Single<StatusResponse> =
+                            markAllAsRead()
+
+                        val disposable = observable
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .doFinally { customLoadingOverlay.hideLoading() }
+                            .subscribe({ _ -> (requireActivity() as NotificationMarkedListener).onMarkedNotifications() }) { error: Throwable -> error.printStackTrace() }
+
+                        compositeDisposable.add(disposable)
+                    }
             }
         }
     }

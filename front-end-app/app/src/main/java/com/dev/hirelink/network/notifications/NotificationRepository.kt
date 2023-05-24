@@ -11,4 +11,8 @@ class NotificationRepository(
     }
 
     fun findAll(page: Int? = 1, user: Int? = null) = service.findAll(page, user)
+
+    fun getUnreadNotificationCount() = service.getUnreadNotificationCount()
+
+    fun markAllAsRead() = service.markAllAsRead()
 }

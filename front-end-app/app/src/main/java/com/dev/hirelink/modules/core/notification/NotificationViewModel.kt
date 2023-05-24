@@ -11,6 +11,10 @@ class NotificationViewModel(
 
     fun fetchNotifications(page: Int? = null, user: Int? = null) = notificationRepository.findAll(page, user)
 
+    fun getUnreadNotificationCount() = notificationRepository.getUnreadNotificationCount()
+
+    fun markAllAsRead() = notificationRepository.markAllAsRead()
+
     class NotificationViewModelFactory(
         private val context: Context,
         private val repository: NotificationRepository

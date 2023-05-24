@@ -39,6 +39,22 @@ class NotificationsRepository extends ServiceEntityRepository
         }
     }
 
+    public function markAllAsRead(int $user)
+    {
+        $this
+            ->_em
+            ->createQueryBuilder()
+            ->update(Notifications::class, 'n')
+            ->set('n.seen', ':newSeen')
+            ->where('n.user = :user')
+            ->andWhere('n.seen = :seen')
+            ->setParameter('user', $user)
+            ->setParameter('seen', false)
+            ->setParameter('newSeen', true)
+            ->getQuery()
+            ->execute();
+    }
+
 //    /**
 //     * @return Notifications[] Returns an array of Notifications objects
 //     */

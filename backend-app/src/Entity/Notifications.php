@@ -7,7 +7,12 @@ use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Put;
+use App\Dto\DigitVerificationOutput;
+use App\Dto\UnreadNotificationOutput;
 use App\Repository\NotificationsRepository;
+use App\State\NotificationAllReadProcessor;
+use App\State\UnreadNotificationStateProvider;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
@@ -19,6 +24,24 @@ use Symfony\Component\Serializer\Annotation\Groups;
             paginationEnabled: true,
             paginationItemsPerPage: 5,
             paginationMaximumItemsPerPage: 5
+        ),
+        new Get(
+            uriTemplate: 'notifications/unread',
+            openapiContext: [
+                'summary' => 'Retrieves the unread notifications for the logged in user.',
+            ],
+            normalizationContext: ['groups' => 'notification:unread'],
+            output: UnreadNotificationOutput::class,
+            provider: UnreadNotificationStateProvider::class
+        ),
+        new Put(
+            uriTemplate: 'notifications/mark-all-read',
+            openapiContext: [
+                'summary' => 'Mark the unread notifications for the logged in user as read.',
+            ],
+            normalizationContext: ['groups' => 'digit:read'],
+            output: DigitVerificationOutput::class,
+            processor: NotificationAllReadProcessor::class
         )
     ],
     normalizationContext: ['groups' => ['notifications:read',
@@ -32,7 +55,8 @@ use Symfony\Component\Serializer\Annotation\Groups;
     ApiFilter(
         SearchFilter::class,
         properties: [
-            'user' => 'exact'
+            'user' => 'exact',
+            'seen' => 'exact'
         ])
 ]
 class Notifications
@@ -59,6 +83,10 @@ class Notifications
     #[ORM\Column(type: Types::DATE_MUTABLE)]
     #[Groups(['notifications:read'])]
     private ?\DateTimeInterface $creationDate = null;
+
+    #[ORM\Column(nullable: true)]
+    #[Groups(['notifications:read'])]
+    private ?bool $seen = false;
 
     public function getId(): ?int
     {
@@ -109,6 +137,18 @@ class Notifications
     public function setCreationDate(\DateTimeInterface $creationDate): self
     {
         $this->creationDate = $creationDate;
+
+        return $this;
+    }
+
+    public function isSeen(): ?bool
+    {
+        return $this->seen ?? false;
+    }
+
+    public function setSeen(?bool $seen): self
+    {
+        $this->seen = $seen;
 
         return $this;
     }
