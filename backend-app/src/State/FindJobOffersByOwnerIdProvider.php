@@ -29,7 +29,8 @@ class FindJobOffersByOwnerIdProvider implements ProviderInterface
         $page = $request->query->get('page');
 
         $criteria = [
-            'ownerID' => $uriVariables['id']
+            'ownerID' => $uriVariables['id'],
+            'searchQuery' => $request->query->get('searchQuery')
         ];
 
         return $this->jobOfferRepository->findByOwnerPaginated($page, $criteria);

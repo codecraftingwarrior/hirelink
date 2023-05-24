@@ -51,8 +51,6 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
     private lateinit var binding: ActivityBaseBinding
     val authRepository: AuthRepository by lazy { (application as HirelinkApplication).authRepository }
     private var currentFragment = ""
-    private lateinit var speechRecognizer: SpeechRecognizer
-    private lateinit var recognitionListener: RecognitionListener
     private val compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var currentUser: ApplicationUser
     private lateinit var jobOfferFilterCriteria: JobOfferFilterViewModel.JobOfferFilterCriteria
@@ -84,24 +82,29 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
             (application as HirelinkApplication).jobApplicationRepository
         )
     }
-    private val speechResultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            val data: Intent? = result.data
-            // Récupérer les résultats de la recherche vocale ici
-            val matches: List<String>? = data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
-            // Traiter les résultats de la recherche vocale
-            if (matches != null && matches.isNotEmpty()) {
-                val spokenText = matches[0]
-                binding.editTextJobOfferListSearch.setText(spokenText)
+    private val speechResultLauncher =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data: Intent? = result.data
+                // Récupérer les résultats de la recherche vocale ici
+                val matches: List<String>? =
+                    data?.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS)
+                // Traiter les résultats de la recherche vocale
+                if (matches != null && matches.isNotEmpty()) {
+                    val spokenText = matches[0]
+                    binding.editTextJobOfferListSearch.setText(spokenText)
+                }
             }
         }
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityBaseBinding.inflate(layoutInflater);
         currentFragment = "OFFERS"
         fetchCurrentUser()
+
         setContentView(binding.root)
+        supportActionBar?.hide()
 
         setup()
     }
@@ -109,11 +112,9 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
     private fun setup() {
         sharedPrefs = SharedPreferenceManager(applicationContext)
 
-        supportActionBar?.hide()
-
         setupNavigationBar();
         bindListeners()
-        
+
         jobOfferFilterCriteria = jobOfferListfilterViewModel.getCriteria()
 
         jobOfferListfilterViewModel.updateCriteria(jobOfferFilterCriteria)
@@ -127,27 +128,15 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                 ).show()
         }
 
-        initTextRecognitionListener()
     }
 
-    private fun initTextRecognitionListener() {
-        speechRecognizer = SpeechRecognizer.createSpeechRecognizer(this)
-        recognitionListener = object : RecognitionListener {
-            override fun onReadyForSpeech(params: Bundle?) {}
-            override fun onBeginningOfSpeech() {}
-            override fun onRmsChanged(rmsdB: Float) {}
-            override fun onBufferReceived(buffer: ByteArray?) {}
-            override fun onEndOfSpeech() {}
-            override fun onError(p0: Int) {}
-            override fun onResults(p0: Bundle?) {}
-            override fun onPartialResults(p0: Bundle?) {}
-            override fun onEvent(p0: Int, p1: Bundle?) {}
-        }
-    }
 
     private fun startSpeechRecognition() {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+        intent.putExtra(
+            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
+            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
+        )
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, "Start to talk")
         speechResultLauncher.launch(intent)
     }
@@ -162,11 +151,14 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                 if (isLoggedIn) {
                     binding.imgBtnProfile.visibility = View.VISIBLE
                     binding.buttonLogin.visibility = View.GONE
-                    binding.bottomNavigation.visibility =
-                        if (currentUser.role?.code == RoleType.APPLICANT.code) View.VISIBLE else View.GONE
+                    binding.bottomNavigation.visibility = if (currentUser.role?.code == RoleType.APPLICANT.code) View.VISIBLE else View.GONE
                     if (currentUser.role?.code != RoleType.APPLICANT.code) {
                         binding.chipGroupDistanceFilter.visibility = View.GONE
                         binding.addFloatingActionButton.visibility = View.VISIBLE
+                        binding.imgBtnFilter.visibility = View.GONE
+                        val layoutParams: LayoutParams = binding.textFieldSearch.layoutParams
+                        layoutParams.width = LayoutParams.MATCH_PARENT
+                        binding.textFieldSearch.layoutParams = layoutParams
                     } else {
                         binding.chipGroupDistanceFilter.visibility = View.VISIBLE
                         binding.addFloatingActionButton.visibility = View.GONE
@@ -305,8 +297,8 @@ class BaseActivity : AppCompatActivity(), JobOfferItemAdapter.MoreButtonClickLis
                     binding.searchHeader.background =
                         ContextCompat.getDrawable(this, R.drawable.rectangle_bg_gray_reg)
                     binding.horizontalScrollViewChipDistance.visibility = View.GONE
-                    binding.imgBtnFilter.visibility = View.GONE
                     currentFragment = "CANDIDACY"
+                    binding.imgBtnFilter.visibility = View.GONE
                     val layoutParams: LayoutParams = binding.textFieldSearch.layoutParams
                     layoutParams.width = LayoutParams.MATCH_PARENT
                     binding.textFieldSearch.layoutParams = layoutParams

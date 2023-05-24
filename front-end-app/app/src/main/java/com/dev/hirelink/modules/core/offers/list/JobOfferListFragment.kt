@@ -188,7 +188,7 @@ class JobOfferListFragment : Fragment() {
             .apply {
                 val jobOfferObservable: Single<WrappedPaginatedResource<JobOffer>> =
                     if (currentUser.role?.code == RoleType.EMPLOYER.code || currentUser.role?.code == RoleType.INTERIM_AGENCY.code)
-                        findByOwnerId(currentUser.id!!, pageNumber = pageNumber)
+                        findByOwnerId(currentUser.id!!, pageNumber = pageNumber, filterCriteria.jobTitle)
                     else this.findAll(
                         pageNumber = pageNumber,
                         lat = filterCriteria.latitude,

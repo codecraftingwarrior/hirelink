@@ -12,6 +12,7 @@ use Doctrine\ORM\Query\QueryException;
 use Doctrine\Persistence\ManagerRegistry;
 use ApiPlatform\Doctrine\Orm\Paginator;
 use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
+use function Doctrine\ORM\QueryBuilder;
 
 
 /**
@@ -162,6 +163,16 @@ class JobOfferRepository extends ServiceEntityRepository
                 ->expr()
                 ->eq('jo.owner', $criteria['ownerID'])
         )->orderBy('jo.createdAt', 'DESC');
+
+        if (isset($criteria['searchQuery'])) {
+            $qb
+                ->andWhere(
+                    $qb->expr()->orX(
+                        $qb->expr()->like('jo.title', ':query'),
+                        $qb->expr()->like('jo.address', ':query'),
+                    )
+                )->setParameter('query', '%' . $criteria['searchQuery'] . '%');
+        }
 
         $criteriaPaging = Criteria::create()
             ->setFirstResult($firstResult)

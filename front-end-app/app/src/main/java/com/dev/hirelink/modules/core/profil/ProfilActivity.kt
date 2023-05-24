@@ -10,6 +10,7 @@ import com.dev.hirelink.components.SharedPreferenceManager
 import com.dev.hirelink.databinding.ActivityProfilBinding
 import com.dev.hirelink.enums.RoleType
 import com.dev.hirelink.models.ApplicationUser
+import com.dev.hirelink.modules.core.BaseActivity
 import com.dev.hirelink.network.auth.AuthRepository
 import io.reactivex.disposables.CompositeDisposable
 
@@ -39,7 +40,7 @@ class ProfilActivity : AppCompatActivity() {
             sharedPrefs.removeJwtToken()
             val authRepository = (application as HirelinkApplication).authRepository
             authRepository.emitUser(ApplicationUser())
-            finish()
+            startActivity(Intent(this, BaseActivity::class.java))
         }
 
         binding.imgBtnSettingActivityProfil.setOnClickListener {
