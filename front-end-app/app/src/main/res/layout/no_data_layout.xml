@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layout_marginEnd="20dp"
+    android:layout_marginStart="20dp"
+    android:orientation="vertical"
+    android:elevation="20dp">
+
+    <ImageView
+        android:id="@+id/img_view_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="430dp"
+        android:layout_marginStart="6dp"
+        android:layout_marginEnd="6dp"
+        android:src="@drawable/no_data_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/no_data_text"
+        app:layout_constraintTop_toBottomOf="@id/img_view_no_data"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/AppTextSemiBoldBlack"
+        android:textAlignment="center"
+        android:text="There is no data to display."
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

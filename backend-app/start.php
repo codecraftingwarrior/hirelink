@@ -15,3 +15,4 @@ const APP_MAIL = 'noreply@hirelink.fr';
 const APP_NAME = 'HireLink';
 
 const JOB_OFFER_ITEM_PER_PAGE = 5;
+const JOB_APPLICATION_ITEM_PER_PAGE = 5;

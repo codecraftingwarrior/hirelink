@@ -33,6 +33,7 @@ interface JobOfferService {
     fun findByOwnerId(
         @Path("id") id: Int,
         @Query("page") pageNumber: Int = 1,
+        @Query("searchQuery") searchQuery: String? = null,
     ): Single<WrappedPaginatedResource<JobOffer>>
 
     @POST("job-offers")

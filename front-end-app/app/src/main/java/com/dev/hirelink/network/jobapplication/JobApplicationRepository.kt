@@ -12,9 +12,13 @@ class JobApplicationRepository(private val context: Context) {
         RetrofitServiceBuilder(context).create(JobApplicationService::class.java)
     }
 
-    fun create(fields: MutableMap<String, RequestBody>, files: List<MultipartBody.Part>) = service.create(fields, files)
+    fun create(fields: MutableMap<String, RequestBody>, files: List<MultipartBody.Part>) =
+        service.create(fields, files)
 
     fun findById(id: Int) = service.findById(id)
 
     fun update(jobApplication: JobApplication) = service.update(jobApplication.id!!, jobApplication)
+
+    fun findAll(page: Int = 1, state: String? = null, searchQuery: String? = null) =
+        service.findAll(page, state, searchQuery)
 }

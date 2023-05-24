@@ -39,7 +39,7 @@ class JobOfferRepository(private val context: Context) {
 
     fun findById(id: Int) = service.findById(id)
 
-    fun findByOwnerId(id: Int, pageNumber: Int = 1) = service.findByOwnerId(id, pageNumber)
+    fun findByOwnerId(id: Int, pageNumber: Int = 1, searchQuery: String? = null) = service.findByOwnerId(id, pageNumber, searchQuery)
 
     fun create(jobOffer: JobOffer) = service.create(jobOffer)
 

@@ -11,6 +11,7 @@ use App\Controller\CreateJobApplicationController;
 use App\Entity\RootEntity\TrackableEntity;
 use App\Enum\JobApplicationState;
 use App\Repository\JobApplicationRepository;
+use App\State\JobApplicationListStateProvider;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,7 +27,14 @@ use Symfony\Component\Serializer\Annotation\Groups;
         new Post(
             controller: CreateJobApplicationController::class,
             deserialize: false
-        )
+        ),
+         new GetCollection(
+             paginationEnabled: true,
+             paginationItemsPerPage: 5,
+             paginationMaximumItemsPerPage: 5,
+             normalizationContext: ['groups' => ['job-offer:read-collection', 'company:read:name', 'job-application:read-collection']],
+             provider: JobApplicationListStateProvider::class
+         )
     ],
     normalizationContext: ['groups' => ['job-application:read', 'user:read', 'document:read', 'role:read']],
     denormalizationContext: ['groups' => ['job-application:writable', 'document:writable']]
@@ -36,16 +44,16 @@ class JobApplication extends TrackableEntity
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    #[Groups(['job-application:read', 'job-application:read:id'])]
+    #[Groups(['job-application:read', 'job-application:read:id', 'job-application:read-collection'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 80)]
-    #[Groups(['job-application:read', 'job-application:update-state'])]
+    #[Groups(['job-application:read', 'job-application:update-state', 'job-application:read-collection'])]
     private ?string $state = 'PENDING';
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['job-application:writable'])]
+    #[Groups(['job-application:writable', 'job-application:read-collection'])]
     private ?JobOffer $jobOffer = null;
 
     #[ORM\ManyToOne(inversedBy: 'jobApplications')]
