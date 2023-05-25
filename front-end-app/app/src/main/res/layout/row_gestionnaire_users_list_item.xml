@@ -3,96 +3,129 @@
 xmlns:app="http://schemas.android.com/apk/res-auto"
 xmlns:tools="http://schemas.android.com/tools">
 
-<data>
+    <data>
 
-</data>
+    </data>
 
-<com.google.android.material.card.MaterialCardView
-    android:layout_height="wrap_content"
-    android:layout_width="match_parent"
-    app:cardElevation="5dp"
-    style="?attr/materialCardViewElevatedStyle"
-    app:cardCornerRadius="10dp"
-    app:rippleColor="@color/gray_app"
-    android:layout_marginTop="25dp"
-    android:layout_marginBottom="10dp"
-    android:layout_marginStart="26dp"
-    android:layout_marginEnd="26dp"
-    android:clickable="true"
-    android:focusable="true"
-    android:checkable="true">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/root_constraint_layout_candidacy_list_item"
-        android:layout_width="match_parent"
+    <com.google.android.material.card.MaterialCardView
         android:layout_height="wrap_content"
-        android:padding="13dp">
+        android:layout_width="match_parent"
+        app:cardElevation="5dp"
+        style="?attr/materialCardViewElevatedStyle"
+        app:cardCornerRadius="10dp"
+        app:rippleColor="@color/gray_app"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true">
 
-        <TextView
-            android:id="@+id/text_view_candidate_name"
-            style="@style/OfferListItemStyleHeader"
-            android:layout_width="205dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/root_constraint_layout_candidacy_list_item"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="9dp"
-            android:letterSpacing="0.05"
-            android:lineSpacingExtra="@dimen/_9pxh"
-            android:textColor="@color/indigo_main"
-            android:singleLine="true"
-            app:layout_goneMarginStart="10dp"
-            app:layout_constraintStart_toEndOf="@+id/text_view_candidate_initials"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="GUEYE Ahmadou" />
+            android:padding="13dp">
 
+            <ImageView
+                android:id="@+id/logo_company"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@drawable/apple_logo_icon"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
 
-        <TextView
-            android:id="@+id/text_view_candidate_initials"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:background="@drawable/circle_blue_initial"
-            android:text="AG"
-            android:textColor="@color/black"
-            android:gravity="center"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            app:layout_constraintBottom_toBottomOf="@+id/text_view_candidate_name"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/text_view_candidate_name"
-            />
+            <TextView
+                android:id="@+id/text_view_company_name"
+                style="@style/OfferListItemStyleHeader"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="6dp"
+                android:letterSpacing="0.05"
+                android:lineSpacingExtra="@dimen/_9pxh"
+                android:textColor="@color/indigo_main"
+                android:singleLine="true"
+                android:textSize="@dimen/_23pxh"
+                app:layout_goneMarginStart="10dp"
+                app:layout_constraintStart_toEndOf="@id/logo_company"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@string/apple" />
 
-        <TextView
-            android:id="@+id/text_view_candidate_timeago"
-            style="@style/AppOfferTextRegular"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="9dp"
-            android:layout_marginBottom="4dp"
-            android:letterSpacing="0.08"
-            android:lineSpacingExtra="@dimen/_7pxh"
-            android:singleLine="true"
-            android:text="4 Days ago"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@id/text_view_candidate_initials"
-            app:layout_constraintTop_toBottomOf="@+id/text_view_candidate_initials"
-            tools:text="4 Days ago" />
+            <TextView
+                android:id="@+id/text_view_ceo"
+                style="@style/AppOfferTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="1dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                tools:text="@string/profile_name"
+                app:layout_constraintStart_toEndOf="@+id/logo_company"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_company_name" />
 
-        <ImageButton
-            android:id="@+id/image_btn_info"
-            android:layout_width="@dimen/_30pxh"
-            android:layout_height="@dimen/_30pxh"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:clickable="false"
-            android:focusable="false"
-            android:src="@drawable/info_icon"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:ignore="ContentDescription"
-            tools:src="@drawable/info_icon" />
+            <TextView
+                android:id="@+id/text_view_refused"
+                style="@style/AppOfferTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="1dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                android:textSize="@dimen/_9pxh"
+                tools:text="@string/refused"
+                app:layout_constraintStart_toEndOf="@id/logo_company"
+                app:layout_constraintTop_toBottomOf="@+id/text_view_ceo" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/first_point"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/center_point"
+                android:fontFamily="@font/poppins"
+                android:textSize="16sp"
+                app:layout_constraintStart_toEndOf="@+id/text_view_refused"
+                app:layout_constraintTop_toTopOf="@+id/text_view_refused"
+                app:layout_constraintBottom_toBottomOf="@+id/text_view_refused"/>
 
-</com.google.android.material.card.MaterialCardView>
+            <ImageView
+                android:id="@+id/red_point"
+                android:layout_width="7dp"
+                android:layout_height="7dp"
+                android:src="@drawable/circle_red"
+                android:scaleType="center"
+                android:layout_marginBottom="2.5dp"
+                android:layout_marginStart="3dp"
+                tools:ignore="ContentDescription"
+                app:layout_constraintStart_toEndOf="@+id/first_point"
+                app:layout_constraintTop_toTopOf="@+id/first_point"
+                app:layout_constraintBottom_toBottomOf="@+id/first_point" />
+
+            <ImageButton
+                android:id="@+id/image_btn_info"
+                android:layout_width="@dimen/_40pxh"
+                android:layout_height="@dimen/_40pxh"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:clickable="false"
+                android:focusable="false"
+                android:src="@drawable/info_icon_blue"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/info_icon_blue" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
 </layout>

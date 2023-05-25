@@ -124,6 +124,7 @@
     <string name="address_name">7 Place d\'Iéna, Paris 75016, France</string>
     <string name="users">Users</string>
     <string name="dashboard">Dashboard</string>
+    <string name="refused">REFUSED</string>
 
     <!-- Motivation Letter -->
     <string name="motivaiton_letter">Motivation Letter</string>
