@@ -63,10 +63,10 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:layout_marginTop="15dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/dollar_icon_blue"
+                tools:src="@drawable/dollar_icon_blue"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/gestionnaire_job_logo"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/dollar_icon_blue" />
+                tools:ignore="ContentDescription" />
 
             <TextView
                 android:id="@+id/gestionnaire_salary_logo_text"
