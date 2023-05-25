@@ -1,0 +1,482 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/candidacy_detail_root_constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/header_bar_candidacy_detail"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:background="@drawable/rectangle_bg_gray"
+                android:paddingHorizontal="14dp"
+                android:paddingTop="14dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageButton
+                    android:id="@+id/img_btn_arrow_left"
+                    android:layout_width="@dimen/_25pxh"
+                    android:layout_height="@dimen/_25pxh"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginEnd="346dp"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/next_arrow_left_description"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/next_arrow_left_icon"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/next_arrow_left_icon" />
+
+                <ImageView
+                    android:id="@+id/image_view_hire_link"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="55dp"
+                    android:paddingTop="3dp"
+                    android:src="@drawable/hirelink_logo"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    tools:src="@drawable/hirelink_logo" />
+
+                <ImageButton
+                    android:id="@+id/img_btn_plus_candidacy_list"
+                    android:layout_width="@dimen/_35pxh"
+                    android:layout_height="@dimen/_35pxh"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toStartOf="@id/img_btn_profile_candidacy_list"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    android:src="@drawable/three_dot"
+                    tools:src="@drawable/three_dot" />
+
+                <ImageButton
+                    android:id="@+id/img_btn_profile_candidacy_list"
+                    android:layout_width="@dimen/_35pxh"
+                    android:layout_height="@dimen/_35pxh"
+                    android:scaleType="fitXY"
+                    android:background="@android:color/transparent"
+                    android:layout_marginEnd="4dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:ignore="ContentDescription"
+                    android:src="@drawable/profil_icon"
+                    tools:src="@drawable/profil_icon" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <ImageView
+                android:id="@+id/candidate_detail_initials"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_marginTop="15dp"
+                android:src="@drawable/apple_logo_icon"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_bar_candidacy_detail" />
+
+            <TextView
+                android:id="@+id/candidate_fullname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:fontFamily="@font/poppins"
+                android:text="@string/apple"
+                android:textColor="@color/black"
+                android:textSize="40sp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/candidate_detail_initials" />
+
+            <TextView
+                android:id="@+id/application_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins"
+                android:text="@string/profile_name"
+                android:textColor="@color/stroke_color"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/candidate_fullname" />
+
+            <TextView
+                android:id="@+id/candidacy_state_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:gravity="center"
+                android:letterSpacing="0.05"
+                android:lineSpacingExtra="@dimen/_9pxh"
+                android:singleLine="true"
+                android:textColor="@color/stroke_color"
+                android:text="@string/profile_nationality"
+                android:textAllCaps="false"
+                android:layout_marginTop="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/application_date" />
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView"
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="@dimen/_82pxh"
+                android:layout_height="@dimen/_70pxh"
+                android:layout_marginStart="47dp"
+                android:layout_marginTop="15dp"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/candidacy_state_text"
+                app:rippleColor="@color/gray_app">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/call_constraint_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="13dp">
+
+                    <TextView
+                        android:id="@+id/text_view_candidate_name"
+                        style="@style/OfferListItemStyleHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:letterSpacing="0.05"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:singleLine="true"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="@dimen/_10pxh"
+                        app:layout_constraintEnd_toEndOf="@+id/image_call_candidate"
+                        app:layout_constraintStart_toStartOf="@+id/image_call_candidate"
+                        app:layout_constraintTop_toBottomOf="@+id/image_call_candidate"
+                        android:text="@string/call" />
+
+                    <ImageView
+                        android:id="@+id/image_call_candidate"
+                        android:layout_width="@dimen/_30pxh"
+                        android:layout_height="@dimen/_30pxh"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:clickable="false"
+                        android:focusable="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription"
+                        tools:src="@drawable/call_icon"
+                        android:src="@drawable/call_icon"
+                        />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView2"
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="@dimen/_82pxh"
+                android:layout_height="@dimen/_70pxh"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="15dp"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintStart_toEndOf="@+id/materialCardView"
+                app:layout_constraintTop_toBottomOf="@+id/candidacy_state_text"
+                app:rippleColor="@color/gray_app">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/send_msg_constraint_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+
+                    <TextView
+                        android:id="@+id/text_view_send_msg"
+                        style="@style/OfferListItemStyleHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:letterSpacing="0.05"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:singleLine="true"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="@dimen/_10pxh"
+                        app:layout_constraintEnd_toEndOf="@+id/image_send_msg"
+                        app:layout_constraintStart_toStartOf="@+id/image_send_msg"
+                        app:layout_constraintTop_toBottomOf="@+id/image_send_msg"
+                        android:text="@string/send_msg" />
+
+                    <ImageView
+                        android:id="@+id/image_send_msg"
+                        android:layout_width="@dimen/_30pxh"
+                        android:layout_height="@dimen/_30pxh"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:clickable="false"
+                        android:focusable="false"
+                        android:layout_marginBottom="10dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription"
+                        android:src="@drawable/send_msg_icon_2" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="@dimen/_82pxh"
+                android:layout_height="@dimen/_70pxh"
+                android:layout_marginStart="36dp"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="47dp"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/materialCardView2"
+                app:layout_constraintTop_toBottomOf="@+id/candidacy_state_text"
+                app:rippleColor="@color/gray_app">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/send_email_constraint_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="13dp">
+
+                    <TextView
+                        android:id="@+id/text_view_send_email"
+                        style="@style/OfferListItemStyleHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="3dp"
+                        android:letterSpacing="0.05"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:singleLine="true"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="@dimen/_10pxh"
+                        app:layout_constraintEnd_toEndOf="@+id/image_send_email"
+                        app:layout_constraintStart_toStartOf="@+id/image_send_email"
+                        app:layout_constraintTop_toBottomOf="@+id/image_send_email"
+                        android:text="@string/email" />
+
+                    <ImageView
+                        android:id="@+id/image_send_email"
+                        android:layout_width="@dimen/_30pxh"
+                        android:layout_height="@dimen/_30pxh"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:clickable="false"
+                        android:focusable="false"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        tools:ignore="ContentDescription"
+                        android:src="@drawable/send_email_icon" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView3"
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="@dimen/_315pxh"
+                android:layout_height="@dimen/_75pxh"
+                android:layout_marginTop="24dp"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView2"
+                app:rippleColor="@color/gray_app">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/service_name_constraint_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="13dp">
+
+                    <TextView
+                        android:id="@+id/text_view_service_name"
+                        style="@style/OfferListItemStyleHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:letterSpacing="0.1"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:singleLine="true"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="@dimen/_15pxh"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/service_name" />
+
+                    <TextView
+                        android:id="@+id/text_view_service_name_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="2dp"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:textSize="@dimen/_13pxh"
+                        android:text="@string/it_service"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_service_name" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView4"
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="@dimen/_315pxh"
+                android:layout_height="@dimen/_75pxh"
+                android:layout_marginTop="16dp"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+                app:rippleColor="@color/gray_app">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/siren_number_constraint_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="13dp">
+
+                    <TextView
+                        android:id="@+id/text_view_siren_number"
+                        style="@style/OfferListItemStyleHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:letterSpacing="0.1"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:singleLine="true"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="@dimen/_15pxh"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/siren_number" />
+
+                    <TextView
+                        android:id="@+id/text_view_siren_number_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="2dp"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:textSize="@dimen/_13pxh"
+                        android:text="@string/siren_number_1"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_siren_number" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/materialCardView5"
+                style="?attr/materialCardViewElevatedStyle"
+                android:layout_width="@dimen/_315pxh"
+                android:layout_height="@dimen/_75pxh"
+                android:layout_marginTop="16dp"
+                android:checkable="true"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="10dp"
+                app:cardElevation="5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/materialCardView4"
+                app:rippleColor="@color/gray_app">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/address_constraint_layout"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="13dp">
+
+                    <TextView
+                        android:id="@+id/text_view_address"
+                        style="@style/OfferListItemStyleHeader"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="4dp"
+                        android:layout_marginTop="4dp"
+                        android:letterSpacing="0.1"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:singleLine="true"
+                        android:textColor="@color/indigo_main"
+                        android:textSize="@dimen/_15pxh"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:text="@string/address" />
+
+                    <TextView
+                        android:id="@+id/text_view_address_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginTop="2dp"
+                        android:lineSpacingExtra="@dimen/_9pxh"
+                        android:textSize="@dimen/_13pxh"
+                        android:text="@string/address_name"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/text_view_address" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</layout>
