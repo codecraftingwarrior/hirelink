@@ -1,6 +1,172 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/gestionnaire_dashboard_constraint_layout_parent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/gestionnaire_dashboard_search_header"
+            android:background="@drawable/rectangle_bg_gray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:padding="14dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/gestionnaire_dashboard_hire_link"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/hirelink_logo"
+                android:layout_marginStart="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/hirelink_logo" />
+
+            <ImageButton
+                android:id="@+id/gestionnaire_dashboard_profile_logo"
+                android:layout_width="@dimen/_35pxh"
+                android:layout_height="@dimen/_35pxh"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="4dp"
+                android:src="@drawable/profil_icon"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/profil_icon" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/gestionnaire_dashboard_text_field_starting_date"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/starting_date"
+                app:boxCornerRadiusTopStart="@dimen/_20pxh"
+                app:boxCornerRadiusBottomEnd="@dimen/_20pxh"
+                app:boxCornerRadiusBottomStart="@dimen/_20pxh"
+                app:boxCornerRadiusTopEnd="@dimen/_20pxh"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gestionnaire_dashboard_hire_link">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/gestionnaire_dashboard_edit_text_starting_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="@dimen/_13pxh"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/gestionnaire_dashboard_text_field_ending_date"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:hint="@string/ending_date"
+                app:boxCornerRadiusTopStart="@dimen/_20pxh"
+                app:boxCornerRadiusBottomEnd="@dimen/_20pxh"
+                app:boxCornerRadiusBottomStart="@dimen/_20pxh"
+                app:boxCornerRadiusTopEnd="@dimen/_20pxh"
+                app:layout_constraintStart_toEndOf="@id/gestionnaire_dashboard_text_field_starting_date"
+                app:layout_constraintTop_toTopOf="@id/gestionnaire_dashboard_text_field_starting_date">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/gestionnaire_dashboard_edit_text_ending_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="@dimen/_13pxh"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/gestionnaire_dashboard_text_field_town"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="10dp"
+                android:hint="@string/town"
+                app:boxCornerRadiusTopStart="@dimen/_20pxh"
+                app:boxCornerRadiusBottomEnd="@dimen/_20pxh"
+                app:boxCornerRadiusBottomStart="@dimen/_20pxh"
+                app:boxCornerRadiusTopEnd="@dimen/_20pxh"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gestionnaire_dashboard_text_field_starting_date">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/gestionnaire_dashboard_edit_text_town"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="@dimen/_13pxh"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/gestionnaire_dashboard_text_field_profession"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="170dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:hint="@string/profession"
+                app:boxCornerRadiusTopStart="@dimen/_20pxh"
+                app:boxCornerRadiusBottomEnd="@dimen/_20pxh"
+                app:boxCornerRadiusBottomStart="@dimen/_20pxh"
+                app:boxCornerRadiusTopEnd="@dimen/_20pxh"
+                app:layout_constraintStart_toEndOf="@id/gestionnaire_dashboard_text_field_town"
+                app:layout_constraintTop_toTopOf="@id/gestionnaire_dashboard_text_field_town">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/gestionnaire_dashboard_edit_text_profession"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:fontFamily="@font/poppins"
+                    android:textSize="@dimen/_13pxh"
+                    android:inputType="text" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/gestionnaire_dashboard_constraint_layout_child"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/gestionnaire_dashboard_search_header"
+            app:layout_constraintBottom_toTopOf="@id/gestionnaire_dashboard_bottom_navigation" >
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/gestionnaire_dashboard_bottom_navigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:menu="@menu/bottom_navigation_menu_gestionnaire" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
