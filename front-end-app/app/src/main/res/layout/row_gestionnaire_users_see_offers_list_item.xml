@@ -8,7 +8,7 @@ xmlns:tools="http://schemas.android.com/tools">
     </data>
 
     <com.google.android.material.card.MaterialCardView
-        android:id="@+id/gestionnaire_see_offers_material_card"
+        android:id="@+id/gestionnaire_see_offers_materialCard"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         app:cardElevation="5dp"
@@ -30,7 +30,7 @@ xmlns:tools="http://schemas.android.com/tools">
             android:padding="13dp">
 
             <ImageView
-                android:id="@+id/gestionnaire_job_logo"
+                android:id="@+id/gestionnaire_see_offers_job_logo"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="5dp"
@@ -42,7 +42,7 @@ xmlns:tools="http://schemas.android.com/tools">
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/gestionnaire_job_name"
+                android:id="@+id/gestionnaire_see_offers_job_name"
                 style="@style/AppOfferTextRegular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -51,13 +51,13 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:letterSpacing="0.08"
                 android:lineSpacingExtra="@dimen/_7pxh"
                 android:singleLine="true"
-                app:layout_constraintBottom_toBottomOf="@id/gestionnaire_job_logo"
-                app:layout_constraintStart_toEndOf="@id/gestionnaire_job_logo"
-                app:layout_constraintTop_toTopOf="@id/gestionnaire_job_logo"
+                app:layout_constraintBottom_toBottomOf="@id/gestionnaire_see_offers_job_logo"
+                app:layout_constraintStart_toEndOf="@id/gestionnaire_see_offers_job_logo"
+                app:layout_constraintTop_toTopOf="@id/gestionnaire_see_offers_job_logo"
                 tools:text="@string/data_analyst" />
 
             <ImageView
-                android:id="@+id/gestionnaire_salary_logo"
+                android:id="@+id/gestionnaire_see_offers_salary_logo"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="15dp"
@@ -65,11 +65,11 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:src="@drawable/dollar_icon_blue"
                 tools:src="@drawable/dollar_icon_blue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/gestionnaire_job_logo"
+                app:layout_constraintTop_toBottomOf="@+id/gestionnaire_see_offers_job_logo"
                 tools:ignore="ContentDescription" />
 
             <TextView
-                android:id="@+id/gestionnaire_salary_logo_text"
+                android:id="@+id/gestionnaire_see_offers_logo_text"
                 style="@style/AppOfferTextRegular"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -77,25 +77,25 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:letterSpacing="0.08"
                 android:lineSpacingExtra="@dimen/_7pxh"
                 android:singleLine="true"
-                app:layout_constraintBottom_toBottomOf="@id/gestionnaire_salary_logo"
-                app:layout_constraintStart_toEndOf="@id/gestionnaire_salary_logo"
-                app:layout_constraintTop_toTopOf="@id/gestionnaire_salary_logo"
+                app:layout_constraintBottom_toBottomOf="@id/gestionnaire_see_offers_salary_logo"
+                app:layout_constraintStart_toEndOf="@id/gestionnaire_see_offers_salary_logo"
+                app:layout_constraintTop_toTopOf="@id/gestionnaire_see_offers_salary_logo"
                 tools:text="@string/salary_range" />
 
             <ImageView
-                android:id="@+id/gestionnaire_location_logo"
+                android:id="@+id/gestionnaire_see_offers_location_logo"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
                 android:layout_marginTop="14dp"
                 android:scaleType="fitXY"
                 android:src="@drawable/blue_location_icon"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/gestionnaire_salary_logo"
+                app:layout_constraintTop_toBottomOf="@id/gestionnaire_see_offers_salary_logo"
                 tools:ignore="ContentDescription"
                 tools:src="@drawable/blue_location_icon" />
 
             <TextView
-                android:id="@+id/gestionnaire_location_text"
+                android:id="@+id/gestionnaire_see_offers_location_text"
                 style="@style/AppOfferTextRegular"
                 android:layout_width="202dp"
                 android:layout_height="wrap_content"
@@ -103,9 +103,9 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:letterSpacing="0.08"
                 android:lineSpacingExtra="@dimen/_7pxh"
                 android:singleLine="true"
-                app:layout_constraintBottom_toBottomOf="@id/gestionnaire_location_logo"
-                app:layout_constraintStart_toEndOf="@id/gestionnaire_location_logo"
-                app:layout_constraintTop_toTopOf="@id/gestionnaire_location_logo"
+                app:layout_constraintBottom_toBottomOf="@id/gestionnaire_see_offers_location_logo"
+                app:layout_constraintStart_toEndOf="@id/gestionnaire_see_offers_location_logo"
+                app:layout_constraintTop_toTopOf="@id/gestionnaire_see_offers_location_logo"
                 tools:text="@string/tulum" />
 
             <TextView
@@ -123,7 +123,7 @@ xmlns:tools="http://schemas.android.com/tools">
                 tools:text="@string/gestionnaire_see_offers_date"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/gestionnaire_location_logo" />
+                app:layout_constraintTop_toBottomOf="@id/gestionnaire_see_offers_location_logo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
