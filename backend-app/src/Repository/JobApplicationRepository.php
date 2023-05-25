@@ -95,7 +95,19 @@ class JobApplicationRepository extends ServiceEntityRepository
         $doctrinePaginator = new DoctrinePaginator($qb);
 
         return new Paginator($doctrinePaginator);
+    }
 
+    public function findElementsWithHighestFrequency(int $limit = 3)
+    {
+        return $this->createQueryBuilder('ja')
+            ->select('p.name, COUNT(ja.jobOffer) AS frequency')
+            ->leftJoin('ja.jobOffer', 'jo')
+            ->leftJoin('jo.profession', 'p')
+            ->groupBy('p.name')
+            ->orderBy('frequency', 'DESC')
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
     }
 
 //    /**

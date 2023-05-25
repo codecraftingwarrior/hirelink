@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/gestionnaire_see_offers_materialCard"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        app:cardElevation="5dp"
+        style="?attr/materialCardViewElevatedStyle"
+        app:cardCornerRadius="10dp"
+        app:rippleColor="@color/gray_app"
+        android:layout_marginTop="25dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginStart="26dp"
+        android:layout_marginEnd="26dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:checkable="true">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/gestionnaire_see_offers_constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="13dp">
+
+            <ImageView
+                android:id="@+id/gestionnaire_see_offers_job_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="5dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/suitcase_blue_icon"
+                tools:src="@drawable/suitcase_blue_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/gestionnaire_see_offers_job_name"
+                style="@style/AppOfferTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="5dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="@id/gestionnaire_see_offers_job_logo"
+                app:layout_constraintStart_toEndOf="@id/gestionnaire_see_offers_job_logo"
+                app:layout_constraintTop_toTopOf="@id/gestionnaire_see_offers_job_logo"
+                tools:text="@string/data_analyst" />
+
+            <ImageView
+                android:id="@+id/gestionnaire_see_offers_salary_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="15dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/dollar_icon_blue"
+                tools:src="@drawable/dollar_icon_blue"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/gestionnaire_see_offers_job_logo"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/gestionnaire_see_offers_logo_text"
+                style="@style/AppOfferTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="@id/gestionnaire_see_offers_salary_logo"
+                app:layout_constraintStart_toEndOf="@id/gestionnaire_see_offers_salary_logo"
+                app:layout_constraintTop_toTopOf="@id/gestionnaire_see_offers_salary_logo"
+                tools:text="@string/salary_range" />
+
+            <ImageView
+                android:id="@+id/gestionnaire_see_offers_location_logo"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginTop="14dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/blue_location_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gestionnaire_see_offers_salary_logo"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/blue_location_icon" />
+
+            <TextView
+                android:id="@+id/gestionnaire_see_offers_location_text"
+                style="@style/AppOfferTextRegular"
+                android:layout_width="202dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="@id/gestionnaire_see_offers_location_logo"
+                app:layout_constraintStart_toEndOf="@id/gestionnaire_see_offers_location_logo"
+                app:layout_constraintTop_toTopOf="@id/gestionnaire_see_offers_location_logo"
+                tools:text="@string/tulum" />
+
+            <TextView
+                android:id="@+id/gestionnaire_see_offers_date"
+                style="@style/AppOfferTextRegular"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:layout_marginTop="8dp"
+                android:letterSpacing="0.08"
+                android:lineSpacingExtra="@dimen/_7pxh"
+                android:singleLine="true"
+                android:textSize="@dimen/_9pxh"
+                android:text="@string/gestionnaire_see_offers_date"
+                tools:text="@string/gestionnaire_see_offers_date"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/gestionnaire_see_offers_location_logo" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</layout>
