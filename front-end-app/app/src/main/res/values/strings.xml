@@ -125,6 +125,8 @@
     <string name="users">Users</string>
     <string name="dashboard">Dashboard</string>
     <string name="refused">REFUSED</string>
+    <string name="salary_range">4.500 - 2.000</string>
+    <string name="gestionnaire_see_offers_date">5 January 2023</string>
 
     <!-- Motivation Letter -->
     <string name="motivaiton_letter">Motivation Letter</string>
