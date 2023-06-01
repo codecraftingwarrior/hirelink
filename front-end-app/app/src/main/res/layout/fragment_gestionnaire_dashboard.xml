@@ -13,159 +13,293 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/gestionnaire_dashboard_search_header"
-            android:background="@drawable/rectangle_bg_gray"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/gestionnaire_dashboard_materialCardView1"
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="@dimen/_150pxh"
+            android:layout_height="@dimen/_150pxh"
+            android:layout_marginStart="35dp"
+            android:layout_marginTop="50dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:rippleColor="@color/gray_app"
             app:layout_constraintTop_toTopOf="parent"
-            android:padding="14dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            app:layout_constraintStart_toStartOf="parent">
 
-            <ImageView
-                android:id="@+id/gestionnaire_dashboard_hire_link"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/hirelink_logo"
-                android:layout_marginStart="10dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/hirelink_logo" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/gestionnaire_dashboard_constraint_layout1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
 
-            <ImageButton
-                android:id="@+id/gestionnaire_dashboard_profile_logo"
-                android:layout_width="@dimen/_35pxh"
-                android:layout_height="@dimen/_35pxh"
-                android:scaleType="fitXY"
-                android:background="@android:color/transparent"
-                android:layout_marginEnd="4dp"
-                android:src="@drawable/profil_icon"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="ContentDescription"
-                tools:src="@drawable/profil_icon" />
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view1_1"
+                    style="@style/OfferListItemStyleHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/indigo_main"
+                    android:textSize="@dimen/_50pxh"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="23" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/gestionnaire_dashboard_text_field_starting_date"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
-                android:layout_marginEnd="10dp"
-                android:hint="@string/starting_date"
-                app:boxCornerRadiusTopStart="@dimen/_20pxh"
-                app:boxCornerRadiusBottomEnd="@dimen/_20pxh"
-                app:boxCornerRadiusBottomStart="@dimen/_20pxh"
-                app:boxCornerRadiusTopEnd="@dimen/_20pxh"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/gestionnaire_dashboard_hire_link">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/gestionnaire_dashboard_edit_text_starting_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view1_2"
                     android:fontFamily="@font/poppins"
-                    android:textSize="@dimen/_13pxh"
-                    android:inputType="text" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/stroke_color"
+                    android:textSize="@dimen/_15pxh"
+                    app:layout_constraintEnd_toEndOf="@+id/gestionnaire_dashboard_text_view1_1"
+                    app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_text_view1_1"
+                    app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_text_view1_1"
+                    android:text="@string/candidatures" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/gestionnaire_dashboard_text_field_ending_date"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:hint="@string/ending_date"
-                app:boxCornerRadiusTopStart="@dimen/_20pxh"
-                app:boxCornerRadiusBottomEnd="@dimen/_20pxh"
-                app:boxCornerRadiusBottomStart="@dimen/_20pxh"
-                app:boxCornerRadiusTopEnd="@dimen/_20pxh"
-                app:layout_constraintStart_toEndOf="@id/gestionnaire_dashboard_text_field_starting_date"
-                app:layout_constraintTop_toTopOf="@id/gestionnaire_dashboard_text_field_starting_date">
+        </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/gestionnaire_dashboard_edit_text_ending_date"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/gestionnaire_dashboard_materialCardView2"
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="@dimen/_150pxh"
+            android:layout_height="@dimen/_150pxh"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="50dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:rippleColor="@color/gray_app"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/gestionnaire_dashboard_materialCardView1">>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/gestionnaire_dashboard_constraint_layout2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view2_1"
+                    style="@style/OfferListItemStyleHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/indigo_main"
+                    android:textSize="@dimen/_50pxh"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="47" />
+
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view2_2"
                     android:fontFamily="@font/poppins"
-                    android:textSize="@dimen/_13pxh"
-                    android:inputType="text" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/stroke_color"
+                    android:textSize="@dimen/_15pxh"
+                    app:layout_constraintEnd_toEndOf="@+id/gestionnaire_dashboard_text_view2_1"
+                    app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_text_view2_1"
+                    app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_text_view2_1"
+                    android:text="@string/announces" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/gestionnaire_dashboard_text_field_town"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginEnd="10dp"
-                android:hint="@string/town"
-                app:boxCornerRadiusTopStart="@dimen/_20pxh"
-                app:boxCornerRadiusBottomEnd="@dimen/_20pxh"
-                app:boxCornerRadiusBottomStart="@dimen/_20pxh"
-                app:boxCornerRadiusTopEnd="@dimen/_20pxh"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/gestionnaire_dashboard_text_field_starting_date">
+        </com.google.android.material.card.MaterialCardView>
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/gestionnaire_dashboard_edit_text_town"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/gestionnaire_dashboard_materialCardView3"
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_150pxh"
+            android:layout_marginTop="50dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:rippleColor="@color/gray_app"
+            app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_materialCardView1"
+            app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_materialCardView1"
+            app:layout_constraintEnd_toEndOf="@+id/gestionnaire_dashboard_materialCardView2">>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/gestionnaire_dashboard_constraint_layout3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view3_1"
+                    style="@style/OfferListItemStyleHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="15dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/indigo_main"
+                    android:textSize="@dimen/_22pxh"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/request_job" />
+
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view3_2"
                     android:fontFamily="@font/poppins"
-                    android:textSize="@dimen/_13pxh"
-                    android:inputType="text" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="25dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/stroke_color"
+                    android:textSize="@dimen/_15pxh"
+                    app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_text_view3_1"
+                    app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_text_view3_1"
+                    android:text="@string/data_analyst" />
 
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/gestionnaire_dashboard_text_field_profession"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                android:layout_width="170dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="40dp"
-                android:hint="@string/profession"
-                app:boxCornerRadiusTopStart="@dimen/_20pxh"
-                app:boxCornerRadiusBottomEnd="@dimen/_20pxh"
-                app:boxCornerRadiusBottomStart="@dimen/_20pxh"
-                app:boxCornerRadiusTopEnd="@dimen/_20pxh"
-                app:layout_constraintStart_toEndOf="@id/gestionnaire_dashboard_text_field_town"
-                app:layout_constraintTop_toTopOf="@id/gestionnaire_dashboard_text_field_town">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/gestionnaire_dashboard_edit_text_profession"
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view3_3"
                     android:fontFamily="@font/poppins"
-                    android:textSize="@dimen/_13pxh"
-                    android:inputType="text" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/stroke_color"
+                    android:textSize="@dimen/_15pxh"
+                    app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_text_view3_2"
+                    app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_text_view3_2"
+                    android:text="@string/engineer" />
 
-            </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view3_4"
+                    android:fontFamily="@font/poppins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/stroke_color"
+                    android:textSize="@dimen/_15pxh"
+                    app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_text_view3_3"
+                    app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_text_view3_3"
+                    android:text="@string/baker" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/gestionnaire_dashboard_constraint_layout_child"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/gestionnaire_dashboard_search_header"
-            app:layout_constraintBottom_toTopOf="@id/gestionnaire_dashboard_bottom_navigation" >
+        </com.google.android.material.card.MaterialCardView>
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/gestionnaire_dashboard_materialCardView4"
+            style="?attr/materialCardViewElevatedStyle"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_150pxh"
+            android:layout_marginTop="50dp"
+            android:checkable="true"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardCornerRadius="10dp"
+            app:cardElevation="5dp"
+            app:rippleColor="@color/gray_app"
+            app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_materialCardView3"
+            app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_materialCardView3"
+            app:layout_constraintEnd_toEndOf="@+id/gestionnaire_dashboard_materialCardView3">>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/gestionnaire_dashboard_bottom_navigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintStart_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:menu="@menu/bottom_navigation_menu_gestionnaire" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/gestionnaire_dashboard_constraint_layout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view4_1"
+                    style="@style/OfferListItemStyleHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginStart="15dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/indigo_main"
+                    android:textSize="@dimen/_22pxh"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:text="@string/proposed_job" />
+
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view4_2"
+                    android:fontFamily="@font/poppins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="25dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/stroke_color"
+                    android:textSize="@dimen/_15pxh"
+                    app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_text_view4_1"
+                    app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_text_view4_1"
+                    android:text="@string/cleaning_agent" />
+
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view4_3"
+                    android:fontFamily="@font/poppins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/stroke_color"
+                    android:textSize="@dimen/_15pxh"
+                    app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_text_view4_2"
+                    app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_text_view4_2"
+                    android:text="@string/teacher" />
+
+                <TextView
+                    android:id="@+id/gestionnaire_dashboard_text_view4_4"
+                    android:fontFamily="@font/poppins"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:letterSpacing="0.05"
+                    android:lineSpacingExtra="@dimen/_9pxh"
+                    android:singleLine="true"
+                    android:textColor="@color/stroke_color"
+                    android:textSize="@dimen/_15pxh"
+                    app:layout_constraintStart_toStartOf="@+id/gestionnaire_dashboard_text_view4_3"
+                    app:layout_constraintTop_toBottomOf="@+id/gestionnaire_dashboard_text_view4_3"
+                    android:text="@string/mechanic" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
