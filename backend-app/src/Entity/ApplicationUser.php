@@ -3,9 +3,12 @@
 namespace App\Entity;
 
 use ApiPlatform\Action\NotFoundAction;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use ApiPlatform\Metadata\Get;
 use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
 use ApiPlatform\Metadata\Post;
 use ApiPlatform\Metadata\Put;
 use ApiPlatform\OpenApi\Model\Operation;
@@ -27,13 +30,21 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Serializer\Annotation\SerializedName;
 use Symfony\Component\Validator\Constraints\NotBlank;
-use Symfony\Component\Validator\Constraints\NotNull;
 
 
 #[ORM\Entity(repositoryClass: ApplicationUserRepository::class)]
 #[ApiResource(
     operations: [
         new GetCollection(uriTemplate: '/users'),
+        new GetCollection(
+            uriTemplate: '/users/registration-state',
+            normalizationContext: ['groups' => ['user:read:first-name',
+                                                'user:read:last-name',
+                                                'company:read:name',
+                                                'user:read:registration-state',
+                                                'user:read:role',
+                                                'role:read']]
+        ),
         new Get(
             uriTemplate: '/users/{id}',
             requirements: ['id' => '\d+'],
@@ -118,10 +129,21 @@ use Symfony\Component\Validator\Constraints\NotNull;
                 'summary' => 'Retrieves notifications for the given user id'
             ],
             normalizationContext: ['groups' => ['user:read:notifications', 'notifications:read']],
+        ),
+        new Patch(
+            uriTemplate: '/users/{id}/update-state',
+            normalizationContext: ['groups' => ['user:read:registration-state']],
+            denormalizationContext: ['groups' => ['user:write:registration-state']]
         )
     ],
     normalizationContext: ['groups' => ['user:read']]
-)]
+),
+    ApiFilter(
+        SearchFilter::class,
+        properties: [
+            'role.code' => 'exact'
+        ])
+]
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email.')]
 #[UniqueEntity(fields: ['phoneNumber'], message: 'There is already an account with this phone number.')]
 class ApplicationUser extends BaseUser
@@ -166,7 +188,7 @@ class ApplicationUser extends BaseUser
 
     #[ORM\ManyToOne(inversedBy: 'applicationUsers')]
     #[ORM\JoinColumn(nullable: false)]
-    #[Groups(['user:read', 'user:writable'])]
+    #[Groups(['user:read', 'user:writable', 'user:read:role'])]
     #[SerializedName(serializedName: 'appRole')]
     #[NotBlank]
     private ?Role $role = null;

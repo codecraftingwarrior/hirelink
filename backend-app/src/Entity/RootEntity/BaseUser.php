@@ -35,7 +35,8 @@ class BaseUser extends TrackableEntity implements UserInterface, PasswordAuthent
     protected ?string $plainPassword = null;
 
     #[ORM\Column(length: 80)]
-    protected ?string $registrationState = null;
+    #[Groups(['user:read:registration-state', 'user:write:registration-state'])]
+    protected ?string $registrationState = 'PENDING';
 
     #[ORM\Column(length: 5, nullable: true)]
     #[Groups('user:read:otp')]
