@@ -130,7 +130,14 @@
     <string name="starting_date">Starting Date</string>
     <string name="ending_date">Ending Date</string>
     <string name="town">Town</string>
-    <string name="profession">Profession</string>
+    <string name="announcesprofession">Profession</string>
+    <string name="candidatures">Candidatures</string>
+    <string name="announces">Announces</string>
+    <string name="request_job">Most Requested Jobs</string>
+    <string name="baker">Baker</string>
+    <string name="proposed_job">Most Proposed Jobs</string>
+    <string name="mechanic">Mechanic</string>
+    <string name="teacher">Teacher</string>
 
     <!-- Motivation Letter -->
     <string name="motivaiton_letter">Motivation Letter</string>
