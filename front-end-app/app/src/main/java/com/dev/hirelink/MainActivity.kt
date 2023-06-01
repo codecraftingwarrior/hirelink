@@ -69,10 +69,16 @@ class MainActivity : AppCompatActivity() {
                 currentUser = applicationUser ?: ApplicationUser()
 
                 if (sharedPrefs.hasKey(JWT_TOKEN_KEY)) {
+                    val clazz =
+                        if (applicationUser?.role?.code != RoleType.MANAGER.code)
+                            BaseActivity::class.java
+                        else
+                            ManagerBaseActivity::class.java
+
                     startActivity(
                         Intent(
                             this,
-                            if (applicationUser?.role?.code != RoleType.MANAGER.code) BaseActivity::class.java else ManagerBaseActivity::class.java
+                            clazz
                         )
                     )
                     finish()

@@ -61,6 +61,7 @@ class ManagerBaseActivity : AppCompatActivity() {
             }
         }
         binding.bottomNavigationManager.menu.getItem(0).isChecked = true
+        binding.textFieldSearch.visibility = View.GONE
         replaceFragment(DashboardFragment())
     }
 
