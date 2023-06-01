@@ -29,15 +29,22 @@ xmlns:tools="http://schemas.android.com/tools">
             android:layout_height="wrap_content"
             android:padding="13dp">
 
-            <ImageView
+            <TextView
                 android:id="@+id/gestionnaire_user_logo_company"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:src="@drawable/apple_logo_icon"
+                android:background="@drawable/circle_blue_initial"
+                android:text="A"
+                android:textColor="@color/black"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:textStyle="bold"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="15dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                />
+
 
             <TextView
                 android:id="@+id/gestionnaire_user_text_view_company_name"
@@ -90,25 +97,27 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
-                android:text="@string/center_point"
+                android:text="\u2022"
                 android:fontFamily="@font/poppins"
                 android:textSize="16sp"
                 app:layout_constraintStart_toEndOf="@+id/gestionnaire_user_text_view_refused"
                 app:layout_constraintTop_toTopOf="@+id/gestionnaire_user_text_view_refused"
                 app:layout_constraintBottom_toBottomOf="@+id/gestionnaire_user_text_view_refused"/>
 
-            <ImageView
+
+            <View
                 android:id="@+id/gestionnaire_user_red_point"
-                android:layout_width="7dp"
-                android:layout_height="7dp"
-                android:src="@drawable/circle_red"
-                android:scaleType="center"
-                android:layout_marginBottom="2.5dp"
+                android:background="@drawable/circle_red"
+                android:layout_gravity="center"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginStart="3dp"
-                tools:ignore="ContentDescription"
                 app:layout_constraintStart_toEndOf="@+id/gestionnaire_user_first_point"
                 app:layout_constraintTop_toTopOf="@+id/gestionnaire_user_first_point"
-                app:layout_constraintBottom_toBottomOf="@+id/gestionnaire_user_first_point" />
+                app:layout_constraintBottom_toBottomOf="@+id/gestionnaire_user_first_point"
+                android:layout_width="7dp"
+                android:layout_height="7dp" />
 
             <ImageButton
                 android:id="@+id/gestionnaire_user_info_logo"

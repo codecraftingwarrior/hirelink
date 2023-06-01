@@ -22,7 +22,7 @@ import java.util.*
 
 
 object Globals {
-    const val BACKEND_DOMAIN = "https://a6c1-46-193-64-92.ngrok-free.app"
+    const val BACKEND_DOMAIN = "https://2c33-46-193-64-92.ngrok-free.app"
     const val API_BASE_URL = "$BACKEND_DOMAIN/api/";
     const val PLAN_RESOURCE_PREFIX = "/api/plans/"
     const val JOB_OFFER_RESOURCE_PREFIX = "/api/job-offers/"
