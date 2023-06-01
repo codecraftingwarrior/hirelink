@@ -53,12 +53,12 @@ class UserListItemAdapter(
             }
 
             stateText.text =
-                view.context.getString(JobApplicationState.valueOf("PENDING").stringResourceId)
+                view.context.getString(JobApplicationState.valueOf(user.registrationState!!).stringResourceId)
 
             stateText.setTextColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    JobApplicationState.valueOf("PENDING").colorResourceId
+                    JobApplicationState.valueOf(user.registrationState).colorResourceId
                 )
             )
 
@@ -66,7 +66,7 @@ class UserListItemAdapter(
             stateIndicatorBg.setColor(
                 ContextCompat.getColor(
                     itemView.context,
-                    JobApplicationState.valueOf("PENDING").colorResourceId
+                    JobApplicationState.valueOf(user.registrationState).colorResourceId
                 )
             )
         }
@@ -76,7 +76,7 @@ class UserListItemAdapter(
         if (viewType == VIEW_TYPE_ITEM) {
             val adapterLayout = LayoutInflater
                 .from(parent.context)
-                .inflate(R.layout.row_offer_list_item, parent, false)
+                .inflate(R.layout.row_gestionnaire_users_list_item, parent, false)
             return UserItemViewHolder(adapterLayout)
         }
         val view: View =

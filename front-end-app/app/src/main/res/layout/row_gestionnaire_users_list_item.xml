@@ -49,7 +49,7 @@ xmlns:tools="http://schemas.android.com/tools">
             <TextView
                 android:id="@+id/gestionnaire_user_text_view_company_name"
                 style="@style/OfferListItemStyleHeader"
-                android:layout_width="wrap_content"
+                android:layout_width="190dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="6dp"
@@ -57,7 +57,7 @@ xmlns:tools="http://schemas.android.com/tools">
                 android:lineSpacingExtra="@dimen/_9pxh"
                 android:textColor="@color/indigo_main"
                 android:singleLine="true"
-                android:textSize="@dimen/_23pxh"
+                android:textSize="16dp"
                 app:layout_goneMarginStart="10dp"
                 app:layout_constraintStart_toEndOf="@id/gestionnaire_user_logo_company"
                 app:layout_constraintTop_toTopOf="parent"

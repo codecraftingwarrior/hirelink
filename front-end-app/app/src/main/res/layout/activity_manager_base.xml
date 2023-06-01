@@ -25,6 +25,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
+            <ImageButton
+                android:id="@+id/img_btn_logout"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:scaleType="fitXY"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="2dp"
+                android:src="@drawable/baseline_logout_24"
+                android:contentDescription="@string/setting_button_description"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="ContentDescription"
+                tools:src="@drawable/baseline_logout_24"/>
+
             <ImageView
                 android:id="@+id/image_view_hire_link"
                 android:layout_width="wrap_content"

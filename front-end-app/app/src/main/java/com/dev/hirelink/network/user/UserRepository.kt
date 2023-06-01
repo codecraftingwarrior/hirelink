@@ -10,4 +10,6 @@ class UserRepository(private val context: Context) {
     private val service: UserService by lazy { RetrofitServiceBuilder(context).create(UserService::class.java) }
 
     fun choosePlan(id: Int, payload: EmployerChoosePlanRequest) = service.choosePlan(id, payload)
+
+    fun findAll(page: Int? = 1, role: String? = "AGC") = service.findAll(page, role)
 }

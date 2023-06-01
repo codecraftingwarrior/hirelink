@@ -38,12 +38,15 @@ use Symfony\Component\Validator\Constraints\NotBlank;
         new GetCollection(uriTemplate: '/users'),
         new GetCollection(
             uriTemplate: '/users/registration-state',
+            paginationEnabled: true,
+            paginationItemsPerPage: 5,
+            paginationMaximumItemsPerPage: 5,
             normalizationContext: ['groups' => ['user:read:first-name',
                                                 'user:read:last-name',
                                                 'company:read:name',
                                                 'user:read:registration-state',
                                                 'user:read:role',
-                                                'role:read']]
+                                                'role:read']],
         ),
         new Get(
             uriTemplate: '/users/{id}',
