@@ -19,11 +19,13 @@ import com.dev.hirelink.databinding.ActivityLoginBinding
 import com.dev.hirelink.dto.Credentials
 import com.dev.hirelink.dto.LoginErrorResponse
 import com.dev.hirelink.dto.LoginResponse
+import com.dev.hirelink.enums.RoleType
 import com.dev.hirelink.modules.auth.register.RegisterActivity
 import com.dev.hirelink.modules.auth.viewmodel.AuthViewModel
 import com.dev.hirelink.modules.auth.viewmodel.AuthViewModelFactory
 import com.dev.hirelink.modules.common.CustomLoadingOverlay
 import com.dev.hirelink.modules.core.BaseActivity
+import com.dev.hirelink.modules.core.ManagerBaseActivity
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -50,7 +52,8 @@ class LoginActivity : AppCompatActivity() {
         binding = DataBindingUtil.setContentView(this, R.layout.activity_login)
         setContentView(binding.root)
 
-        customLoadingOverlay = CustomLoadingOverlay(this, R.id.root_constraint_layout_login, R.layout.loading_overlay)
+        customLoadingOverlay =
+            CustomLoadingOverlay(this, R.id.root_constraint_layout_login, R.layout.loading_overlay)
         sharedPrefs = SharedPreferenceManager(this)
 
         supportActionBar?.hide()
@@ -135,7 +138,10 @@ class LoginActivity : AppCompatActivity() {
             .subscribe({ applicationUser ->
                 authViewModel.emitUser(applicationUser)
 
-                val intent = Intent(this, BaseActivity::class.java)
+                val intent = Intent(
+                    this,
+                    if (applicationUser?.role?.code != RoleType.MANAGER.code) BaseActivity::class.java else ManagerBaseActivity::class.java
+                )
                 intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                 startActivity(intent)
 
@@ -155,9 +161,14 @@ class LoginActivity : AppCompatActivity() {
         when (error) {
             is HttpException -> {
                 try {
-                    val loginErrorResponse = HttpExceptionParser.parse(error, LoginErrorResponse::class.java)
-                    Snackbar.make(binding.buttonLogin, loginErrorResponse.message, Snackbar.LENGTH_SHORT).show()
-                } catch(e: Exception) {
+                    val loginErrorResponse =
+                        HttpExceptionParser.parse(error, LoginErrorResponse::class.java)
+                    Snackbar.make(
+                        binding.buttonLogin,
+                        loginErrorResponse.message,
+                        Snackbar.LENGTH_SHORT
+                    ).show()
+                } catch (e: Exception) {
                     e.printStackTrace()
                     Snackbar.make(
                         binding.buttonLogin,

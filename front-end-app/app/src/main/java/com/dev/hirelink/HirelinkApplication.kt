@@ -11,6 +11,7 @@ import com.dev.hirelink.network.auth.AuthRepository
 import com.dev.hirelink.network.bankinformation.BankInformationRepository
 import com.dev.hirelink.network.company.CompanyRepository
 import com.dev.hirelink.network.contractype.ContractTypeRepository
+import com.dev.hirelink.network.dashboard.DashboardRepository
 import com.dev.hirelink.network.jobapplication.JobApplicationRepository
 import com.dev.hirelink.network.jobcategory.JobCategoryRepository
 import com.dev.hirelink.network.joboffer.JobOfferRepository
@@ -37,6 +38,7 @@ class HirelinkApplication : Application() {
     val jobOfferRepository: JobOfferRepository by lazy { JobOfferRepository(applicationContext) }
     val companyRepository: CompanyRepository by lazy { CompanyRepository(applicationContext) }
     val professionRepository: ProfessionRepository by lazy { ProfessionRepository(applicationContext) }
+    val dashboardRepository: DashboardRepository by lazy { DashboardRepository(applicationContext) }
     val jobCategoryRepository: JobCategoryRepository by lazy {
         JobCategoryRepository(
             applicationContext

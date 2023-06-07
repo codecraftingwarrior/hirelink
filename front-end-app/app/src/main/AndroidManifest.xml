@@ -10,7 +10,6 @@
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
-
     <application
         android:name=".HirelinkApplication"
         android:allowBackup="true"
@@ -21,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Hirelinkfront"
         tools:targetApi="31">
+        <activity
+            android:name=".modules.core.ManagerBaseActivity"
+            android:exported="false" />
         <activity
             android:name=".modules.core.employer.candidacy.detail.CandidacyDetailActivity"
             android:exported="false" />
